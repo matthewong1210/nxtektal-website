@@ -62,8 +62,8 @@ export default function EarthScene({
       <Stars
         radius={70}
         depth={25}
-        count={mobile ? 650 : 1500}
-        factor={1.6}
+        count={mobile ? 400 : 850}
+        factor={1.4}
         saturation={0}
         fade
         speed={0}
