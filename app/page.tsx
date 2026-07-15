@@ -1,5 +1,6 @@
 import EarthExperience from "../components/earth/EarthExperience";
 import FounderSection, { founders } from "../components/manifesto/FounderSection";
+import MachineSection from "../components/manifesto/MachineSection";
 import Reveal from "./reveal";
 
 const site = {
@@ -190,6 +191,8 @@ export default function Home() {
       </header>
 
       <EarthExperience chapters={chapters} />
+
+      <MachineSection />
 
       <FounderSection />
 

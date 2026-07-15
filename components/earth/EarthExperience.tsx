@@ -92,17 +92,10 @@ export default function EarthExperience({
       groundRef.current.style.opacity = g.toFixed(3);
       groundRef.current.style.visibility = g <= 0.005 ? "hidden" : "visible";
       const settle = clamp01((p - 0.68) / 0.32);
-      const scene = groundRef.current.querySelector<HTMLElement>(".concept-ground");
+      const scene = groundRef.current.querySelector<HTMLElement>(".ground-photo");
       if (scene) {
-        scene.style.transform = `scale(${lerp(1.14, 1, settle)}) translateY(${lerp(-4, 0, settle)}%)`;
+        scene.style.transform = `scale(${lerp(1.16, 1.02, settle)}) translateY(${lerp(-3.5, 0, settle)}%)`;
       }
-      groundRef.current
-        .querySelectorAll<SVGGElement>("[data-depth]")
-        .forEach((layer) => {
-          const far = layer.dataset.depth === "far";
-          const shift = lerp(far ? 3.5 : 7, 0, settle);
-          layer.style.transform = `translateY(${shift}%)`;
-        });
     }
   }, []);
 

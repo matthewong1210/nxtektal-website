@@ -121,11 +121,9 @@ main { background: var(--night); }
 
 /* Ground stage + cloud veil */
 .ez-ground { position: absolute; inset: 0; z-index: 3; opacity: 0; visibility: hidden; }
-.concept-ground { position: absolute; inset: 0; overflow: hidden; transform-origin: 50% 62%; }
-.concept-ground > svg { width: 100%; height: 100%; }
-.concept-ground [data-depth] { will-change: transform; }
-.concept-tag { position: absolute; left: var(--pad); bottom: clamp(16px, 3vw, 34px); z-index: 3; display: flex; align-items: center; gap: 8px; padding: 9px 13px; color: rgba(245, 247, 247, 0.72); border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(13, 17, 23, 0.72); backdrop-filter: blur(10px); font-size: 9px; font-weight: 800; letter-spacing: 0.16em; }
-.concept-tag i { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 12px rgba(166, 226, 46, 0.8); }
+.ground-photo { position: absolute; inset: 0; overflow: hidden; transform-origin: 50% 62%; will-change: transform; }
+.ground-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 66% 62%; }
+.ground-photo::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 60% 55%, transparent 46%, rgba(4, 7, 13, 0.45) 100%), linear-gradient(to bottom, rgba(4, 7, 13, 0.35), transparent 22%, transparent 78%, rgba(4, 7, 13, 0.5)); }
 
 .ez-veil { position: absolute; inset: 0; z-index: 4; opacity: 0; visibility: hidden; pointer-events: none; }
 .ez-veil::before {
@@ -211,6 +209,15 @@ main { background: var(--night); }
   opacity: 0.85;
 }
 
+/* ---------- The Machine ---------- */
+.machine-block { background: radial-gradient(circle at 80% 12%, rgba(30, 47, 30, 0.4), transparent 34%), var(--night); }
+.machine-intro { max-width: 680px; margin: 26px 0 0; font-size: clamp(15px, 1.4vw, 19px); line-height: 1.66; }
+.machine-media { margin-top: clamp(44px, 5.5vw, 76px); display: grid; gap: clamp(12px, 1.4vw, 18px); }
+.machine-video-el { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: 1px solid var(--line); border-radius: 20px; background: #0a0f14; }
+.machine-photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 1.4vw, 18px); }
+.machine-photos img { display: block; width: 100%; height: 100%; object-fit: cover; border: 1px solid var(--line); border-radius: 16px; }
+.machine-photos > div { display: flex; }
+
 /* ---------- Founders ---------- */
 .founders-block { background: linear-gradient(180deg, var(--night), #0f1611 55%, var(--night)); }
 .founders-intro { max-width: 720px; margin: 26px 0 0; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.68; }
@@ -275,6 +282,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .direction-sequence span:nth-child(3) { padding-left: 40px; }
   .ez-reduced .ez-chapter--top::after { right: -40vw; top: auto; bottom: -10%; width: 110vw; opacity: 0.6; }
 
+  .machine-photos { grid-template-columns: 1fr; }
   .founders-grid { grid-template-columns: 1fr; gap: 40px; }
   .closing-actions { align-items: flex-start; flex-direction: column; }
   .closing-actions .button { width: 100%; }
