@@ -1,4 +1,5 @@
 import EarthExperience from "../components/earth/EarthExperience";
+import FluidMenu from "../components/manifesto/FluidMenu";
 import FounderSection, { founders } from "../components/manifesto/FounderSection";
 import MachineSection from "../components/manifesto/MachineSection";
 import Reveal from "./reveal";
@@ -184,9 +185,20 @@ export default function Home() {
             <a href="#founders">Founders</a>
             <a href="#contact">Contact</a>
           </nav>
-          <a className="header-cta" href={investorMail}>
-            Talk to the founders <Arrow />
-          </a>
+          <div className="header-end">
+            <a className="header-cta" href={investorMail}>
+              Talk to the founders <Arrow />
+            </a>
+            <FluidMenu
+              items={[
+                { label: "Thesis", href: "#thesis" },
+                { label: "Where we begin", href: "#starting-point" },
+                { label: "Vision", href: "#vision" },
+                { label: "Founders", href: "#founders" },
+                { label: "Contact", href: "#contact" },
+              ]}
+            />
+          </div>
         </div>
       </header>
 
