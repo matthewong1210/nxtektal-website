@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const siteUrl = "https://nxtektal.com";
-const title = "NXTektal Systems | Outdoor Autonomy";
+const title = "NXTektal Systems | Autonomous Outdoor Operations";
 const description =
-  "NXTektal Systems is building the autonomy operating system for managed outdoor environments, starting with golf.";
+  "NXTektal Systems is building the operating system for autonomous outdoor work, starting with demand-responsive ball collection and handoff for golf ranges.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
