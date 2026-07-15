@@ -43,6 +43,7 @@ export default function EarthExperience({
   chapters: ChapterContent[];
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
+  const spaceRef = useRef<HTMLDivElement>(null);
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const veilRef = useRef<HTMLDivElement>(null);
   const groundRef = useRef<HTMLDivElement>(null);
@@ -70,6 +71,14 @@ export default function EarthExperience({
 
     if (canvasWrapRef.current) {
       canvasWrapRef.current.style.opacity = canvasOpacity(p).toFixed(3);
+    }
+
+    if (spaceRef.current) {
+      // The Milky Way backdrop recedes as the camera dives into the clouds.
+      const o = 1 - smoothstep(0.5, 0.66, p);
+      spaceRef.current.style.opacity = o.toFixed(3);
+      const drift = smoothstep(0, 0.55, p);
+      spaceRef.current.style.transform = `scale(${lerp(1.12, 1.01, drift)}) translateY(${lerp(-1.5, 1.5, drift)}%)`;
     }
 
     if (veilRef.current) {
@@ -191,6 +200,10 @@ export default function EarthExperience({
         )
       )}
       <div className="ez-viewport">
+        <div ref={spaceRef} className="ez-space" aria-hidden="true">
+          <div className="ez-space-glow ez-space-glow-a" />
+          <div className="ez-space-glow ez-space-glow-b" />
+        </div>
         <div
           ref={canvasWrapRef}
           className={`ez-canvas${sceneReady ? " ez-canvas--ready" : ""}`}

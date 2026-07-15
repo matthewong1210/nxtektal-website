@@ -20,5 +20,16 @@ Visible Earth** satellite data, which is in the **public domain**
 The `*_1024.jpg` / `*_1024.png` variants are local downscales of the files
 above (generated with macOS `sips`) used for mobile devices.
 
+## Milky Way backdrop (`public/earth/milkyway-*.jpg`)
+
+Photo by **Jonathan Borba** on Pexels
+(https://www.pexels.com/photo/16002199/), downloaded 2026-07-15 and
+supplied by the founders. **Pexels License**: free to use, including
+commercially; attribution not required. Local downscales generated with
+macOS `sips`.
+
 No Google Earth, Mapbox, or watermarked imagery is used. No assets were
-copied from getlayers.ai or any other third-party website.
+copied from getlayers.ai or any other third-party website. The 21st.dev
+components referenced during development (fluid-menu, quantum-nebula)
+served as interaction references only; all shipped code is original to
+this repository.

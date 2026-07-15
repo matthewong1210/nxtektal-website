@@ -135,6 +135,22 @@ main { background: var(--night); }
   position: sticky; top: 0; height: 100svh; overflow: hidden;
   background: radial-gradient(circle at 68% 42%, #0a1220 0%, var(--space) 55%, #030509 100%);
 }
+/* Milky Way backdrop (Pexels photo) with slow nebula glow drift */
+.ez-space {
+  position: absolute; inset: -3%; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(to bottom, rgba(4, 7, 13, 0.55), rgba(4, 7, 13, 0.2) 30%, rgba(4, 7, 13, 0.25) 75%, rgba(4, 7, 13, 0.7)),
+    url("/earth/milkyway-lg.jpg");
+  background-size: cover; background-position: 42% 38%;
+  filter: brightness(0.72) saturate(0.9);
+  will-change: transform, opacity;
+}
+.ez-space-glow { position: absolute; inset: -20%; mix-blend-mode: screen; opacity: 0.16; }
+.ez-space-glow-a { background: radial-gradient(ellipse 46% 30% at 38% 62%, #3a5c96 0%, transparent 65%); animation: nebula-drift-a 85s ease-in-out infinite alternate; }
+.ez-space-glow-b { background: radial-gradient(ellipse 34% 24% at 52% 55%, #8a6a4d 0%, transparent 62%); opacity: 0.12; animation: nebula-drift-b 110s ease-in-out infinite alternate; }
+@keyframes nebula-drift-a { from { transform: translate3d(-1.5%, 1%, 0) scale(1); } to { transform: translate3d(2%, -1.5%, 0) scale(1.08); } }
+@keyframes nebula-drift-b { from { transform: translate3d(2%, -1%, 0) scale(1.05); } to { transform: translate3d(-2%, 1.5%, 0) scale(1); } }
+
 .ez-canvas { position: absolute; inset: 0; z-index: 1; }
 .ez-canvas canvas { display: block; }
 
@@ -229,12 +245,12 @@ main { background: var(--night); }
   /* Static layout applies even before hydration adds .ez-reduced */
   .ez-sequence { height: auto; }
   .ez-viewport { position: static; height: auto; overflow: visible; }
-  .ez-canvas, .ez-veil, .ez-ground, .ez-poster { display: none; }
+  .ez-canvas, .ez-veil, .ez-ground, .ez-poster, .ez-space { display: none; }
   .ez-chapter { position: relative; opacity: 1 !important; visibility: visible !important; transform: none !important; pointer-events: auto !important; min-height: 72svh; overflow: hidden; }
 }
 .ez-reduced { height: auto; }
 .ez-reduced .ez-viewport { position: static; height: auto; overflow: visible; background: var(--space); }
-.ez-reduced .ez-canvas, .ez-reduced .ez-veil, .ez-reduced .ez-ground, .ez-reduced .ez-poster { display: none; }
+.ez-reduced .ez-canvas, .ez-reduced .ez-veil, .ez-reduced .ez-ground, .ez-reduced .ez-poster, .ez-reduced .ez-space { display: none; }
 .ez-reduced .ez-chapter { position: relative; opacity: 1 !important; visibility: visible !important; transform: none !important; pointer-events: auto !important; min-height: 72svh; overflow: hidden; }
 .ez-reduced .ez-chapter--top { min-height: 100svh; }
 .ez-reduced .ez-chapter--top::after {
@@ -316,6 +332,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .hero-actions { align-items: stretch; flex-direction: column; margin-top: 28px; }
   .hero-actions .button { width: 100%; }
   .ez-poster-earth { right: -30vw; top: 58%; width: 96vw; opacity: 0.9; }
+  .ez-space { background-image: linear-gradient(to bottom, rgba(4, 7, 13, 0.6), rgba(4, 7, 13, 0.3) 30%, rgba(4, 7, 13, 0.35) 75%, rgba(4, 7, 13, 0.75)), url("/earth/milkyway-sm.jpg"); }
   .observation blockquote { font-size: clamp(19px, 5.6vw, 24px); line-height: 1.4; }
   .workflow-line { letter-spacing: 0.1em; }
   .direction-sequence span:nth-child(2) { padding-left: 20px; }
