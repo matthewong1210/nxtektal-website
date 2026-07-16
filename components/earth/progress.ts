@@ -34,44 +34,7 @@ export const smoothstep = (a: number, b: number, x: number) => {
   return t * t * (3 - 2 * t);
 };
 
-const easeInOut = (t: number) => t * t * (3 - 2 * t);
-const easeIn = (t: number) => t * t;
-
-/** Piecewise camera distance from the earth centre (earth radius = 1). */
-export function cameraZ(p: number): number {
-  if (p <= 0.36) return lerp(4.8, 2.55, easeInOut(clamp01(p / 0.36)));
-  if (p <= 0.52) return lerp(2.55, 1.72, easeInOut((p - 0.36) / 0.16));
-  if (p <= 0.72) return lerp(1.72, 1.045, easeIn((p - 0.52) / 0.2));
-  return 1.045;
-}
-
-/** Earth drifts from right-of-frame to centre during the first third. */
-export function earthOffsetX(p: number, aspect: number): number {
-  const start = 1.35 * Math.min(1, aspect / 1.65);
-  return lerp(start, 0, smoothstep(0, 0.34, p));
-}
-
-/** Progress-driven rotation that brings North America toward the camera. */
-export function earthRotationY(p: number): number {
-  return -1.35 + smoothstep(0.05, 0.62, p) * 1.55;
-}
-
-/** Atmosphere rim intensity grows as we approach orbit. */
-export function atmosphereStrength(p: number): number {
-  return 0.75 + smoothstep(0.15, 0.55, p) * 0.9;
-}
-
-/** Exposure lifts as the camera dives into the cloud deck. */
-export function exposure(p: number): number {
-  return 1.0 + smoothstep(0.52, 0.68, p) * 0.9;
-}
-
-/** Cloud layer opacity thickens slightly during the dive. */
-export function cloudOpacity(p: number): number {
-  return 0.85 + smoothstep(0.5, 0.68, p) * 0.15;
-}
-
-/** DOM opacity for the WebGL canvas (fades out inside the cloud veil). */
+/** DOM opacity for the footage layer (fades out inside the cloud veil). */
 export function canvasOpacity(p: number): number {
   return 1 - smoothstep(0.66, 0.73, p);
 }

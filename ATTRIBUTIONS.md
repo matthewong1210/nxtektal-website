@@ -2,7 +2,7 @@
 
 ## Earth textures (`public/earth/`)
 
-All Earth textures were downloaded on **2026-07-14** from the official
+Downloaded on **2026-07-14** from the official
 [three.js repository](https://github.com/mrdoob/three.js) (directory
 `examples/textures/planets/`), which is distributed under the
 **MIT License**. The imagery itself is derived from **NASA Blue Marble /
@@ -11,14 +11,15 @@ Visible Earth** satellite data, which is in the **public domain**
 
 | File | Source file | Author / origin | License |
 | --- | --- | --- | --- |
-| `earth_atmos_2048.jpg` | `earth_atmos_2048.jpg` | NASA Blue Marble via three.js | MIT (repo) / Public domain (NASA imagery) |
-| `earth_normal_2048.jpg` | `earth_normal_2048.jpg` | NASA elevation data via three.js | MIT / Public domain |
-| `earth_specular_2048.jpg` | `earth_specular_2048.jpg` | NASA data via three.js | MIT / Public domain |
+| `earth_atmos_1024.jpg` | `earth_atmos_2048.jpg` (downscaled) | NASA Blue Marble via three.js | MIT (repo) / Public domain (NASA imagery) |
 | `earth_clouds_1024.png` | `earth_clouds_1024.png` | NASA cloud imagery via three.js | MIT / Public domain |
-| `earth_lights_2048.png` | `earth_lights_2048.png` | NASA Earth at Night via three.js | MIT / Public domain |
 
-The `*_1024.jpg` / `*_1024.png` variants are local downscales of the files
-above (generated with macOS `sips`) used for mobile devices.
+## Earth approach footage (`public/earth/earth-dive*.mp4`)
+
+AI-generated cinematic footage produced by the founders with **Dreamina**
+(`dreamina-2026-07-15-7306`), supplied 2026-07-15. Re-encoded locally with
+ffmpeg (all-intra H.264) for scroll scrubbing. Usage rights per Dreamina's
+terms for user-generated content; confirm commercial terms before launch.
 
 ## Milky Way backdrop (`public/earth/milkyway-*.jpg`)
 

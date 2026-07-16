@@ -7,7 +7,6 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import dynamic from "next/dynamic";
 import EarthFallback from "./EarthFallback";
 import GroundTransition from "./GroundTransition";
 import {
@@ -22,7 +21,8 @@ import {
   veilOpacity,
 } from "./progress";
 
-const EarthScene = dynamic(() => import("./EarthScene"), { ssr: false });
+/** Portion of the sequence covered by the earth-approach footage. */
+const DIVE_END = 0.64;
 
 export type ChapterContent = {
   id: string;
@@ -31,11 +31,12 @@ export type ChapterContent = {
 
 /**
  * The scroll-driven cinematic sequence. A tall scroll region maps page
- * scroll to a 0–1 progress value (via GSAP ScrollTrigger); the WebGL earth,
- * the cloud veil, the ground stage and the DOM text chapters are all pure
- * functions of that progress, so scrolling up plays the exact same shot in
- * reverse. Below `prefers-reduced-motion` or without WebGL the sequence
- * degrades to static layouts with all copy and CTAs intact.
+ * scroll to a 0–1 progress value (via GSAP ScrollTrigger); the earth
+ * footage (scrubbed frame-by-frame — encoded all-intra so seeks are
+ * instant in both directions), the cloud veil, the ground stage and the
+ * DOM text chapters are all pure functions of that progress, so scrolling
+ * up plays the exact same shot in reverse. Under `prefers-reduced-motion`
+ * the sequence degrades to static layouts with all copy and CTAs intact.
  */
 export default function EarthExperience({
   chapters,
@@ -45,14 +46,13 @@ export default function EarthExperience({
   const rootRef = useRef<HTMLDivElement>(null);
   const spaceRef = useRef<HTMLDivElement>(null);
   const canvasWrapRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const veilRef = useRef<HTMLDivElement>(null);
   const groundRef = useRef<HTMLDivElement>(null);
   const chapterRefs = useRef<(HTMLElement | null)[]>([]);
 
   const [reduced, setReduced] = useState(false);
-  const [webgl, setWebgl] = useState(true);
   const [mobile, setMobile] = useState(false);
-  const [active, setActive] = useState(true);
   const [sceneReady, setSceneReady] = useState(false);
 
   const applyProgress = useCallback((p: number) => {
@@ -71,6 +71,16 @@ export default function EarthExperience({
 
     if (canvasWrapRef.current) {
       canvasWrapRef.current.style.opacity = canvasOpacity(p).toFixed(3);
+    }
+
+    const video = videoRef.current;
+    if (video && video.duration) {
+      // Scrub the approach footage: progress 0–DIVE_END maps onto the whole
+      // clip. All-intra encoding makes seeks cheap in both directions.
+      const t = clamp01(p / DIVE_END) * Math.max(0, video.duration - 1 / 30);
+      if (Math.abs(video.currentTime - t) > 0.016) {
+        video.currentTime = t;
+      }
     }
 
     if (spaceRef.current) {
@@ -121,15 +131,6 @@ export default function EarthExperience({
     mqReduce.addEventListener("change", syncReduce);
     mqMobile.addEventListener("change", syncMobile);
 
-    try {
-      const probe = document.createElement("canvas");
-      setWebgl(
-        !!(probe.getContext("webgl2") || probe.getContext("webgl"))
-      );
-    } catch {
-      setWebgl(false);
-    }
-
     return () => {
       mqReduce.removeEventListener("change", syncReduce);
       mqMobile.removeEventListener("change", syncMobile);
@@ -147,40 +148,63 @@ export default function EarthExperience({
       }
     }
 
-    let trigger: import("gsap/ScrollTrigger").ScrollTrigger | undefined;
     let cancelled = false;
+    let removeTick: (() => void) | undefined;
 
     (async () => {
-      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
-        import("gsap"),
-        import("gsap/ScrollTrigger"),
-      ]);
+      const { default: gsap } = await import("gsap");
       if (cancelled || !rootRef.current) return;
-      gsap.registerPlugin(ScrollTrigger);
-      // The sequence sits at the very top of the page, so keep the WebGL
-      // loop alive until the user has fully scrolled past it (progress = 1);
-      // ScrollTrigger reports isActive=false at exactly scrollY 0.
-      const sync = (self: { progress: number; isActive: boolean }) => {
-        applyProgress(self.progress);
-        setActive(self.progress < 1 || self.isActive);
+      // Progress is derived from the sequence's geometry on every GSAP
+      // ticker frame rather than from scroll events, which some embedded
+      // browsers fail to dispatch. Purely positional, so it is exact on
+      // mid-page reload and fully reversible.
+      let lastP = -1;
+      const tick = () => {
+        const el = rootRef.current;
+        if (!el) return;
+        const total = el.offsetHeight - window.innerHeight;
+        const p = clamp01(-el.getBoundingClientRect().top / Math.max(1, total));
+        if (Math.abs(p - lastP) > 0.0004) {
+          lastP = p;
+          applyProgress(p);
+        }
       };
-      trigger = ScrollTrigger.create({
-        trigger: rootRef.current,
-        start: "top top",
-        end: "bottom bottom",
-        onUpdate: sync,
-        onToggle: sync,
-      });
-      sync(trigger);
+      gsap.ticker.add(tick);
+      tick();
+      // Safety net for environments that throttle rAF into silence
+      // (embedded webviews): a coarse interval keeps progress tracking,
+      // and the lastP check makes it a no-op when the ticker is healthy.
+      const interval = window.setInterval(tick, 250);
+      removeTick = () => {
+        gsap.ticker.remove(tick);
+        window.clearInterval(interval);
+      };
     })();
 
     return () => {
       cancelled = true;
-      trigger?.kill();
+      removeTick?.();
     };
   }, [reduced, applyProgress]);
 
-  const showScene = webgl && !reduced;
+  // The video can finish loading before hydration attaches onLoadedData;
+  // catch up from readyState so the poster does not linger over the footage.
+  // onLoadedData can be missed when the (cached) video loads before
+  // hydration, and some embedded browsers drop media events entirely —
+  // poll readiness as a fallback and stop as soon as the poster is gone.
+  useEffect(() => {
+    if (sceneReady || reduced) return;
+    const check = () =>
+      !!(videoRef.current && videoRef.current.readyState >= 2) &&
+      (setSceneReady(true), true);
+    if (check()) return;
+    const id = window.setInterval(() => {
+      if (check()) window.clearInterval(id);
+    }, 300);
+    return () => window.clearInterval(id);
+  }, [sceneReady, reduced]);
+
+  const showVideo = !reduced;
 
   return (
     <div
@@ -209,15 +233,19 @@ export default function EarthExperience({
           className={`ez-canvas${sceneReady ? " ez-canvas--ready" : ""}`}
           aria-hidden="true"
         >
-          {showScene && (
-            <EarthScene
-              mobile={mobile}
-              active={active}
-              onReady={() => setSceneReady(true)}
+          {showVideo && (
+            <video
+              ref={videoRef}
+              className="ez-dive-video"
+              src={mobile ? "/earth/earth-dive-sm.mp4" : "/earth/earth-dive.mp4"}
+              muted
+              playsInline
+              preload="auto"
+              onLoadedData={() => setSceneReady(true)}
             />
           )}
         </div>
-        {(!sceneReady || !showScene) && <EarthFallback />}
+        {(!sceneReady || !showVideo) && <EarthFallback />}
         <GroundTransition veilRef={veilRef} groundRef={groundRef} />
         {chapters.map((chapter, i) => (
           <section
