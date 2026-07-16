@@ -24,6 +24,12 @@ import {
 /** Portion of the sequence covered by the earth-approach footage. */
 const DIVE_END = 0.64;
 
+/**
+ * While progress rests below this, the footage plays as an ambient loop;
+ * past it, playback pauses and scroll scrubs the exact frame.
+ */
+const IDLE_LOOP_END = 0.01;
+
 export type ChapterContent = {
   id: string;
   content: ReactNode;
@@ -75,11 +81,20 @@ export default function EarthExperience({
 
     const video = videoRef.current;
     if (video && video.duration) {
-      // Scrub the approach footage: progress 0–DIVE_END maps onto the whole
-      // clip. All-intra encoding makes seeks cheap in both directions.
-      const t = clamp01(p / DIVE_END) * Math.max(0, video.duration - 1 / 30);
-      if (Math.abs(video.currentTime - t) > 0.016) {
-        video.currentTime = t;
+      if (p < IDLE_LOOP_END) {
+        // At rest on the hero the footage runs as an ambient loop.
+        video.loop = true;
+        if (video.paused) video.play().catch(() => {});
+      } else {
+        // The moment scrolling starts, freeze playback and scrub: progress
+        // IDLE_LOOP_END–DIVE_END maps onto the whole clip. All-intra
+        // encoding makes seeks instant in both directions.
+        video.loop = false;
+        if (!video.paused) video.pause();
+        const t = clamp01(p / DIVE_END) * Math.max(0, video.duration - 1 / 30);
+        if (Math.abs(video.currentTime - t) > 0.016) {
+          video.currentTime = t;
+        }
       }
     }
 
@@ -238,6 +253,8 @@ export default function EarthExperience({
               ref={videoRef}
               className="ez-dive-video"
               src={mobile ? "/earth/earth-dive-sm.mp4" : "/earth/earth-dive.mp4"}
+              autoPlay
+              loop
               muted
               playsInline
               preload="auto"
