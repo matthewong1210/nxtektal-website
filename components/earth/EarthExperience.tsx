@@ -25,6 +25,14 @@ import {
 const DIVE_END = 0.64;
 
 /**
+ * Crossfade window from the idle orbit clip to the zoom-in clip: the idle
+ * shot fades out over IDLE_LOOP_END–XFADE_END while the zoom clip starts
+ * scrubbing beneath it. The two clips share near-identical framing at the
+ * hand-off, so the cut reads as one continuous camera move.
+ */
+const XFADE_END = 0.06;
+
+/**
  * Portion of the sequence the space backdrop footage scrubs across. The
  * layer is fully faded by 0.66 (see the ez-space opacity curve), so the
  * clip spends its full length on the range where it is actually visible.
@@ -60,7 +68,8 @@ export default function EarthExperience({
   const spaceRef = useRef<HTMLDivElement>(null);
   const spaceVideoRef = useRef<HTMLVideoElement>(null);
   const canvasWrapRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const idleVideoRef = useRef<HTMLVideoElement>(null);
+  const zoomVideoRef = useRef<HTMLVideoElement>(null);
   const veilRef = useRef<HTMLDivElement>(null);
   const groundRef = useRef<HTMLDivElement>(null);
   const chapterRefs = useRef<(HTMLElement | null)[]>([]);
@@ -87,22 +96,30 @@ export default function EarthExperience({
       canvasWrapRef.current.style.opacity = canvasOpacity(p).toFixed(3);
     }
 
-    const video = videoRef.current;
-    if (video && video.duration) {
-      if (p < IDLE_LOOP_END) {
-        // At rest on the hero the footage runs as an ambient loop.
-        video.loop = true;
-        if (video.paused) video.play().catch(() => {});
-      } else {
-        // The moment scrolling starts, freeze playback and scrub: progress
-        // IDLE_LOOP_END–DIVE_END maps onto the whole clip. All-intra
-        // encoding makes seeks instant in both directions.
-        video.loop = false;
-        if (!video.paused) video.pause();
-        const t = clamp01(p / DIVE_END) * Math.max(0, video.duration - 1 / 30);
-        if (Math.abs(video.currentTime - t) > 0.016) {
-          video.currentTime = t;
-        }
+    // Idle orbit clip: ambient loop while resting on the hero, fading out
+    // over the crossfade window once scrolling starts.
+    const idle = idleVideoRef.current;
+    if (idle) {
+      const o = 1 - smoothstep(IDLE_LOOP_END, XFADE_END, p);
+      idle.style.opacity = o.toFixed(3);
+      if (o > 0.01) {
+        if (idle.paused) idle.play().catch(() => {});
+      } else if (!idle.paused) {
+        idle.pause();
+      }
+    }
+
+    // Zoom-in clip: revealed beneath the idle shot and scrubbed
+    // frame-exactly — progress IDLE_LOOP_END–DIVE_END maps onto the whole
+    // clip. All-intra encoding makes seeks instant in both directions.
+    const zoom = zoomVideoRef.current;
+    if (zoom && zoom.duration) {
+      const t =
+        clamp01((p - IDLE_LOOP_END) / (DIVE_END - IDLE_LOOP_END)) *
+        Math.max(0, zoom.duration - 1 / 30);
+      if (!zoom.paused) zoom.pause();
+      if (Math.abs(zoom.currentTime - t) > 0.016) {
+        zoom.currentTime = t;
       }
     }
 
@@ -237,7 +254,7 @@ export default function EarthExperience({
   useEffect(() => {
     if (sceneReady || reduced) return;
     const check = () =>
-      !!(videoRef.current && videoRef.current.readyState >= 2) &&
+      !!(idleVideoRef.current && idleVideoRef.current.readyState >= 2) &&
       (setSceneReady(true), true);
     if (check()) return;
     const id = window.setInterval(() => {
@@ -289,17 +306,27 @@ export default function EarthExperience({
           aria-hidden="true"
         >
           {showVideo && (
-            <video
-              ref={videoRef}
-              className="ez-dive-video"
-              src={mobile ? "/earth/earth-dive-sm.mp4" : "/earth/earth-dive.mp4"}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
-              onLoadedData={() => setSceneReady(true)}
-            />
+            <>
+              <video
+                ref={zoomVideoRef}
+                className="ez-dive-video"
+                src={mobile ? "/earth/earth-zoom-sm.mp4" : "/earth/earth-zoom.mp4"}
+                muted
+                playsInline
+                preload="auto"
+              />
+              <video
+                ref={idleVideoRef}
+                className="ez-dive-video ez-idle-video"
+                src={mobile ? "/earth/earth-idle-sm.mp4" : "/earth/earth-idle.mp4"}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
+                onLoadedData={() => setSceneReady(true)}
+              />
+            </>
           )}
         </div>
         {(!sceneReady || !showVideo) && <EarthFallback />}
