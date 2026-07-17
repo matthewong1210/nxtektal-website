@@ -14,12 +14,14 @@ Visible Earth** satellite data, which is in the **public domain**
 | `earth_atmos_1024.jpg` | `earth_atmos_2048.jpg` (downscaled) | NASA Blue Marble via three.js | MIT (repo) / Public domain (NASA imagery) |
 | `earth_clouds_1024.png` | `earth_clouds_1024.png` | NASA cloud imagery via three.js | MIT / Public domain |
 
-## Earth approach footage (`public/earth/earth-dive*.mp4`)
+## Earth footage (`public/earth/earth-idle*.mp4`, `earth-zoom*.mp4`)
 
-AI-generated cinematic footage produced by the founders with **Dreamina**
-(`dreamina-2026-07-15-7306`), supplied 2026-07-15. Re-encoded locally with
-ffmpeg (all-intra H.264) for scroll scrubbing. Usage rights per Dreamina's
-terms for user-generated content; confirm commercial terms before launch.
+AI-generated cinematic footage produced by the founders with **Dreamina**:
+the idle orbit clip (`dreamina-2026-07-15-7306`, supplied 2026-07-15,
+loops on the hero) and the zoom-in clip (`dreamina-2026-07-16-4049`,
+supplied 2026-07-16, scroll-scrubbed — re-encoded all-intra H.264 with
+ffmpeg). Usage rights per Dreamina's terms for user-generated content;
+confirm commercial terms before launch.
 
 ## Space backdrop footage (`public/earth/space-drift*.mp4`)
 
