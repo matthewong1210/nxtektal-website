@@ -20,6 +20,7 @@ export const founders = [
     name: "Steven Guo",
     role: "Co-Founder & Chief Technology Officer",
     email: "steven@nxtektal.com",
+    photo: "/founders/steven-guo.jpg",
     bio: "Steven is a UC Berkeley student studying Physics and Economics, with hands-on experience in mechanical engineering, Formula SAE, and competitive robotics. At NXTektal, he leads robotics engineering, system architecture, and product development.",
   },
   {
