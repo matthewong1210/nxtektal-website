@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "../../app/reveal";
 
 const Arrow = () => (
@@ -26,6 +27,7 @@ export const founders = [
     name: "Jason Chen",
     role: "Co-Founder & Chief Operating Officer",
     email: "jasonchen@nxtektal.com",
+    photo: "/founders/jason-chen.jpg",
     bio: "Jason is an engineering student at the University of British Columbia with access to a multi-factory manufacturing network, established component and electronics suppliers, and export channels serving Europe and the United States. At NXTektal, he leads manufacturing, supply chain, production, and China operations.",
   },
 ];
@@ -45,7 +47,18 @@ export default function FounderSection() {
           {founders.map((founder, index) => (
             <Reveal key={founder.name} delay={index * 90}>
               <article className="founder">
-                <div className="founder-initials" aria-hidden="true">{founder.initials}</div>
+                {"photo" in founder && founder.photo ? (
+                  <Image
+                    className="founder-photo"
+                    src={founder.photo}
+                    alt={`Portrait of ${founder.name}`}
+                    width={168}
+                    height={168}
+                    sizes="84px"
+                  />
+                ) : (
+                  <div className="founder-initials" aria-hidden="true">{founder.initials}</div>
+                )}
                 <h3>{founder.name}</h3>
                 <p className="founder-role">{founder.role}</p>
                 <p className="founder-bio">{founder.bio}</p>

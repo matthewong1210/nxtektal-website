@@ -287,7 +287,8 @@ main { background: var(--night); }
 .founders-grid { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(34px, 4vw, 60px); align-items: stretch; }
 .founders-grid > div { display: flex; }
 .founder { display: flex; flex-direction: column; padding-top: 26px; border-top: 1px solid var(--line-strong); }
-.founder-initials { width: 58px; height: 58px; margin-bottom: 26px; display: grid; place-items: center; color: var(--lime); border: 1px solid var(--lime-line); border-radius: 14px; background: rgba(166, 226, 46, 0.05); font-size: 16px; font-weight: 800; letter-spacing: 0.08em; }
+.founder-initials { width: 84px; height: 84px; margin-bottom: 26px; display: grid; place-items: center; color: var(--lime); border: 1px solid var(--lime-line); border-radius: 16px; background: rgba(166, 226, 46, 0.05); font-size: 19px; font-weight: 800; letter-spacing: 0.08em; }
+.founder-photo { width: 84px; height: 84px; margin-bottom: 26px; display: block; object-fit: cover; border: 1px solid var(--lime-line); border-radius: 16px; filter: grayscale(1) contrast(1.05); }
 .founder h3 { margin: 0; color: var(--white); font-size: clamp(23px, 2vw, 28px); font-weight: 640; letter-spacing: -0.025em; }
 .founder-role { margin: 10px 0 0; color: var(--lime); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
 .founder-bio { margin: 20px 0 0; color: var(--white-faint); font-size: 14.5px; line-height: 1.72; }
