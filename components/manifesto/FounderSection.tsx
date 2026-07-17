@@ -13,6 +13,7 @@ export const founders = [
     name: "Matthew Huang",
     role: "Co-Founder & Chief Executive Officer",
     email: "matthew@nxtektal.com",
+    photo: "/founders/matthew-huang.jpg",
     bio: "Matthew is a UC Berkeley graduate with experience spanning business development, financial services, sales, and early-stage ventures. At NXTektal, he leads company strategy, customer development, fundraising, and North American partnerships—connecting real-world operational needs with the company’s engineering and manufacturing capabilities.",
   },
   {
