@@ -1,8 +1,12 @@
+import dynamic from "next/dynamic";
 import EarthExperience from "../components/earth/EarthExperience";
 import FluidMenu from "../components/manifesto/FluidMenu";
 import FounderSection, { founders } from "../components/manifesto/FounderSection";
 import MachineSection from "../components/manifesto/MachineSection";
 import Reveal from "./reveal";
+
+// Below-the-fold interactive module: split out so it never weighs on first paint.
+const QuickCalculator = dynamic(() => import("../components/roi/QuickCalculator"));
 
 const site = {
   brand: "NXTektal Systems",
@@ -182,6 +186,7 @@ export default function Home() {
             <a href="#thesis">Thesis</a>
             <a href="#starting-point">Where we begin</a>
             <a href="#vision">Vision</a>
+            <a href="#cost-calculator">Savings calculator</a>
             <a href="#founders">Founders</a>
             <a href="#contact">Contact</a>
           </nav>
@@ -194,6 +199,7 @@ export default function Home() {
                 { label: "Thesis", href: "#thesis" },
                 { label: "Where we begin", href: "#starting-point" },
                 { label: "Vision", href: "#vision" },
+                { label: "Savings calculator", href: "#cost-calculator" },
                 { label: "Founders", href: "#founders" },
                 { label: "Contact", href: "#contact" },
               ]}
@@ -205,6 +211,8 @@ export default function Home() {
       <EarthExperience chapters={chapters} />
 
       <MachineSection />
+
+      <QuickCalculator />
 
       <FounderSection />
 

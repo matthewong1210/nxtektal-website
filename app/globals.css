@@ -356,3 +356,151 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 @media (min-width: 761px) and (max-width: 1120px) {
   .founders-grid { grid-template-columns: 1fr; max-width: 720px; gap: 44px; }
 }
+
+/* ---------- ROI Calculator (homepage quick section + /roi-calculator) ---------- */
+
+.roi-quick { padding: clamp(90px, 12vw, 170px) var(--pad); background: linear-gradient(180deg, var(--night), #0f1611 60%, var(--night)); }
+.roi-quick h2 { max-width: 760px; margin: 22px 0 0; color: var(--white); font-size: clamp(30px, 3.6vw, 52px); font-weight: 600; line-height: 1.08; letter-spacing: -0.035em; }
+.roi-quick-sub { max-width: 620px; margin: 16px 0 0; color: var(--white-faint); font-size: clamp(15px, 1.3vw, 17px); line-height: 1.65; }
+.roi-quick-grid { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 420px); gap: clamp(32px, 4vw, 56px); align-items: start; }
+.roi-quick-form { display: flex; flex-direction: column; gap: 20px; }
+
+.roi-field { display: flex; flex-direction: column; gap: 8px; flex: 1 1 180px; min-width: 0; }
+.roi-field label { color: var(--white-soft); font-size: 12.5px; font-weight: 650; letter-spacing: 0.02em; }
+.roi-required { color: var(--lime); }
+.roi-input-wrap { display: flex; align-items: center; gap: 8px; padding: 0 14px; border: 1px solid var(--line-strong); border-radius: 12px; background: rgba(13, 17, 23, 0.6); transition: border-color 160ms ease; }
+.roi-input-wrap:focus-within { border-color: var(--lime); }
+.roi-field--invalid .roi-input-wrap { border-color: rgba(255, 176, 92, 0.65); }
+.roi-affix { color: var(--white-faint); font-size: 13px; }
+.roi-input-wrap input { flex: 1; min-width: 0; padding: 12px 0; color: var(--white); background: transparent; border: none; outline: none; font: inherit; font-size: 15px; font-variant-numeric: tabular-nums; }
+.roi-input-wrap input::placeholder { color: rgba(245, 247, 247, 0.28); }
+.roi-hint { margin: 0; color: var(--white-faint); font-size: 12px; line-height: 1.5; max-width: 52ch; }
+.roi-field-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.roi-field select { padding: 12px 14px; color: var(--white); background: rgba(13, 17, 23, 0.6); border: 1px solid var(--line-strong); border-radius: 12px; font: inherit; font-size: 14px; }
+.roi-field select:focus-visible, .roi-input-wrap input:focus-visible { outline: none; }
+
+.roi-segmented { margin: 0; padding: 0; border: none; }
+.roi-segmented legend { padding: 0 0 10px; color: var(--white-soft); font-size: 12.5px; font-weight: 650; }
+.roi-segmented-track { display: inline-flex; border: 1px solid var(--line-strong); border-radius: 999px; overflow: hidden; }
+.roi-segment input { position: absolute; opacity: 0; pointer-events: none; }
+.roi-segment span { display: block; padding: 9px 16px; color: var(--white-faint); font-size: 12px; font-weight: 700; letter-spacing: 0.03em; cursor: pointer; transition: color 160ms ease, background-color 160ms ease; }
+.roi-segment input:checked + span { color: var(--night); background: var(--lime); }
+.roi-segment input:focus-visible + span { outline: 2px solid var(--lime); outline-offset: -2px; }
+
+.roi-toggle-block { border-top: 1px solid var(--line); padding-top: 18px; display: flex; flex-direction: column; gap: 16px; }
+.roi-toggle-row { display: flex; align-items: flex-start; gap: 10px; }
+.roi-toggle-row input { width: 18px; height: 18px; margin-top: 1px; accent-color: var(--lime); }
+.roi-toggle-row label { color: var(--white-soft); font-size: 13.5px; font-weight: 600; line-height: 1.5; cursor: pointer; }
+
+.roi-quick-result { position: sticky; top: 24px; padding: 26px 24px; border: 1px solid var(--line-strong); border-radius: 20px; background: rgba(13, 17, 23, 0.76); box-shadow: 0 22px 60px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.04); }
+.roi-result-label { margin: 0; color: var(--lime); font-size: 11px; font-weight: 850; letter-spacing: 0.18em; text-transform: uppercase; }
+.roi-result-headline { margin: 14px 0 0; color: var(--white); font-size: clamp(38px, 4vw, 52px); font-weight: 650; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.roi-result-headline span { color: var(--white-faint); font-size: 0.4em; font-weight: 600; letter-spacing: 0; }
+.roi-result-rows { margin: 20px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.roi-result-rows div { display: flex; justify-content: space-between; gap: 14px; padding-top: 10px; border-top: 1px solid var(--line); }
+.roi-result-rows dt { color: var(--white-faint); font-size: 12.5px; }
+.roi-result-rows dd { margin: 0; color: var(--white); font-size: 14px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.roi-result-empty { margin: 16px 0 0; color: var(--white-faint); font-size: 14px; line-height: 1.6; }
+.roi-quick-actions { margin-top: 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.roi-disclaimer { margin: 22px 0 0; color: var(--white-faint); font-size: 12px; line-height: 1.6; }
+
+/* ----- Full page ----- */
+
+.roi-main { min-height: 100vh; background: var(--night); }
+.roi-topbar { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 22px var(--pad); border-bottom: 1px solid var(--line); }
+.roi-topbar-brand { color: var(--white); font-size: 15px; font-weight: 750; letter-spacing: 0.04em; }
+.roi-topbar-brand small { margin-left: 6px; color: var(--lime); font-size: 8px; font-weight: 800; letter-spacing: 0.26em; }
+.roi-topbar-note { color: var(--white-faint); font-size: 11px; letter-spacing: 0.06em; }
+
+.roi-page { width: min(100%, var(--max)); margin: 0 auto; padding: clamp(36px, 5vw, 64px) var(--pad) 120px; }
+.roi-page-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.roi-page-head h1 { max-width: 640px; margin: 18px 0 0; color: var(--white); font-size: clamp(30px, 3.6vw, 50px); font-weight: 600; line-height: 1.08; letter-spacing: -0.035em; }
+.roi-page-tools { display: flex; flex-wrap: wrap; gap: 8px; }
+.roi-tool { padding: 9px 15px; color: var(--white-soft); background: rgba(13, 17, 23, 0.6); border: 1px solid var(--line-strong); border-radius: 999px; font: inherit; font-size: 11.5px; font-weight: 700; letter-spacing: 0.03em; cursor: pointer; transition: color 160ms ease, border-color 160ms ease; }
+.roi-tool:hover, .roi-tool:focus-visible { color: var(--lime); border-color: rgba(166, 226, 46, 0.44); }
+.roi-tool--danger:hover, .roi-tool--danger:focus-visible { color: #ffb05c; border-color: rgba(255, 176, 92, 0.5); }
+
+.roi-layout { margin-top: clamp(36px, 4vw, 56px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 430px); gap: clamp(32px, 4vw, 56px); align-items: start; }
+.roi-forms { display: flex; flex-direction: column; gap: clamp(36px, 4vw, 52px); }
+.roi-section h2 { margin: 0 0 22px; color: var(--white); font-size: 17px; font-weight: 700; letter-spacing: 0.01em; }
+.roi-section { display: flex; flex-direction: column; gap: 20px; }
+.roi-callout { margin: 0; padding: 14px 16px; color: var(--white-soft); border: 1px solid var(--lime-line); border-radius: 12px; background: rgba(166, 226, 46, 0.05); font-size: 13px; line-height: 1.6; }
+
+.roi-accordion { border: 1px solid var(--line); border-radius: 16px; padding: 0 20px; }
+.roi-accordion summary { padding: 18px 0; color: var(--white); font-size: 17px; font-weight: 700; cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: 10px; }
+.roi-accordion summary span { color: var(--white-faint); font-size: 12px; font-weight: 500; }
+.roi-accordion summary::-webkit-details-marker { display: none; }
+.roi-accordion summary::after { content: "+"; margin-left: auto; color: var(--lime); font-size: 18px; }
+.roi-accordion[open] summary::after { content: "–"; }
+.roi-accordion[open] { padding-bottom: 22px; }
+.roi-accordion > *:not(summary) { margin-bottom: 16px; }
+
+.roi-results { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 20px; }
+.roi-card { padding: 26px 24px; border: 1px solid var(--line-strong); border-radius: 20px; background: rgba(13, 17, 23, 0.76); box-shadow: 0 22px 60px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.04); }
+.roi-illustrative { margin: 10px 0 0; color: #ffb05c; font-size: 11.5px; font-weight: 700; letter-spacing: 0.04em; }
+.roi-waterfall { margin: 18px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.roi-waterfall li { display: flex; justify-content: space-between; gap: 14px; padding: 9px 0; border-top: 1px solid var(--line); color: var(--white-faint); font-size: 12.5px; }
+.roi-waterfall li strong { color: var(--white); font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.roi-waterfall-core { background: rgba(166, 226, 46, 0.07); margin: 0 -12px; padding: 11px 12px !important; border-radius: 10px; border-top: none !important; }
+.roi-waterfall-core span { color: var(--white); font-weight: 700; }
+.roi-waterfall-core strong { color: var(--lime); font-size: 15px; }
+.roi-hours-split { margin-top: 18px; }
+
+.roi-compare { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+.roi-compare-row { display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 10px; font-size: 12px; color: var(--white-faint); }
+.roi-compare-row strong { color: var(--white); font-variant-numeric: tabular-nums; }
+.roi-bar { height: 10px; border-radius: 999px; background: rgba(245, 247, 247, 0.08); overflow: hidden; }
+.roi-bar i { display: block; height: 100%; background: var(--steel); border-radius: 999px; }
+.roi-bar--lime i { background: var(--lime); }
+
+.roi-breakdown { margin-top: clamp(48px, 6vw, 72px); }
+.roi-breakdown table { width: 100%; border-collapse: collapse; border: 1px solid var(--line-strong); border-radius: 16px; overflow: hidden; }
+.roi-breakdown th, .roi-breakdown td { padding: 13px 16px; text-align: left; font-size: 13px; border-bottom: 1px solid var(--line); }
+.roi-breakdown th { color: var(--white-faint); font-size: 11px; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; background: rgba(13, 17, 23, 0.6); }
+.roi-breakdown td:nth-child(2) { color: var(--white-faint); font-variant-numeric: tabular-nums; }
+.roi-breakdown td:last-child, .roi-breakdown th:last-child { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.roi-row-total td { color: var(--white); font-weight: 750; background: rgba(166, 226, 46, 0.06); }
+.roi-row-excluded td { color: var(--white-faint); font-style: italic; }
+
+.roi-transparency { margin-top: clamp(48px, 6vw, 72px); }
+.roi-warnings { margin: 0; padding-left: 18px; color: #ffb05c; font-size: 13px; line-height: 1.7; }
+.roi-assumption-list { margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px 22px; }
+.roi-assumption-list div { padding-top: 10px; border-top: 1px solid var(--line); }
+.roi-assumption-list dt { color: var(--white-faint); font-size: 11.5px; }
+.roi-assumption-list dd { margin: 4px 0 0; color: var(--white); font-size: 13.5px; font-weight: 650; }
+.roi-assumption-list dd em { color: var(--white-faint); font-size: 10.5px; font-style: normal; font-weight: 500; margin-left: 6px; letter-spacing: 0.04em; }
+
+.roi-cta { margin-top: clamp(56px, 7vw, 88px); padding: clamp(36px, 5vw, 56px); border: 1px solid var(--line-strong); border-radius: 24px; background: radial-gradient(circle at 50% 0%, rgba(166, 226, 46, 0.07), transparent 55%), rgba(13, 17, 23, 0.6); align-items: flex-start; }
+.roi-cta h2 { font-size: clamp(24px, 2.6vw, 34px); letter-spacing: -0.02em; margin-bottom: 6px; }
+.roi-cta p { margin: 0 0 10px; color: var(--white-faint); font-size: 14.5px; line-height: 1.65; max-width: 56ch; }
+
+/* Presentation mode: bigger numbers, fewer distractions. */
+.roi-page--presentation .roi-page-head h1 { font-size: clamp(24px, 2.4vw, 34px); }
+.roi-page--presentation .roi-result-headline { font-size: clamp(52px, 6vw, 84px); }
+.roi-page--presentation .roi-waterfall li { font-size: 14px; }
+.roi-page--presentation .roi-waterfall-core strong { font-size: 19px; }
+.roi-page--presentation .roi-transparency, .roi-page--presentation .roi-cta { display: none; }
+
+@media (max-width: 960px) {
+  .roi-quick-grid, .roi-layout { grid-template-columns: 1fr; }
+  .roi-quick-result, .roi-results { position: static; }
+  .roi-results { order: 2; }
+  .roi-breakdown table, .roi-breakdown thead, .roi-breakdown tbody, .roi-breakdown tr { display: block; }
+  .roi-breakdown thead { display: none; }
+  .roi-breakdown tr { padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .roi-breakdown td { display: block; padding: 2px 0; border: none; }
+  .roi-breakdown td:last-child { text-align: left; font-weight: 700; color: var(--white); }
+}
+
+@media print {
+  body::before, .site-header, .roi-topbar, .roi-page-tools, .roi-cta, .roi-quick-actions { display: none !important; }
+  html, body, main, .roi-main { background: #fff !important; }
+  .roi-page, .roi-card, .roi-breakdown table { color: #111; }
+  .roi-page { padding: 0; }
+  .roi-card { border: 1px solid #bbb; box-shadow: none; background: #fff; }
+  .roi-result-headline, .roi-waterfall li strong, .roi-result-rows dd, .roi-breakdown td, .roi-section h2, .roi-page-head h1 { color: #111 !important; }
+  .roi-result-label { color: #3a6b00 !important; }
+  .roi-waterfall li, .roi-result-rows dt, .roi-breakdown td:nth-child(2), .roi-hint, .roi-disclaimer, .roi-quick-sub { color: #444 !important; }
+  .roi-layout { grid-template-columns: 1fr; }
+  .roi-results { position: static; }
+}
