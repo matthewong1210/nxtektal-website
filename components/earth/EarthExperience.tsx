@@ -25,6 +25,13 @@ import {
 const DIVE_END = 0.64;
 
 /**
+ * Portion of the sequence the space backdrop footage scrubs across. The
+ * layer is fully faded by 0.66 (see the ez-space opacity curve), so the
+ * clip spends its full length on the range where it is actually visible.
+ */
+const SPACE_END = 0.55;
+
+/**
  * While progress rests below this, the footage plays as an ambient loop;
  * past it, playback pauses and scroll scrubs the exact frame.
  */
@@ -51,6 +58,7 @@ export default function EarthExperience({
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const spaceRef = useRef<HTMLDivElement>(null);
+  const spaceVideoRef = useRef<HTMLVideoElement>(null);
   const canvasWrapRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const veilRef = useRef<HTMLDivElement>(null);
@@ -99,11 +107,30 @@ export default function EarthExperience({
     }
 
     if (spaceRef.current) {
-      // The Milky Way backdrop recedes as the camera dives into the clouds.
+      // The space backdrop recedes as the camera dives into the clouds.
       const o = 1 - smoothstep(0.5, 0.66, p);
       spaceRef.current.style.opacity = o.toFixed(3);
       const drift = smoothstep(0, 0.55, p);
       spaceRef.current.style.transform = `scale(${lerp(1.12, 1.01, drift)}) translateY(${lerp(-1.5, 1.5, drift)}%)`;
+    }
+
+    const spaceVideo = spaceVideoRef.current;
+    if (spaceVideo && spaceVideo.duration && p < 0.7) {
+      // Same treatment as the earth footage: ambient loop at rest on the
+      // hero, exact-frame scrub once scrolling starts. Skipped entirely once
+      // the layer has faded out (p ≥ 0.7) to save pointless seeks.
+      if (p < IDLE_LOOP_END) {
+        spaceVideo.loop = true;
+        if (spaceVideo.paused) spaceVideo.play().catch(() => {});
+      } else {
+        spaceVideo.loop = false;
+        if (!spaceVideo.paused) spaceVideo.pause();
+        const t =
+          clamp01(p / SPACE_END) * Math.max(0, spaceVideo.duration - 1 / 30);
+        if (Math.abs(spaceVideo.currentTime - t) > 0.016) {
+          spaceVideo.currentTime = t;
+        }
+      }
     }
 
     if (veilRef.current) {
@@ -240,6 +267,19 @@ export default function EarthExperience({
       )}
       <div className="ez-viewport">
         <div ref={spaceRef} className="ez-space" aria-hidden="true">
+          {showVideo && (
+            <video
+              ref={spaceVideoRef}
+              className="ez-space-video"
+              src={mobile ? "/earth/space-drift-sm.mp4" : "/earth/space-drift.mp4"}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+            />
+          )}
+          <div className="ez-space-shade" />
           <div className="ez-space-glow ez-space-glow-a" />
           <div className="ez-space-glow ez-space-glow-b" />
         </div>

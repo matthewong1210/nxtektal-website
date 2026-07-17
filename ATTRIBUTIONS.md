@@ -21,6 +21,14 @@ AI-generated cinematic footage produced by the founders with **Dreamina**
 ffmpeg (all-intra H.264) for scroll scrubbing. Usage rights per Dreamina's
 terms for user-generated content; confirm commercial terms before launch.
 
+## Space backdrop footage (`public/earth/space-drift*.mp4`)
+
+AI-generated cinematic space footage produced by the founders with **Dreamina**
+(`dreamina-2026-07-16-4049`), supplied 2026-07-16. Re-encoded locally with
+ffmpeg (all-intra H.264, audio stripped) for scroll scrubbing. Usage rights per
+Dreamina's terms for user-generated content; confirm commercial terms before
+launch.
+
 ## Milky Way backdrop (`public/earth/milkyway-*.jpg`)
 
 Photo by **Jonathan Borba** on Pexels
