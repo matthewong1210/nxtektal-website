@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { RefObject } from "react";
 
 /**
@@ -20,9 +21,11 @@ export default function GroundTransition({
     <>
       <div ref={groundRef} className="ez-ground">
         <div className="ground-photo">
-          <img
+          <Image
             src="/robot/robot-front.jpg"
             alt="NXTektal ball collection robot facing the camera on a driving range at dusk"
+            fill
+            sizes="100vw"
           />
         </div>
       </div>

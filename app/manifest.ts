@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "NXTektal Systems is building the operating system for autonomous outdoor work, starting with demand-responsive ball collection and handoff for golf ranges.",
     start_url: "/",
     display: "standalone",
-    background_color: "#07100b",
-    theme_color: "#07100b",
+    background_color: "#0d1117",
+    theme_color: "#0d1117",
     icons: [
       {
         src: "/icon.svg",

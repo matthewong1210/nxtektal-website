@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "../../app/reveal";
 import RobotVideo from "./RobotVideo";
 
@@ -34,7 +35,14 @@ export default function MachineSection() {
           <div className="machine-photos">
             {photos.map((photo, index) => (
               <Reveal key={photo.src} delay={index * 90}>
-                <img src={photo.src} alt={photo.alt} loading="lazy" width={1536} height={1024} />
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  width={1536}
+                  height={1024}
+                  sizes="(max-width: 760px) 100vw, 33vw"
+                  loading="lazy"
+                />
               </Reveal>
             ))}
           </div>
