@@ -9,9 +9,9 @@ const inter = Inter({
 });
 
 const siteUrl = "https://nxtektal.com";
-const title = "NXTektal Systems | Autonomous Outdoor Operations";
+const title = "NXTektal Systems | Autonomous Operations for Golf Facilities";
 const description =
-  "NXTektal Systems is building the operating system for autonomous outdoor work, starting with demand-responsive ball collection and handoff for golf ranges.";
+  "NXTektal is building an operating layer that coordinates robots, sensors, and AI agents for autonomous golf facility operations, starting with closed-loop ball operations at driving ranges.";
 const ogImage = {
   url: "/og-image.jpg",
   width: 1200,
