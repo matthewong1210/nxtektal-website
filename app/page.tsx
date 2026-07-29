@@ -2,7 +2,8 @@ import dynamic from "next/dynamic";
 import EarthExperience from "../components/earth/EarthExperience";
 import FluidMenu from "../components/manifesto/FluidMenu";
 import FounderSection, { founders } from "../components/manifesto/FounderSection";
-import MachineSection from "../components/manifesto/MachineSection";
+import IntelligenceSection from "../components/manifesto/IntelligenceSection";
+import RobotVideo from "../components/manifesto/RobotVideo";
 import Reveal from "./reveal";
 
 // Below-the-fold interactive module: split out so it never weighs on first paint.
@@ -15,8 +16,17 @@ const site = {
   domain: "nxtektal.com",
 };
 
-const investorMail = `mailto:${site.email}?subject=Investor%20conversation`;
-const pilotMail = `mailto:${site.email}?subject=Pilot%20partnership`;
+const pilotMail = `mailto:${site.email}?subject=Pilot%20Facility%20Interest%20%E2%80%94%20%5BFacility%20Name%5D`;
+const partnerMail = `mailto:${site.email}?subject=Partnership%20Discussion`;
+
+const navItems = [
+  { label: "Starting Point", href: "#why-driving-ranges" },
+  { label: "First Workflow", href: "#first-workflow" },
+  { label: "Intelligence", href: "#intelligence" },
+  { label: "Expansion", href: "#expansion" },
+  { label: "ROI", href: "#roi" },
+  { label: "Company", href: "#company" },
+];
 
 const Arrow = () => (
   <svg aria-hidden="true" viewBox="0 0 20 20" className="icon-arrow">
@@ -24,12 +34,8 @@ const Arrow = () => (
   </svg>
 );
 
-const BrandMark = ({ compact = false }: { compact?: boolean }) => (
-  <svg
-    aria-hidden="true"
-    viewBox="0 0 74 50"
-    className={compact ? "brand-mark compact" : "brand-mark"}
-  >
+const BrandMark = () => (
+  <svg aria-hidden="true" viewBox="0 0 74 50" className="brand-mark">
     <defs>
       <linearGradient id="nx-silver" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stopColor="#ffffff" />
@@ -52,106 +58,134 @@ const chapters = [
     id: "top",
     content: (
       <div className="ez-copy ez-copy--hero">
-        <div className="eyebrow hero-fade"><span className="pulse" /> AUTONOMOUS OUTDOOR OPERATIONS</div>
-        <h1 className="hero-fade">Outdoor work will not run on fixed schedules forever.</h1>
+        <div className="eyebrow hero-fade"><span className="pulse" /> AUTONOMOUS OPERATIONS FOR GOLF FACILITIES</div>
+        <h1 className="hero-fade">One operating layer for autonomous golf facilities.</h1>
         <p className="ez-body hero-fade">
-          NXTektal is building the operating system for autonomous outdoor work—systems that continuously understand the environment, decide what needs attention, and coordinate machines to act.
+          NXTektal is building a system that coordinates robots, sensors, and AI agents to automate repetitive outdoor work and continuously improve how a golf facility operates.
         </p>
-        <p className="hero-start hero-fade">We are starting <span>in golf.</span></p>
+        <p className="hero-start hero-fade">Starting with <span>closed-loop ball operations</span> at driving ranges.</p>
         <div className="hero-actions hero-fade">
-          <a className="button button-primary" href={investorMail}>
-            Talk to the founders <Arrow />
+          <a className="button button-primary" href="#pilot">
+            Become a Pilot Facility <Arrow />
           </a>
-          <a className="button button-secondary" href="#starting-point">
-            See where we begin
+          <a className="button button-secondary" href="#first-workflow">
+            See the First Workflow
           </a>
         </div>
       </div>
     ),
   },
   {
-    id: "thesis",
+    id: "validation",
     content: (
-      <div className="ez-copy">
-        <div className="eyebrow">THE THESIS</div>
-        <h2>The environment changes.<br />The work should respond.</h2>
-        <div className="ez-paragraphs">
-          <p>
-            Outdoor environments never stop changing. Ball inventories fall. Turf degrades. Weather shifts. People, vehicles, and equipment move constantly. Yet the work is still organized through fixed schedules, manual inspection, isolated machines, and repeated handoffs.
-          </p>
-          <p>
-            The next generation of outdoor infrastructure will not be defined by more disconnected robots. It will be defined by a system that understands the environment, decides what needs attention, coordinates machines to act, verifies the outcome, and improves through real operation.
-          </p>
-        </div>
-        <p className="ez-close">Robots execute the work. <span>NXTektal coordinates the system.</span></p>
+      <div className="ez-copy ez-copy--validation">
+        <dl className="validation-strip">
+          <div>
+            <dt>30+</dt>
+            <dd>Facilities contacted</dd>
+          </div>
+          <div>
+            <dt>Over two-thirds</dt>
+            <dd>Reported labor, safety, and reliability challenges</dd>
+          </div>
+          <div>
+            <dt>6</dt>
+            <dd>Facilities interested in piloting</dd>
+          </div>
+        </dl>
+        <p className="validation-note">Based on NXTektal customer discovery to date.</p>
       </div>
     ),
   },
   {
-    id: "observation",
+    id: "ambition",
     content: (
       <div className="ez-copy">
-        <figure className="observation">
-          <figcaption className="observation-label"><i aria-hidden="true" /> FIELD OBSERVATION</figcaption>
-          <blockquote>
-            At one driving range, staff leave roughly <em>every two hours</em> for collection runs that take <em>more than an hour</em>—then manually lift and transfer the balls, while dispensers can <em>still run empty</em>.
-          </blockquote>
-          <p className="observation-close">That is where NXTektal begins.</p>
-        </figure>
-      </div>
-    ),
-  },
-  {
-    id: "starting-point",
-    content: (
-      <div className="ez-copy">
-        <div className="eyebrow">WHERE WE BEGIN</div>
-        <h2>One complete workflow, before an entire platform.</h2>
-        <div className="ez-paragraphs">
-          <p>
-            NXTektal is developing a demand-responsive ball collection and handoff system for golf ranges. It is designed to monitor ball availability, dispatch a purpose-built robot when collection is needed, unload into a range’s existing processing equipment, and return to charge.
-          </p>
-          <p>
-            The goal is simple: keep ball supply moving while removing the routine manual handoffs between collection runs.
-          </p>
-        </div>
-        <p className="workflow-line" aria-label="Workflow: monitor, dispatch, collect, handoff, recharge">
-          {["MONITOR", "DISPATCH", "COLLECT", "HANDOFF", "RECHARGE"].map((step, index) => (
-            <span key={step} className="workflow-step">
-              {index > 0 && <i aria-hidden="true">→</i>}
-              {step}
-            </span>
-          ))}
+        <p className="ez-close">Outdoor work will not run on fixed schedules forever.</p>
+        <p className="ez-body ez-ambition-sub">
+          Golf facilities still run on fixed schedules, manual inspection, and isolated machines. NXTektal is building the operating layer that understands the facility, decides what needs attention, coordinates machines to act, and verifies the outcome.
         </p>
-        <p className="ez-note">
-          Designed to work with existing wash-and-dispense infrastructure rather than requiring a facility to replace its entire system.
-        </p>
-      </div>
-    ),
-  },
-  {
-    id: "vision",
-    content: (
-      <div className="ez-copy">
-        <div className="eyebrow">THE DIRECTION</div>
-        <h2>One task at a time.<br />One environment at a time.</h2>
-        <div className="ez-paragraphs">
-          <p>
-            Ball collection is the first workflow, not the final definition of the company. The same foundation—mapping, perception, mission planning, autonomous docking, remote operations, and field reliability—can support progressively broader maintenance work across golf facilities and, over time, other managed outdoor environments.
-          </p>
-          <p>
-            NXTektal is not building a collection of disconnected machines. <span className="ez-strong">It is building the system that coordinates them.</span>
-          </p>
-        </div>
-        <div className="direction-sequence" aria-label="Direction: golf ranges, then golf facilities, then managed outdoor environments">
-          <span>GOLF RANGES</span>
-          <span><i aria-hidden="true">→</i> GOLF FACILITIES</span>
-          <span><i aria-hidden="true">→</i> MANAGED OUTDOOR ENVIRONMENTS</span>
-        </div>
       </div>
     ),
   },
 ];
+
+const whyCards = [
+  { title: "Repetitive", body: "Collection, unloading, and transfer happen throughout the operating day." },
+  { title: "Operationally critical", body: "When the ball supply breaks, customers notice immediately." },
+  { title: "Measurable", body: "Labor hours, run frequency, interventions, downtime, and ball availability can all be tracked." },
+];
+
+const workflowSteps = ["MONITOR", "DISPATCH", "COLLECT", "RETURN", "HANDOFF", "WASH & DISPENSE", "VERIFY"];
+
+const systemComponents = [
+  {
+    title: "Range Operations Agent",
+    body: "Monitors demand, equipment state, and mission status, then determines when collection is needed.",
+  },
+  {
+    title: "Autonomous Collection System",
+    body: "Collects balls, navigates the range, returns to the handoff point, and recharges between missions.",
+  },
+  {
+    title: "Modular Ball Handoff",
+    body: "Connects collection with the facility’s washer and dispenser infrastructure to reduce routine manual transfer.",
+  },
+];
+
+const devStatus = [
+  { name: "Collection hardware", status: "Prototype development" },
+  { name: "Range Operations Agent", status: "Early product development" },
+  { name: "Automated handoff", status: "Engineering development" },
+  { name: "Closed-loop field operation", status: "Pilot validation target" },
+];
+
+const roadmapStages = [
+  {
+    label: "STARTING POINT",
+    title: "Range ball operations",
+    status: "In development",
+    active: true,
+    items: [
+      "Ball availability monitoring",
+      "Demand-responsive dispatch",
+      "Collection",
+      "Automated handoff",
+      "Wash-and-dispense coordination",
+      "Workflow verification",
+    ],
+  },
+  {
+    label: "PLANNED EXPANSION",
+    title: "Inspection and grounds care",
+    status: "Platform direction",
+    active: false,
+    items: [
+      "Drone inspection and mapping",
+      "Turf and soil monitoring",
+      "Bunker raking",
+      "Localized maintenance",
+      "Mowing coordination",
+      "Equipment inspection",
+    ],
+  },
+  {
+    label: "LONG-TERM DIRECTION",
+    title: "Facility-wide autonomy",
+    status: "Long-term direction",
+    active: false,
+    items: [
+      "Shared facility maps",
+      "Multi-robot scheduling",
+      "Predictive maintenance",
+      "Equipment logistics",
+      "Human-and-robot task coordination",
+      "Facility-wide operational reporting",
+    ],
+  },
+];
+
+const beyondEnvironments = ["Campuses", "Parks", "Sports facilities", "Resorts", "Commercial landscapes"];
 
 export default function Home() {
   const structuredData = {
@@ -161,7 +195,7 @@ export default function Home() {
     url: `https://${site.domain}`,
     email: site.email,
     description:
-      "NXTektal Systems is building the operating system for autonomous outdoor work, starting with demand-responsive ball collection and handoff for golf ranges.",
+      "NXTektal is building an operating layer that coordinates robots, sensors, and AI agents for autonomous golf facility operations, starting with closed-loop ball operations at driving ranges.",
     founder: founders.map((founder) => ({
       "@type": "Person",
       name: founder.name,
@@ -176,6 +210,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
+      {/* 1 · Header */}
       <header className="site-header">
         <div className="header-shell">
           <a className="brand" href="#top" aria-label="NXTektal Systems home">
@@ -183,66 +218,254 @@ export default function Home() {
             <span className="brand-type"><strong>{site.shortBrand}</strong><small>SYSTEMS</small></span>
           </a>
           <nav aria-label="Primary navigation">
-            <a href="#thesis">Thesis</a>
-            <a href="#starting-point">Where we begin</a>
-            <a href="#vision">Vision</a>
-            <a href="#cost-calculator">Savings calculator</a>
-            <a href="#founders">Founders</a>
-            <a href="#contact">Contact</a>
+            {navItems.map((item) => (
+              <a key={item.href} href={item.href}>{item.label}</a>
+            ))}
           </nav>
           <div className="header-end">
-            <a className="header-cta" href={investorMail}>
-              Talk to the founders <Arrow />
+            <a className="header-cta" href="#pilot">
+              Become a Pilot <Arrow />
             </a>
-            <FluidMenu
-              items={[
-                { label: "Thesis", href: "#thesis" },
-                { label: "Where we begin", href: "#starting-point" },
-                { label: "Vision", href: "#vision" },
-                { label: "Savings calculator", href: "#cost-calculator" },
-                { label: "Founders", href: "#founders" },
-                { label: "Contact", href: "#contact" },
-              ]}
-            />
+            <FluidMenu items={navItems} />
           </div>
         </div>
       </header>
 
+      {/* 2 · Hero + 3 · Validation strip (cinematic sequence) */}
       <EarthExperience chapters={chapters} />
 
-      <MachineSection />
-
-      <QuickCalculator />
-
-      <FounderSection />
-
-      <section className="closing-block" id="contact">
-        <div className="closing-grid-bg" aria-hidden="true" />
-        <div className="block-inner closing-inner">
+      {/* 4 · Why driving ranges */}
+      <section className="block why-block" id="why-driving-ranges">
+        <div className="block-inner">
           <Reveal>
-            <p className="closing-statement">
-              MORE PRECISE CARE.<br />
-              LESS DANGEROUS WORK.<br />
-              FEWER UNNECESSARY INTERVENTIONS.
+            <div className="eyebrow">WHY DRIVING RANGES</div>
+            <h2>Why start with driving ranges?</h2>
+          </Reveal>
+          <div className="ez-paragraphs section-paragraphs">
+            <Reveal>
+              <p>
+                Driving-range ball operations are repetitive, labor-intensive, and directly tied to customer experience. A range can own a collection machine and still depend on people to decide when to deploy it, unload the balls, move them through washing and dispensing, and respond when ball supply falls.
+              </p>
+            </Reveal>
+            <Reveal>
+              <p>
+                That makes the driving range a practical place to prove reliable autonomy, closed-loop execution, and measurable operating economics before expanding across the rest of the facility.
+              </p>
+            </Reveal>
+          </div>
+          <div className="why-cards">
+            {whyCards.map((card, index) => (
+              <Reveal key={card.title} delay={index * 90}>
+                <article className="why-card">
+                  <h3>{card.title}</h3>
+                  <p>{card.body}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <figure className="observation observation--compact">
+              <figcaption className="observation-label"><i aria-hidden="true" /> FIELD OBSERVATION</figcaption>
+              <blockquote>
+                At one driving range, collection runs can occur roughly <em>every two hours</em>, take <em>more than an hour</em>, and still require <em>manual unloading and transfer</em> afterward.
+              </blockquote>
+            </figure>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 5 · First closed-loop workflow */}
+      <section className="block workflow-block" id="first-workflow">
+        <div className="block-inner">
+          <Reveal>
+            <div className="eyebrow">CURRENT WEDGE · IN DEVELOPMENT</div>
+            <h2>Keeping range balls moving, end to end.</h2>
+          </Reveal>
+          <Reveal>
+            <p className="section-body">
+              Our first system is being developed to monitor ball availability, dispatch collection when needed, return to a handoff point, transfer balls into the range’s existing processing equipment, and verify that the workflow is complete.
             </p>
           </Reveal>
           <Reveal>
-            <h2>One workflow today. A new operating layer over time.</h2>
+            <p className="workflow-line workflow-line--full" aria-label="Workflow: monitor, dispatch, collect, return, handoff, wash and dispense, verify">
+              {workflowSteps.map((step, index) => (
+                <span key={step} className="workflow-step">
+                  {index > 0 && <i aria-hidden="true">→</i>}
+                  {step}
+                </span>
+              ))}
+            </p>
+          </Reveal>
+          <div className="system-cards">
+            {systemComponents.map((component, index) => (
+              <Reveal key={component.title} delay={index * 90}>
+                <article className="system-card">
+                  <h3>{component.title}</h3>
+                  <p>{component.body}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="workflow-media">
+            <RobotVideo />
+            <p className="media-caption">Product development visualization</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 6 · Existing equipment integration */}
+      <section className="block integration-block">
+        <div className="block-inner">
+          <Reveal>
+            <div className="eyebrow">DESIGNED FOR EXISTING INFRASTRUCTURE</div>
+            <h2>Keep the equipment already on site.</h2>
           </Reveal>
           <Reveal>
-            <p className="closing-body">
-              NXTektal is building toward outdoor environments that can continuously sense what is happening, decide what needs attention, and coordinate machines to act—while people focus on judgment, service, and relationships.
+            <p className="section-body">
+              NXTektal is being designed around common wash-and-dispense configurations rather than requiring a facility to replace its entire system. Site-specific calibration and modular adapters connect the workflow where needed.
+            </p>
+          </Reveal>
+          <div className="compare-grid">
+            <Reveal>
+              <article className="compare-card">
+                <h3>Traditional closed system</h3>
+                <p>Requires multiple proprietary components to be replaced together.</p>
+              </article>
+            </Reveal>
+            <Reveal delay={90}>
+              <article className="compare-card compare-card--nxt">
+                <h3>NXTektal approach</h3>
+                <p>Adds a coordinated collection and handoff layer around compatible equipment already on site.</p>
+              </article>
+            </Reveal>
+          </div>
+          <Reveal>
+            <p className="ez-note">Compatibility is validated site by site during assessment and pilot planning.</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 7 · Development status */}
+      <section className="status-block" aria-label="Current development status">
+        <div className="block-inner">
+          <Reveal>
+            <div className="eyebrow">WHAT WE ARE BUILDING NOW</div>
+            <ul className="status-grid">
+              {devStatus.map((item) => (
+                <li key={item.name}>
+                  <strong>{item.name}</strong>
+                  <span>{item.status}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 8 · ROI */}
+      <QuickCalculator />
+
+      {/* 9 · Pilot CTA */}
+      <section className="block pilot-block" id="pilot">
+        <div className="block-inner">
+          <Reveal>
+            <div className="eyebrow">PILOT PROGRAM</div>
+            <h2>Test the first workflow at your range.</h2>
+          </Reveal>
+          <Reveal>
+            <p className="section-body">
+              We are speaking with facilities that want to evaluate equipment integration, workflow reliability, labor reduction, and ball availability in a real operating environment.
             </p>
           </Reveal>
           <Reveal>
             <div className="closing-actions">
-              <a className="button button-primary" href={investorMail}>Talk to the founders <Arrow /></a>
-              <a className="text-link" href={pilotMail}>Pilot partnerships <Arrow /></a>
+              <a className="button button-primary" href={pilotMail}>
+                Become a Pilot Facility <Arrow />
+              </a>
             </div>
           </Reveal>
         </div>
       </section>
 
+      {/* 10 · Agent intelligence + 11 · Illustrative manager report */}
+      <IntelligenceSection />
+
+      {/* 12 · Expansion across golf */}
+      <section className="block expansion-block" id="expansion">
+        <div className="block-inner">
+          <Reveal>
+            <div className="eyebrow">EXPANDING ACROSS GOLF</div>
+            <h2>One operating layer. More workflows over time.</h2>
+          </Reveal>
+          <div className="roadmap-stages">
+            {roadmapStages.map((stage, index) => (
+              <Reveal key={stage.title} delay={index * 90}>
+                <article className={`roadmap-stage${stage.active ? " roadmap-stage--active" : ""}`}>
+                  <span className="roadmap-label">{stage.label}</span>
+                  <h3>{stage.title}</h3>
+                  <ul>
+                    {stage.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <span className="roadmap-status">{stage.status}</span>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 13 · Expansion beyond golf */}
+      <section className="block beyond-block">
+        <div className="block-inner">
+          <Reveal>
+            <div className="eyebrow">BUILT FOR GOLF FIRST</div>
+            <h2>Designed for managed outdoor environments.</h2>
+          </Reveal>
+          <Reveal>
+            <p className="section-body">
+              The specific tasks change, but the operating loop remains: sense, prioritize, dispatch, execute, verify, and improve. Over time, the same coordination layer can extend to other managed outdoor environments.
+            </p>
+          </Reveal>
+          <Reveal>
+            <ul className="beyond-list" aria-label="Adjacent managed outdoor environments">
+              {beyondEnvironments.map((env) => (
+                <li key={env}>{env}</li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal>
+            <p className="beyond-direction">LONG-TERM PLATFORM DIRECTION</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 14 · Founders */}
+      <FounderSection />
+
+      {/* 15 · Final CTA */}
+      <section className="closing-block" id="contact">
+        <div className="closing-grid-bg" aria-hidden="true" />
+        <div className="block-inner closing-inner">
+          <Reveal>
+            <h2>Help build the first autonomous golf facilities.</h2>
+          </Reveal>
+          <Reveal>
+            <p className="closing-body">
+              We are looking for pilot facilities, equipment partners, and collaborators who want to help validate the first closed-loop workflow.
+            </p>
+          </Reveal>
+          <Reveal>
+            <div className="closing-actions">
+              <a className="button button-primary" href="#pilot">Become a Pilot Facility <Arrow /></a>
+              <a className="text-link" href={partnerMail}>Discuss a Partnership <Arrow /></a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 16 · Footer */}
       <footer>
         <a className="brand footer-brand" href="#top">
           <BrandMark />

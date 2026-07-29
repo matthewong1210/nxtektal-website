@@ -84,7 +84,9 @@ export default function EarthExperience({
     CHAPTERS.forEach((c, i) => {
       const el = chapterRefs.current[i];
       if (!el) return;
-      const o = chapterOpacity(p, c, i === 0, i === CHAPTERS.length - 1);
+      // No chapter persists to the end: the ground reveal closes the
+      // sequence as a clean visual beat before normal scrolling resumes.
+      const o = chapterOpacity(p, c, i === 0, false);
       el.style.opacity = o.toFixed(3);
       el.style.visibility = o <= 0.01 ? "hidden" : "visible";
       const dir = p < (c.start + c.end) / 2 ? 1 : -1;
@@ -271,17 +273,6 @@ export default function EarthExperience({
       id="top"
       className={`ez-sequence${reduced ? " ez-reduced" : ""}`}
     >
-      {CHAPTERS.filter((c) => c.id !== "top" && c.id !== "observation").map(
-        (c) => (
-          <div
-            key={c.id}
-            id={c.id}
-            className="ez-anchor"
-            style={{ top: `${(c.start + 0.02) * 100}%` }}
-            aria-hidden="true"
-          />
-        )
-      )}
       <div className="ez-viewport">
         <div ref={spaceRef} className="ez-space" aria-hidden="true">
           {showVideo && (

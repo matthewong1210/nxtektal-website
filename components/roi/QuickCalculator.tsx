@@ -19,11 +19,13 @@ export default function QuickCalculator() {
   const suggested = suggestedCyclesPerDay(parseNum(form.operatingHours), parseNum(form.intervalHours));
 
   return (
-    <section className="roi-quick" id="cost-calculator" aria-labelledby="roi-quick-title">
+    <section className="roi-quick" id="roi" aria-labelledby="roi-quick-title">
       <div className="block-inner">
-        <div className="eyebrow">OPERATING COST</div>
-        <h2 id="roi-quick-title">What is manual ball collection costing your range?</h2>
-        <p className="roi-quick-sub">Enter a few operating numbers to estimate your current daily and annual cost.</p>
+        <div className="eyebrow">OPERATING ECONOMICS</div>
+        <h2 id="roi-quick-title">What is the current workflow costing your range?</h2>
+        <p className="roi-quick-sub">
+          Use your own labor, collection frequency, run time, and equipment costs to estimate the direct operating cost of today’s workflow.
+        </p>
 
         <div className="roi-quick-grid">
           <form className="roi-quick-form" onSubmit={(e) => e.preventDefault()}>
@@ -122,9 +124,14 @@ export default function QuickCalculator() {
             )}
             <div className="roi-quick-actions">
               <Link className="button button-primary" href="/roi-calculator">
-                Build my full savings estimate
+                Open Full ROI Calculator
               </Link>
-              <Link className="text-link" href="/roi-calculator">Open full ROI calculator</Link>
+              <a
+                className="text-link"
+                href="mailto:founders@nxtektal.com?subject=Site%20Assessment%20Request"
+              >
+                Request a Site Assessment
+              </a>
             </div>
             <p className="roi-disclaimer">
               Preliminary estimate based on the information and assumptions shown. It is not a quote, guarantee, or final operational assessment.
