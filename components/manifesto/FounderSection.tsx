@@ -24,14 +24,6 @@ export const founders = [
     photo: "/founders/steven-guo.jpg",
     bio: "Steven is a UC Berkeley student studying Physics and Economics, with hands-on experience in mechanical engineering, Formula SAE, and competitive robotics. At NXTektal, he leads robotics engineering, system architecture, and product development.",
   },
-  {
-    initials: "JC",
-    name: "Jason Chen",
-    role: "Co-Founder & Chief Operating Officer",
-    email: "jasonchen@nxtektal.com",
-    photo: "/founders/jason-chen.jpg",
-    bio: "Jason is an engineering student at the University of British Columbia with access to a multi-factory manufacturing network, established component and electronics suppliers, and export channels serving Europe and the United States. At NXTektal, he leads manufacturing, supply chain, production, and China operations.",
-  },
 ];
 
 export default function FounderSection() {

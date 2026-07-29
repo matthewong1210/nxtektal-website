@@ -284,7 +284,7 @@ main { background: var(--night); }
 /* ---------- Founders ---------- */
 .founders-block { background: linear-gradient(180deg, var(--night), #0f1611 55%, var(--night)); }
 .founders-intro { max-width: 720px; margin: 26px 0 0; font-size: clamp(16px, 1.5vw, 20px); line-height: 1.68; }
-.founders-grid { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(34px, 4vw, 60px); align-items: stretch; }
+.founders-grid { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(2, 1fr); max-width: 900px; gap: clamp(34px, 4vw, 60px); align-items: stretch; }
 .founders-grid > div { display: flex; }
 .founder { display: flex; flex-direction: column; padding-top: 26px; border-top: 1px solid var(--line-strong); }
 .founder-initials { width: 84px; height: 84px; margin-bottom: 26px; display: grid; place-items: center; color: var(--lime); border: 1px solid var(--lime-line); border-radius: 16px; background: rgba(166, 226, 46, 0.05); font-size: 19px; font-weight: 800; letter-spacing: 0.08em; }
