@@ -28,7 +28,7 @@ const layers = [
   },
 ];
 
-const reportItems = [
+const summaryItems = [
   "Ball inventory remained above the operating threshold.",
   "Collection demand peaked later than the current schedule.",
   "One manual intervention was recorded and assigned for review.",
@@ -43,16 +43,63 @@ export default function IntelligenceSection() {
         <Reveal>
           <div className="eyebrow">PLATFORM ARCHITECTURE · IN DEVELOPMENT</div>
           <h2>From robot dispatch to operational intelligence.</h2>
-          <div className="ez-paragraphs intel-intro">
-            <p>
-              NXTektal is being designed to turn facility goals into coordinated work, compare plans with real outcomes, and improve how future tasks are prioritized and executed.
-            </p>
-            <p>
-              The facility manager remains in control. The operating layer converts goals and policies into prioritized missions, coordinates the execution layer, verifies outcomes, and returns status, exceptions, and recommendations.
-            </p>
+          <p className="section-body">
+            NXTektal is being designed to turn facility goals into coordinated work, compare plans with real outcomes, and improve how future tasks are prioritized and executed. The facility manager remains in control.
+          </p>
+        </Reveal>
+
+        {/* Manager dashboard concept — the platform made tangible */}
+        <Reveal>
+          <div className="dash" role="group" aria-label="Illustrative manager dashboard concept">
+            <div className="dash-titlebar">
+              <span className="dash-title"><i aria-hidden="true" /> NXTektal · Range Operations</span>
+              <span className="dash-note">Illustrative product concept — not live facility data</span>
+            </div>
+            <div className="dash-grid">
+              <div className="dash-card dash-card--inventory">
+                <span className="dash-label">Ball inventory</span>
+                <strong className="dash-value">Above threshold</strong>
+                <div className="dash-bar" aria-hidden="true"><i style={{ width: "72%" }} /></div>
+                <p>Dispenser supply holding through the afternoon peak.</p>
+              </div>
+              <div className="dash-card">
+                <span className="dash-label">Active mission</span>
+                <strong className="dash-value"><em className="dash-dot dash-dot--live" aria-hidden="true" /> Collection · Zone B</strong>
+                <p>Returning to handoff point after priority sweep.</p>
+              </div>
+              <div className="dash-card">
+                <span className="dash-label">Robot availability</span>
+                <strong className="dash-value">1 active · charging window scheduled</strong>
+                <p>Next mission window aligned with demand forecast.</p>
+              </div>
+              <div className="dash-card">
+                <span className="dash-label">Equipment status</span>
+                <strong className="dash-value"><em className="dash-dot dash-dot--warn" aria-hidden="true" /> Washer intake flagged</strong>
+                <p>Interruption detected and routed for review.</p>
+              </div>
+              <div className="dash-card">
+                <span className="dash-label">Manual interventions</span>
+                <strong className="dash-value">1 recorded today</strong>
+                <p>Assigned for review with mission context attached.</p>
+              </div>
+              <div className="dash-card">
+                <span className="dash-label">Pending approvals</span>
+                <strong className="dash-value">Schedule adjustment</strong>
+                <p>Recommended collection windows updated from observed demand.</p>
+              </div>
+              <div className="dash-card dash-card--summary">
+                <span className="dash-label">Daily operations summary</span>
+                <ul>
+                  {summaryItems.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </Reveal>
 
+        {/* Coordination structure */}
         <Reveal>
           <div className="intel-diagram">
             <ol className="intel-stack" aria-label="NXTektal coordination structure, from facility manager to verification and learning">
@@ -85,26 +132,6 @@ export default function IntelligenceSection() {
               </p>
             </div>
           </div>
-        </Reveal>
-
-        <Reveal>
-          <figure className="report-panel">
-            <figcaption className="report-head">
-              <span className="eyebrow report-eyebrow">ILLUSTRATIVE OUTPUT</span>
-              <h3>What the facility manager sees</h3>
-            </figcaption>
-            <div className="report-mock" role="group" aria-label="Illustrative daily operations summary">
-              <div className="report-mock-title">
-                <i aria-hidden="true" /> Daily Operations Summary
-              </div>
-              <ul>
-                {reportItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <p className="report-caption">Illustrative product concept — not live facility data.</p>
-          </figure>
         </Reveal>
       </div>
     </section>

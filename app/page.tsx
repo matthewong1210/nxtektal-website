@@ -3,7 +3,7 @@ import EarthExperience from "../components/earth/EarthExperience";
 import FluidMenu from "../components/manifesto/FluidMenu";
 import FounderSection, { founders } from "../components/manifesto/FounderSection";
 import IntelligenceSection from "../components/manifesto/IntelligenceSection";
-import RobotVideo from "../components/manifesto/RobotVideo";
+import WorkflowStory from "../components/manifesto/WorkflowStory";
 import Reveal from "./reveal";
 
 // Below-the-fold interactive module: split out so it never weighs on first paint.
@@ -76,28 +76,6 @@ const chapters = [
     ),
   },
   {
-    id: "validation",
-    content: (
-      <div className="ez-copy ez-copy--validation">
-        <dl className="validation-strip">
-          <div>
-            <dt>30+</dt>
-            <dd>Facilities contacted</dd>
-          </div>
-          <div>
-            <dt>Over two-thirds</dt>
-            <dd>Reported labor, safety, and reliability challenges</dd>
-          </div>
-          <div>
-            <dt>6</dt>
-            <dd>Facilities interested in piloting</dd>
-          </div>
-        </dl>
-        <p className="validation-note">Based on NXTektal customer discovery to date.</p>
-      </div>
-    ),
-  },
-  {
     id: "ambition",
     content: (
       <div className="ez-copy">
@@ -115,8 +93,6 @@ const whyCards = [
   { title: "Operationally critical", body: "When the ball supply breaks, customers notice immediately." },
   { title: "Measurable", body: "Labor hours, run frequency, interventions, downtime, and ball availability can all be tracked." },
 ];
-
-const workflowSteps = ["MONITOR", "DISPATCH", "COLLECT", "RETURN", "HANDOFF", "WASH & DISPENSE", "VERIFY"];
 
 const systemComponents = [
   {
@@ -231,11 +207,34 @@ export default function Home() {
         </div>
       </header>
 
-      {/* 2 · Hero + 3 · Validation strip (cinematic sequence) */}
+      {/* 2 · Hero (cinematic sequence) */}
       <EarthExperience chapters={chapters} />
 
+      {/* 3 · Validation strip */}
+      <section className="section-light validation-block" aria-label="Customer discovery to date">
+        <div className="block-inner">
+          <Reveal>
+            <dl className="validation-strip">
+              <div>
+                <dt>30+</dt>
+                <dd>Facilities contacted</dd>
+              </div>
+              <div>
+                <dt>Over two-thirds</dt>
+                <dd>Reported labor, safety, and reliability challenges</dd>
+              </div>
+              <div>
+                <dt>6</dt>
+                <dd>Facilities interested in piloting</dd>
+              </div>
+            </dl>
+            <p className="validation-note">Based on NXTektal customer discovery to date.</p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* 4 · Why driving ranges */}
-      <section className="block why-block" id="why-driving-ranges">
+      <section className="block section-light why-block" id="why-driving-ranges">
         <div className="block-inner">
           <Reveal>
             <div className="eyebrow">WHY DRIVING RANGES</div>
@@ -286,16 +285,7 @@ export default function Home() {
               Our first system is being developed to monitor ball availability, dispatch collection when needed, return to a handoff point, transfer balls into the range’s existing processing equipment, and verify that the workflow is complete.
             </p>
           </Reveal>
-          <Reveal>
-            <p className="workflow-line workflow-line--full" aria-label="Workflow: monitor, dispatch, collect, return, handoff, wash and dispense, verify">
-              {workflowSteps.map((step, index) => (
-                <span key={step} className="workflow-step">
-                  {index > 0 && <i aria-hidden="true">→</i>}
-                  {step}
-                </span>
-              ))}
-            </p>
-          </Reveal>
+          <WorkflowStory />
           <div className="system-cards">
             {systemComponents.map((component, index) => (
               <Reveal key={component.title} delay={index * 90}>
@@ -306,15 +296,11 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-          <Reveal className="workflow-media">
-            <RobotVideo />
-            <p className="media-caption">Product development visualization</p>
-          </Reveal>
         </div>
       </section>
 
       {/* 6 · Existing equipment integration */}
-      <section className="block integration-block">
+      <section className="block section-light integration-block">
         <div className="block-inner">
           <Reveal>
             <div className="eyebrow">DESIGNED FOR EXISTING INFRASTRUCTURE</div>
@@ -339,6 +325,13 @@ export default function Home() {
               </article>
             </Reveal>
           </div>
+          <Reveal>
+            <div className="asset-slot" aria-label="Planned visual: automated handoff sequence">
+              <span className="asset-slot-tag">COMING IN A LATER PHASE</span>
+              <strong>Automated handoff sequence</strong>
+              <p>Collection-to-washer transfer, shown end to end.</p>
+            </div>
+          </Reveal>
           <Reveal>
             <p className="ez-note">Compatibility is validated site by site during assessment and pilot planning.</p>
           </Reveal>
@@ -397,10 +390,17 @@ export default function Home() {
             <div className="eyebrow">EXPANDING ACROSS GOLF</div>
             <h2>One operating layer. More workflows over time.</h2>
           </Reveal>
+          <Reveal>
+            <div className="layer-band" aria-hidden="true">
+              <strong>NXTektal Operating Layer</strong>
+              <span>Shared facility state · Prioritization · Dispatch · Verification</span>
+            </div>
+          </Reveal>
           <div className="roadmap-stages">
             {roadmapStages.map((stage, index) => (
               <Reveal key={stage.title} delay={index * 90}>
                 <article className={`roadmap-stage${stage.active ? " roadmap-stage--active" : ""}`}>
+                  <span className="roadmap-tether" aria-hidden="true" />
                   <span className="roadmap-label">{stage.label}</span>
                   <h3>{stage.title}</h3>
                   <ul>
@@ -413,6 +413,11 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+          <Reveal>
+            <p className="ez-note">
+              New workflows join as execution modules on the same operating layer — not as separate, disconnected products.
+            </p>
+          </Reveal>
         </div>
       </section>
 
