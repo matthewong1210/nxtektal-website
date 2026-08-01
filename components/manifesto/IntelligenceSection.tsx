@@ -48,9 +48,36 @@ export default function IntelligenceSection() {
           </p>
         </Reveal>
 
-        {/* Manager dashboard concept — the platform made tangible */}
-        <Reveal>
-          <div className="dash" role="group" aria-label="Illustrative manager dashboard concept">
+        <div className="intel-duo">
+          {/* Coordination hierarchy — compact, secondary to the product view */}
+          <Reveal>
+            <div className="intel-left">
+              <ol className="intel-stack" aria-label="NXTektal coordination structure, from facility manager to verification and learning">
+                {layers.map((layer, index) => (
+                  <li key={layer.name} className="intel-layer">
+                    {index > 0 && <span className="intel-connector" aria-hidden="true" />}
+                    <div className="intel-card">
+                      <div className="intel-card-head">
+                        <strong>{layer.name}</strong>
+                        <span>{layer.subtitle}</span>
+                      </div>
+                      <p>{layer.description}</p>
+                    </div>
+                  </li>
+                ))}
+                <span className="intel-feedback-rail" aria-hidden="true">
+                  <i>FEEDBACK</i>
+                </span>
+              </ol>
+              <p className="intel-feedback-note">
+                Verification &amp; Learning feeds outcomes back to the Facility Operations Agent, so future missions are prioritized from real results.
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Manager dashboard concept — the platform made tangible */}
+          <Reveal>
+            <div className="dash" role="group" aria-label="Illustrative manager dashboard concept">
             <div className="dash-titlebar">
               <span className="dash-title"><i aria-hidden="true" /> NXTektal · Range Operations</span>
               <span className="dash-note">Illustrative product concept — not live facility data</span>
@@ -96,43 +123,9 @@ export default function IntelligenceSection() {
                 </ul>
               </div>
             </div>
-          </div>
-        </Reveal>
-
-        {/* Coordination structure */}
-        <Reveal>
-          <div className="intel-diagram">
-            <ol className="intel-stack" aria-label="NXTektal coordination structure, from facility manager to verification and learning">
-              {layers.map((layer, index) => (
-                <li key={layer.name} className="intel-layer">
-                  {index > 0 && <span className="intel-connector" aria-hidden="true" />}
-                  <div className="intel-card">
-                    <div className="intel-card-head">
-                      <strong>{layer.name}</strong>
-                      <span>{layer.subtitle}</span>
-                    </div>
-                    <p>{layer.description}</p>
-                  </div>
-                </li>
-              ))}
-              <span className="intel-feedback-rail" aria-hidden="true">
-                <i>FEEDBACK</i>
-              </span>
-            </ol>
-            <div className="intel-side">
-              <div className="intel-dashboard">
-                <div className="intel-card-head">
-                  <strong>Manager Dashboard</strong>
-                  <span>Status · Alerts · Recommendations</span>
-                </div>
-                <p>Receives live status, exceptions, and recommendations from the operating layer.</p>
-              </div>
-              <p className="intel-feedback-note">
-                Verification &amp; Learning feeds outcomes back to the Facility Operations Agent, so future missions are prioritized from real results.
-              </p>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

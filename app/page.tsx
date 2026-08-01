@@ -61,7 +61,7 @@ const chapters = [
         <div className="eyebrow hero-fade"><span className="pulse" /> AUTONOMOUS OPERATIONS FOR GOLF FACILITIES</div>
         <h1 className="hero-fade">One operating layer for autonomous golf facilities.</h1>
         <p className="ez-body hero-fade">
-          NXTektal is building a system that coordinates robots, sensors, and AI agents to automate repetitive outdoor work and continuously improve how a golf facility operates.
+          NXTektal is building an operating layer designed to connect robots, sensors, people, and the equipment already on site—so repetitive work can be planned, executed, verified, and improved as one system.
         </p>
         <p className="hero-start hero-fade">Starting with <span>closed-loop ball operations</span> at driving ranges.</p>
         <div className="hero-actions hero-fade">
@@ -69,29 +69,18 @@ const chapters = [
             Become a Pilot Facility <Arrow />
           </a>
           <a className="button button-secondary" href="#first-workflow">
-            See the First Workflow
+            Explore the First Workflow
           </a>
         </div>
-      </div>
-    ),
-  },
-  {
-    id: "ambition",
-    content: (
-      <div className="ez-copy">
-        <p className="ez-close">Outdoor work will not run on fixed schedules forever.</p>
-        <p className="ez-body ez-ambition-sub">
-          Golf facilities still run on fixed schedules, manual inspection, and isolated machines. NXTektal is building the operating layer that understands the facility, decides what needs attention, coordinates machines to act, and verifies the outcome.
-        </p>
       </div>
     ),
   },
 ];
 
 const whyCards = [
-  { title: "Repetitive", body: "Collection, unloading, and transfer happen throughout the operating day." },
+  { title: "Repetitive workflow", body: "Collection, unloading, and transfer happen throughout the operating day." },
   { title: "Operationally critical", body: "When the ball supply breaks, customers notice immediately." },
-  { title: "Measurable", body: "Labor hours, run frequency, interventions, downtime, and ball availability can all be tracked." },
+  { title: "Measurable economics", body: "Labor hours, run frequency, interventions, downtime, and ball availability can all be tracked." },
 ];
 
 const systemComponents = [
@@ -236,40 +225,37 @@ export default function Home() {
       {/* 4 · Why driving ranges */}
       <section className="block section-light why-block" id="why-driving-ranges">
         <div className="block-inner">
-          <Reveal>
-            <div className="eyebrow">WHY DRIVING RANGES</div>
-            <h2>Why start with driving ranges?</h2>
-          </Reveal>
-          <div className="ez-paragraphs section-paragraphs">
-            <Reveal>
-              <p>
-                Driving-range ball operations are repetitive, labor-intensive, and directly tied to customer experience. A range can own a collection machine and still depend on people to decide when to deploy it, unload the balls, move them through washing and dispensing, and respond when ball supply falls.
-              </p>
-            </Reveal>
-            <Reveal>
-              <p>
-                That makes the driving range a practical place to prove reliable autonomy, closed-loop execution, and measurable operating economics before expanding across the rest of the facility.
-              </p>
-            </Reveal>
-          </div>
-          <div className="why-cards">
-            {whyCards.map((card, index) => (
-              <Reveal key={card.title} delay={index * 90}>
-                <article className="why-card">
-                  <h3>{card.title}</h3>
-                  <p>{card.body}</p>
-                </article>
+          <div className="why-split">
+            <div className="why-intro">
+              <Reveal>
+                <div className="eyebrow">WHY DRIVING RANGES</div>
+                <h2>Why start with driving ranges?</h2>
               </Reveal>
-            ))}
+              <Reveal>
+                <p className="why-lede">
+                  Ball operations are repetitive, labor-intensive, and directly tied to customer experience—which makes the driving range a practical place to prove reliable autonomy and measurable operating economics before expanding across the facility.
+                </p>
+              </Reveal>
+              <Reveal>
+                <figure className="observation observation--compact">
+                  <figcaption className="observation-label"><i aria-hidden="true" /> FIELD OBSERVATION</figcaption>
+                  <blockquote>
+                    At one driving range, collection runs can occur roughly <em>every two hours</em>, take <em>more than an hour</em>, and still require <em>manual unloading and transfer</em> afterward.
+                  </blockquote>
+                </figure>
+              </Reveal>
+            </div>
+            <div className="why-cards">
+              {whyCards.map((card, index) => (
+                <Reveal key={card.title} delay={index * 90}>
+                  <article className="why-card">
+                    <h3>{card.title}</h3>
+                    <p>{card.body}</p>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
           </div>
-          <Reveal>
-            <figure className="observation observation--compact">
-              <figcaption className="observation-label"><i aria-hidden="true" /> FIELD OBSERVATION</figcaption>
-              <blockquote>
-                At one driving range, collection runs can occur roughly <em>every two hours</em>, take <em>more than an hour</em>, and still require <em>manual unloading and transfer</em> afterward.
-              </blockquote>
-            </figure>
-          </Reveal>
         </div>
       </section>
 
@@ -326,10 +312,35 @@ export default function Home() {
             </Reveal>
           </div>
           <Reveal>
-            <div className="asset-slot" aria-label="Planned visual: automated handoff sequence">
-              <span className="asset-slot-tag">COMING IN A LATER PHASE</span>
-              <strong>Automated handoff sequence</strong>
-              <p>Collection-to-washer transfer, shown end to end.</p>
+            <div className="flow-compare" role="group" aria-label="Ball workflow before and after NXTektal">
+              <div className="flow-row">
+                <span className="flow-row-label">CURRENT WORKFLOW — MANUAL COORDINATION</span>
+                <div className="flow-chain">
+                  <div className="flow-node flow-node--existing"><strong>Collector</strong><span>EXISTING EQUIPMENT</span></div>
+                  <span className="flow-arrow" aria-hidden="true">→</span>
+                  <div className="flow-node flow-node--manual"><strong>Manual unloading</strong><span>MANUAL</span></div>
+                  <span className="flow-arrow" aria-hidden="true">→</span>
+                  <div className="flow-node flow-node--existing"><strong>Washer</strong><span>EXISTING EQUIPMENT</span></div>
+                  <span className="flow-arrow" aria-hidden="true">→</span>
+                  <div className="flow-node flow-node--manual"><strong>Manual transfer</strong><span>MANUAL</span></div>
+                  <span className="flow-arrow" aria-hidden="true">→</span>
+                  <div className="flow-node flow-node--existing"><strong>Dispenser</strong><span>EXISTING EQUIPMENT</span></div>
+                </div>
+              </div>
+              <div className="flow-row flow-row--nxt">
+                <span className="flow-row-label">NXTEKTAL WORKFLOW — IN DEVELOPMENT</span>
+                <div className="flow-chain">
+                  <div className="flow-node flow-node--auto"><strong>Monitor &amp; Dispatch</strong><span>NXTEKTAL</span></div>
+                  <span className="flow-arrow" aria-hidden="true">→</span>
+                  <div className="flow-node flow-node--auto"><strong>Autonomous Collection</strong><span>NXTEKTAL</span></div>
+                  <span className="flow-arrow" aria-hidden="true">→</span>
+                  <div className="flow-node flow-node--auto"><strong>Modular Handoff</strong><span>NXTEKTAL</span></div>
+                  <span className="flow-arrow" aria-hidden="true">→</span>
+                  <div className="flow-node flow-node--existing"><strong>Existing Washer &amp; Dispenser</strong><span>KEPT ON SITE</span></div>
+                  <span className="flow-arrow" aria-hidden="true">→</span>
+                  <div className="flow-node flow-node--auto"><strong>Verify</strong><span>NXTEKTAL</span></div>
+                </div>
+              </div>
             </div>
           </Reveal>
           <Reveal>
@@ -384,7 +395,7 @@ export default function Home() {
       <IntelligenceSection />
 
       {/* 12 · Expansion across golf */}
-      <section className="block expansion-block" id="expansion">
+      <section className="block section-light expansion-block" id="expansion">
         <div className="block-inner">
           <Reveal>
             <div className="eyebrow">EXPANDING ACROSS GOLF</div>
@@ -422,7 +433,7 @@ export default function Home() {
       </section>
 
       {/* 13 · Expansion beyond golf */}
-      <section className="block beyond-block">
+      <section className="block section-light beyond-block">
         <div className="block-inner">
           <Reveal>
             <div className="eyebrow">BUILT FOR GOLF FIRST</div>
@@ -442,6 +453,9 @@ export default function Home() {
           </Reveal>
           <Reveal>
             <p className="beyond-direction">LONG-TERM PLATFORM DIRECTION</p>
+          </Reveal>
+          <Reveal>
+            <p className="beyond-vision">Outdoor work will not run on fixed schedules forever.</p>
           </Reveal>
         </div>
       </section>
