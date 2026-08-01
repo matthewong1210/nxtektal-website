@@ -13,7 +13,9 @@ export default function RoiCalculatorPage() {
   return (
     <main className="roi-main">
       <header className="roi-topbar">
-        <Link href="/" className="roi-topbar-brand">NXTektal <small>SYSTEMS</small></Link>
+        <Link href="/" className="roi-topbar-brand" aria-label="NXTektal Systems home">
+          <img className="brand-lockup" src="/brand/nxtektal-lockup.png" alt="NXTektal Systems" width={760} height={106} />
+        </Link>
         <span className="roi-topbar-note">ROI Calculator · nxt-roi-v1.0</span>
       </header>
       <FullCalculator />

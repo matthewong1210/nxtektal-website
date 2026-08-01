@@ -34,23 +34,15 @@ const Arrow = () => (
   </svg>
 );
 
-const BrandMark = () => (
-  <svg aria-hidden="true" viewBox="0 0 74 50" className="brand-mark">
-    <defs>
-      <linearGradient id="nx-silver" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stopColor="#ffffff" />
-        <stop offset="0.48" stopColor="#cfd4d8" />
-        <stop offset="1" stopColor="#707780" />
-      </linearGradient>
-      <linearGradient id="nx-lime" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stopColor="#c7ff3d" />
-        <stop offset="1" stopColor="#7dbd10" />
-      </linearGradient>
-    </defs>
-    <path d="M4 44 18 9h10L15 44Z" fill="url(#nx-silver)" />
-    <path d="M18 9h13l21 35H38Z" fill="url(#nx-lime)" />
-    <path d="M50 4h16L50 44H35Z" fill="url(#nx-silver)" />
-  </svg>
+const BrandLockup = () => (
+  // Official gradient lockup (public/brand). Raster export from the brand AI file.
+  <img
+    className="brand-lockup"
+    src="/brand/nxtektal-lockup.png"
+    alt="NXTektal Systems"
+    width={760}
+    height={106}
+  />
 );
 
 const chapters = [
@@ -158,6 +150,7 @@ export default function Home() {
     "@type": "Organization",
     name: site.brand,
     url: `https://${site.domain}`,
+    logo: `https://${site.domain}/brand/nxtektal-lockup.png`,
     email: site.email,
     description:
       "NXTektal is building an operating layer that coordinates robots, sensors, and AI agents for autonomous golf facility operations, starting with closed-loop ball operations at driving ranges.",
@@ -179,8 +172,7 @@ export default function Home() {
       <header className="site-header">
         <div className="header-shell">
           <a className="brand" href="#top" aria-label="NXTektal Systems home">
-            <BrandMark />
-            <span className="brand-type"><strong>{site.shortBrand}</strong><small>SYSTEMS</small></span>
+            <BrandLockup />
           </a>
           <nav aria-label="Primary navigation">
             {navItems.map((item) => (
@@ -486,9 +478,8 @@ export default function Home() {
 
       {/* 16 · Footer */}
       <footer>
-        <a className="brand footer-brand" href="#top">
-          <BrandMark />
-          <span className="brand-type"><strong>{site.shortBrand}</strong><small>SYSTEMS</small></span>
+        <a className="brand footer-brand" href="#top" aria-label="Back to top">
+          <BrandLockup />
         </a>
         <p>AUTONOMY. INTELLIGENCE. IMPACT.</p>
         <div>
