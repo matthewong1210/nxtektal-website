@@ -17,9 +17,7 @@ export type ChapterDef = {
 };
 
 export const CHAPTERS: ChapterDef[] = [
-  { id: "top", start: 0, end: 0.24 },
-  { id: "validation", start: 0.24, end: 0.46 },
-  { id: "ambition", start: 0.46, end: 0.66 },
+  { id: "top", start: 0, end: 0.42 },
 ];
 
 export const clamp01 = (x: number) => Math.min(1, Math.max(0, x));

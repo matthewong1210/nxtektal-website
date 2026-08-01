@@ -27,7 +27,12 @@ export default function QuickCalculator() {
           Use your own labor, collection frequency, run time, and equipment costs to estimate the direct operating cost of today’s workflow.
         </p>
 
-        <div className="roi-quick-grid">
+        <div className="roi-app">
+          <div className="roi-app-titlebar">
+            <span className="roi-app-title"><i aria-hidden="true" /> NXTektal · Operating Cost Estimator</span>
+            <span className="roi-app-note">Estimates from your inputs — not a quote</span>
+          </div>
+          <div className="roi-quick-grid">
           <form className="roi-quick-form" onSubmit={(e) => e.preventDefault()}>
             <Segmented
               legend="What does one hour of range labor cost the facility?"
@@ -136,6 +141,7 @@ export default function QuickCalculator() {
             <p className="roi-disclaimer">
               Preliminary estimate based on the information and assumptions shown. It is not a quote, guarantee, or final operational assessment.
             </p>
+          </div>
           </div>
         </div>
       </div>
