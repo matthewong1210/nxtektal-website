@@ -76,12 +76,12 @@ public/visuals/phase2/build-evidence
 | Purpose | Establish the robot + operating layer in a real range environment; first-impression product credibility |
 | Source material required | Approved Master Product Visual: robot photography or approved render + range environment plate; storyboard for the motion version |
 | Desktop dimensions | 2880×1620 (16:9) still; video 1920×1080 |
-| Mobile dimensions | 1125×1500 (3:4 crop-safe) still; video 1080×1350 |
+| Mobile dimensions | 1125×1500 (3:4 recomposition — not a crop; see PHASE_2B_VISUAL_BRIEF.md §1) still; video 1080×1350 |
 | File formats | Still: AVIF + WebP (JPG only for the OG/social export). Video: WebM + all-intra MP4 (scroll-scrub compatible) + WebP/AVIF poster |
 | Fallback behavior | Video → poster still → current footage stays until approval |
 | Caption | Product development visualization |
-| Alt text | "NXTektal autonomous collection robot on a driving range at dusk" |
-| Implementation component | `EarthExperience` ground stage (existing structure; no markup change) |
+| Alt text | "Autonomous collection robot working on a driving range at dusk, with the range's washer and dispenser station nearby" |
+| Implementation component | `EarthExperience` ground stage — section structure unchanged; on approval, the master frame adds overlay chips/connectors + caption as new DOM inside the hero chapter (spec: PHASE_2B_VISUAL_BRIEF.md §1) |
 | Current status | **Blocked on approval** — do not replace current hero until Master Product Visual is approved; current earth-zoom → robot-field footage remains |
 
 ### 2 · Closed-Loop Workflow
@@ -106,16 +106,16 @@ public/visuals/phase2/build-evidence
 | Field | Value |
 |---|---|
 | Homepage section | Equipment Integration (`.integration-block`) |
-| Asset name | `handoff/handoff-sequence` |
+| Asset name | `handoff/seq-01-dock`, `seq-02-transfer`, `seq-03-verify` (Sprint 1 — three concept panels; a `handoff/handoff-sequence` video remains a later option) |
 | Purpose | Show collection-to-washer transfer end to end around existing equipment |
 | Source material required | Engineering CAD/prototype footage or approved concept render of the handoff unit docking + transfer |
-| Desktop dimensions | 1920×1080 video / 1600×900 still |
-| Mobile dimensions | 1080×1080 (1:1 crop) or same 16:9 |
+| Desktop dimensions | 1200×900 per panel (4:3; SVG viewBox preferred) — superseded per PHASE_2B_VISUAL_BRIEF.md §2; a later video would be 1920×1080 |
+| Mobile dimensions | Same 4:3 panels stacked vertically |
 | File formats | WebM + MP4 + poster; or AVIF/WebP still sequence; SVG overlay labels |
 | Fallback behavior | Video → poster → existing before/after CSS flow diagram (stays in DOM permanently) |
 | Caption | Engineering concept visualization |
 | Alt text | "Modular handoff unit transferring collected balls into the range's existing washer" |
-| Implementation component | `MediaFrame` (`tone="light"`) wrapping the flow diagram — **wired ✅**; video slots in above the diagram in the same frame |
+| Implementation component | New `MediaFrame` (`tone="light"`) mounted ABOVE the existing flow-diagram frame (separate frames — see PHASE_2B_VISUAL_BRIEF.md §4.2); the flow diagram's own frame stays as wired ✅ |
 | Current status | Missing — flow diagram (HTML/CSS) is the current content and the permanent fallback. Public "COMING IN A LATER PHASE" placeholder removed in Pass 1.1 ✅ |
 
 ### 4 · Manager Dashboard
