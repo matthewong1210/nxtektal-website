@@ -328,7 +328,25 @@ main { background: var(--night); }
 /* Structural placeholder for future assets */
 
 /* Manager dashboard concept */
+.dash-shell { display: grid; gap: 12px; }
 .dash { margin-top: 0; border: 1px solid var(--line-strong); border-radius: 18px; background: #0a1018; overflow: hidden; }
+.dash-body { display: grid; grid-template-columns: 118px minmax(0, 1fr); }
+.dash-rail { display: flex; flex-direction: column; gap: 4px; padding: 16px 10px; border-right: 1px solid var(--line); background: rgba(245, 247, 247, 0.02); }
+.dash-rail-item { padding: 8px 12px; border-radius: 8px; color: var(--white-faint); font-size: 11.5px; font-weight: 650; letter-spacing: 0.03em; }
+.dash-rail-item--active { color: var(--white); background: rgba(91, 157, 255, 0.12); }
+.dash-main { min-width: 0; }
+.dash-status-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 13px 22px; border-bottom: 1px solid var(--line); }
+.dash-facility { display: inline-flex; align-items: center; gap: 8px; color: var(--white); font-size: 13.5px; font-weight: 680; }
+.dash-tag { flex: 0 0 auto; padding: 3px 8px; border: 1px solid var(--lime-line); border-radius: 999px; color: var(--lime); font-size: 8.5px; font-weight: 800; letter-spacing: 0.1em; white-space: nowrap; }
+.dash-tag--concept { border-color: var(--blue-line); color: var(--blue); }
+.dash-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.dash-grid--decisions { border-bottom: 1px solid var(--line); }
+.dash-grid--decisions .dash-card:first-child { grid-column: span 2; }
+.dash-card--recommend { background: rgba(91, 157, 255, 0.055); }
+.dash-actions { display: flex; gap: 8px; margin-top: 14px; }
+.dash-btn { padding: 7px 14px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--white-soft); font-size: 11.5px; font-weight: 720; letter-spacing: 0.03em; }
+.dash-btn--approve { color: var(--night); background: var(--lime); border-color: transparent; }
+.dash-legend { margin: 0; color: var(--white-faint); font-size: 12px; line-height: 1.55; letter-spacing: 0.02em; }
 .dash-titlebar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 18px; padding: 14px 22px; border-bottom: 1px solid var(--line); background: rgba(245, 247, 247, 0.03); }
 .dash-title { display: flex; align-items: center; gap: 9px; color: var(--white); font-size: 13px; font-weight: 720; letter-spacing: 0.04em; }
 .dash-title i { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
@@ -347,6 +365,39 @@ main { background: var(--night); }
 .dash-card--summary ul { margin: 12px 0 0; padding: 0; list-style: none; columns: 2; column-gap: 40px; }
 .dash-card--summary li { position: relative; break-inside: avoid; padding: 7px 0 7px 18px; color: var(--white-soft); font-size: 13.5px; line-height: 1.55; }
 .dash-card--summary li::before { content: ""; position: absolute; left: 0; top: 14px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue-line); }
+
+/* Modular handoff concept sequence (Sprint 2 — schematic placeholders) */
+.handoff-frame { margin-top: clamp(36px, 4.4vw, 58px); }
+.handoff-seq { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 24px); }
+.handoff-panel { display: flex; flex-direction: column; gap: 14px; }
+.handoff-stage { position: relative; border: 1px solid var(--paper-line); border-radius: 14px; background: #ffffff; overflow: hidden; }
+.handoff-glyph { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; }
+.handoff-placeholder-tag { position: absolute; top: 10px; right: 10px; padding: 3px 8px; border: 1px solid var(--paper-line); border-radius: 999px; background: var(--paper); color: var(--ink-faint); font-size: 8.5px; font-weight: 800; letter-spacing: 0.1em; }
+.handoff-panel-head { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; }
+.handoff-panel-head strong { display: block; color: var(--ink); font-size: 13.5px; font-weight: 760; letter-spacing: 0.06em; }
+.handoff-panel-head p { margin: 5px 0 0; color: var(--ink-faint); font-size: 13px; line-height: 1.5; }
+.handoff-panel-head .wf-step-index { color: var(--blue-deep); }
+
+/* Schematic linework — CSS-var colors, concept not blueprint */
+.hg-ground { stroke: var(--paper-line); stroke-width: 2; }
+.hg-existing rect { fill: #f5f7f9; stroke: rgba(22, 32, 43, 0.3); stroke-width: 2; }
+.hg-zone-label { fill: var(--ink-faint); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; }
+.hg-nxt rect, .hg-nxt circle { fill: #eef4ff; stroke: var(--blue); stroke-width: 2; }
+.hg-chute { stroke: var(--blue); stroke-width: 2; fill: none; }
+.hg-arrow, .hg-funnel { stroke: var(--blue-deep); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.hg-flow { stroke: var(--blue); stroke-width: 2; stroke-dasharray: 6 6; fill: none; }
+.hg-ball { fill: #ffffff; stroke: var(--blue-deep); stroke-width: 1.6; }
+.hg-sensor { fill: #f7fcec; stroke: #7ed321; stroke-width: 2; }
+.hg-tick { stroke: #45790a; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Hero master-frame media + overlay (renders only once the frame is approved) */
+.ground-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; top: 16%; right: 5%; z-index: 2; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.hero-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(10, 16, 24, 0.72); color: var(--white); font-size: 12px; font-weight: 680; letter-spacing: 0.02em; backdrop-filter: blur(6px); }
+.hero-chip--data { color: var(--white-soft); font-weight: 600; }
+.hero-chip-dot { width: 7px; height: 7px; border-radius: 50%; }
+.hero-chip-dot--live { background: var(--lime); }
+.hero-frame-caption { position: absolute; left: 18px; bottom: 14px; z-index: 2; margin: 0; }
 
 /* Operating-layer band + module tethers */
 .layer-band { margin-top: clamp(40px, 5vw, 64px); padding: clamp(18px, 2.2vw, 28px) clamp(20px, 2.6vw, 34px); border: 1px solid var(--blue-line); border-radius: 16px; background: rgba(91, 157, 255, 0.05); display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 22px; }
@@ -527,6 +578,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .fluid-menu { display: block; }
   .roadmap-stages { grid-template-columns: 1fr; max-width: 640px; }
   .intel-duo { grid-template-columns: 1fr; }
+  .handoff-seq { grid-template-columns: 1fr; max-width: 460px; }
   .why-split { grid-template-columns: 1fr; }
   .intel-feedback-rail { display: none; }
   .wf-story { grid-template-columns: 1fr; }
@@ -576,6 +628,9 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .wf-step { opacity: 1; }
   .dash-grid { grid-template-columns: 1fr; }
   .dash-card--summary { grid-column: auto; }
+  .dash-grid--decisions .dash-card:first-child { grid-column: auto; }
+  .dash-body { grid-template-columns: 1fr; }
+  .dash-rail { flex-direction: row; flex-wrap: wrap; border-right: none; border-bottom: 1px solid var(--line); padding: 10px; }
   .flow-chain { flex-direction: column; }
   .flow-arrow { display: none; }
   .flow-node { flex-basis: auto; }
