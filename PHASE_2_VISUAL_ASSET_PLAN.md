@@ -76,7 +76,7 @@ public/visuals/phase2/build-evidence
 | Purpose | Establish the robot + operating layer in a real range environment; first-impression product credibility |
 | Source material required | Approved Master Product Visual: robot photography or approved render + range environment plate; storyboard for the motion version |
 | Desktop dimensions | 2880×1620 (16:9) still; video 1920×1080 |
-| Mobile dimensions | 1125×1500 (3:4 recomposition — not a crop; see PHASE_2B_VISUAL_BRIEF.md §1) still; video 1080×1350 |
+| Mobile dimensions | 1125×1500 (3:4 recomposition — not a crop; see PHASE_2B_VISUAL_BRIEF.md §1) still; video 1080×1440 (3:4) |
 | File formats | Still: AVIF + WebP (JPG only for the OG/social export). Video: WebM + all-intra MP4 (scroll-scrub compatible) + WebP/AVIF poster |
 | Fallback behavior | Video → poster still → current footage stays until approval |
 | Caption | Product development visualization |
@@ -114,7 +114,7 @@ public/visuals/phase2/build-evidence
 | File formats | WebM + MP4 + poster; or AVIF/WebP still sequence; SVG overlay labels |
 | Fallback behavior | Video → poster → existing before/after CSS flow diagram (stays in DOM permanently) |
 | Caption | Engineering concept visualization |
-| Alt text | "Modular handoff unit transferring collected balls into the range's existing washer" |
+| Alt text | Per panel — 01: "Robot docking at the modular handoff unit (concept)" · 02: "Balls transferring from the robot's hopper into the existing washer intake (concept)" · 03: "Sensor confirming completed transfer (concept)" |
 | Implementation component | New `MediaFrame` (`tone="light"`) mounted ABOVE the existing flow-diagram frame (separate frames — see PHASE_2B_VISUAL_BRIEF.md §4.2); the flow diagram's own frame stays as wired ✅ |
 | Current status | Missing — flow diagram (HTML/CSS) is the current content and the permanent fallback. Public "COMING IN A LATER PHASE" placeholder removed in Pass 1.1 ✅ |
 
@@ -131,7 +131,7 @@ public/visuals/phase2/build-evidence
 | File formats | Preferred: keep as coded HTML (current `.dash`); else AVIF/WebP still or WebM/MP4 capture |
 | Fallback behavior | Coded HTML dash (current) is both the interim asset and the permanent no-JS fallback |
 | Caption | Illustrative product concept — not live facility data (rendered in the dash titlebar, HTML) |
-| Alt text | n/a while coded HTML (real text); if image: "Illustrative NXTektal range-operations dashboard concept" |
+| Alt text | n/a while coded HTML (real text); if image: "Illustrative NXTektal range-operations dashboard concept showing facility status, missions, inventory, and approvals" |
 | Implementation component | `.dash` app shell inside `.intel-duo` (already a stable framed container) |
 | Current status | **Usable coded asset live** — upgrade path is a design-polish pass, not a structural change |
 
@@ -164,7 +164,7 @@ public/visuals/phase2/build-evidence
 | Mobile dimensions | 1125×750 (3:2) |
 | File formats | AVIF + WebP (JPG source retained); short clips WebM+MP4+poster |
 | Fallback behavior | Static grid of stills (no motion dependency) |
-| Caption | none required (real photos) — optional date/location line as HTML |
+| Caption | Real photos need no visualization label; the MediaFrame `caption` (a required prop) carries the HTML date/location line instead, e.g. "Prototype bench test · June 2026" |
 | Alt text | Descriptive per photo, e.g. "Collection robot prototype, front view with sensor mast" |
 | Implementation component | `MediaFrame` grid in/beside `.status-block` — added when the strip is approved |
 | Current status | **Partially available**: 4 real photos in `public/robot/` (1536×1024) + `robot-field.mp4` (1280×720); currently robot-field.mp4 is used by Workflow; photos unused since IA redesign |

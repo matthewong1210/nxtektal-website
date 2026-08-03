@@ -9,7 +9,9 @@ import { useEffect, useRef, useState } from "react";
  */
 export default function RobotVideo() {
   const ref = useRef<HTMLVideoElement>(null);
-  const [reduced, setReduced] = useState(false);
+  // null = preference not yet resolved; playback waits for a definite answer so
+  // reduced-motion users never get a pre-hydration autoplay flash.
+  const [reduced, setReduced] = useState<boolean | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -21,7 +23,7 @@ export default function RobotVideo() {
 
   useEffect(() => {
     const video = ref.current;
-    if (!video) return;
+    if (!video || reduced === null) return;
     if (reduced) {
       video.pause();
       return;
@@ -48,12 +50,12 @@ export default function RobotVideo() {
       ref={ref}
       className="machine-video-el"
       src="/robot/robot-field.mp4"
-      autoPlay={!reduced}
+      autoPlay={reduced === false}
       muted
       loop
       playsInline
       preload="metadata"
-      controls={reduced}
+      controls={reduced === true}
       aria-label="NXTektal ball collection robot operating on a driving range"
     />
   );
