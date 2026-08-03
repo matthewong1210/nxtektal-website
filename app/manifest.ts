@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "NXTektal Systems",
     short_name: "NXTektal",
     description:
-      "NXTektal Systems is building the operating system for autonomous outdoor work, starting with demand-responsive ball collection and handoff for golf ranges.",
+      "NXTektal is building one operating layer for autonomous golf facilities, starting with closed-loop ball operations at driving ranges.",
     start_url: "/",
     display: "standalone",
     background_color: "#0d1117",

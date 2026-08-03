@@ -235,6 +235,15 @@ main { background: var(--night); }
 .hero-fade:nth-child(5) { animation-delay: 400ms; }
 @keyframes hero-fade { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
+/* Phase 2 media containers (PHASE_2_VISUAL_ASSET_PLAN.md) */
+.media-frame { margin: 0; }
+.media-frame-stage { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: #0a0f14; }
+.media-frame--light .media-frame-stage { border-color: var(--paper-line); background: #ffffff; }
+.media-frame--bare .media-frame-stage { border: none; border-radius: 0; background: transparent; overflow: visible; }
+.media-frame-stage > img, .media-frame-stage > video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.media-frame-stage .machine-video-el { height: 100%; border: none; border-radius: 0; }
+.media-frame--light .media-caption { color: var(--ink-faint); }
+
 /* Field observation */
 .observation { margin: 0; padding: clamp(20px, 2.4vw, 30px) clamp(22px, 2.6vw, 34px); border: 1px solid var(--paper-line); border-radius: 14px; background: #ffffff; }
 .observation-label { display: flex; align-items: center; gap: 9px; color: var(--blue-deep); font-size: 11px; font-weight: 800; letter-spacing: 0.18em; }
@@ -303,9 +312,10 @@ main { background: var(--night); }
 .wf-story { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
 .wf-story .wf-visual { order: -1; }
 .wf-steps { margin: 0; padding: 0; list-style: none; }
-.wf-step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: clamp(16px, 2vw, 24px) 0; border-bottom: 1px solid var(--line); opacity: 0.45; transition: opacity 300ms ease; }
+.wf-step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: clamp(16px, 2vw, 24px) 0; border-bottom: 1px solid var(--line); transition: opacity 300ms ease; }
+.wf-steps--js .wf-step { opacity: 0.45; }
 .wf-step:last-child { border-bottom: none; }
-.wf-step--active { opacity: 1; }
+.wf-steps--js .wf-step--active { opacity: 1; }
 .wf-step-index { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; padding-top: 4px; }
 .wf-step strong { display: block; color: var(--white); font-size: clamp(14px, 1.25vw, 17px); font-weight: 740; letter-spacing: 0.08em; }
 .wf-step p { margin: 7px 0 0; color: var(--white-faint); font-size: clamp(13px, 1.05vw, 14.5px); line-height: 1.6; }
