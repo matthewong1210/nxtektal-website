@@ -1,6 +1,8 @@
 import dynamic from "next/dynamic";
 import EarthExperience from "../components/earth/EarthExperience";
 import FluidMenu from "../components/manifesto/FluidMenu";
+import BuildEvidenceGallery from "../components/manifesto/BuildEvidenceGallery";
+import ExpansionMap from "../components/manifesto/ExpansionMap";
 import FounderSection, { founders } from "../components/manifesto/FounderSection";
 import HandoffSequence from "../components/manifesto/HandoffSequence";
 import MediaFrame, { CAPTIONS } from "../components/media/MediaFrame";
@@ -362,6 +364,8 @@ export default function Home() {
               ))}
             </ul>
           </Reveal>
+          {/* Renders only when real photos are registered AND approved (lib/visualAssets.ts) */}
+          <BuildEvidenceGallery />
         </div>
       </section>
 
@@ -405,6 +409,10 @@ export default function Home() {
               <strong>NXTektal Operating Layer</strong>
               <span>Shared facility state · Prioritization · Dispatch · Verification</span>
             </div>
+          </Reveal>
+          {/* Facility capability map slot — renders only once the map exists (lib/visualAssets.ts) */}
+          <Reveal>
+            <ExpansionMap />
           </Reveal>
           <div className="roadmap-stages">
             {roadmapStages.map((stage, index) => (

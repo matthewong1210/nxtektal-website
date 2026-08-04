@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import MediaFrame, { CAPTIONS } from "../media/MediaFrame";
+import { ResponsiveStill } from "../media/ResponsiveMedia";
+import { workflowStepStills } from "../../lib/visualAssets";
 import RobotVideo from "./RobotVideo";
 
 const steps = [
@@ -25,6 +27,14 @@ const steps = [
  */
 export default function WorkflowStory() {
   const listRef = useRef<HTMLOListElement>(null);
+  // Active step drives the visual once per-step stills are registered in
+  // lib/visualAssets.ts; with none registered the robot-field loop renders
+  // exactly as before. Steps without a still fall back to the loop too.
+  // prefers-reduced-motion: the scroll loop below never starts, so the
+  // visual stays a static complete state (step-01 still, or the paused
+  // loop) by design — scroll-driven image swaps count as motion; the full
+  // text list always carries the content.
+  const [activeStep, setActiveStep] = useState(0);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -46,6 +56,7 @@ export default function WorkflowStory() {
       if (active !== lastActive) {
         lastActive = active;
         items.forEach((el, i) => el.classList.toggle("wf-step--active", i <= active));
+        setActiveStep(active);
       }
     };
 
@@ -83,7 +94,11 @@ export default function WorkflowStory() {
       <div className="wf-visual">
         <div className="wf-visual-sticky">
           <MediaFrame caption={CAPTIONS.devViz} aspect="16 / 9">
-            <RobotVideo />
+            {workflowStepStills[activeStep] ? (
+              <ResponsiveStill source={workflowStepStills[activeStep]} />
+            ) : (
+              <RobotVideo />
+            )}
           </MediaFrame>
         </div>
       </div>

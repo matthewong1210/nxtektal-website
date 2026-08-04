@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { OG_IMAGE_PATH } from "../lib/visualAssets";
 import "./globals.css";
 
 const inter = Inter({
@@ -13,10 +14,10 @@ const title = "NXTektal Systems | Autonomous Operations for Golf Facilities";
 const description =
   "NXTektal is building an operating layer that coordinates robots, sensors, and AI agents for autonomous golf facility operations, starting with closed-loop ball operations at driving ranges.";
 const ogImage = {
-  url: "/og-image.jpg",
+  url: OG_IMAGE_PATH,
   width: 1200,
   height: 630,
-  alt: "NXTektal Systems — building the operating system for autonomous outdoor work",
+  alt: "NXTektal Systems — one operating layer for autonomous golf facilities",
 };
 
 export const metadata: Metadata = {

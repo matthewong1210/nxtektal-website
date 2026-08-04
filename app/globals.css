@@ -399,6 +399,11 @@ main { background: var(--night); }
 .hero-chip-dot--live { background: var(--lime); }
 .hero-frame-caption { position: absolute; left: 18px; bottom: 14px; z-index: 2; margin: 0; }
 
+/* Sprint 3 gated slots: evidence grid + expansion map */
+.evidence-grid { margin-top: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.5vw, 20px); }
+.evidence-grid .media-frame-stage { border-color: var(--line-strong); }
+.expansion-map-frame { margin-top: clamp(32px, 4vw, 52px); }
+
 /* Operating-layer band + module tethers */
 .layer-band { margin-top: clamp(40px, 5vw, 64px); padding: clamp(18px, 2.2vw, 28px) clamp(20px, 2.6vw, 34px); border: 1px solid var(--blue-line); border-radius: 16px; background: rgba(91, 157, 255, 0.05); display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 22px; }
 .layer-band strong { color: var(--white); font-size: clamp(16px, 1.5vw, 21px); font-weight: 700; letter-spacing: -0.01em; }
@@ -579,6 +584,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .roadmap-stages { grid-template-columns: 1fr; max-width: 640px; }
   .intel-duo { grid-template-columns: 1fr; }
   .handoff-seq { grid-template-columns: 1fr; max-width: 460px; }
+  .evidence-grid { grid-template-columns: repeat(2, 1fr); }
   .why-split { grid-template-columns: 1fr; }
   .intel-feedback-rail { display: none; }
   .wf-story { grid-template-columns: 1fr; }
@@ -621,6 +627,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .validation-strip { grid-template-columns: 1fr; gap: 22px; }
   .validation-strip dt { font-size: clamp(30px, 9vw, 40px); }
   .why-cards, .system-cards, .compare-grid, .status-grid { grid-template-columns: 1fr; }
+  .evidence-grid { grid-template-columns: 1fr; }
   .status-block { padding-left: var(--pad); padding-right: var(--pad); }
   .beyond-list li { padding: 10px 16px; }
   .wf-story { grid-template-columns: 1fr; }

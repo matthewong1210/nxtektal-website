@@ -1,4 +1,6 @@
 import MediaFrame, { CAPTIONS } from "../media/MediaFrame";
+import { ResponsiveStill } from "../media/ResponsiveMedia";
+import { handoffPanelStills } from "../../lib/visualAssets";
 
 /**
  * Three-panel Modular Ball Handoff concept sequence
@@ -92,11 +94,17 @@ export default function HandoffSequence() {
   return (
     <MediaFrame caption={CAPTIONS.engConcept} tone="light" bare className="handoff-frame">
       <ol className="handoff-seq" aria-label="Modular ball handoff concept sequence: dock, transfer, verify and release">
-        {panels.map((panel) => (
+        {panels.map((panel, index) => (
           <li key={panel.step} className="handoff-panel">
             <div className="handoff-stage">
-              <HandoffGlyph kind={panel.glyph} alt={panel.alt} />
-              <span className="handoff-placeholder-tag">CONCEPT SCHEMATIC</span>
+              {handoffPanelStills[index] ? (
+                <ResponsiveStill source={handoffPanelStills[index]} />
+              ) : (
+                <>
+                  <HandoffGlyph kind={panel.glyph} alt={panel.alt} />
+                  <span className="handoff-placeholder-tag">CONCEPT SCHEMATIC</span>
+                </>
+              )}
             </div>
             <div className="handoff-panel-head">
               <span className="wf-step-index" aria-hidden="true">{panel.step}</span>
