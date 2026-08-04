@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { RefObject } from "react";
-import { hasMasterFrame, heroInterim, heroMasterFrame } from "../../lib/heroAssets";
+import { hasMasterFrame, heroInterim, heroMasterFrame } from "../../lib/visualAssets";
 
 /**
  * The cloud veil that masks the earth→ground crossfade, plus the golf-range

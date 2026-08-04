@@ -36,6 +36,10 @@ the nine required modules).
 
 **Files:** `lib/heroAssets.ts` (new), `components/earth/GroundTransition.tsx`
 
+> Superseded (Phase 2C prep): `lib/heroAssets.ts` was consolidated into
+> `lib/visualAssets.ts` — that registry is now the single metadata source.
+> References to `heroAssets.ts` below are historical.
+
 - `heroAssets.ts` is the single registry for the master frame: desktop
   AVIF/WebP (2880×1620), mobile AVIF/WebP (1125×1500, 3:4), future WebM/MP4
   loop + poster, canonical alt text and caption. `ready` flag defaults to
