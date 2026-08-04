@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import EarthExperience from "../components/earth/EarthExperience";
 import FluidMenu from "../components/manifesto/FluidMenu";
 import FounderSection, { founders } from "../components/manifesto/FounderSection";
+import MediaFrame, { CAPTIONS } from "../components/media/MediaFrame";
 import IntelligenceSection from "../components/manifesto/IntelligenceSection";
 import WorkflowStory from "../components/manifesto/WorkflowStory";
 import Reveal from "./reveal";
@@ -304,6 +305,7 @@ export default function Home() {
             </Reveal>
           </div>
           <Reveal>
+            <MediaFrame caption={CAPTIONS.engConcept} tone="light" bare>
             <div className="flow-compare" role="group" aria-label="Ball workflow before and after NXTektal">
               <div className="flow-row">
                 <span className="flow-row-label">CURRENT WORKFLOW — MANUAL COORDINATION</span>
@@ -334,6 +336,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            </MediaFrame>
           </Reveal>
           <Reveal>
             <p className="ez-note">Compatibility is validated site by site during assessment and pilot planning.</p>

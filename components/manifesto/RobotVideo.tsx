@@ -48,7 +48,7 @@ export default function RobotVideo() {
       ref={ref}
       className="machine-video-el"
       src="/robot/robot-field.mp4"
-      autoPlay
+      autoPlay={!reduced}
       muted
       loop
       playsInline

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import MediaFrame, { CAPTIONS } from "../media/MediaFrame";
 import RobotVideo from "./RobotVideo";
 
 const steps = [
@@ -29,6 +30,9 @@ export default function WorkflowStory() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const list = listRef.current;
     if (!list) return;
+    // Dimming is opt-in via this class so no-JS (and reduced-motion) visitors
+    // always read the full list at normal contrast.
+    list.classList.add("wf-steps--js");
 
     let lastActive = -1;
     const tick = () => {
@@ -78,8 +82,9 @@ export default function WorkflowStory() {
       </ol>
       <div className="wf-visual">
         <div className="wf-visual-sticky">
-          <RobotVideo />
-          <p className="media-caption">Product development visualization</p>
+          <MediaFrame caption={CAPTIONS.devViz} aspect="16 / 9">
+            <RobotVideo />
+          </MediaFrame>
         </div>
       </div>
     </div>
