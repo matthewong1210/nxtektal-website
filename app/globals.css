@@ -359,21 +359,52 @@ main { background: var(--night); }
 .validation-block .validation-note { color: var(--ink-faint); }
 
 /* Workflow story (sticky product showcase) */
-.wf-story { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
-.wf-story .wf-visual { order: -1; }
+/* Default (server-rendered / mobile / reduced-motion): sequential story —
+   number, label, description, then that step's distinct media. */
+.wf-story { margin-top: clamp(40px, 5vw, 64px); }
+.wf-narrative { position: relative; min-width: 0; }
 .wf-steps { margin: 0; padding: 0; list-style: none; }
-.wf-step { display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: clamp(16px, 2vw, 24px) 0; border-bottom: 1px solid var(--line); transition: opacity 300ms ease; }
-.wf-steps--js .wf-step { opacity: 0.45; }
+.wf-step { position: relative; display: grid; grid-template-columns: 44px 1fr; gap: 14px; padding: clamp(16px, 2vw, 24px) 0; border-bottom: 1px solid var(--line); }
 .wf-step:last-child { border-bottom: none; }
-.wf-steps--js .wf-step--active { opacity: 1; }
-.wf-step-index { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; padding-top: 4px; }
-.wf-step strong { display: block; color: var(--white); font-size: clamp(14px, 1.25vw, 17px); font-weight: 740; letter-spacing: 0.08em; }
-.wf-step p { margin: 7px 0 0; color: var(--white-faint); font-size: clamp(13px, 1.05vw, 14.5px); line-height: 1.6; }
+.wf-step-index { color: var(--blue); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; padding-top: 4px; transition: color var(--motion-fast) var(--ease-standard); }
+.wf-step strong { display: block; color: var(--white); font-size: clamp(14px, 1.25vw, 17px); font-weight: 740; letter-spacing: 0.08em; transition: color var(--motion-fast) var(--ease-standard); }
+.wf-step p { margin: 7px 0 0; color: var(--white-faint); font-size: clamp(13px, 1.05vw, 14.5px); line-height: 1.6; transition: color var(--motion-fast) var(--ease-standard); }
+.wf-step-media { grid-column: 1 / -1; margin-top: 4px; }
 .wf-visual { min-width: 0; }
-.wf-visual-sticky { position: sticky; top: clamp(64px, 12vh, 120px); }
-@media (prefers-reduced-motion: reduce) {
-  .wf-step { opacity: 1; }
-}
+.wf-visual-sticky { position: sticky; top: 114px; }
+
+/* Enhanced desktop composition: sticky media stage left, narrative right. */
+/* stretch (grid default) is load-bearing: the visual cell must span the
+   full row height or position:sticky has no room to travel. */
+.wf-story--enhanced { display: grid; grid-template-columns: minmax(0, 58fr) minmax(0, 42fr); gap: clamp(28px, 4vw, 64px); }
+.wf-story--enhanced .wf-visual { order: -1; }
+.wf-story--enhanced .wf-narrative { padding-left: 26px; padding-bottom: 144px; }
+/* Step hierarchy: future steps stay readable (no opacity dimming — colors
+   only, all AA against the section background). */
+.wf-story--enhanced .wf-step strong { color: var(--white-soft); }
+.wf-story--enhanced .wf-step-index { color: var(--white-faint); }
+.wf-story--enhanced .wf-step--done .wf-step-index { color: var(--blue); }
+.wf-story--enhanced .wf-step--done strong { color: var(--white-soft); }
+.wf-story--enhanced .wf-step--active .wf-step-index { color: var(--lime); }
+.wf-story--enhanced .wf-step--active strong { color: var(--white); }
+.wf-story--enhanced .wf-step--active p { color: var(--white-soft); }
+
+/* Progress rail: decorative (aria-hidden). Track muted blue-gray, fill
+   restrained blue, nodes per step — active lime, completed blue. */
+.wf-rail { position: absolute; left: 6px; top: 26px; bottom: 26px; width: 2px; background: rgba(91, 157, 255, 0.16); border-radius: 1px; }
+.wf-rail-fill { position: absolute; left: 0; top: 0; width: 100%; background: var(--blue); border-radius: 1px; transition: height var(--motion-control) var(--ease-standard); }
+.wf-story--enhanced .wf-step::before { content: ""; position: absolute; left: -24px; top: clamp(20px, 2vw, 28px); width: 8px; height: 8px; border-radius: 50%; background: rgba(91, 157, 255, 0.25); transition: background-color var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard); }
+.wf-story--enhanced .wf-step--done::before { background: var(--blue); }
+.wf-story--enhanced .wf-step--active::before { background: var(--lime); box-shadow: 0 0 0 3px rgba(154, 248, 18, 0.18); }
+
+/* Sticky-stage media layers: incoming media fades in above the outgoing
+   frame — never an empty, white, or black frame between assets. */
+.wf-layer { position: absolute; inset: 0; }
+.wf-layer--in { animation: wf-layer-in var(--motion-image) var(--ease-expressive) both; }
+.wf-layer--warm { opacity: 0; pointer-events: none; }
+@keyframes wf-layer-in { from { opacity: 0; transform: scale(1.012); } to { opacity: 1; transform: none; } }
+.wf-visual .media-caption { min-height: 2.6em; }
+.wf-visual .machine-video-el { height: 100%; border: none; border-radius: 0; background: transparent; }
 
 /* Structural placeholder for future assets */
 
@@ -647,8 +678,6 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .evidence-grid { grid-template-columns: repeat(2, 1fr); }
   .why-split { grid-template-columns: 1fr; }
   .intel-feedback-rail { display: none; }
-  .wf-story { grid-template-columns: 1fr; }
-  .wf-visual-sticky { position: static; }
   .dash-grid { grid-template-columns: repeat(2, 1fr); }
   .dash-card--summary { grid-column: span 2; }
 }
@@ -684,9 +713,6 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .evidence-grid { grid-template-columns: 1fr; }
   .status-block { padding-left: var(--pad); padding-right: var(--pad); }
   .beyond-list li { padding: 10px 16px; }
-  .wf-story { grid-template-columns: 1fr; }
-  .wf-visual-sticky { position: static; }
-  .wf-step { opacity: 1; }
   .dash-grid { grid-template-columns: 1fr; }
   .dash-card--summary { grid-column: auto; }
   .sim-frame .media-frame-stage { aspect-ratio: 1080 / 1350; }

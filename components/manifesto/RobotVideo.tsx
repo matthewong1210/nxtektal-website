@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
  * browsers throttle off-screen video decode on their own); reduced-motion
  * users get a paused video with native controls instead of a moving loop.
  */
-export default function RobotVideo() {
+export default function RobotVideo({ playing = true }: { playing?: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
   // null = preference not yet resolved; playback waits for a definite answer so
   // reduced-motion users never get a pre-hydration autoplay flash.
@@ -24,7 +24,9 @@ export default function RobotVideo() {
   useEffect(() => {
     const video = ref.current;
     if (!video || reduced === null) return;
-    if (reduced) {
+    // Pausing (never resetting currentTime) means an inactive→active flip
+    // resumes the loop where it left off instead of restarting it.
+    if (reduced || !playing) {
       video.pause();
       return;
     }
@@ -43,14 +45,14 @@ export default function RobotVideo() {
       window.removeEventListener("touchstart", retry);
       window.removeEventListener("keydown", retry);
     };
-  }, [reduced]);
+  }, [reduced, playing]);
 
   return (
     <video
       ref={ref}
       className="machine-video-el"
       src="/robot/robot-field.mp4"
-      autoPlay={reduced === false}
+      autoPlay={reduced === false && playing}
       muted
       loop
       playsInline
