@@ -81,6 +81,8 @@ export type StillSource = {
   /** Mobile recomposition (used ≤760px). Omit to reuse the desktop crop. */
   mobile?: { avif: string; webp: string; width: number; height: number };
   alt: string;
+  /** Optional per-asset caption override (e.g. a simulation qualification). */
+  caption?: string;
 };
 
 /** An ambient loop: WebM preferred, MP4 fallback, poster is mandatory. */
@@ -99,15 +101,50 @@ export type LoopSource = {
 // robot-field loop becomes the fallback. Partial sets are allowed: steps
 // without a still fall back to the loop.
 // -----------------------------------------------------------------------
+const SIMULATOR_STILL_QUALIFICATION =
+  "Range Operations Simulator — simulation results, not live facility data.";
+
 export const workflowStepStills: (StillSource | null)[] = [
-  null, // 01 MONITOR    → step-01-monitor
-  null, // 02 PRIORITIZE → step-02-prioritize
-  null, // 03 DISPATCH   → step-03-dispatch
-  null, // 04 COLLECT    → step-04-collect
-  null, // 05 RETURN     → step-05-return
-  null, // 06 HANDOFF    → step-06-handoff
-  null, // 07 WASH & DISPENSE → step-07-wash-dispense
-  null, // 08 VERIFY     → step-08-verify
+  {
+    // 01 MONITOR — simulator replay, early operating day
+    avif: "/visuals/phase2/workflow/01-monitor-simulator.avif",
+    webp: "/visuals/phase2/workflow/01-monitor-simulator.webp",
+    width: 1600,
+    height: 900,
+    alt: "Range Operations Simulator monitoring ball availability and demand across range zones early in the operating day",
+    caption: SIMULATOR_STILL_QUALIFICATION,
+  },
+  {
+    // 02 PRIORITIZE — simulator replay, demand rising
+    avif: "/visuals/phase2/workflow/02-prioritize-simulator.avif",
+    webp: "/visuals/phase2/workflow/02-prioritize-simulator.webp",
+    width: 1600,
+    height: 900,
+    alt: "Range Operations Simulator weighing zone demand and robot availability before dispatching collection",
+    caption: SIMULATOR_STILL_QUALIFICATION,
+  },
+  {
+    // 03 DISPATCH — dispatcher decision: assign collection · R1, Z2
+    avif: "/visuals/phase2/workflow/03-dispatch-simulator.avif",
+    webp: "/visuals/phase2/workflow/03-dispatch-simulator.webp",
+    width: 1600,
+    height: 900,
+    alt: "Range Operations Simulator dispatcher decision assigning collection of zone Z2 to robot R1",
+    caption: SIMULATOR_STILL_QUALIFICATION,
+  },
+  null, // 04 COLLECT — physical workflow imagery only (robot-field loop)
+  null, // 05 RETURN — physical workflow imagery only
+  null, // 06 HANDOFF — physical workflow imagery only
+  null, // 07 WASH & DISPENSE — physical workflow imagery only
+  {
+    // 08 VERIFY — simulator final summary
+    avif: "/visuals/phase2/workflow/08-verify-simulator.avif",
+    webp: "/visuals/phase2/workflow/08-verify-simulator.webp",
+    width: 1600,
+    height: 900,
+    alt: "Range Operations Simulator final summary reporting service availability, balls processed, interventions, energy use, utilization, and estimated operating cost",
+    caption: SIMULATOR_STILL_QUALIFICATION,
+  },
 ];
 
 // -----------------------------------------------------------------------
@@ -155,6 +192,58 @@ export const buildEvidencePhotos: EvidencePhoto[] = [
 export const expansionMap: { still: StillSource | null } = {
   still: null,
 };
+
+// -----------------------------------------------------------------------
+// 6 · Range Operations Simulator demo (#intelligence · SimulatorProof)
+// ~13.6s chrome-cropped loop (1400×1000, 30fps, muted) + desktop poster
+// (00:54 frame: assign collection · R1, Z2) + 1080×1350 mobile
+// recomposition (live state + dispatcher decision over final summary).
+// Gate: flip `ready` only after derivatives + posters exist and 1440px /
+// 375px / reduced-motion QA passes. With ready=false the intelligence
+// chapter renders exactly as before.
+// -----------------------------------------------------------------------
+export type AgentSimulatorDemo = {
+  ready: boolean;
+  loop: { webm: string; mp4: string };
+  posterDesktop: { avif: string; webp: string; width: number; height: number };
+  posterMobile: { avif: string; webp: string; width: number; height: number };
+  alt: string;
+  caption: string;
+  truthLabel: string;
+};
+
+export const agentSimulatorDemo: AgentSimulatorDemo = {
+  // Flipped after Sprint 1 QA: derivatives + posters shipped, 1440px and
+  // 375px QA passed, reduced-motion verified (see PR).
+  ready: true,
+  loop: {
+    webm: "/visuals/phase2/simulator/range-ops-simulator-loop.webm",
+    mp4: "/visuals/phase2/simulator/range-ops-simulator-loop.mp4",
+  },
+  posterDesktop: {
+    avif: "/visuals/phase2/simulator/range-ops-simulator-poster-desktop.avif",
+    webp: "/visuals/phase2/simulator/range-ops-simulator-poster-desktop.webp",
+    width: 1400,
+    height: 1000,
+  },
+  posterMobile: {
+    avif: "/visuals/phase2/simulator/range-ops-simulator-poster-mobile.avif",
+    webp: "/visuals/phase2/simulator/range-ops-simulator-poster-mobile.webp",
+    width: 1080,
+    height: 1350,
+  },
+  alt: "Replay of the NXTektal Range Operations Simulator showing multiple robot states, dispatch decisions, facility metrics, and final operating results.",
+  caption: "Range Operations Simulator — working development environment. Demand-spike scenario shown.",
+  truthLabel: "Simulation results — not live facility data.",
+};
+
+// Build-evidence candidate (do NOT activate — double gate stays):
+// title "Range Operations Simulator" · status "Working development
+// environment" · caption "Demand-spike replay used to evaluate dispatch
+// behavior, fleet activity, stockouts, interventions, and operating
+// outcomes." · image = the simulator desktop poster above. Software
+// development evidence — never a customer deployment, live facility
+// operation, or validated customer result.
 
 // -----------------------------------------------------------------------
 // OG / social image
