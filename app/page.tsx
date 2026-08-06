@@ -4,6 +4,7 @@ import SiteHeader from "../components/manifesto/SiteHeader";
 import BuildEvidenceGallery from "../components/manifesto/BuildEvidenceGallery";
 import ExpansionMap from "../components/manifesto/ExpansionMap";
 import FounderSection, { founders } from "../components/manifesto/FounderSection";
+import EquipmentCompare from "../components/manifesto/EquipmentCompare";
 import HandoffSequence from "../components/manifesto/HandoffSequence";
 import MediaFrame, { CAPTIONS } from "../components/media/MediaFrame";
 import IntelligenceSection from "../components/manifesto/IntelligenceSection";
@@ -274,62 +275,17 @@ export default function Home() {
           </Reveal>
           <Reveal>
             <p className="section-body">
-              NXTektal is being designed around common wash-and-dispense configurations rather than requiring a facility to replace its entire system. Site-specific calibration and modular adapters connect the workflow where needed.
+              NXTektal is being designed around common wash-and-dispense configurations rather than requiring a facility to replace its entire system. Site-specific calibration and modular interfaces connect the workflow where needed.
             </p>
           </Reveal>
-          <div className="compare-grid">
-            <Reveal>
-              <article className="compare-card">
-                <h3>Traditional closed system</h3>
-                <p>Requires multiple proprietary components to be replaced together.</p>
-              </article>
-            </Reveal>
-            <Reveal delay={60}>
-              <article className="compare-card compare-card--nxt">
-                <h3>NXTektal approach</h3>
-                <p>Adds a coordinated collection and handoff layer around compatible equipment already on site.</p>
-              </article>
-            </Reveal>
-          </div>
+          <Reveal>
+            <EquipmentCompare />
+          </Reveal>
           <Reveal>
             <HandoffSequence />
           </Reveal>
           <Reveal>
-            <MediaFrame caption={CAPTIONS.engConcept} tone="light" bare>
-            <div className="flow-compare" role="group" aria-label="Ball workflow before and after NXTektal">
-              <div className="flow-row">
-                <span className="flow-row-label">CURRENT WORKFLOW — MANUAL COORDINATION</span>
-                <div className="flow-chain">
-                  <div className="flow-node flow-node--existing"><strong>Collector</strong><span>EXISTING EQUIPMENT</span></div>
-                  <span className="flow-arrow" aria-hidden="true">→</span>
-                  <div className="flow-node flow-node--manual"><strong>Manual unloading</strong><span>MANUAL</span></div>
-                  <span className="flow-arrow" aria-hidden="true">→</span>
-                  <div className="flow-node flow-node--existing"><strong>Washer</strong><span>EXISTING EQUIPMENT</span></div>
-                  <span className="flow-arrow" aria-hidden="true">→</span>
-                  <div className="flow-node flow-node--manual"><strong>Manual transfer</strong><span>MANUAL</span></div>
-                  <span className="flow-arrow" aria-hidden="true">→</span>
-                  <div className="flow-node flow-node--existing"><strong>Dispenser</strong><span>EXISTING EQUIPMENT</span></div>
-                </div>
-              </div>
-              <div className="flow-row flow-row--nxt">
-                <span className="flow-row-label">NXTEKTAL WORKFLOW — IN DEVELOPMENT</span>
-                <div className="flow-chain">
-                  <div className="flow-node flow-node--auto"><strong>Monitor &amp; Dispatch</strong><span>NXTEKTAL</span></div>
-                  <span className="flow-arrow" aria-hidden="true">→</span>
-                  <div className="flow-node flow-node--auto"><strong>Autonomous Collection</strong><span>NXTEKTAL</span></div>
-                  <span className="flow-arrow" aria-hidden="true">→</span>
-                  <div className="flow-node flow-node--auto"><strong>Modular Handoff</strong><span>NXTEKTAL</span></div>
-                  <span className="flow-arrow" aria-hidden="true">→</span>
-                  <div className="flow-node flow-node--existing"><strong>Existing Washer &amp; Dispenser</strong><span>KEPT ON SITE</span></div>
-                  <span className="flow-arrow" aria-hidden="true">→</span>
-                  <div className="flow-node flow-node--auto"><strong>Verify</strong><span>NXTEKTAL</span></div>
-                </div>
-              </div>
-            </div>
-            </MediaFrame>
-          </Reveal>
-          <Reveal>
-            <p className="ez-note">Compatibility is validated site by site during assessment and pilot planning.</p>
+            <p className="ez-note">Compatibility and final integration are assessed site by site.</p>
           </Reveal>
         </div>
       </section>
