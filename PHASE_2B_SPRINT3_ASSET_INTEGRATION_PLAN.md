@@ -22,7 +22,7 @@ structural, not procedural.
 
 | # | Slot | Mount point | Activation | Renders today |
 |---|---|---|---|---|
-| 1 | Hero Master Visual | `GroundTransition` (hero ground stage) | `lib/heroAssets.ts` → paths + `ready: true` | Interim robot photo (unchanged, gate holds) |
+| 1 | Hero Master Visual | `GroundTransition` (hero ground stage) | `heroMasterFrame` in `lib/visualAssets.ts` → paths + `ready: true` (consolidated from `lib/heroAssets.ts` in Phase 2C prep) | Interim robot photo (unchanged, gate holds) |
 | 2 | Handoff production panels | `HandoffSequence` per-panel | `handoffPanelStills[i]` | Coded schematic glyphs + CONCEPT SCHEMATIC tags |
 | 3 | Workflow per-step stills | `WorkflowStory` visual (active-step driven) | `workflowStepStills[i]` (partial sets OK) | robot-field loop |
 | 4 | Build Evidence gallery | `<BuildEvidenceGallery/>` in Development Status band | register photos + `buildEvidenceApproved: true` | **Nothing** (dual gate: photos + approval) |
