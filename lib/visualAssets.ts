@@ -13,7 +13,7 @@
  */
 
 // -----------------------------------------------------------------------
-// 1 · Hero Master Visual (EarthExperience ground stage · GroundTransition)
+// 1 · Hero Master Visual (ProductHero full-bleed stage — Phase 2E)
 // Consolidated here from lib/heroAssets.ts (Phase 2C prep) — this registry
 // is the single authoritative metadata source for every visual slot.
 // Gate: `ready` stays false until NXTektal approves the Master Product
@@ -68,7 +68,8 @@ export const heroMasterFrame: HeroMasterFrame = {
   caption: "Product development visualization",
 };
 
-/** Interim hero used until the master frame is approved. */
+/** Interim hero photograph — retained as the documented fallback if the
+ * master frame ever needs to be pulled (swap into ProductHero). */
 export const heroInterim = {
   src: "/robot/robot-front.jpg",
   alt: "NXTektal ball collection robot facing the camera on a driving range at dusk",

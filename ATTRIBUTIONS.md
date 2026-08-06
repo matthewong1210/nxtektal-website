@@ -1,43 +1,39 @@
 # Asset Attributions
 
-## Earth textures (`public/earth/`)
+## Robot photography and footage (`public/robot/`)
 
-Downloaded on **2026-07-14** from the official
-[three.js repository](https://github.com/mrdoob/three.js) (directory
-`examples/textures/planets/`), which is distributed under the
-**MIT License**. The imagery itself is derived from **NASA Blue Marble /
-Visible Earth** satellite data, which is in the **public domain**
-(NASA imagery is not copyrighted; see https://visibleearth.nasa.gov/image-use-policy).
+Real NXTektal prototype photography and field footage supplied by the
+founders. All rights held by NXTektal Systems.
 
-| File | Source file | Author / origin | License |
-| --- | --- | --- | --- |
-| `earth_atmos_1024.jpg` | `earth_atmos_2048.jpg` (downscaled) | NASA Blue Marble via three.js | MIT (repo) / Public domain (NASA imagery) |
-| `earth_clouds_1024.png` | `earth_clouds_1024.png` | NASA cloud imagery via three.js | MIT / Public domain |
+## Hero master visual (`public/visuals/phase2/hero/`)
 
-## Earth footage (`public/earth/earth-idle*.mp4`, `earth-zoom*.mp4`)
+AI-generated product concept render (tracked collector towing the
+gang-roller picker) produced by the founders with **Dreamina**, supplied
+2026-08-05, matching the Transfer Robot STEP v1 / no-arm product concept.
+Usage rights per Dreamina's terms for user-generated content; confirm
+commercial terms before launch. Labeled on-site as "Product development
+visualization".
 
-AI-generated cinematic footage produced by the founders with **Dreamina**:
-the idle orbit clip (`dreamina-2026-07-15-7306`, supplied 2026-07-15,
-loops on the hero) and the zoom-in clip (`dreamina-2026-07-16-4049`,
-supplied 2026-07-16, scroll-scrubbed — re-encoded all-intra H.264 with
-ffmpeg). Usage rights per Dreamina's terms for user-generated content;
-confirm commercial terms before launch.
+## Workflow physical-loop media (`public/visuals/phase2/workflow/`)
 
-## Space backdrop footage (`public/earth/space-drift*.mp4`)
+AI-generated product concept renders (RETURN / HANDOFF / WASH & DISPENSE
+loops and posters) produced by the founders with **Dreamina**, supplied
+2026-08-04/06. Same usage terms as above. Simulator-derived stills are
+screenshots of the NXTektal Range Operations Simulator (original software,
+all rights held by NXTektal Systems).
 
-AI-generated cinematic space footage produced by the founders with **Dreamina**
-(`dreamina-2026-07-16-4049`), supplied 2026-07-16. Re-encoded locally with
-ffmpeg (all-intra H.264, audio stripped) for scroll scrubbing. Usage rights per
-Dreamina's terms for user-generated content; confirm commercial terms before
-launch.
+## Simulator media (`public/visuals/phase2/simulator/`)
 
-## Milky Way backdrop (`public/earth/milkyway-*.jpg`)
+Screen recordings and stills of the NXTektal Range Operations Simulator —
+original NXTektal software; all rights held by NXTektal Systems.
 
-Photo by **Jonathan Borba** on Pexels
-(https://www.pexels.com/photo/16002199/), downloaded 2026-07-15 and
-supplied by the founders. **Pexels License**: free to use, including
-commercially; attribution not required. Local downscales generated with
-macOS `sips`.
+## Removed assets
+
+The earth/space hero sequence (NASA-derived textures via three.js, Dreamina
+earth/space footage, Pexels Milky Way photo by Jonathan Borba) was removed
+in Phase 2E Sprint 1 along with `public/earth/`; attributions for those
+assets are preserved in git history (tag
+`phase-2d-signature-interactions-complete` and earlier).
 
 No Google Earth, Mapbox, or watermarked imagery is used. No assets were
 copied from getlayers.ai or any other third-party website. The 21st.dev

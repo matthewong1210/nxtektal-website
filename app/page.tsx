@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import EarthExperience from "../components/earth/EarthExperience";
+import ProductHero from "../components/manifesto/ProductHero";
 import SiteHeader from "../components/manifesto/SiteHeader";
 import BuildEvidenceGallery from "../components/manifesto/BuildEvidenceGallery";
 import ExpansionMap from "../components/manifesto/ExpansionMap";
@@ -51,29 +51,6 @@ const BrandLockup = () => (
   />
 );
 
-const chapters = [
-  {
-    id: "top",
-    content: (
-      <div className="ez-copy ez-copy--hero">
-        <div className="eyebrow hero-fade"><span className="pulse" /> AUTONOMOUS OPERATIONS FOR GOLF FACILITIES</div>
-        <h1 className="hero-fade">One operating layer for autonomous golf facilities.</h1>
-        <p className="ez-body hero-fade">
-          NXTektal is building an operating layer designed to connect robots, sensors, people, and the equipment already on site—so repetitive work can be planned, executed, verified, and improved as one system.
-        </p>
-        <p className="hero-start hero-fade">Starting with <span>closed-loop ball operations</span> at driving ranges.</p>
-        <div className="hero-actions hero-fade">
-          <a className="button button-primary" href="#pilot">
-            Become a Pilot Facility <Arrow />
-          </a>
-          <a className="button button-secondary" href="#first-workflow">
-            Explore the First Workflow
-          </a>
-        </div>
-      </div>
-    ),
-  },
-];
 
 const whyCards = [
   { title: "Repetitive workflow", body: "Collection, unloading, and transfer happen throughout the operating day." },
@@ -133,8 +110,27 @@ export default function Home() {
       {/* 1 · Header */}
       <SiteHeader items={navItems} brand={<BrandLockup />} ctaIcon={<Arrow />} />
 
-      {/* 2 · Hero (cinematic sequence) */}
-      <EarthExperience chapters={chapters} />
+      {/* 2 · Hero (product-led) */}
+      <ProductHero
+        copy={
+          <>
+            <div className="eyebrow hero-fade"><span className="pulse" /> AUTONOMOUS OPERATIONS FOR GOLF FACILITIES</div>
+            <h1 className="hero-fade">One operating layer for autonomous golf facilities.</h1>
+            <p className="ez-body hero-fade">
+              NXTektal is building an operating layer designed to connect robots, sensors, people, and the equipment already on site—so repetitive work can be planned, executed, verified, and improved as one system.
+            </p>
+            <p className="hero-start hero-fade">Starting with <span>closed-loop ball operations</span> at driving ranges.</p>
+            <div className="hero-actions hero-fade">
+              <a className="button button-primary" href="#pilot">
+                Become a Pilot Facility <Arrow />
+              </a>
+              <a className="button button-secondary" href="#first-workflow">
+                Explore the First Workflow
+              </a>
+            </div>
+          </>
+        }
+      />
 
       {/* 3 · Validation strip */}
       <section className="section-light validation-block" aria-label="Customer discovery to date">
@@ -302,11 +298,6 @@ export default function Home() {
           </Reveal>
           <Reveal>
             <ExpansionMap />
-          </Reveal>
-          <Reveal>
-            <p className="ez-note">
-              New workflows join as execution modules on the same operating layer — not as separate, disconnected products.
-            </p>
           </Reveal>
         </div>
       </section>
