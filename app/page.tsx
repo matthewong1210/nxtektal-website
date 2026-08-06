@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import EarthExperience from "../components/earth/EarthExperience";
-import FluidMenu from "../components/manifesto/FluidMenu";
+import SiteHeader from "../components/manifesto/SiteHeader";
 import BuildEvidenceGallery from "../components/manifesto/BuildEvidenceGallery";
 import ExpansionMap from "../components/manifesto/ExpansionMap";
 import FounderSection, { founders } from "../components/manifesto/FounderSection";
@@ -8,6 +8,7 @@ import HandoffSequence from "../components/manifesto/HandoffSequence";
 import MediaFrame, { CAPTIONS } from "../components/media/MediaFrame";
 import IntelligenceSection from "../components/manifesto/IntelligenceSection";
 import WorkflowStory from "../components/manifesto/WorkflowStory";
+import SpotlightGroup from "../components/manifesto/SpotlightGroup";
 import Reveal from "./reveal";
 
 // Below-the-fold interactive module: split out so it never weighs on first paint.
@@ -173,24 +174,7 @@ export default function Home() {
       />
 
       {/* 1 · Header */}
-      <header className="site-header">
-        <div className="header-shell">
-          <a className="brand" href="#top" aria-label="NXTektal Systems home">
-            <BrandLockup />
-          </a>
-          <nav aria-label="Primary navigation">
-            {navItems.map((item) => (
-              <a key={item.href} href={item.href}>{item.label}</a>
-            ))}
-          </nav>
-          <div className="header-end">
-            <a className="header-cta" href="#pilot">
-              Become a Pilot <Arrow />
-            </a>
-            <FluidMenu items={navItems} />
-          </div>
-        </div>
-      </header>
+      <SiteHeader items={navItems} brand={<BrandLockup />} ctaIcon={<Arrow />} />
 
       {/* 2 · Hero (cinematic sequence) */}
       <EarthExperience chapters={chapters} />
@@ -241,16 +225,16 @@ export default function Home() {
                 </figure>
               </Reveal>
             </div>
-            <div className="why-cards">
+            <SpotlightGroup className="why-cards">
               {whyCards.map((card, index) => (
-                <Reveal key={card.title} delay={index * 90}>
+                <Reveal key={card.title} delay={index * 60}>
                   <article className="why-card">
                     <h3>{card.title}</h3>
                     <p>{card.body}</p>
                   </article>
                 </Reveal>
               ))}
-            </div>
+            </SpotlightGroup>
           </div>
         </div>
       </section>
@@ -270,7 +254,7 @@ export default function Home() {
           <WorkflowStory />
           <div className="system-cards">
             {systemComponents.map((component, index) => (
-              <Reveal key={component.title} delay={index * 90}>
+              <Reveal key={component.title} delay={index * 60}>
                 <article className="system-card">
                   <h3>{component.title}</h3>
                   <p>{component.body}</p>
@@ -300,7 +284,7 @@ export default function Home() {
                 <p>Requires multiple proprietary components to be replaced together.</p>
               </article>
             </Reveal>
-            <Reveal delay={90}>
+            <Reveal delay={60}>
               <article className="compare-card compare-card--nxt">
                 <h3>NXTektal approach</h3>
                 <p>Adds a coordinated collection and handoff layer around compatible equipment already on site.</p>
@@ -416,7 +400,7 @@ export default function Home() {
           </Reveal>
           <div className="roadmap-stages">
             {roadmapStages.map((stage, index) => (
-              <Reveal key={stage.title} delay={index * 90}>
+              <Reveal key={stage.title} delay={index * 60}>
                 <article className={`roadmap-stage${stage.active ? " roadmap-stage--active" : ""}`}>
                   <span className="roadmap-tether" aria-hidden="true" />
                   <span className="roadmap-label">{stage.label}</span>

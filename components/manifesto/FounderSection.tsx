@@ -36,7 +36,7 @@ export default function FounderSection() {
         </Reveal>
         <div className="founders-grid">
           {founders.map((founder, index) => (
-            <Reveal key={founder.name} delay={index * 90}>
+            <Reveal key={founder.name} delay={index * 60}>
               <article className="founder">
                 {"photo" in founder && founder.photo ? (
                   <Image

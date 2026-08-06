@@ -25,7 +25,11 @@ export default function FluidMenu({ items }: { items: FluidMenuItem[] }) {
       if (!rootRef.current?.contains(event.target as Node)) close();
     };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") close();
+      if (event.key === "Escape") {
+        close();
+        // Keyboard users land back on the control that owns the menu.
+        rootRef.current?.querySelector<HTMLButtonElement>(".fluid-menu-toggle")?.focus();
+      }
     };
     document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);

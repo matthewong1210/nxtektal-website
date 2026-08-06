@@ -45,15 +45,26 @@ export type HeroMasterFrame = {
 };
 
 export const heroMasterFrame: HeroMasterFrame = {
-  // Flip to true only after NXTektal approves the Master Product Visual.
-  ready: false,
-  // public/visuals/phase2/hero/master-frame.{avif,webp} — 2880×1620
-  desktop: null,
-  // public/visuals/phase2/hero/master-frame-mobile.{avif,webp} — 1125×1500
-  mobile: null,
+  // Master Product Visual supplied by NXTektal 2026-08-05 (tracked-collector
+  // concept render, towed gang-roller picker — matches the no-arm
+  // architecture). Registered at the render's native resolution; the 2880
+  // re-export can replace these files in place when it exists.
+  ready: true,
+  desktop: {
+    avif: "/visuals/phase2/hero/master-frame.avif",
+    webp: "/visuals/phase2/hero/master-frame.webp",
+    width: 1672,
+    height: 940,
+  },
+  mobile: {
+    avif: "/visuals/phase2/hero/master-frame-mobile.avif",
+    webp: "/visuals/phase2/hero/master-frame-mobile.webp",
+    width: 706,
+    height: 940,
+  },
   // Motion version is a separate deliverable gated on storyboard approval.
   loop: null,
-  alt: "Autonomous collection robot working on a driving range at dusk, with the range's washer and dispenser station nearby",
+  alt: "NXTektal tracked collection robot towing a gang-roller ball picker across a sunlit driving range scattered with golf balls",
   caption: "Product development visualization",
 };
 

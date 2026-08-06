@@ -4,104 +4,220 @@ import { useEffect, useRef, useState } from "react";
 import MediaFrame, { CAPTIONS } from "../media/MediaFrame";
 import { ResponsiveStill } from "../media/ResponsiveMedia";
 import { workflowStepStills } from "../../lib/visualAssets";
+import {
+  WORKFLOW_STEPS,
+  isLoopStep,
+  mediaKeyFor,
+  resolveActiveStep,
+  sequentialMediaFor,
+} from "../../lib/workflowSteps";
 import RobotVideo from "./RobotVideo";
 
-const steps = [
-  { name: "MONITOR", body: "Ball availability and demand are tracked across the range." },
-  { name: "PRIORITIZE", body: "The Range Operations Agent decides when collection is worth running." },
-  { name: "DISPATCH", body: "A mission is issued to the collection system." },
-  { name: "COLLECT", body: "The robot sweeps priority zones and fills its hopper." },
-  { name: "RETURN", body: "It navigates back to the handoff point." },
-  { name: "HANDOFF", body: "Balls transfer into the modular handoff unit." },
-  { name: "WASH & DISPENSE", body: "The facility’s existing equipment processes and returns balls to players." },
-  { name: "VERIFY", body: "The workflow is confirmed complete and logged for review." },
-];
+/** Activation line: a fixed fraction of the viewport height. */
+const ACTIVATION_FRACTION = 0.42;
 
 /**
- * Scroll-driven workflow storytelling: the step list highlights as the
- * reader moves through the section while the product visual stays sticky.
- * The full list is always in the DOM, so the sequence reads completely
- * without JavaScript, with reduced motion, and for screen readers — the
- * highlight is a progressive enhancement driven by simple geometry
- * (no IntersectionObserver, which some embedded browsers throttle).
+ * First Closed-Loop Workflow (Phase 2D Sprint 2A).
+ *
+ * Server-rendered default: a sequential story — every step's number, label,
+ * description, and (distinct) media in DOM order. That is the no-JS, the
+ * mobile, and the reduced-motion presentation, so nothing critical depends
+ * on hydration, stickiness, or motion.
+ *
+ * Client enhancement (≥761px, motion allowed): a two-column sticky visual
+ * story. The step list drives one authoritative active-step state from
+ * measured geometry (rAF-throttled scroll/resize → resolveActiveStep with
+ * hysteresis); the sticky media stage crossfades between per-step media,
+ * and a decorative progress rail tracks completion. Geometry measurement
+ * (not IntersectionObserver) is deliberate: this repo's scroll systems are
+ * geometric (the hero ticker), a fixed activation line + hysteresis has no
+ * clean IO equivalent, and refresh/anchor/resize all need explicit
+ * measurement anyway.
  */
 export default function WorkflowStory() {
   const listRef = useRef<HTMLOListElement>(null);
-  // Active step drives the visual once per-step stills are registered in
-  // lib/visualAssets.ts; with none registered the robot-field loop renders
-  // exactly as before. Steps without a still fall back to the loop too.
-  // prefers-reduced-motion: the scroll loop below never starts, so the
-  // visual stays a static complete state (step-01 still, or the paused
-  // loop) by design — scroll-driven image swaps count as motion; the full
-  // text list always carries the content.
-  const [activeStep, setActiveStep] = useState(0);
+  const activeRef = useRef(0);
+  const [enhanced, setEnhanced] = useState(false);
+  const [active, setActive] = useState(0);
+  // Media stack: at most [previous, current]; current fades in on top of
+  // previous so there is never an empty, white, or black frame between.
+  const [stack, setStack] = useState<string[]>([mediaKeyFor(0)]);
+  const [railFill, setRailFill] = useState(0);
 
+  // Enhancement gate: desktop width AND motion allowed. Reduced-motion
+  // users keep the fully stacked sequence (per spec, preferable) — which
+  // also removes crossfades, rail travel, and workflow video autoplay.
+  // 1121px matches the repo's established breakpoint contract: this
+  // section (and the desktop nav) already restructure at ≤1120px.
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const list = listRef.current;
-    if (!list) return;
-    // Dimming is opt-in via this class so no-JS (and reduced-motion) visitors
-    // always read the full list at normal contrast.
-    list.classList.add("wf-steps--js");
-
-    let lastActive = -1;
-    const tick = () => {
-      const items = list.querySelectorAll<HTMLElement>(".wf-step");
-      if (!items.length) return;
-      const focusY = window.innerHeight * 0.44;
-      let active = 0;
-      items.forEach((el, i) => {
-        if (el.getBoundingClientRect().top <= focusY) active = i;
-      });
-      if (active !== lastActive) {
-        lastActive = active;
-        items.forEach((el, i) => el.classList.toggle("wf-step--active", i <= active));
-        setActiveStep(active);
-      }
-    };
-
-    let raf = 0;
-    const loop = () => {
-      tick();
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
-    const interval = window.setInterval(tick, 300);
-    tick();
+    const desktop = window.matchMedia("(min-width: 1121px)");
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setEnhanced(desktop.matches && !reduced.matches);
+    sync();
+    desktop.addEventListener("change", sync);
+    reduced.addEventListener("change", sync);
     return () => {
-      cancelAnimationFrame(raf);
-      window.clearInterval(interval);
+      desktop.removeEventListener("change", sync);
+      reduced.removeEventListener("change", sync);
     };
   }, []);
 
+  // One authoritative active-step measurement (enhanced mode only).
+  useEffect(() => {
+    if (!enhanced) return;
+    const list = listRef.current;
+    if (!list) return;
+    let raf = 0;
+    const measure = () => {
+      raf = 0;
+      const items = list.querySelectorAll<HTMLElement>(".wf-step");
+      if (items.length === 0) return;
+      const tops: number[] = [];
+      items.forEach((el) => tops.push(el.getBoundingClientRect().top));
+      const line = window.innerHeight * ACTIVATION_FRACTION;
+      const next = resolveActiveStep(tops, line, activeRef.current);
+      if (next !== activeRef.current) {
+        activeRef.current = next;
+        setActive(next);
+      }
+    };
+    const schedule = () => {
+      if (raf === 0) raf = requestAnimationFrame(measure);
+    };
+    // Initial synchronous measure covers mid-section refresh and direct
+    // #first-workflow navigation; scroll/resize keep it current.
+    measure();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      if (raf !== 0) cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [enhanced]);
+
+  // Media stack follows the active step's media identity. Contiguous
+  // loop-backed steps share one identity, so COLLECT→RETURN→HANDOFF→WASH
+  // never crossfades (and never restarts) the loop.
+  const activeKey = mediaKeyFor(active);
+  useEffect(() => {
+    setStack((prev) =>
+      prev[prev.length - 1] === activeKey
+        ? prev
+        : [...prev.filter((k) => k !== activeKey), activeKey].slice(-2)
+    );
+  }, [activeKey]);
+
+  // Rail fill height tracks the active node (updates only on step change).
+  useEffect(() => {
+    if (!enhanced) return;
+    const list = listRef.current;
+    if (!list) return;
+    const items = list.querySelectorAll<HTMLElement>(".wf-step");
+    const el = items[active];
+    if (el) setRailFill(el.offsetTop + 26);
+  }, [enhanced, active]);
+
+  const dropPrevious = () => setStack((prev) => prev.slice(-1));
+
+  const renderStepMedia = (key: string) =>
+    key === "loop" ? (
+      <RobotVideo playing={isLoopStep(active)} />
+    ) : (
+      <ResponsiveStill source={workflowStepStills[Number(key.split(":")[1])]!} />
+    );
+
+  const captionFor = (index: number) =>
+    workflowStepStills[index]?.caption ?? CAPTIONS.devViz;
+
+  // Warm the immediately adjacent stills (same markup the stage will
+  // render, hidden) so a crossfade lands on a cached asset — without ever
+  // eagerly downloading the rest of the registry.
+  const warmKeys = [active - 1, active + 1]
+    .filter((i) => i >= 0 && i < WORKFLOW_STEPS.length && workflowStepStills[i])
+    .map((i) => `still:${i}`)
+    .filter((k) => !stack.includes(k));
+
   return (
-    <div className="wf-story">
-      <ol
-        ref={listRef}
-        className="wf-steps"
-        aria-label="Closed-loop workflow: monitor, prioritize, dispatch, collect, return, handoff, wash and dispense, verify"
-      >
-        {steps.map((step, index) => (
-          <li key={step.name} className="wf-step">
-            <span className="wf-step-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-            <div>
-              <strong>{step.name}</strong>
-              <p>{step.body}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-      <div className="wf-visual">
-        <div className="wf-visual-sticky">
-          <MediaFrame caption={workflowStepStills[activeStep]?.caption ?? CAPTIONS.devViz} aspect="16 / 9">
-            {workflowStepStills[activeStep] ? (
-              <ResponsiveStill source={workflowStepStills[activeStep]} />
-            ) : (
-              <RobotVideo />
-            )}
-          </MediaFrame>
-        </div>
+    <div className={enhanced ? "wf-story wf-story--enhanced" : "wf-story"}>
+      <div className="wf-narrative">
+        {enhanced && (
+          <div className="wf-rail" aria-hidden="true">
+            <i className="wf-rail-fill" style={{ height: `${railFill}px` }} />
+          </div>
+        )}
+        <ol
+          ref={listRef}
+          className="wf-steps"
+          aria-label="Closed-loop workflow: monitor, prioritize, dispatch, collect, return, handoff, wash and dispense, verify"
+        >
+          {WORKFLOW_STEPS.map((step, index) => {
+            const state = !enhanced
+              ? ""
+              : index === active
+                ? " wf-step--active"
+                : index < active
+                  ? " wf-step--done"
+                  : "";
+            const seqMedia = sequentialMediaFor(index);
+            return (
+              <li
+                key={step.name}
+                className={`wf-step${state}`}
+                aria-current={enhanced && index === active ? "step" : undefined}
+                aria-labelledby={`wf-step-label-${index}`}
+                aria-describedby={`wf-step-body-${index}`}
+              >
+                <span className="wf-step-index" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <strong id={`wf-step-label-${index}`}>{step.name}</strong>
+                  <p id={`wf-step-body-${index}`}>{step.body}</p>
+                </div>
+                {!enhanced && seqMedia && (
+                  <div className="wf-step-media">
+                    <MediaFrame caption={captionFor(index)} aspect="16 / 9">
+                      {seqMedia === "still" ? (
+                        <ResponsiveStill source={workflowStepStills[index]!} />
+                      ) : (
+                        <RobotVideo />
+                      )}
+                    </MediaFrame>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
       </div>
+      {enhanced && (
+        <div className="wf-visual">
+          <div className="wf-visual-sticky">
+            <MediaFrame caption={captionFor(active)} aspect="16 / 9">
+              {warmKeys.map((key) => (
+                <div key={key} className="wf-layer wf-layer--warm" aria-hidden="true">
+                  <ResponsiveStill
+                    source={workflowStepStills[Number(key.split(":")[1])]!}
+                  />
+                </div>
+              ))}
+              {stack.map((key, i) => {
+                const top = i === stack.length - 1;
+                return (
+                  <div
+                    key={key}
+                    className={top && stack.length > 1 ? "wf-layer wf-layer--in" : "wf-layer"}
+                    onAnimationEnd={top && stack.length > 1 ? dropPrevious : undefined}
+                  >
+                    {renderStepMedia(key)}
+                  </div>
+                );
+              })}
+            </MediaFrame>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
