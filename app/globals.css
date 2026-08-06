@@ -496,6 +496,97 @@ main { background: var(--night); }
 /* Sprint 3 gated slots: evidence grid + expansion map */
 .evidence-grid { margin-top: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.5vw, 20px); }
 .evidence-grid .media-frame-stage { border-color: var(--line-strong); }
+/* Operating Layer Terrain Map (Sprint 3) */
+.tm { margin-top: clamp(32px, 4vw, 52px); }
+.tm-stage-wrap { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 2.4vw, 32px); align-items: start; }
+.tm--enhanced .tm-stage-wrap { grid-template-columns: minmax(0, 65fr) minmax(0, 35fr); }
+.tm-map { border: 1px solid var(--paper-line); border-radius: 18px; background: #fbfcfd; padding: clamp(10px, 1.2vw, 16px); }
+.tm-svg { display: block; width: 100%; height: auto; }
+.tm-map-caption { margin: 8px 4px 2px; color: var(--ink-faint); font-size: 11px; letter-spacing: 0.04em; }
+
+/* base terrain */
+.tm-area { stroke-width: 1.2; }
+.tm-area--turf { fill: #eef3ee; stroke: rgba(22, 32, 43, 0.1); }
+.tm-area--range { fill: #e8f0e6; stroke: rgba(22, 32, 43, 0.16); }
+.tm-area--green { fill: #e2ecdf; stroke: rgba(22, 32, 43, 0.14); }
+.tm-area--bunker { fill: #f4efe2; stroke: rgba(22, 32, 43, 0.14); }
+.tm-area--maint { fill: #eef0f3; stroke: rgba(22, 32, 43, 0.2); }
+.tm-area--core { fill: #ffffff; stroke: rgba(22, 32, 43, 0.3); }
+.tm-contour { fill: none; stroke: rgba(22, 32, 43, 0.07); stroke-width: 1.2; }
+.tm-zone-label { fill: rgba(22, 32, 43, 0.38); font-size: 12.5px; font-weight: 780; letter-spacing: 0.12em; }
+
+/* nodes, routes, links */
+.tm-route { fill: rgba(154, 248, 18, 0.05); stroke: #7ed321; stroke-width: 2; stroke-dasharray: 8 6; }
+.tm-node { stroke-width: 2; }
+.tm-node--lime { fill: #f6fce8; stroke: #7ed321; }
+.tm-node--blue { fill: #eef4ff; stroke: var(--blue); }
+.tm-node-sq--slate { fill: #eef1f5; stroke: #8494ab; stroke-width: 1.6; }
+.tm-node-label { font-size: 14.5px; font-weight: 680; }
+.tm-node-label--lime { fill: #45790a; }
+.tm-node-label--blue { fill: var(--blue-deep); }
+.tm-node-label--slate { fill: #5b6b82; }
+.tm-equip { fill: #ffffff; stroke: rgba(22, 32, 43, 0.34); stroke-width: 1.4; }
+.tm-equip-label { fill: var(--ink); font-size: 13px; font-weight: 650; }
+.tm-link { fill: none; stroke-width: 1.6; }
+.tm-link--lime { stroke: rgba(126, 211, 33, 0.75); }
+.tm-link--blue { stroke: rgba(91, 157, 255, 0.5); }
+.tm-link--slate { stroke: rgba(132, 148, 171, 0.55); }
+.tm-link--dash { stroke-dasharray: 5 6; }
+.tm-anchor-box { fill: #10161f; }
+.tm-anchor-label { fill: #9af812; font-size: 11.5px; font-weight: 800; letter-spacing: 0.1em; }
+
+/* stage emphasis: later stages rest muted until selected; earlier stages persist */
+.tm-s1, .tm-s2, .tm-s3 { transition: opacity 460ms var(--ease-standard); }
+.tm-svg[data-stage="1"] .tm-s2, .tm-svg[data-stage="1"] .tm-s3 { opacity: 0.14; }
+.tm-svg[data-stage="2"] .tm-s3 { opacity: 0.14; }
+.tm-svg[data-stage="2"] .tm-s2, .tm-svg[data-stage="3"] .tm-s2, .tm-svg[data-stage="3"] .tm-s3 { opacity: 1; }
+
+/* operating layer core panel */
+.tm-core { border: 1px solid var(--blue-line); border-radius: 14px; background: #f7faff; padding: clamp(14px, 1.6vw, 20px); }
+.tm-core-name { display: block; color: var(--ink); font-size: 13.5px; font-weight: 750; letter-spacing: 0.02em; }
+.tm-core-fns { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 8px; }
+.tm-core-fns li { padding: 4px 10px; border: 1px solid var(--blue-line); border-radius: 999px; color: var(--blue-deep); font-size: 11px; font-weight: 720; letter-spacing: 0.04em; background: #ffffff; }
+
+/* stage controls */
+.tm-side { display: grid; gap: clamp(14px, 1.6vw, 20px); align-content: start; }
+.tm-controls { display: grid; gap: 10px; }
+.tm-control { display: block; width: 100%; text-align: left; padding: clamp(13px, 1.5vw, 17px) clamp(14px, 1.7vw, 19px); border: 1px solid var(--paper-line); border-radius: 14px; background: #ffffff; font: inherit; cursor: pointer; transition: border-color var(--motion-control) var(--ease-standard), background-color var(--motion-control) var(--ease-standard); }
+.tm-control:hover { border-color: rgba(22, 32, 43, 0.3); }
+.tm-control:focus-visible { outline: 2px solid var(--blue-deep); outline-offset: 2px; }
+.tm-control[aria-pressed="true"] { border-color: var(--blue-deep); background: #f7faff; }
+.tm-control-head { display: flex; align-items: baseline; gap: 10px; }
+.tm-control-num { color: var(--blue); font-size: 12px; font-weight: 800; }
+.tm-control-label { color: var(--ink-faint); font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; }
+.tm-status { margin-left: auto; padding: 3px 9px; border-radius: 999px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.07em; white-space: nowrap; }
+.tm-status--1 { color: #45790a; border: 1px solid var(--lime-line); background: #f6fce8; }
+.tm-status--2 { color: var(--blue-deep); border: 1px solid var(--blue-line); background: #eef4ff; }
+.tm-status--3 { color: #5b6b82; border: 1px solid rgba(132, 148, 171, 0.4); background: #eef1f5; }
+.tm-control-title { display: block; margin-top: 7px; color: var(--ink); font-size: 15.5px; font-weight: 700; }
+.tm-control-caps { display: block; margin-top: 6px; color: var(--ink-faint); font-size: 11.5px; line-height: 1.55; }
+
+/* complete stage cards (mobile / no-JS / SR) */
+.tm-cards { margin-top: clamp(20px, 2.4vw, 30px); display: grid; grid-template-columns: 1fr; gap: clamp(14px, 1.8vw, 22px); }
+.tm-cards--sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tm-card { border: 1px solid var(--paper-line); border-radius: 16px; background: #ffffff; padding: clamp(16px, 2vw, 24px); }
+.tm-card--1 { border-color: var(--lime-line); }
+.tm-card--2 { border-color: var(--blue-line); }
+.tm-card-label { display: block; color: var(--ink-faint); font-size: 10.5px; font-weight: 800; letter-spacing: 0.12em; }
+.tm-card h3 { margin: 8px 0 0; color: var(--ink); font-size: clamp(16px, 1.4vw, 19px); font-weight: 700; }
+.tm-card ul { margin: 12px 0 14px; padding: 0; list-style: none; display: grid; gap: 6px; }
+.tm-card li { position: relative; padding-left: 16px; color: var(--ink-faint); font-size: 13px; line-height: 1.5; }
+.tm-card li::before { content: ""; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue-line); }
+.tm-card--1 li::before { background: #7ed321; }
+
+/* Below the desktop breakpoint the map is a symbolic overview: no tiny text */
+@media (max-width: 1120px) {
+  .tm-svg text { display: none; }
+}
+
+/* Beyond Golf: transferable operating loop strip */
+.beyond-loop { margin: clamp(24px, 3vw, 38px) 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 6px; }
+.beyond-loop li { padding: 7px 13px; border: 1px solid var(--paper-line); border-radius: 999px; background: #ffffff; color: var(--ink); font-size: 11px; font-weight: 780; letter-spacing: 0.08em; }
+.beyond-loop li:not(:last-child)::after { content: "→"; margin-left: -2px; padding-left: 10px; color: var(--ink-faint); font-weight: 400; border: none; }
+
 .expansion-map-frame { margin-top: clamp(32px, 4vw, 52px); }
 
 /* Operating-layer band + module tethers */
@@ -807,7 +898,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   footer > div { justify-self: start; gap: 12px 18px; }
 }
 
-@media (min-width: 761px) { .eqc-cards:not(.eqc-cards--sr) { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 761px) { .eqc-cards:not(.eqc-cards--sr) { grid-template-columns: 1fr 1fr; } .tm-cards:not(.tm-cards--sr) { grid-template-columns: 1fr 1fr 1fr; } .tm-core--card { grid-column: 1 / -1; } }
 
 @media (min-width: 761px) and (max-width: 1120px) {
   .founders-grid { grid-template-columns: 1fr; max-width: 720px; gap: 44px; }
