@@ -35,7 +35,15 @@ export function ResponsiveStill({ source }: { source: StillSource }) {
   );
 }
 
-export function ResponsiveLoop({ source }: { source: LoopSource }) {
+export function ResponsiveLoop({
+  source,
+  playing,
+}: {
+  source: LoopSource;
+  /** When set, external play/pause control (e.g. only the active workflow
+   * step plays); reduced-motion still wins. Omit for autonomous ambient use. */
+  playing?: boolean;
+}) {
   const ref = useRef<HTMLVideoElement>(null);
   // null = preference unresolved; autoplay waits for a definite answer so
   // reduced-motion users get the poster, never a pre-hydration flash.
@@ -52,7 +60,7 @@ export function ResponsiveLoop({ source }: { source: LoopSource }) {
   useEffect(() => {
     const video = ref.current;
     if (!video || reduced === null) return;
-    if (reduced) {
+    if (reduced || playing === false) {
       video.pause();
       return;
     }
@@ -71,7 +79,7 @@ export function ResponsiveLoop({ source }: { source: LoopSource }) {
       window.removeEventListener("touchstart", retry);
       window.removeEventListener("keydown", retry);
     };
-  }, [reduced]);
+  }, [reduced, playing]);
 
   return (
     <video
@@ -79,7 +87,7 @@ export function ResponsiveLoop({ source }: { source: LoopSource }) {
       muted
       loop
       playsInline
-      autoPlay={reduced === false}
+      autoPlay={reduced === false && playing !== false}
       preload="metadata"
       poster={source.poster}
       controls={reduced === true}
