@@ -103,52 +103,8 @@ const devStatus = [
   { name: "Closed-loop field operation", status: "Pilot validation target" },
 ];
 
-const roadmapStages = [
-  {
-    label: "STARTING POINT",
-    title: "Range ball operations",
-    status: "In development",
-    active: true,
-    items: [
-      "Ball availability monitoring",
-      "Demand-responsive dispatch",
-      "Collection",
-      "Automated handoff",
-      "Wash-and-dispense coordination",
-      "Workflow verification",
-    ],
-  },
-  {
-    label: "PLANNED EXPANSION",
-    title: "Inspection and grounds care",
-    status: "Platform direction",
-    active: false,
-    items: [
-      "Drone inspection and mapping",
-      "Turf and soil monitoring",
-      "Bunker raking",
-      "Localized maintenance",
-      "Mowing coordination",
-      "Equipment inspection",
-    ],
-  },
-  {
-    label: "LONG-TERM DIRECTION",
-    title: "Facility-wide autonomy",
-    status: "Long-term direction",
-    active: false,
-    items: [
-      "Shared facility maps",
-      "Multi-robot scheduling",
-      "Predictive maintenance",
-      "Equipment logistics",
-      "Human-and-robot task coordination",
-      "Facility-wide operational reporting",
-    ],
-  },
-];
 
-const beyondEnvironments = ["Campuses", "Parks", "Sports facilities", "Resorts", "Commercial landscapes"];
+const beyondEnvironments = ["Campuses", "Parks", "Sports Facilities", "Resorts", "Commercial Landscapes"];
 
 export default function Home() {
   const structuredData = {
@@ -345,32 +301,8 @@ export default function Home() {
             <h2>One operating layer. More workflows over time.</h2>
           </Reveal>
           <Reveal>
-            <div className="layer-band" aria-hidden="true">
-              <strong>NXTektal Operating Layer</strong>
-              <span>Shared facility state · Prioritization · Dispatch · Verification</span>
-            </div>
-          </Reveal>
-          {/* Facility capability map slot — renders only once the map exists (lib/visualAssets.ts) */}
-          <Reveal>
             <ExpansionMap />
           </Reveal>
-          <div className="roadmap-stages">
-            {roadmapStages.map((stage, index) => (
-              <Reveal key={stage.title} delay={index * 60}>
-                <article className={`roadmap-stage${stage.active ? " roadmap-stage--active" : ""}`}>
-                  <span className="roadmap-tether" aria-hidden="true" />
-                  <span className="roadmap-label">{stage.label}</span>
-                  <h3>{stage.title}</h3>
-                  <ul>
-                    {stage.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                  <span className="roadmap-status">{stage.status}</span>
-                </article>
-              </Reveal>
-            ))}
-          </div>
           <Reveal>
             <p className="ez-note">
               New workflows join as execution modules on the same operating layer — not as separate, disconnected products.
@@ -390,6 +322,13 @@ export default function Home() {
             <p className="section-body">
               The specific tasks change, but the operating loop remains: sense, prioritize, dispatch, execute, verify, and improve. Over time, the same coordination layer can extend to other managed outdoor environments.
             </p>
+          </Reveal>
+          <Reveal>
+            <ol className="beyond-loop" aria-label="The transferable operating loop">
+              {["SENSE", "PRIORITIZE", "DISPATCH", "EXECUTE", "VERIFY", "IMPROVE"].map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
           </Reveal>
           <Reveal>
             <ul className="beyond-list" aria-label="Adjacent managed outdoor environments">
