@@ -24,37 +24,72 @@ describe("step order and content", () => {
   });
 });
 
-describe("registered-media mapping and fallback", () => {
-  it("maps simulator stills to MONITOR/PRIORITIZE/DISPATCH/VERIFY and the loop to the rest", () => {
+describe("registered-media mapping (Phase 2D Sprint 2B: eight identities)", () => {
+  it("keeps simulator stills at [0], [1], [2], [7] and physical media at [3]-[6]", () => {
     expect(WORKFLOW_STEPS.map((_, i) => mediaKeyFor(i))).toEqual([
-      "still:0",
-      "still:1",
-      "still:2",
-      "loop",
-      "loop",
-      "loop",
-      "loop",
-      "still:7",
+      "still:0", // MONITOR — simulator still
+      "still:1", // PRIORITIZE — simulator still
+      "still:2", // DISPATCH — simulator still
+      "loop", // COLLECT — real robot-field footage
+      "vloop:4", // RETURN — dedicated loop
+      "vloop:5", // HANDOFF — dedicated loop
+      "vloop:6", // WASH & DISPENSE — dedicated loop
+      "still:7", // VERIFY — simulator still
     ]);
   });
 
-  it("shares one media identity across contiguous loop steps so video never restarts", () => {
-    expect(mediaKeyFor(3)).toBe(mediaKeyFor(6));
-    expect(isLoopStep(3)).toBe(true);
-    expect(isLoopStep(0)).toBe(false);
+  it("gives every one of the eight steps a distinct media identity", () => {
+    const keys = WORKFLOW_STEPS.map((_, i) => mediaKeyFor(i));
+    expect(new Set(keys).size).toBe(8);
   });
 
-  it("sequential story shows each still, the loop once at COLLECT, and no duplicate clips", () => {
+  it("no longer groups HANDOFF or WASH & DISPENSE under COLLECT's identity", () => {
+    expect(mediaKeyFor(5)).not.toBe(mediaKeyFor(3));
+    expect(mediaKeyFor(6)).not.toBe(mediaKeyFor(3));
+    expect(mediaKeyFor(6)).not.toBe(mediaKeyFor(5));
+  });
+
+  it("only COLLECT renders the shared robot-field loop", () => {
+    expect(WORKFLOW_STEPS.map((_, i) => isLoopStep(i))).toEqual([
+      false, false, false, true, false, false, false, false,
+    ]);
+  });
+
+  it("sequential story gives every step visible media: stills, loop once, posters for step loops", () => {
     expect(WORKFLOW_STEPS.map((_, i) => sequentialMediaFor(i))).toEqual([
       "still",
       "still",
       "still",
       "loop",
-      null,
-      null,
-      null,
+      "poster",
+      "poster",
+      "poster",
       "still",
     ]);
+  });
+});
+
+describe("registry asset contracts", () => {
+  it("simulator stills carry the simulation qualification caption", async () => {
+    const { workflowStepStills } = await import("../visualAssets");
+    for (const i of [0, 1, 2, 7]) {
+      expect(workflowStepStills[i]?.caption).toMatch(/not live facility data/i);
+    }
+  });
+
+  it("physical step loops each declare webm, mp4, and an alt-bearing poster still", async () => {
+    const { workflowStepLoops } = await import("../visualAssets");
+    for (const i of [4, 5, 6]) {
+      const loop = workflowStepLoops[i];
+      expect(loop).not.toBeNull();
+      expect(loop!.webm).toMatch(/\.webm$/);
+      expect(loop!.mp4).toMatch(/\.mp4$/);
+      expect(loop!.still.alt.length).toBeGreaterThan(10);
+    }
+    const { workflowStepStills } = await import("../visualAssets");
+    expect(workflowStepStills[3]).toBeNull();
+    const loops = await import("../visualAssets");
+    expect(loops.workflowStepLoops[3]).toBeNull();
   });
 });
 

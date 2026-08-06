@@ -7,7 +7,7 @@
  * these functions.
  */
 
-import { workflowStepStills } from "./visualAssets";
+import { workflowStepLoops, workflowStepStills } from "./visualAssets";
 
 export type WorkflowStep = { name: string; body: string };
 
@@ -24,13 +24,19 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
 ];
 
 /**
- * Media identity for a step: `still:<index>` for a registered simulator
- * still, `loop` for the shared robot-field fallback. Contiguous loop-backed
- * steps share one identity so the stage never crossfades a video into
- * itself (which would restart playback).
+ * Media identity for a step:
+ * - `still:<index>` — a registered still (simulator frames);
+ * - `vloop:<index>` — a registered per-step ambient loop (RETURN / HANDOFF /
+ *   WASH & DISPENSE render footage);
+ * - `loop` — the shared robot-field fallback (COLLECT, and any step with
+ *   nothing registered).
+ * Each key is one crossfade identity: equal keys never crossfade (which
+ * would restart a playing video); distinct keys always do.
  */
 export function mediaKeyFor(index: number): string {
-  return workflowStepStills[index] ? `still:${index}` : "loop";
+  if (workflowStepStills[index]) return `still:${index}`;
+  if (workflowStepLoops[index]) return `vloop:${index}`;
+  return "loop";
 }
 
 /** True when the step renders the shared robot-field loop. */
@@ -39,14 +45,18 @@ export function isLoopStep(index: number): boolean {
 }
 
 /**
- * Distinct media for the sequential (mobile / no-JS) story: steps with a
- * registered still always show it; the shared loop appears once, at the
- * first loop-backed step (COLLECT), instead of repeating an identical clip
- * under RETURN / HANDOFF / WASH.
+ * Distinct media for the sequential (mobile / no-JS) story: registered
+ * stills always show; per-step loops show their poster still (no mobile
+ * autoplay video for these); the shared robot-field loop appears once, at
+ * the first fallback-backed step (COLLECT), instead of repeating an
+ * identical clip under later steps.
  */
-export function sequentialMediaFor(index: number): "still" | "loop" | null {
+export function sequentialMediaFor(index: number): "still" | "poster" | "loop" | null {
   if (workflowStepStills[index]) return "still";
-  const firstLoop = WORKFLOW_STEPS.findIndex((_, i) => !workflowStepStills[i]);
+  if (workflowStepLoops[index]) return "poster";
+  const firstLoop = WORKFLOW_STEPS.findIndex(
+    (_, i) => !workflowStepStills[i] && !workflowStepLoops[i]
+  );
   return index === firstLoop ? "loop" : null;
 }
 

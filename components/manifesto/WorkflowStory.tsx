@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import MediaFrame, { CAPTIONS } from "../media/MediaFrame";
-import { ResponsiveStill } from "../media/ResponsiveMedia";
-import { workflowStepStills } from "../../lib/visualAssets";
+import { ResponsiveLoop, ResponsiveStill } from "../media/ResponsiveMedia";
+import { workflowStepLoops, workflowStepStills } from "../../lib/visualAssets";
 import {
   WORKFLOW_STEPS,
   isLoopStep,
@@ -120,12 +120,20 @@ export default function WorkflowStory() {
 
   const dropPrevious = () => setStack((prev) => prev.slice(-1));
 
-  const renderStepMedia = (key: string) =>
-    key === "loop" ? (
-      <RobotVideo playing={isLoopStep(active)} />
-    ) : (
-      <ResponsiveStill source={workflowStepStills[Number(key.split(":")[1])]!} />
-    );
+  const renderStepMedia = (key: string) => {
+    if (key === "loop") return <RobotVideo playing={isLoopStep(active)} />;
+    const index = Number(key.split(":")[1]);
+    if (key.startsWith("vloop:")) {
+      const loop = workflowStepLoops[index]!;
+      return (
+        <ResponsiveLoop
+          source={{ webm: loop.webm, mp4: loop.mp4, poster: loop.still.webp, alt: loop.still.alt }}
+          playing={activeKey === key}
+        />
+      );
+    }
+    return <ResponsiveStill source={workflowStepStills[index]!} />;
+  };
 
   const captionFor = (index: number) =>
     workflowStepStills[index]?.caption ?? CAPTIONS.devViz;
@@ -133,10 +141,15 @@ export default function WorkflowStory() {
   // Warm the immediately adjacent stills (same markup the stage will
   // render, hidden) so a crossfade lands on a cached asset — without ever
   // eagerly downloading the rest of the registry.
-  const warmKeys = [active - 1, active + 1]
-    .filter((i) => i >= 0 && i < WORKFLOW_STEPS.length && workflowStepStills[i])
-    .map((i) => `still:${i}`)
-    .filter((k) => !stack.includes(k));
+  const warmSources = [active - 1, active + 1]
+    .filter((i) => i >= 0 && i < WORKFLOW_STEPS.length)
+    .map((i) => ({ key: mediaKeyFor(i), still: workflowStepStills[i] ?? workflowStepLoops[i]?.still }))
+    .filter(
+      (w, idx, arr) =>
+        w.still !== undefined &&
+        !stack.includes(w.key) &&
+        arr.findIndex((o) => o.key === w.key) === idx
+    );
 
   return (
     <div className={enhanced ? "wf-story wf-story--enhanced" : "wf-story"}>
@@ -180,6 +193,8 @@ export default function WorkflowStory() {
                     <MediaFrame caption={captionFor(index)} aspect="16 / 9">
                       {seqMedia === "still" ? (
                         <ResponsiveStill source={workflowStepStills[index]!} />
+                      ) : seqMedia === "poster" ? (
+                        <ResponsiveStill source={workflowStepLoops[index]!.still} />
                       ) : (
                         <RobotVideo />
                       )}
@@ -195,11 +210,9 @@ export default function WorkflowStory() {
         <div className="wf-visual">
           <div className="wf-visual-sticky">
             <MediaFrame caption={captionFor(active)} aspect="16 / 9">
-              {warmKeys.map((key) => (
+              {warmSources.map(({ key, still }) => (
                 <div key={key} className="wf-layer wf-layer--warm" aria-hidden="true">
-                  <ResponsiveStill
-                    source={workflowStepStills[Number(key.split(":")[1])]!}
-                  />
+                  <ResponsiveStill source={{ ...still!, alt: "" }} />
                 </div>
               ))}
               {stack.map((key, i) => {

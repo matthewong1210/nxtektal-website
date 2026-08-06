@@ -158,6 +158,68 @@ export const workflowStepStills: (StillSource | null)[] = [
   },
 ];
 
+/**
+ * A per-step workflow loop: ambient WebM/MP4 with a StillSource that serves
+ * as desktop poster, mobile/sequential media, and reduced-motion frame.
+ */
+export type WorkflowStepLoop = {
+  still: StillSource;
+  webm: string;
+  mp4: string;
+};
+
+// Physical-loop media (Phase 2D Sprint 2B). Product concept renders from the
+// approved tracked-collector + transfer-robot sources — same geometry as the
+// hero master frame and the Transfer Robot CAD (STEP v1). COLLECT (index 3)
+// stays on the real robot-field footage; RETURN/HANDOFF/WASH each get their
+// own identity so the four physical stages are visually distinct.
+export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
+  null, // 01 MONITOR — simulator still
+  null, // 02 PRIORITIZE — simulator still
+  null, // 03 DISPATCH — simulator still
+  null, // 04 COLLECT — real robot-field footage (RobotVideo, legacy identity)
+  {
+    // 05 RETURN — loaded rig traversing back across the range.
+    // Documented limitation: the handoff destination is not visible in frame.
+    still: {
+      avif: "/visuals/phase2/workflow/05-return-poster.avif",
+      webp: "/visuals/phase2/workflow/05-return-poster.webp",
+      width: 1280,
+      height: 720,
+      alt: "NXTektal tracked collector towing the gang-roller picker with a loaded ball basket back across the range",
+    },
+    webm: "/visuals/phase2/workflow/05-return-loop.webm",
+    mp4: "/visuals/phase2/workflow/05-return-loop.mp4",
+  },
+  {
+    // 06 HANDOFF — transfer robot aligning with and lifting the collector's
+    // basket at the processing area (payload ↔ equipment relationship).
+    still: {
+      avif: "/visuals/phase2/workflow/06-handoff-poster.avif",
+      webp: "/visuals/phase2/workflow/06-handoff-poster.webp",
+      width: 1280,
+      height: 720,
+      alt: "NXTektal transfer robot gripping and lifting the loaded ball basket from the collection rig at the handoff point",
+    },
+    webm: "/visuals/phase2/workflow/06-handoff-loop.webm",
+    mp4: "/visuals/phase2/workflow/06-handoff-loop.mp4",
+  },
+  {
+    // 07 WASH & DISPENSE — basket tipping balls into the existing washer
+    // intake; facility equipment (trough, buckets, conveyor) visible.
+    still: {
+      avif: "/visuals/phase2/workflow/07-wash-dispense-poster.avif",
+      webp: "/visuals/phase2/workflow/07-wash-dispense-poster.webp",
+      width: 1280,
+      height: 720,
+      alt: "Golf balls pouring from the transfer robot's basket into the facility's existing washer intake trough",
+    },
+    webm: "/visuals/phase2/workflow/07-wash-dispense-loop.webm",
+    mp4: "/visuals/phase2/workflow/07-wash-dispense-loop.mp4",
+  },
+  null, // 08 VERIFY — simulator still
+];
+
 // -----------------------------------------------------------------------
 // 3 · Modular Handoff production visuals (.integration-block · HandoffSequence)
 // Contract: 4:3 per panel — inline SVG preferred; stills 1200×900 AVIF+WebP.
