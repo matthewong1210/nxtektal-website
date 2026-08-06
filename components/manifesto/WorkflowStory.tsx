@@ -93,7 +93,7 @@ export default function WorkflowStory() {
       </ol>
       <div className="wf-visual">
         <div className="wf-visual-sticky">
-          <MediaFrame caption={CAPTIONS.devViz} aspect="16 / 9">
+          <MediaFrame caption={workflowStepStills[activeStep]?.caption ?? CAPTIONS.devViz} aspect="16 / 9">
             {workflowStepStills[activeStep] ? (
               <ResponsiveStill source={workflowStepStills[activeStep]} />
             ) : (

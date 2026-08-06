@@ -1,4 +1,5 @@
 import Reveal from "../../app/reveal";
+import SimulatorProof from "./SimulatorProof";
 
 const layers = [
   {
@@ -50,6 +51,13 @@ export default function IntelligenceSection() {
   return (
     <section className="block intel-block" id="intelligence">
       <div className="block-inner">
+        {/* 1 · Simulator proof — tests and compares operating policies
+            (renders only when agentSimulatorDemo.ready) */}
+        <Reveal>
+          <SimulatorProof />
+        </Reveal>
+
+        {/* 2 · Operating layer + 3 · Manager dashboard */}
         <Reveal>
           <div className="eyebrow">PLATFORM ARCHITECTURE · IN DEVELOPMENT</div>
           <h2>From robot dispatch to operational intelligence.</h2>

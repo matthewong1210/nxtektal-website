@@ -240,7 +240,8 @@ main { background: var(--night); }
 .media-frame-stage { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: #0a0f14; }
 .media-frame--light .media-frame-stage { border-color: var(--paper-line); background: #ffffff; }
 .media-frame--bare .media-frame-stage { border: none; border-radius: 0; background: transparent; overflow: visible; }
-.media-frame-stage > img, .media-frame-stage > video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.media-frame-stage picture { display: block; width: 100%; height: 100%; }
+.media-frame-stage img, .media-frame-stage video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .media-frame-stage .machine-video-el { height: 100%; border: none; border-radius: 0; }
 .media-frame--light .media-caption { color: var(--ink-faint); }
 
@@ -398,6 +399,19 @@ main { background: var(--night); }
 .hero-chip-dot { width: 7px; height: 7px; border-radius: 50%; }
 .hero-chip-dot--live { background: var(--lime); }
 .hero-frame-caption { position: absolute; left: 18px; bottom: 14px; z-index: 2; margin: 0; }
+
+/* Range Operations Simulator proof (start of #intelligence) */
+.sim-proof { margin-bottom: clamp(56px, 7vw, 96px); padding-bottom: clamp(44px, 5.5vw, 72px); border-bottom: 1px solid var(--line); }
+.sim-duo { margin-top: clamp(36px, 4.4vw, 58px); display: grid; grid-template-columns: minmax(0, 62fr) minmax(0, 38fr); gap: clamp(24px, 3vw, 44px); align-items: start; }
+.sim-frame .media-frame-stage { aspect-ratio: 1400 / 1000; }
+.sim-truth-tag { position: absolute; bottom: 12px; left: 12px; z-index: 2; padding: 5px 11px; color: var(--white-soft); border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(9, 19, 15, 0.82); font-size: 10.5px; font-weight: 720; letter-spacing: 0.06em; }
+.sim-copy > p { margin: 0; color: var(--white-soft); font-size: clamp(14px, 1.15vw, 16px); line-height: 1.62; }
+.sim-process { margin: clamp(20px, 2.4vw, 30px) 0 0; padding: 0; list-style: none; display: grid; gap: 0; }
+.sim-process li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: clamp(10px, 1.2vw, 14px) 0; border-bottom: 1px solid var(--line); }
+.sim-process li:last-child { border-bottom: none; }
+.sim-process strong { display: block; color: var(--white); font-size: 12.5px; font-weight: 780; letter-spacing: 0.08em; }
+.sim-process p { margin: 4px 0 0; color: var(--white-faint); font-size: 12.5px; line-height: 1.5; }
+.sim-qualification { margin: clamp(16px, 2vw, 24px) 0 0; color: var(--white-faint); font-size: 12px; line-height: 1.6; letter-spacing: 0.02em; }
 
 /* Sprint 3 gated slots: evidence grid + expansion map */
 .evidence-grid { margin-top: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.5vw, 20px); }
@@ -583,6 +597,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .fluid-menu { display: block; }
   .roadmap-stages { grid-template-columns: 1fr; max-width: 640px; }
   .intel-duo { grid-template-columns: 1fr; }
+  .sim-duo { grid-template-columns: 1fr; }
   .handoff-seq { grid-template-columns: 1fr; max-width: 460px; }
   .evidence-grid { grid-template-columns: repeat(2, 1fr); }
   .why-split { grid-template-columns: 1fr; }
@@ -635,6 +650,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .wf-step { opacity: 1; }
   .dash-grid { grid-template-columns: 1fr; }
   .dash-card--summary { grid-column: auto; }
+  .sim-frame .media-frame-stage { aspect-ratio: 1080 / 1350; }
   .dash-grid--decisions .dash-card:first-child { grid-column: auto; }
   .dash-body { grid-template-columns: 1fr; }
   .dash-rail { flex-direction: row; flex-wrap: wrap; border-right: none; border-bottom: 1px solid var(--line); padding: 10px; }
