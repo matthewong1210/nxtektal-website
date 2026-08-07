@@ -13,7 +13,7 @@
  */
 
 // -----------------------------------------------------------------------
-// 1 · Hero Master Visual (EarthExperience ground stage · GroundTransition)
+// 1 · Hero Master Visual (ProductHero full-bleed stage — Phase 2E)
 // Consolidated here from lib/heroAssets.ts (Phase 2C prep) — this registry
 // is the single authoritative metadata source for every visual slot.
 // Gate: `ready` stays false until NXTektal approves the Master Product
@@ -41,7 +41,6 @@ export type HeroMasterFrame = {
   mobile: HeroSource | null;
   loop: HeroLoop | null;
   alt: string;
-  caption: string;
 };
 
 export const heroMasterFrame: HeroMasterFrame = {
@@ -65,10 +64,10 @@ export const heroMasterFrame: HeroMasterFrame = {
   // Motion version is a separate deliverable gated on storyboard approval.
   loop: null,
   alt: "NXTektal tracked collection robot towing a gang-roller ball picker across a sunlit driving range scattered with golf balls",
-  caption: "Product development visualization",
 };
 
-/** Interim hero used until the master frame is approved. */
+/** Interim hero photograph — retained as the documented fallback if the
+ * master frame ever needs to be pulled (swap into ProductHero). */
 export const heroInterim = {
   src: "/robot/robot-front.jpg",
   alt: "NXTektal ball collection robot facing the camera on a driving range at dusk",
@@ -177,7 +176,20 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
   null, // 01 MONITOR — simulator still
   null, // 02 PRIORITIZE — simulator still
   null, // 03 DISPATCH — simulator still
-  null, // 04 COLLECT — real robot-field footage (RobotVideo, legacy identity)
+  {
+    // 04 COLLECT — tracked collector sweeping scattered balls (approved
+    // render; replaces the retired white-prototype field footage on the
+    // public page — the raw footage remains internal in public/robot/)
+    still: {
+      avif: "/visuals/phase2/workflow/04-collect-poster.avif",
+      webp: "/visuals/phase2/workflow/04-collect-poster.webp",
+      width: 1280,
+      height: 720,
+      alt: "NXTektal tracked collector towing the gang-roller picker through scattered range balls during collection",
+    },
+    webm: "/visuals/phase2/workflow/04-collect-loop.webm",
+    mp4: "/visuals/phase2/workflow/04-collect-loop.mp4",
+  },
   {
     // 05 RETURN — loaded rig traversing back across the range.
     // Documented limitation: the handoff destination is not visible in frame.

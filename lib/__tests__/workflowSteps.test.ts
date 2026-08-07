@@ -30,7 +30,7 @@ describe("registered-media mapping (Phase 2D Sprint 2B: eight identities)", () =
       "still:0", // MONITOR — simulator still
       "still:1", // PRIORITIZE — simulator still
       "still:2", // DISPATCH — simulator still
-      "loop", // COLLECT — real robot-field footage
+      "vloop:3", // COLLECT — dedicated collection loop (approved render)
       "vloop:4", // RETURN — dedicated loop
       "vloop:5", // HANDOFF — dedicated loop
       "vloop:6", // WASH & DISPENSE — dedicated loop
@@ -49,9 +49,9 @@ describe("registered-media mapping (Phase 2D Sprint 2B: eight identities)", () =
     expect(mediaKeyFor(6)).not.toBe(mediaKeyFor(5));
   });
 
-  it("only COLLECT renders the shared robot-field loop", () => {
+  it("no step renders the retired shared robot-field fallback", () => {
     expect(WORKFLOW_STEPS.map((_, i) => isLoopStep(i))).toEqual([
-      false, false, false, true, false, false, false, false,
+      false, false, false, false, false, false, false, false,
     ]);
   });
 
@@ -60,7 +60,7 @@ describe("registered-media mapping (Phase 2D Sprint 2B: eight identities)", () =
       "still",
       "still",
       "still",
-      "loop",
+      "poster",
       "poster",
       "poster",
       "poster",
@@ -79,7 +79,7 @@ describe("registry asset contracts", () => {
 
   it("physical step loops each declare webm, mp4, and an alt-bearing poster still", async () => {
     const { workflowStepLoops } = await import("../visualAssets");
-    for (const i of [4, 5, 6]) {
+    for (const i of [3, 4, 5, 6]) {
       const loop = workflowStepLoops[i];
       expect(loop).not.toBeNull();
       expect(loop!.webm).toMatch(/\.webm$/);
@@ -88,8 +88,6 @@ describe("registry asset contracts", () => {
     }
     const { workflowStepStills } = await import("../visualAssets");
     expect(workflowStepStills[3]).toBeNull();
-    const loops = await import("../visualAssets");
-    expect(loops.workflowStepLoops[3]).toBeNull();
   });
 });
 

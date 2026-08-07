@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MediaFrame from "../media/MediaFrame";
 import { ResponsiveLoop, ResponsiveStill } from "../media/ResponsiveMedia";
 import { agentSimulatorDemo } from "../../lib/visualAssets";
@@ -31,6 +31,26 @@ const processItems = [
 export default function SimulatorProof() {
   // null = unresolved; the loop mounts only on a definite desktop+motion yes.
   const [playLoop, setPlayLoop] = useState<boolean | null>(null);
+  // The ~500KB loop stays unrequested until the section approaches the
+  // viewport (poster renders meanwhile) — below-the-fold media is not
+  // preloaded at page load.
+  const [near, setNear] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (near) return;
+    const check = () => {
+      const el = rootRef.current;
+      if (!el) return;
+      if (el.getBoundingClientRect().top < window.innerHeight * 1.5) {
+        setNear(true);
+        window.removeEventListener("scroll", check);
+      }
+    };
+    check();
+    window.addEventListener("scroll", check, { passive: true });
+    return () => window.removeEventListener("scroll", check);
+  }, [near]);
 
   useEffect(() => {
     const wide = window.matchMedia("(min-width: 761px)");
@@ -50,7 +70,7 @@ export default function SimulatorProof() {
   const { loop, posterDesktop, posterMobile, alt, caption, truthLabel } = agentSimulatorDemo;
 
   return (
-    <div className="sim-proof">
+    <div className="sim-proof" ref={rootRef}>
       <div className="eyebrow">SIMULATION &amp; OPERATING INTELLIGENCE</div>
       <h2>Test the operation before it reaches the field.</h2>
       <p className="section-body">
@@ -61,7 +81,7 @@ export default function SimulatorProof() {
         <div className="sim-media">
           <MediaFrame caption={caption} className="sim-frame">
             <span className="sim-truth-tag">{truthLabel}</span>
-            {playLoop ? (
+            {playLoop && near ? (
               <ResponsiveLoop source={{ ...loop, poster: posterDesktop.webp, alt }} />
             ) : (
               <ResponsiveStill

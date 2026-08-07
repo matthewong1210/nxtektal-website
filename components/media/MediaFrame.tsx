@@ -10,14 +10,15 @@ import type { ReactNode } from "react";
  */
 
 export const CAPTIONS = {
-  devViz: "Product development visualization",
   engConcept: "Engineering concept visualization",
   illustrative: "Illustrative product concept — not live facility data",
   direction: "Platform direction",
 } as const;
 
 type MediaFrameProps = {
-  caption: string;
+  /** Optional: approved product imagery renders without a public label;
+   * concept/simulation media keeps its qualification caption. */
+  caption?: string;
   /** CSS aspect-ratio for the media stage, e.g. "16 / 9". Omit for auto-height content such as diagrams. */
   aspect?: string;
   /** Matches the section theme; affects frame border/background. */
@@ -44,7 +45,7 @@ export default function MediaFrame({
       <div className="media-frame-stage" style={aspect ? { aspectRatio: aspect } : undefined}>
         {children}
       </div>
-      <figcaption className="media-caption">{caption}</figcaption>
+      {caption && <figcaption className="media-caption">{caption}</figcaption>}
     </figure>
   );
 }
