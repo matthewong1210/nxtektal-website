@@ -176,7 +176,20 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
   null, // 01 MONITOR — simulator still
   null, // 02 PRIORITIZE — simulator still
   null, // 03 DISPATCH — simulator still
-  null, // 04 COLLECT — real robot-field footage (RobotVideo, legacy identity)
+  {
+    // 04 COLLECT — tracked collector sweeping scattered balls (approved
+    // render; replaces the retired white-prototype field footage on the
+    // public page — the raw footage remains internal in public/robot/)
+    still: {
+      avif: "/visuals/phase2/workflow/04-collect-poster.avif",
+      webp: "/visuals/phase2/workflow/04-collect-poster.webp",
+      width: 1280,
+      height: 720,
+      alt: "NXTektal tracked collector towing the gang-roller picker through scattered range balls during collection",
+    },
+    webm: "/visuals/phase2/workflow/04-collect-loop.webm",
+    mp4: "/visuals/phase2/workflow/04-collect-loop.mp4",
+  },
   {
     // 05 RETURN — loaded rig traversing back across the range.
     // Documented limitation: the handoff destination is not visible in frame.
