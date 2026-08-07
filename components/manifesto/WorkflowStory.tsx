@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import MediaFrame, { CAPTIONS } from "../media/MediaFrame";
+import MediaFrame from "../media/MediaFrame";
 import { ResponsiveLoop, ResponsiveStill } from "../media/ResponsiveMedia";
 import { workflowStepLoops, workflowStepStills } from "../../lib/visualAssets";
 import {
@@ -135,8 +135,9 @@ export default function WorkflowStory() {
     return <ResponsiveStill source={workflowStepStills[index]!} />;
   };
 
-  const captionFor = (index: number) =>
-    workflowStepStills[index]?.caption ?? CAPTIONS.devViz;
+  // Simulator stills carry their qualification; approved physical product
+  // media renders as normal product imagery with no public label.
+  const captionFor = (index: number) => workflowStepStills[index]?.caption;
 
   // Warm the immediately adjacent stills (same markup the stage will
   // render, hidden) so a crossfade lands on a cached asset — without ever

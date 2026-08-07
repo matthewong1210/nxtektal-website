@@ -16,7 +16,7 @@ import { heroMasterFrame } from "../../lib/visualAssets";
  * disabled under prefers-reduced-motion by the global motion rules.
  */
 export default function ProductHero({ copy }: { copy: ReactNode }) {
-  const { desktop, mobile, alt, caption } = heroMasterFrame;
+  const { desktop, mobile, alt } = heroMasterFrame;
 
   return (
     <section className="phero" aria-label="NXTektal — one operating layer for autonomous golf facilities">
@@ -55,7 +55,6 @@ export default function ProductHero({ copy }: { copy: ReactNode }) {
           <span className="phero-chip"><i className="phero-dot" aria-hidden="true" /> Collection · Zone B — active</span>
           <span className="phero-chip phero-chip--data">Ball inventory — above threshold</span>
         </div>
-        <p className="phero-caption">{caption}</p>
       </div>
     </section>
   );

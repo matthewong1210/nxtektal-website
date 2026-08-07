@@ -41,7 +41,6 @@ export type HeroMasterFrame = {
   mobile: HeroSource | null;
   loop: HeroLoop | null;
   alt: string;
-  caption: string;
 };
 
 export const heroMasterFrame: HeroMasterFrame = {
@@ -65,7 +64,6 @@ export const heroMasterFrame: HeroMasterFrame = {
   // Motion version is a separate deliverable gated on storyboard approval.
   loop: null,
   alt: "NXTektal tracked collection robot towing a gang-roller ball picker across a sunlit driving range scattered with golf balls",
-  caption: "Product development visualization",
 };
 
 /** Interim hero photograph — retained as the documented fallback if the
