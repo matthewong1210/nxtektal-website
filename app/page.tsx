@@ -52,6 +52,21 @@ const BrandLockup = () => (
 );
 
 
+const problemPoints = [
+  {
+    title: "Disconnected systems",
+    body: "Equipment, people, and workflows often operate independently without a shared understanding of facility state.",
+  },
+  {
+    title: "Reactive decisions",
+    body: "Operators often respond after problems appear instead of receiving proactive recommendations.",
+  },
+  {
+    title: "No operational memory",
+    body: "Facilities repeat decisions without systematically learning from past outcomes.",
+  },
+];
+
 const whyCards = [
   { title: "Repetitive workflow", body: "Collection, unloading, and transfer happen throughout the operating day." },
   { title: "Operationally critical", body: "When the ball supply breaks, customers notice immediately." },
@@ -179,7 +194,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4 · Why driving ranges */}
+      {/* 4 · Problem — the operational gap */}
+      <section className="block section-light problem-block" aria-label="The operational gap">
+        <div className="block-inner">
+          <Reveal>
+            <div className="eyebrow">PHYSICAL FACILITIES LACK OPERATIONAL INTELLIGENCE</div>
+            <h2>Outdoor facilities are full of equipment, but still lack a system that understands what is happening.</h2>
+          </Reveal>
+          <Reveal>
+            <p className="section-body">
+              Facilities operate through disconnected equipment, manual decisions, and fixed workflows. The challenge is not only automation — it is understanding the current state of the environment, deciding what should happen next, and continuously improving operations over time.
+            </p>
+          </Reveal>
+          <div className="problem-points">
+            {problemPoints.map((point, index) => (
+              <Reveal key={point.title} delay={index * 60}>
+                <article className="why-card">
+                  <h3>{point.title}</h3>
+                  <p>{point.body}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <p className="problem-transition">
+              Autonomous facilities require more than machines. They require a system that understands state, makes decisions, learns from outcomes, and coordinates execution.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 5 · Why driving ranges */}
       <section className="block section-light why-block" id="why-driving-ranges">
         <div className="block-inner">
           <div className="why-split">

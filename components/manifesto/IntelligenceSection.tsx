@@ -20,12 +20,12 @@ const layers = [
   {
     name: "Operational Memory",
     subtitle: "What has been learned?",
-    description: "State, decision, human action, and outcome are recorded — each facility accumulates operating knowledge over time.",
+    description: "State, decision, human action, and outcome feed improved future decisions — each facility develops its own operational knowledge over time.",
   },
   {
     name: "Spatial Digital Twin",
-    subtitle: "Where does everything exist?",
-    description: "A spatial representation of terrain, zones, infrastructure, equipment, workflows, and operational constraints.",
+    subtitle: "Where and how does everything interact?",
+    description: "A living representation of terrain, infrastructure, equipment, operational zones, workflows, constraints, and the relationships between systems — not only visualization, but the operational state of the physical environment.",
   },
   {
     name: "Autonomous Execution",

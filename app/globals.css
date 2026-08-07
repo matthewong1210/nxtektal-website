@@ -546,6 +546,10 @@ main { background: var(--night); }
 .validation-strip dd { margin: 12px 0 0; color: var(--white-soft); font-size: clamp(13px, 1.2vw, 17px); line-height: 1.5; }
 .validation-note { margin: clamp(26px, 3vw, 42px) 0 0; color: var(--white-faint); font-size: clamp(12px, 1vw, 14px); }
 
+/* Problem — the operational gap */
+.problem-points { margin-top: clamp(28px, 3.4vw, 46px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 24px); }
+.problem-transition { max-width: 720px; margin: clamp(28px, 3.4vw, 46px) 0 0; color: var(--ink); font-size: clamp(17px, 1.5vw, 22px); font-weight: 600; line-height: 1.45; letter-spacing: -0.02em; }
+
 /* Why driving ranges */
 .why-split { display: grid; grid-template-columns: 45fr 55fr; gap: clamp(28px, 4vw, 72px); align-items: start; }
 .why-lede { max-width: 560px; margin: clamp(18px, 2vw, 26px) 0 0; font-size: clamp(16px, 1.35vw, 19px); line-height: 1.66; }
@@ -810,7 +814,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .closing-actions .button { width: 100%; }
   .validation-strip { grid-template-columns: 1fr; gap: 22px; }
   .validation-strip dt { font-size: clamp(30px, 9vw, 40px); }
-  .why-cards, .system-cards, .compare-grid, .status-grid, .evidence-cols, .pilot-steps { grid-template-columns: 1fr; }
+  .why-cards, .system-cards, .compare-grid, .status-grid, .evidence-cols, .pilot-steps, .problem-points { grid-template-columns: 1fr; }
   .eqc-columns { grid-template-columns: 1fr; }
   .evidence-grid { grid-template-columns: 1fr; }
   .status-block { padding-left: var(--pad); padding-right: var(--pad); }
