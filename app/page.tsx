@@ -73,11 +73,35 @@ const systemComponents = [
   },
 ];
 
-const devStatus = [
-  { name: "Collection hardware", status: "Prototype development" },
-  { name: "Range Operations Agent", status: "Early product development" },
-  { name: "Automated handoff", status: "Engineering development" },
-  { name: "Closed-loop field operation", status: "Pilot validation target" },
+const buildTracks = [
+  {
+    name: "Hardware",
+    items: [
+      { name: "Collection module", status: "IN DEVELOPMENT" },
+      { name: "Mobile base integration", status: "IN DEVELOPMENT" },
+      { name: "Mechanical development", status: "IN DEVELOPMENT" },
+    ],
+  },
+  {
+    name: "Software",
+    items: [
+      { name: "Range Operations Simulator", status: "EARLY SOFTWARE BUILD" },
+      { name: "Range Operations Agent", status: "EARLY SOFTWARE BUILD" },
+    ],
+  },
+  {
+    name: "Field Validation",
+    items: [
+      { name: "Pilot preparation", status: "PILOT PREPARATION" },
+      { name: "Facility workflow mapping", status: "PILOT PREPARATION" },
+    ],
+  },
+];
+
+const pilotSteps = [
+  { name: "Assess", body: "Understand the current collection, unloading, washing, and dispensing workflow." },
+  { name: "Integrate", body: "Configure collection, handoff, equipment interfaces, and operating rules." },
+  { name: "Validate", body: "Measure availability, labor requirements, interventions, reliability, and economics." },
 ];
 
 
@@ -117,9 +141,8 @@ export default function Home() {
             <div className="eyebrow hero-fade"><span className="pulse" /> AUTONOMOUS OPERATIONS FOR GOLF FACILITIES</div>
             <h1 className="hero-fade">One operating layer for autonomous golf facilities.</h1>
             <p className="ez-body hero-fade">
-              NXTektal is building an operating layer designed to connect robots, sensors, people, and the equipment already on site—so repetitive work can be planned, executed, verified, and improved as one system.
+              NXTektal coordinates robots, sensors, and workflows to automate repetitive outdoor operations — starting with <span className="hero-em">closed-loop ball operations</span> at driving ranges.
             </p>
-            <p className="hero-start hero-fade">Starting with <span>closed-loop ball operations</span> at driving ranges.</p>
             <div className="hero-actions hero-fade">
               <a className="button button-primary" href="#pilot">
                 Become a Pilot Facility <Arrow />
@@ -242,52 +265,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7 · Development status */}
-      <section className="status-block" aria-label="Current development status">
-        <div className="block-inner">
-          <Reveal>
-            <div className="eyebrow">WHAT WE ARE BUILDING NOW</div>
-            <ul className="status-grid">
-              {devStatus.map((item) => (
-                <li key={item.name}>
-                  <strong>{item.name}</strong>
-                  <span>{item.status}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-          {/* Renders only when real photos are registered AND approved (lib/visualAssets.ts) */}
-          <BuildEvidenceGallery />
-        </div>
-      </section>
+      {/* 10 · Agent intelligence + 11 · Illustrative manager report */}
+      <IntelligenceSection />
 
       {/* 8 · ROI */}
       <QuickCalculator />
-
-      {/* 9 · Pilot CTA */}
-      <section className="block pilot-block" id="pilot">
-        <div className="block-inner">
-          <Reveal>
-            <div className="eyebrow">PILOT PROGRAM</div>
-            <h2>Test the first workflow at your range.</h2>
-          </Reveal>
-          <Reveal>
-            <p className="section-body">
-              We are speaking with facilities that want to evaluate equipment integration, workflow reliability, labor reduction, and ball availability in a real operating environment.
-            </p>
-          </Reveal>
-          <Reveal>
-            <div className="closing-actions">
-              <a className="button button-primary" href={pilotMail}>
-                Become a Pilot Facility <Arrow />
-              </a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 10 · Agent intelligence + 11 · Illustrative manager report */}
-      <IntelligenceSection />
 
       {/* 12 · Expansion across golf */}
       <section className="block section-light expansion-block" id="expansion">
@@ -331,8 +313,70 @@ export default function Home() {
           <Reveal>
             <p className="beyond-direction">LONG-TERM PLATFORM DIRECTION</p>
           </Reveal>
+        </div>
+      </section>
+
+      {/* 10 · Build evidence */}
+      <section className="status-block" aria-label="Build evidence">
+        <div className="block-inner">
           <Reveal>
-            <p className="beyond-vision">Outdoor work will not run on fixed schedules forever.</p>
+            <div className="eyebrow">BUILD EVIDENCE</div>
+            <h2 className="evidence-h2">What we are building now.</h2>
+          </Reveal>
+          <div className="evidence-cols">
+            {buildTracks.map((track, index) => (
+              <Reveal key={track.name} delay={index * 60}>
+                <div className="evidence-col">
+                  <h3>{track.name}</h3>
+                  <ul>
+                    {track.items.map((item) => (
+                      <li key={item.name}>
+                        <strong>{item.name}</strong>
+                        <span>{item.status}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          {/* Renders only when real photos are registered AND approved (lib/visualAssets.ts) */}
+          <BuildEvidenceGallery />
+        </div>
+      </section>
+
+      {/* 11 · Pilot program */}
+      <section className="block pilot-block" id="pilot">
+        <div className="block-inner">
+          <Reveal>
+            <div className="eyebrow">PILOT PROGRAM</div>
+            <h2>Test the first workflow at your range.</h2>
+          </Reveal>
+          <Reveal>
+            <p className="section-body">
+              We are speaking with facilities that want to evaluate equipment integration, workflow reliability, labor reduction, and ball availability in a real operating environment.
+            </p>
+          </Reveal>
+          <div className="pilot-steps">
+            {pilotSteps.map((step, index) => (
+              <Reveal key={step.name} delay={index * 60}>
+                <article className="pilot-step">
+                  <span className="wf-step-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3>{step.name}</h3>
+                    <p>{step.body}</p>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal>
+            <div className="closing-actions">
+              <a className="button button-primary" href={pilotMail}>
+                Become a Pilot Facility <Arrow />
+              </a>
+              <a className="text-link" href={partnerMail}>Discuss a Partnership <Arrow /></a>
+            </div>
           </Reveal>
         </div>
       </section>

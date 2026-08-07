@@ -22,7 +22,7 @@ export default function QuickCalculator() {
     <section className="roi-quick" id="roi" aria-labelledby="roi-quick-title">
       <div className="block-inner">
         <div className="eyebrow">OPERATING ECONOMICS</div>
-        <h2 id="roi-quick-title">What is the current workflow costing your range?</h2>
+        <h2 id="roi-quick-title">Understand the operating cost of your current workflow.</h2>
         <p className="roi-quick-sub">
           Use your own labor, collection frequency, run time, and equipment costs to estimate the direct operating cost of today’s workflow.
         </p>
