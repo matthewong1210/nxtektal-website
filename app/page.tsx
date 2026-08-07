@@ -75,25 +75,26 @@ const systemComponents = [
 
 const buildTracks = [
   {
-    name: "Hardware",
-    items: [
-      { name: "Collection module", status: "IN DEVELOPMENT" },
-      { name: "Mobile base integration", status: "IN DEVELOPMENT" },
-      { name: "Mechanical development", status: "IN DEVELOPMENT" },
-    ],
-  },
-  {
-    name: "Software",
+    name: "Software Intelligence",
     items: [
       { name: "Range Operations Simulator", status: "EARLY SOFTWARE BUILD" },
       { name: "Range Operations Agent", status: "EARLY SOFTWARE BUILD" },
+      { name: "Facility state modeling", status: "EARLY SOFTWARE BUILD" },
     ],
   },
   {
     name: "Field Validation",
     items: [
-      { name: "Pilot preparation", status: "PILOT PREPARATION" },
       { name: "Facility workflow mapping", status: "PILOT PREPARATION" },
+      { name: "Pilot preparation", status: "PILOT PREPARATION" },
+    ],
+  },
+  {
+    name: "Hardware Execution",
+    items: [
+      { name: "Collection system", status: "IN DEVELOPMENT" },
+      { name: "Mobile platform", status: "IN DEVELOPMENT" },
+      { name: "Mechanical integration", status: "IN DEVELOPMENT" },
     ],
   },
 ];
@@ -116,7 +117,7 @@ export default function Home() {
     logo: `https://${site.domain}/brand/nxtektal-lockup.png`,
     email: site.email,
     description:
-      "NXTektal is building an operating layer that coordinates robots, sensors, and AI agents for autonomous golf facility operations, starting with closed-loop ball operations at driving ranges.",
+      "NXTektal builds the intelligence layer that enables physical outdoor facilities to understand their environment, make operational decisions, and coordinate autonomous systems — starting with golf facilities.",
     founder: founders.map((founder) => ({
       "@type": "Person",
       name: founder.name,
@@ -138,10 +139,10 @@ export default function Home() {
       <ProductHero
         copy={
           <>
-            <div className="eyebrow hero-fade"><span className="pulse" /> AUTONOMOUS OPERATIONS FOR GOLF FACILITIES</div>
-            <h1 className="hero-fade">One operating layer for autonomous golf facilities.</h1>
+            <div className="eyebrow hero-fade"><span className="pulse" /> FACILITY INTELLIGENCE FOR AUTONOMOUS OUTDOOR OPERATIONS</div>
+            <h1 className="hero-fade">The intelligence layer for autonomous golf facilities.</h1>
             <p className="ez-body hero-fade">
-              NXTektal coordinates robots, sensors, and workflows to automate repetitive outdoor operations — starting with <span className="hero-em">closed-loop ball operations</span> at driving ranges.
+              NXTektal helps physical facilities understand their environment, make operational decisions, and coordinate robots, equipment, and people — starting with <span className="hero-em">closed-loop operations</span> at driving ranges.
             </p>
             <div className="hero-actions hero-fade">
               <a className="button button-primary" href="#pilot">
@@ -224,7 +225,7 @@ export default function Home() {
           </Reveal>
           <Reveal>
             <p className="section-body">
-              Our first system is being developed to monitor ball availability, dispatch collection when needed, return to a handoff point, transfer balls into the range’s existing processing equipment, and verify that the workflow is complete.
+              The intelligence layer monitors ball availability, decides when collection is worth running, and verifies the result — the Autonomous Collection System executes: collecting, returning to the handoff point, and transferring balls into the range’s existing processing equipment.
             </p>
           </Reveal>
           <WorkflowStory />
@@ -293,7 +294,7 @@ export default function Home() {
           </Reveal>
           <Reveal>
             <p className="section-body">
-              The specific tasks change, but the operating loop remains: sense, prioritize, dispatch, execute, verify, and improve. Over time, the same coordination layer can extend to other managed outdoor environments.
+              Every managed outdoor environment has physical state, operational constraints, resources, workflows, and decisions. The tasks change — the intelligence problem does not. NXTektal applies the same intelligence layer across different facilities.
             </p>
           </Reveal>
           <Reveal>
