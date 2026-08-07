@@ -3,29 +3,34 @@ import SimulatorProof from "./SimulatorProof";
 
 const layers = [
   {
-    name: "Facility Manager",
-    subtitle: "Goals · Policies · Approvals",
-    description: "Sets operating goals, constraints, policies, and approval thresholds.",
+    name: "Physical World",
+    subtitle: "Robots · Sensors · Equipment · People · Environment",
+    description: "The facility as it actually is — machines, terrain, weather, demand, and the people working in it.",
   },
   {
-    name: "Facility Operations Agent",
-    subtitle: "Shared state · Priorities · Scheduling",
-    description: "Maintains a shared view of the facility and prioritizes work across workflows.",
+    name: "Facility State",
+    subtitle: "What is happening?",
+    description: "A current understanding of inventory, equipment, demand, terrain, resources, and constraints.",
   },
   {
-    name: "Specialized Workflow Agents",
-    subtitle: "Ball operations · Turf · Inspection · Bunkers",
-    description: "Translate facility priorities into specific missions and operating plans.",
+    name: "Operational Intelligence",
+    subtitle: "What should happen next?",
+    description: "Determines priorities, risks, recommended actions, and resource allocation — the facility manager approves.",
   },
   {
-    name: "Execution Layer",
-    subtitle: "Robots · Drones · Sensors · Human support",
-    description: "Carries out the physical work and returns execution data.",
+    name: "Operational Memory",
+    subtitle: "What has been learned?",
+    description: "State, decision, human action, and outcome feed improved future decisions — each facility develops its own operational knowledge over time.",
   },
   {
-    name: "Verification & Learning",
-    subtitle: "Outcomes · Exceptions · Time · Cost",
-    description: "Compares expected and actual results, records exceptions, and improves future recommendations.",
+    name: "Spatial Digital Twin",
+    subtitle: "Where and how does everything interact?",
+    description: "A living representation of terrain, infrastructure, equipment, operational zones, workflows, constraints, and the relationships between systems — not only visualization, but the operational state of the physical environment.",
+  },
+  {
+    name: "Autonomous Execution",
+    subtitle: "How actions happen",
+    description: "Robots, sensors, connected equipment, and human workflows carry out approved work and report back.",
   },
 ];
 
@@ -59,10 +64,10 @@ export default function IntelligenceSection() {
 
         {/* 2 · Operating layer + 3 · Manager dashboard */}
         <Reveal>
-          <div className="eyebrow">PLATFORM ARCHITECTURE · IN DEVELOPMENT</div>
-          <h2>From robot dispatch to operational intelligence.</h2>
+          <div className="eyebrow">THE INTELLIGENCE LAYER · IN DEVELOPMENT</div>
+          <h2>Robots are the execution layer. NXTektal is the intelligence layer.</h2>
           <p className="section-body">
-            NXTektal is being designed to turn facility goals into coordinated work, compare plans with real outcomes, and improve how future tasks are prioritized and executed. The facility manager remains in control.
+            NXTektal is being designed to understand facility state, decide what should happen next, remember what worked, and coordinate autonomous execution. The facility manager remains in control of goals, policies, and approvals.
           </p>
         </Reveal>
 
@@ -70,7 +75,7 @@ export default function IntelligenceSection() {
           {/* Coordination hierarchy — compact, secondary to the product view */}
           <Reveal>
             <div className="intel-left">
-              <ol className="intel-stack" aria-label="NXTektal coordination structure, from facility manager to verification and learning">
+              <ol className="intel-stack" aria-label="NXTektal intelligence layer, from the physical world to autonomous execution">
                 {layers.map((layer, index) => (
                   <li key={layer.name} className="intel-layer">
                     {index > 0 && <span className="intel-connector" aria-hidden="true" />}
@@ -88,7 +93,7 @@ export default function IntelligenceSection() {
                 </span>
               </ol>
               <p className="intel-feedback-note">
-                Verification &amp; Learning feeds outcomes back to the Facility Operations Agent, so future missions are prioritized from real results.
+                Operational Memory closes the loop: state, decision, human action, and outcome feed back into the next recommendation — so each facility gets operationally smarter over time.
               </p>
             </div>
           </Reveal>

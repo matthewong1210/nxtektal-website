@@ -19,7 +19,7 @@ export default function ProductHero({ copy }: { copy: ReactNode }) {
   const { desktop, mobile, alt } = heroMasterFrame;
 
   return (
-    <section className="phero" aria-label="NXTektal — one operating layer for autonomous golf facilities">
+    <section className="phero" aria-label="NXTektal — the intelligence layer for autonomous golf facilities">
       <div className="phero-media" aria-hidden="true">
         {desktop && (
           <picture>
@@ -50,10 +50,11 @@ export default function ProductHero({ copy }: { copy: ReactNode }) {
 
       <div className="phero-inner">
         <div className="ez-copy ez-copy--hero">{copy}</div>
-        {/* operational status overlay — real DOM text, max two chips */}
-        <div className="phero-chips">
-          <span className="phero-chip"><i className="phero-dot" aria-hidden="true" /> Collection · Zone B — active</span>
-          <span className="phero-chip phero-chip--data">Ball inventory — above threshold</span>
+        {/* facility-intelligence overlay — illustrative, non-numeric, real DOM text */}
+        <div className="phero-chips" aria-label="Illustrative facility intelligence readout">
+          <span className="phero-chip phero-chip--data">State — monitoring</span>
+          <span className="phero-chip"><i className="phero-dot" aria-hidden="true" /> Decision — collection priority updated</span>
+          <span className="phero-chip">Execution — available</span>
         </div>
       </div>
     </section>
