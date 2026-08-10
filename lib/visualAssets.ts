@@ -29,9 +29,9 @@ export type HeroSource = {
 
 export type HeroLoop = {
   webm: string;
-  /** All-intra H.264 so the scroll driver can scrub it (Safari-safe). */
+  /** H.264 fallback for browsers without WebM (Safari). */
   mp4: string;
-  /** Poster still — also the reduced-motion and load-failure frame. */
+  /** Poster still — also the mobile, reduced-motion, and load-failure frame. */
   poster: string;
 };
 
@@ -61,8 +61,19 @@ export const heroMasterFrame: HeroMasterFrame = {
     width: 706,
     height: 940,
   },
-  // Motion version is a separate deliverable gated on storyboard approval.
-  loop: null,
+  // Hero background film (Phase 2G): trimmed re-encode of the produced
+  // NXTektal hero concept film supplied 2026-08-10 (concept visualization —
+  // facility coordination, bunker care, turf care, operating-layer routes).
+  // Logo intro/outro and the closing watermark are cut (source 1.5s–10.25s)
+  // and the tail self-crossfades into the head, so the ~8.3s ambient loop
+  // restarts without a visible seam. 1280×720@30, encoded at source
+  // resolution (never upscaled), no audio track. Desktop-only enhancement:
+  // mobile, reduced-motion, and every failure path keep the master frame.
+  loop: {
+    webm: "/visuals/phase2/hero/hero-loop.webm",
+    mp4: "/visuals/phase2/hero/hero-loop.mp4",
+    poster: "/visuals/phase2/hero/master-frame.webp",
+  },
   alt: "NXTektal tracked collection robot towing a gang-roller ball picker across a sunlit driving range scattered with golf balls",
 };
 

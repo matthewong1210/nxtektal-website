@@ -1,18 +1,21 @@
 import type { ReactNode } from "react";
 import { heroMasterFrame } from "../../lib/visualAssets";
+import HeroBackgroundVideo from "./HeroBackgroundVideo";
 
 /**
- * Product-led Hero (Phase 2E Sprint 1).
+ * Product-led Hero (Phase 2E Sprint 1 · motion layer Phase 2G).
  *
- * Replaces the earth-zoom scroll sequence: the approved Master Product
- * Visual (tracked collector on a sunlit range) is the full-bleed stage, the
- * approved copy renders over a directional scrim, and a restrained
- * operational overlay (two status chips + low-opacity facility contours)
- * communicates the operating layer without a HUD.
+ * The approved Master Product Visual (tracked collector on a sunlit range)
+ * is the full-bleed poster stage; when the registry's hero loop is active,
+ * a gated client layer (HeroBackgroundVideo) fades the produced facility
+ * film in over it on desktop. The approved copy renders over a directional
+ * scrim, and a restrained operational overlay (status chips + low-opacity
+ * facility contours) communicates the operating layer without a HUD.
  *
- * No scroll track, no video, no space imagery. The copy never depends on
- * the image: if the still fails, the night-tone stage keeps the section
- * fully readable. Chip fade-in reuses the existing hero-fade rhythm and is
+ * No scroll track, no space imagery. The copy never depends on the media:
+ * mobile, reduced-motion, no-JS, and load-failure paths keep the still,
+ * and if that fails too the night-tone stage keeps the section fully
+ * readable. Chip fade-in reuses the existing hero-fade rhythm and is
  * disabled under prefers-reduced-motion by the global motion rules.
  */
 export default function ProductHero({ copy }: { copy: ReactNode }) {
@@ -40,6 +43,7 @@ export default function ProductHero({ copy }: { copy: ReactNode }) {
             />
           </picture>
         )}
+        <HeroBackgroundVideo />
         {/* low-opacity facility contours — permitted ambient treatment */}
         <svg className="phero-contours" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice">
           <path d="M -40 620 C 300 560, 620 590, 900 540 C 1120 500, 1300 520, 1480 470" />
