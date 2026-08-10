@@ -15,14 +15,18 @@ commercial terms before launch. (The public "Product development
 visualization" label was retired in the Phase 2E release patch; provenance
 stays recorded here and in `lib/visualAssets.ts`.)
 
-The hero background film (`hero-loop.webm` / `hero-loop.mp4`) is a trimmed
-re-encode of the AI-generated NXTektal hero concept film supplied by the
-founders 2026-08-10 — logo intro/outro and the closing watermark removed,
-audio track stripped, encoded at the source's native 1280×720. Concept
-visualization, not live facility footage. Usage rights follow the
-generating tool's terms for user-generated content; the tool was not
-recorded at hand-off — record it here and confirm commercial terms before
-launch. The raw source recording stays outside the repository.
+The hero background film (`hero-loop.webm` / `hero-loop.mp4`), both hero
+master-frame stills, and the RETURN / HANDOFF workflow loops and posters
+are all derived from one AI-generated NXTektal hero concept film supplied
+by the founders 2026-08-11 (4K 120fps hand-off) — logo intro/outro and the
+closing watermark removed, audio track stripped, hero film downscaled to
+1920×1080, workflow segments retimed to half speed at 1280×720. This
+supersedes the 2026-08-10 film and the earlier tracked-collector render
+stills, which are deleted. Concept visualization, not live facility
+footage. Usage rights follow the generating tool's terms for user-generated
+content; the tool was not recorded at hand-off — record it here and confirm
+commercial terms before launch. The raw source recording stays outside the
+repository.
 
 ## Workflow physical-loop media (`public/visuals/phase2/workflow/`)
 
