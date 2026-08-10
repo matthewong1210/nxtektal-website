@@ -18,9 +18,12 @@ visualization".
 
 AI-generated product concept renders (RETURN / HANDOFF / WASH & DISPENSE
 loops and posters) produced by the founders with **Dreamina**, supplied
-2026-08-04/06. Same usage terms as above. Simulator-derived stills are
-screenshots of the NXTektal Range Operations Simulator (original software,
-all rights held by NXTektal Systems).
+2026-08-04/06. The COLLECT loop and poster are a **Dreamina** render of the
+current collection-robot design (integrated front roller picker) supplied
+2026-08-11, replacing the earlier tracked-collector render. Same usage
+terms as above. Simulator-derived stills are screenshots of the NXTektal
+Range Operations Simulator (original software, all rights held by NXTektal
+Systems).
 
 ## Simulator media (`public/visuals/phase2/simulator/`)
 

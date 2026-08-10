@@ -177,15 +177,17 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
   null, // 02 PRIORITIZE — simulator still
   null, // 03 DISPATCH — simulator still
   {
-    // 04 COLLECT — tracked collector sweeping scattered balls (approved
-    // render; replaces the retired white-prototype field footage on the
-    // public page — the raw footage remains internal in public/robot/)
+    // 04 COLLECT — collection robot with integrated front roller picker
+    // sweeping scattered balls (Dreamina concept render supplied 2026-08-11,
+    // normalized to 720p30 with a 0.4s self-crossfade for a seamless 4.6s
+    // loop; replaces the earlier tracked-collector render — the retired
+    // white-prototype raw footage remains internal in public/robot/)
     still: {
       avif: "/visuals/phase2/workflow/04-collect-poster.avif",
       webp: "/visuals/phase2/workflow/04-collect-poster.webp",
       width: 1280,
       height: 720,
-      alt: "NXTektal tracked collector towing the gang-roller picker through scattered range balls during collection",
+      alt: "NXTektal collection robot sweeping scattered range balls into its front roller picker on a driving range at dawn",
     },
     webm: "/visuals/phase2/workflow/04-collect-loop.webm",
     mp4: "/visuals/phase2/workflow/04-collect-loop.mp4",
