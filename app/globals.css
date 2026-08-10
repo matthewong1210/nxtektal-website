@@ -472,13 +472,13 @@ main { background: var(--night); }
 .tm-core-fns li { padding: 4px 10px; border: 1px solid var(--blue-line); border-radius: 999px; color: var(--blue-deep); font-size: 11px; font-weight: 720; letter-spacing: 0.04em; background: #ffffff; }
 
 /* stage controls */
-.tm-side { display: grid; gap: clamp(14px, 1.6vw, 20px); align-content: start; }
+.tm-side { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(14px, 1.6vw, 20px); align-content: start; }
 .tm-controls { display: grid; gap: 10px; }
 .tm-control { display: block; width: 100%; text-align: left; padding: clamp(13px, 1.5vw, 17px) clamp(14px, 1.7vw, 19px); border: 1px solid var(--paper-line); border-radius: 14px; background: #ffffff; font: inherit; cursor: pointer; transition: border-color var(--motion-control) var(--ease-standard), background-color var(--motion-control) var(--ease-standard); }
 .tm-control:hover { border-color: rgba(22, 32, 43, 0.3); }
 .tm-control:focus-visible { outline: 2px solid var(--blue-deep); outline-offset: 2px; }
 .tm-control[aria-pressed="true"] { border-color: var(--blue-deep); background: #f7faff; }
-.tm-control-head { display: flex; align-items: baseline; gap: 10px; }
+.tm-control-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
 .tm-control-num { color: var(--blue); font-size: 12px; font-weight: 800; }
 .tm-control-label { color: var(--ink-faint); font-size: 10.5px; font-weight: 800; letter-spacing: 0.1em; }
 .tm-status { margin-left: auto; padding: 3px 9px; border-radius: 999px; font-size: 9.5px; font-weight: 800; letter-spacing: 0.07em; white-space: nowrap; }
@@ -515,7 +515,7 @@ main { background: var(--night); }
 
 /* Build evidence tracks */
 .evidence-h2 { margin-top: 14px; color: var(--white); font-size: clamp(24px, 2.6vw, 38px); font-weight: 620; letter-spacing: -0.03em; }
-.evidence-cols { margin-top: clamp(26px, 3.2vw, 42px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 28px); }
+.evidence-cols { margin-top: clamp(26px, 3.2vw, 42px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2vw, 28px); }
 .evidence-col { border: 1px solid var(--line-strong); border-radius: 16px; background: rgba(13, 17, 23, 0.5); padding: clamp(16px, 2vw, 24px); }
 .evidence-col h3 { margin: 0 0 12px; color: var(--white); font-size: 14px; font-weight: 750; letter-spacing: 0.04em; }
 .evidence-col ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
@@ -839,6 +839,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 
 @media (min-width: 761px) and (max-width: 1120px) {
   .founders-grid { grid-template-columns: 1fr; max-width: 720px; gap: 44px; }
+  .evidence-col li { flex-wrap: wrap; }
 }
 
 /* ---------- ROI Calculator (homepage quick section + /roi-calculator) ---------- */
