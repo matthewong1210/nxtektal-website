@@ -120,9 +120,9 @@ export type LoopSource = {
 // 2 · Closed-Loop Workflow (#first-workflow · WorkflowStory MediaFrame)
 // Contract: 1600×900 (16:9) per step, AVIF+WebP.
 // Paths: public/visuals/phase2/workflow/step-01-monitor.{avif,webp} … step-08-verify.{avif,webp}
-// When present, the workflow visual shows the active step's still and the
-// robot-field loop becomes the fallback. Partial sets are allowed: steps
-// without a still fall back to the loop.
+// When present, the workflow visual shows the active step's still; steps
+// without a still render their own registered loop from workflowStepLoops
+// below. Partial sets are allowed.
 // -----------------------------------------------------------------------
 const SIMULATOR_STILL_QUALIFICATION =
   "Range Operations Simulator — simulation results, not live facility data.";
@@ -155,7 +155,7 @@ export const workflowStepStills: (StillSource | null)[] = [
     alt: "Range Operations Simulator dispatcher decision assigning collection of zone Z2 to robot R1",
     caption: SIMULATOR_STILL_QUALIFICATION,
   },
-  null, // 04 COLLECT — physical workflow imagery only (robot-field loop)
+  null, // 04 COLLECT — physical workflow imagery only
   null, // 05 RETURN — physical workflow imagery only
   null, // 06 HANDOFF — physical workflow imagery only
   null, // 07 WASH & DISPENSE — physical workflow imagery only
@@ -180,11 +180,12 @@ export type WorkflowStepLoop = {
   mp4: string;
 };
 
-// Physical-loop media (Phase 2D Sprint 2B). Product concept renders from the
-// approved tracked-collector + transfer-robot sources — same geometry as the
-// hero master frame and the Transfer Robot CAD (STEP v1). COLLECT (index 3)
-// stays on the real robot-field footage; RETURN/HANDOFF/WASH each get their
-// own identity so the four physical stages are visually distinct.
+// Physical-loop media (slots from Phase 2D Sprint 2B; assets refreshed
+// Phase 2G). Every physical step carries its own concept-render identity —
+// COLLECT from the 2026-08-11 Dreamina render, RETURN/HANDOFF from the
+// 2026-08-11 hero film, WASH & DISPENSE from the 2026-08-04/06 render
+// batch — so the four physical stages stay visually distinct. All are
+// concept visualizations, not live facility footage.
 export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
   null, // 01 MONITOR — simulator still
   null, // 02 PRIORITIZE — simulator still
@@ -192,9 +193,10 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
   {
     // 04 COLLECT — collection robot with integrated front roller picker
     // sweeping scattered balls (Dreamina concept render supplied 2026-08-11,
-    // normalized to 720p30 with a 0.4s self-crossfade for a seamless 4.6s
-    // loop; replaces the earlier tracked-collector render — the retired
-    // white-prototype raw footage remains internal in public/robot/)
+    // decimated to its native 24fps cadence at 720p with a 0.5s
+    // self-crossfade for a seamless ~4.0s loop; replaces the earlier
+    // tracked-collector render — the retired white-prototype raw footage
+    // remains internal in public/robot/)
     still: {
       avif: "/visuals/phase2/workflow/04-collect-poster.avif",
       webp: "/visuals/phase2/workflow/04-collect-poster.webp",
@@ -206,16 +208,18 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
     mp4: "/visuals/phase2/workflow/04-collect-loop.mp4",
   },
   {
-    // 05 RETURN — collection robot crossing the range (half-speed retime of
-    // the 2026-08-11 hero film's 120fps collector segment, 720p30, 0.4s
-    // self-crossfade → seamless ~4.8s loop). Documented limitation: the
-    // handoff destination is not visible in frame.
+    // 05 RETURN — coordination-route aerial from the 2026-08-11 hero film
+    // (quarter-speed retime of the 120fps route segment, 720p30, 0.4s
+    // self-crossfade → seamless ~5.6s loop). Deliberately an aerial rather
+    // than another robot close-up so RETURN reads as navigation and stays
+    // visually distinct from COLLECT. Documented limitation: the handoff
+    // destination itself is not visible in frame.
     still: {
       avif: "/visuals/phase2/workflow/05-return-poster.avif",
       webp: "/visuals/phase2/workflow/05-return-poster.webp",
       width: 1280,
       height: 720,
-      alt: "NXTektal collection robot with its front roller picker moving across the misty driving range at dawn",
+      alt: "Aerial view of the golf facility with glowing coordination routes and waypoint markers tracing robot paths across the grounds",
     },
     webm: "/visuals/phase2/workflow/05-return-loop.webm",
     mp4: "/visuals/phase2/workflow/05-return-loop.mp4",

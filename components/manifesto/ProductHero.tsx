@@ -5,8 +5,9 @@ import HeroBackgroundVideo from "./HeroBackgroundVideo";
 /**
  * Product-led Hero (Phase 2E Sprint 1 · motion layer Phase 2G).
  *
- * The approved Master Product Visual (tracked collector on a sunlit range)
- * is the full-bleed poster stage; when the registry's hero loop is active,
+ * The hero film's opening frame (dawn facility aerial with the
+ * operating-layer scan) is the full-bleed poster stage; when the registry's
+ * hero loop is active,
  * a gated client layer (HeroBackgroundVideo) fades the produced facility
  * film in over it on desktop. The approved copy renders over a directional
  * scrim, and a restrained operational overlay (status chips + low-opacity
