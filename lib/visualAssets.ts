@@ -29,9 +29,9 @@ export type HeroSource = {
 
 export type HeroLoop = {
   webm: string;
-  /** All-intra H.264 so the scroll driver can scrub it (Safari-safe). */
+  /** H.264 fallback for browsers without WebM (Safari). */
   mp4: string;
-  /** Poster still — also the reduced-motion and load-failure frame. */
+  /** Poster still — also the mobile, reduced-motion, and load-failure frame. */
   poster: string;
 };
 
@@ -44,26 +44,39 @@ export type HeroMasterFrame = {
 };
 
 export const heroMasterFrame: HeroMasterFrame = {
-  // Master Product Visual supplied by NXTektal 2026-08-05 (tracked-collector
-  // concept render, towed gang-roller picker — matches the no-arm
-  // architecture). Registered at the render's native resolution; the 2880
-  // re-export can replace these files in place when it exists.
+  // Hero stills (Phase 2G v2): both derived from the 2026-08-11 hero film
+  // hand-off (4K/120fps) so poster and film are one continuous visual.
+  // Desktop still IS the loop's first frame — the fade from poster to video
+  // is invisible. Mobile is a 3:4 recomposition of the same aerial centered
+  // on the operating-layer scan beam.
   ready: true,
   desktop: {
     avif: "/visuals/phase2/hero/master-frame.avif",
     webp: "/visuals/phase2/hero/master-frame.webp",
-    width: 1672,
-    height: 940,
+    width: 1920,
+    height: 1080,
   },
   mobile: {
     avif: "/visuals/phase2/hero/master-frame-mobile.avif",
     webp: "/visuals/phase2/hero/master-frame-mobile.webp",
-    width: 706,
+    width: 705,
     height: 940,
   },
-  // Motion version is a separate deliverable gated on storyboard approval.
-  loop: null,
-  alt: "NXTektal tracked collection robot towing a gang-roller ball picker across a sunlit driving range scattered with golf balls",
+  // Hero background film (Phase 2G v2): trimmed re-encode of the NXTektal
+  // hero film supplied 2026-08-11 (concept visualization — dawn facility
+  // aerial with operating-layer scan, bunker care, the collection robot
+  // sweeping balls, universal handoff into the ball-handling station, turf
+  // robot, coordination routes). Logo intro/outro and closing watermark are
+  // cut (source 1.5s–14.8s) and the tail self-crossfades into the head for
+  // a seamless ~12.9s ambient loop. 1920×1080@30 downscaled from the 4K
+  // source, no audio track. Desktop-only enhancement: mobile,
+  // reduced-motion, and every failure path keep the master frame.
+  loop: {
+    webm: "/visuals/phase2/hero/hero-loop.webm",
+    mp4: "/visuals/phase2/hero/hero-loop.mp4",
+    poster: "/visuals/phase2/hero/master-frame.webp",
+  },
+  alt: "Aerial view of a golf facility at dawn with the NXTektal operating layer scanning the grounds",
 };
 
 /** Interim hero photograph — retained as the documented fallback if the
@@ -107,9 +120,9 @@ export type LoopSource = {
 // 2 · Closed-Loop Workflow (#first-workflow · WorkflowStory MediaFrame)
 // Contract: 1600×900 (16:9) per step, AVIF+WebP.
 // Paths: public/visuals/phase2/workflow/step-01-monitor.{avif,webp} … step-08-verify.{avif,webp}
-// When present, the workflow visual shows the active step's still and the
-// robot-field loop becomes the fallback. Partial sets are allowed: steps
-// without a still fall back to the loop.
+// When present, the workflow visual shows the active step's still; steps
+// without a still render their own registered loop from workflowStepLoops
+// below. Partial sets are allowed.
 // -----------------------------------------------------------------------
 const SIMULATOR_STILL_QUALIFICATION =
   "Range Operations Simulator — simulation results, not live facility data.";
@@ -142,7 +155,7 @@ export const workflowStepStills: (StillSource | null)[] = [
     alt: "Range Operations Simulator dispatcher decision assigning collection of zone Z2 to robot R1",
     caption: SIMULATOR_STILL_QUALIFICATION,
   },
-  null, // 04 COLLECT — physical workflow imagery only (robot-field loop)
+  null, // 04 COLLECT — physical workflow imagery only
   null, // 05 RETURN — physical workflow imagery only
   null, // 06 HANDOFF — physical workflow imagery only
   null, // 07 WASH & DISPENSE — physical workflow imagery only
@@ -167,51 +180,61 @@ export type WorkflowStepLoop = {
   mp4: string;
 };
 
-// Physical-loop media (Phase 2D Sprint 2B). Product concept renders from the
-// approved tracked-collector + transfer-robot sources — same geometry as the
-// hero master frame and the Transfer Robot CAD (STEP v1). COLLECT (index 3)
-// stays on the real robot-field footage; RETURN/HANDOFF/WASH each get their
-// own identity so the four physical stages are visually distinct.
+// Physical-loop media (slots from Phase 2D Sprint 2B; assets refreshed
+// Phase 2G). Every physical step carries its own concept-render identity —
+// COLLECT from the 2026-08-11 Dreamina render, RETURN/HANDOFF from the
+// 2026-08-11 hero film, WASH & DISPENSE from the 2026-08-04/06 render
+// batch — so the four physical stages stay visually distinct. All are
+// concept visualizations, not live facility footage.
 export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
   null, // 01 MONITOR — simulator still
   null, // 02 PRIORITIZE — simulator still
   null, // 03 DISPATCH — simulator still
   {
-    // 04 COLLECT — tracked collector sweeping scattered balls (approved
-    // render; replaces the retired white-prototype field footage on the
-    // public page — the raw footage remains internal in public/robot/)
+    // 04 COLLECT — collection robot with integrated front roller picker
+    // sweeping scattered balls (Dreamina concept render supplied 2026-08-11,
+    // decimated to its native 24fps cadence at 720p with a 0.5s
+    // self-crossfade for a seamless ~4.0s loop; replaces the earlier
+    // tracked-collector render — the retired white-prototype raw footage
+    // remains internal in public/robot/)
     still: {
       avif: "/visuals/phase2/workflow/04-collect-poster.avif",
       webp: "/visuals/phase2/workflow/04-collect-poster.webp",
       width: 1280,
       height: 720,
-      alt: "NXTektal tracked collector towing the gang-roller picker through scattered range balls during collection",
+      alt: "NXTektal collection robot sweeping scattered range balls into its front roller picker on a driving range at dawn",
     },
     webm: "/visuals/phase2/workflow/04-collect-loop.webm",
     mp4: "/visuals/phase2/workflow/04-collect-loop.mp4",
   },
   {
-    // 05 RETURN — loaded rig traversing back across the range.
-    // Documented limitation: the handoff destination is not visible in frame.
+    // 05 RETURN — coordination-route aerial from the 2026-08-11 hero film
+    // (quarter-speed retime of the 120fps route segment, 720p30, 0.4s
+    // self-crossfade → seamless ~5.6s loop). Deliberately an aerial rather
+    // than another robot close-up so RETURN reads as navigation and stays
+    // visually distinct from COLLECT. Documented limitation: the handoff
+    // destination itself is not visible in frame.
     still: {
       avif: "/visuals/phase2/workflow/05-return-poster.avif",
       webp: "/visuals/phase2/workflow/05-return-poster.webp",
       width: 1280,
       height: 720,
-      alt: "NXTektal tracked collector towing the gang-roller picker with a loaded ball basket back across the range",
+      alt: "Aerial view of the golf facility with glowing coordination routes and waypoint markers tracing robot paths across the grounds",
     },
     webm: "/visuals/phase2/workflow/05-return-loop.webm",
     mp4: "/visuals/phase2/workflow/05-return-loop.mp4",
   },
   {
-    // 06 HANDOFF — transfer robot aligning with and lifting the collector's
-    // basket at the processing area (payload ↔ equipment relationship).
+    // 06 HANDOFF — universal handoff: the station-side arm tips the loaded
+    // ball basket into the ball-handling system's intake (half-speed retime
+    // of the 2026-08-11 hero film's 120fps handoff segment, 720p30, 0.4s
+    // self-crossfade → seamless ~3.6s loop).
     still: {
       avif: "/visuals/phase2/workflow/06-handoff-poster.avif",
       webp: "/visuals/phase2/workflow/06-handoff-poster.webp",
       width: 1280,
       height: 720,
-      alt: "NXTektal transfer robot gripping and lifting the loaded ball basket from the collection rig at the handoff point",
+      alt: "A robotic arm at the NXTektal handoff station tipping a loaded basket of range balls into the ball-handling system's intake",
     },
     webm: "/visuals/phase2/workflow/06-handoff-loop.webm",
     mp4: "/visuals/phase2/workflow/06-handoff-loop.mp4",

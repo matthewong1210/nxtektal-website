@@ -202,6 +202,9 @@ main { background: var(--night); }
 .phero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; background: var(--night); }
 .phero-media { position: absolute; inset: 0; }
 .phero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
+.phero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; opacity: 0; transition: opacity 900ms ease; pointer-events: none; }
+.phero-video.is-live { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .phero-video { display: none; } }
 .phero-contours { position: absolute; inset: 0; width: 100%; height: 100%; }
 .phero-contours path { fill: none; stroke: rgba(245, 247, 247, 0.1); stroke-width: 1.2; }
 .phero-scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(4, 7, 13, 0.6), rgba(4, 7, 13, 0.18) 120px, transparent 180px), linear-gradient(90deg, rgba(4, 7, 13, 0.78), rgba(4, 7, 13, 0.42) 46%, rgba(4, 7, 13, 0.08) 72%), linear-gradient(to top, rgba(4, 7, 13, 0.55), transparent 30%); }
