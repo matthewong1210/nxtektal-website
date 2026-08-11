@@ -49,22 +49,30 @@ export default function HeroBackgroundVideo() {
     }
     const video = ref.current;
     if (!video) return;
-    video.play().catch(() => {});
-    // Strict autoplay policies (battery-saver modes) need a user gesture
-    // first — retry once after the first interaction. Touch grants user
-    // activation at pointerup/touchend (not -down/-start), so listen there
-    // or the one-shot retry burns before activation exists.
-    const retry = () => {
+    const tryPlay = () => {
       if (video.paused) video.play().catch(() => {});
     };
-    const options = { once: true, passive: true } as const;
-    window.addEventListener("pointerup", retry, options);
-    window.addEventListener("touchend", retry, options);
-    window.addEventListener("keydown", retry, options);
+    tryPlay();
+    // Stay armed for the whole eligible session — a paused video must never
+    // strand the hero on the poster until reload. Browsers pause background
+    // tabs / low-power sessions; `visibilitychange` resumes on return, and
+    // the gesture listeners cover strict autoplay policies that need a user
+    // activation (granted at pointerup/touchend, not -down/-start). These
+    // are cheap no-ops while playing; one-shot listeners proved
+    // insufficient because a later browser pause found them consumed.
+    const onVisibility = () => {
+      if (!document.hidden) tryPlay();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    const options = { passive: true } as const;
+    window.addEventListener("pointerup", tryPlay, options);
+    window.addEventListener("touchend", tryPlay, options);
+    window.addEventListener("keydown", tryPlay, options);
     return () => {
-      window.removeEventListener("pointerup", retry);
-      window.removeEventListener("touchend", retry);
-      window.removeEventListener("keydown", retry);
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pointerup", tryPlay);
+      window.removeEventListener("touchend", tryPlay);
+      window.removeEventListener("keydown", tryPlay);
     };
   }, [eligible]);
 
