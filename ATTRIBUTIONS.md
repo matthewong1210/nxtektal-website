@@ -22,10 +22,10 @@ repository.
 
 ## Workflow physical-loop media (`public/visuals/phase2/workflow/`)
 
-The WASH & DISPENSE loop and poster are an AI-generated product concept
-render produced by the founders with **Dreamina**, supplied 2026-08-04/06;
-usage rights per Dreamina's terms for user-generated content — confirm
-commercial terms before launch. The COLLECT loop and poster are a
+The WASH & DISPENSE loop and poster are derived from concept footage of
+the washer trough and dispensing conveyor supplied by the founders
+2026-08-11 (generating tool not recorded at hand-off — record it here and
+confirm commercial terms before launch). The COLLECT loop and poster are a
 **Dreamina** render of the current collection-robot design (integrated
 front roller picker) supplied 2026-08-11, same terms. The RETURN and
 HANDOFF loops and posters are derived from the 2026-08-11 hero film (see
@@ -45,7 +45,10 @@ The tracked-collector Master Product Visual (Dreamina render supplied
 loops (Dreamina, 2026-08-04/06) were replaced by the 2026-08-11 hero-film
 derivations above; their attributions are preserved in git history. The
 public "Product development visualization" label was retired in the
-Phase 2E release patch.
+Phase 2E release patch. The previous WASH & DISPENSE footage (dual-arm rig
+tipping a basket into the washer intake) was removed in full at the
+founders' direction 2026-08-11; its attribution is preserved in git
+history.
 
 The earth/space hero sequence (NASA-derived textures via three.js, Dreamina
 earth/space footage, Pexels Milky Way photo by Jonathan Borba) was removed

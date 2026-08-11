@@ -240,14 +240,17 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
     mp4: "/visuals/phase2/workflow/06-handoff-loop.mp4",
   },
   {
-    // 07 WASH & DISPENSE — basket tipping balls into the existing washer
-    // intake; facility equipment (trough, buckets, conveyor) visible.
+    // 07 WASH & DISPENSE — the washer trough churning collected balls while
+    // the elevator conveys cleaned balls up toward dispensing (concept
+    // footage supplied 2026-08-11, decimated to its native 24fps cadence at
+    // 720p with a 0.5s self-crossfade → seamless ~2.4s loop; replaces the
+    // retired dual-arm basket-tip footage at the founders' direction).
     still: {
       avif: "/visuals/phase2/workflow/07-wash-dispense-poster.avif",
       webp: "/visuals/phase2/workflow/07-wash-dispense-poster.webp",
       width: 1280,
       height: 720,
-      alt: "Golf balls pouring from the transfer robot's basket into the facility's existing washer intake trough",
+      alt: "Golf balls churning in the washer trough while an elevator conveyor carries cleaned balls up toward the dispenser",
     },
     webm: "/visuals/phase2/workflow/07-wash-dispense-loop.webm",
     mp4: "/visuals/phase2/workflow/07-wash-dispense-loop.mp4",
