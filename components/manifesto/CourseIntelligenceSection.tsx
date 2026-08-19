@@ -3,6 +3,7 @@ import {
   COURSE_INTEL_BRIEFING,
   COURSE_INTEL_BRIEFING_ACTIONS,
   COURSE_INTEL_CONDITION_COVERAGE,
+  COURSE_INTEL_COPY,
   COURSE_INTEL_COVERAGE_CALLOUT,
   COURSE_INTEL_FACILITY_VALUE,
   COURSE_INTEL_FLOW,
@@ -38,24 +39,17 @@ export default function CourseIntelligenceSection() {
     <section className="block ci-block" id="course-intelligence">
       <div className="block-inner">
         <Reveal>
-          <div className="eyebrow">COURSE INTELLIGENCE · PLATFORM DIRECTION</div>
-          <h2>Map the course once. Let every cart inspect it continuously.</h2>
-          <p className="ci-tagline">Map deeply. Inspect continuously. Maintain proactively.</p>
+          <div className="eyebrow">{COURSE_INTEL_COPY.eyebrow}</div>
+          <h2>{COURSE_INTEL_COPY.heading}</h2>
+          <p className="ci-tagline">{COURSE_INTEL_COPY.tagline}</p>
         </Reveal>
+        {COURSE_INTEL_COPY.intro.map((paragraph) => (
+          <Reveal key={paragraph.slice(0, 24)}>
+            <p className="section-body">{paragraph}</p>
+          </Reveal>
+        ))}
         <Reveal>
-          <p className="section-body">
-            At deployment, NXTektal can turn a golf course into a calibrated, versioned 3D Course World Model. Positioning, calibrated cameras, edge processing, and connectivity can then turn existing golf carts into mobile inspection nodes — capturing georeferenced evidence of divots and turf anomalies during normal operation.
-          </p>
-        </Reveal>
-        <Reveal>
-          <p className="section-body">
-            NXTektal can combine repeat observations, distinguish course condition from inspection coverage, and turn the resulting evidence into prioritized maintenance recommendations for the grounds team.
-          </p>
-        </Reveal>
-        <Reveal>
-          <p className="ci-support">
-            The carts remain human-driven, and grounds supervisors remain in control of every maintenance decision. Player-facing shot intelligence can operate on the same mapped infrastructure as an optional module.
-          </p>
+          <p className="ci-support">{COURSE_INTEL_COPY.support}</p>
         </Reveal>
 
         <Reveal>
@@ -137,8 +131,8 @@ export default function CourseIntelligenceSection() {
         <Reveal>
           <div className="ci-brief" role="group" aria-label="Illustrative grounds maintenance briefing concept">
             <div className="ci-brief-head">
-              <span className="ci-brief-title">GROUNDS MAINTENANCE BRIEFING</span>
-              <span className="ci-status">ILLUSTRATIVE CONCEPT</span>
+              <span className="ci-brief-title">{COURSE_INTEL_COPY.briefingTitle}</span>
+              <span className="ci-status">{COURSE_INTEL_COPY.briefingTag}</span>
             </div>
             <ul className="ci-brief-rows">
               {COURSE_INTEL_BRIEFING.map((row) => (
@@ -154,16 +148,14 @@ export default function CourseIntelligenceSection() {
                 <span key={action}>{action}</span>
               ))}
             </p>
-            <p className="ci-caption">
-              Illustrative supervisor briefing — simulated content, not live facility data. Every action remains a human decision.
-            </p>
+            <p className="ci-caption">{COURSE_INTEL_COPY.briefingCaption}</p>
           </div>
         </Reveal>
 
         <Reveal>
           <div className="ci-value">
             <div className="ci-value-col">
-              <h3>For the facility</h3>
+              <h3>{COURSE_INTEL_COPY.facilityHeading}</h3>
               <ul>
                 {COURSE_INTEL_FACILITY_VALUE.map((item) => (
                   <li key={item}>{item}</li>
@@ -171,7 +163,7 @@ export default function CourseIntelligenceSection() {
               </ul>
             </div>
             <div className="ci-value-col">
-              <h3>Optional player intelligence</h3>
+              <h3>{COURSE_INTEL_COPY.playerHeading}</h3>
               <ul>
                 {COURSE_INTEL_PLAYER_VALUE.map((item) => (
                   <li key={item}>{item}</li>
@@ -182,9 +174,7 @@ export default function CourseIntelligenceSection() {
         </Reveal>
 
         <Reveal>
-          <p className="ci-thesis">
-            The unit of autonomy is the facility, not a single robot. A retrofitted cart is not a standalone consumer gadget — it is a mobile inspection node in the NXTektal operating layer.
-          </p>
+          <p className="ci-thesis">{COURSE_INTEL_COPY.thesis}</p>
         </Reveal>
       </div>
     </section>

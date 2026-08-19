@@ -18,6 +18,44 @@
  * commercial wedge; this chapter is the next platform layer, not a pivot.
  */
 
+/** Every piece of public-facing chapter copy that is not already one of the
+ * structured collections below — so the complete rendered corpus sits under
+ * the claims-discipline tests. */
+export type CourseIntelligenceCopy = {
+  eyebrow: string;
+  heading: string;
+  tagline: string;
+  /** Introductory paragraphs, in render order. */
+  intro: readonly string[];
+  support: string;
+  briefingTitle: string;
+  briefingTag: string;
+  briefingCaption: string;
+  facilityHeading: string;
+  playerHeading: string;
+  thesis: string;
+};
+
+export const COURSE_INTEL_COPY: CourseIntelligenceCopy = {
+  eyebrow: "COURSE INTELLIGENCE · PLATFORM DIRECTION",
+  heading: "Map the course once. Let every cart inspect it continuously.",
+  tagline: "Map deeply. Inspect continuously. Maintain proactively.",
+  intro: [
+    "At deployment, NXTektal can turn a golf course into a calibrated, versioned 3D Course World Model. Positioning, calibrated cameras, edge processing, and connectivity can then turn existing golf carts into mobile inspection nodes — capturing georeferenced evidence of divots and turf anomalies during normal operation.",
+    "NXTektal can combine repeat observations, distinguish course condition from inspection coverage, and turn the resulting evidence into prioritized maintenance recommendations for the grounds team.",
+  ],
+  support:
+    "The carts remain human-driven, and grounds supervisors remain in control of every maintenance decision. Player-facing shot intelligence can operate on the same mapped infrastructure as an optional module.",
+  briefingTitle: "GROUNDS MAINTENANCE BRIEFING",
+  briefingTag: "ILLUSTRATIVE CONCEPT",
+  briefingCaption:
+    "Illustrative supervisor briefing — simulated content, not live facility data. Every action remains a human decision.",
+  facilityHeading: "For the facility",
+  playerHeading: "Optional player intelligence",
+  thesis:
+    "The unit of autonomy is the facility, not a single robot. A retrofitted cart is not a standalone consumer gadget — it is a mobile inspection node in the NXTektal operating layer.",
+};
+
 export type CourseIntelligenceStage = {
   /** 1-based stage number in platform order. */
   number: 1 | 2 | 3;
