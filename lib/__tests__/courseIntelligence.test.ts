@@ -1,62 +1,126 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  COURSE_INTEL_BRIEFING,
+  COURSE_INTEL_BRIEFING_ACTIONS,
+  COURSE_INTEL_CONDITION_COVERAGE,
+  COURSE_INTEL_COVERAGE_CALLOUT,
   COURSE_INTEL_FACILITY_VALUE,
   COURSE_INTEL_FLOW,
+  COURSE_INTEL_FUTURE_BRANCH_LABEL,
   COURSE_INTEL_FUTURE_FLOW,
   COURSE_INTEL_LOOP,
+  COURSE_INTEL_PLAYER_BRANCH_LABEL,
+  COURSE_INTEL_PLAYER_FLOW,
   COURSE_INTEL_PLAYER_VALUE,
   COURSE_INTEL_QUALIFICATION,
   COURSE_INTEL_STAGES,
 } from "../courseIntelligence";
 
-describe("approved stages", () => {
-  it("keeps the three stages in platform order with truthful statuses", () => {
+const flat = (nodes: { name: string; note: string }[]) =>
+  nodes.flatMap((n) => [n.name, n.note]).join(" ").toLowerCase();
+
+describe("grounds-operations spine", () => {
+  it("keeps the three stages in platform order, all PLATFORM DIRECTION", () => {
     expect(COURSE_INTEL_STAGES.map((s) => s.label)).toEqual([
-      "SCAN & COMMISSION",
-      "RETROFIT EXISTING CARTS",
-      "LOCALIZED COURSE CARE",
+      "MAP & COMMISSION",
+      "INSPECT CONTINUOUSLY",
+      "PRIORITIZE & VERIFY",
     ]);
-    expect(COURSE_INTEL_STAGES.map((s) => s.status)).toEqual([
-      "PLATFORM DIRECTION",
-      "PLATFORM DIRECTION",
-      "FUTURE MODULE",
-    ]);
+    expect(COURSE_INTEL_STAGES.every((s) => s.status === "PLATFORM DIRECTION")).toBe(true);
   });
 
-  it("keeps course care future, safety-gated, and human-confirmed", () => {
-    const stage3 = COURSE_INTEL_STAGES[2];
-    expect(stage3.body.toLowerCase()).toContain("future");
-    expect(stage3.body.toLowerCase()).toContain("human-confirmed");
-    expect(stage3.body.toLowerCase()).toContain("safety-gated");
-  });
-});
-
-describe("platform sequence and flow", () => {
-  it("keeps the approved MAP→…→REPAIR sequence", () => {
+  it("keeps the approved grounds operating sequence", () => {
     expect([...COURSE_INTEL_LOOP]).toEqual([
       "MAP",
       "LOCALIZE",
-      "OBSERVE",
-      "PREDICT",
-      "GUIDE",
-      "LEARN",
-      "REPAIR",
+      "INSPECT",
+      "DETECT",
+      "DEDUPLICATE",
+      "PRIORITIZE",
+      "CONFIRM",
+      "VERIFY",
     ]);
   });
 
-  it("keeps the cart human-driven and the landing output probabilistic", () => {
-    const corpus = COURSE_INTEL_FLOW.flatMap((n) => [n.name, n.note]).join(" ").toLowerCase();
-    expect(corpus).toContain("human-driven");
-    expect(corpus).toContain("vendor-neutral");
-    expect(corpus).toContain("probability region");
-    expect(corpus).toContain("structured map data");
+  it("carries the grounds-intelligence vocabulary end to end", () => {
+    const corpus = [
+      flat(COURSE_INTEL_FLOW),
+      COURSE_INTEL_STAGES.map((s) => `${s.title} ${s.body}`).join(" ").toLowerCase(),
+      COURSE_INTEL_FACILITY_VALUE.join(" ").toLowerCase(),
+    ].join(" ");
+    for (const key of [
+      "condition",
+      "coverage",
+      "deduplicat",
+      "maintenance briefing",
+      "supervisor",
+      "human-reviewed",
+      "verification",
+      "human-driven",
+      "structured map data",
+      "versioned",
+    ]) {
+      expect(corpus, `missing: ${key}`).toContain(key);
+    }
   });
 
-  it("keeps the future branch human-confirmed and stationary", () => {
-    const corpus = COURSE_INTEL_FUTURE_FLOW.flatMap((n) => [n.name, n.note]).join(" ").toLowerCase();
-    expect(corpus).toContain("human-confirmed");
-    expect(corpus).toContain("stationary");
+  it("keeps condition and coverage distinct, and never equates no-observation with no-issue", () => {
+    expect(COURSE_INTEL_CONDITION_COVERAGE.map((c) => c.name)).toEqual([
+      "Course condition",
+      "Inspection coverage",
+    ]);
+    expect(COURSE_INTEL_COVERAGE_CALLOUT).toContain("No observation is not the same as no issue");
+    expect(COURSE_INTEL_COVERAGE_CALLOUT.toLowerCase()).toContain("coverage remains incomplete");
+  });
+});
+
+describe("branch containment", () => {
+  it("keeps launch-monitor vocabulary only in the optional player module", () => {
+    const outside = [
+      flat(COURSE_INTEL_FLOW),
+      flat(COURSE_INTEL_FUTURE_FLOW),
+      COURSE_INTEL_STAGES.map((s) => `${s.label} ${s.title} ${s.body}`).join(" ").toLowerCase(),
+      COURSE_INTEL_FACILITY_VALUE.join(" ").toLowerCase(),
+    ].join(" ");
+    for (const key of ["launch", "landing region", "club"]) {
+      expect(outside, `player vocabulary leaked: ${key}`).not.toContain(key);
+    }
+    expect(COURSE_INTEL_PLAYER_BRANCH_LABEL).toContain("OPTIONAL");
+    const player = flat(COURSE_INTEL_PLAYER_FLOW);
+    expect(player).toContain("launch-monitor");
+    expect(player).toContain("vendor-neutral");
+    expect(player).toContain("probability region");
+  });
+
+  it("keeps actuator vocabulary only in the future safety-gated branch", () => {
+    const outside = [
+      flat(COURSE_INTEL_FLOW),
+      flat(COURSE_INTEL_PLAYER_FLOW),
+      COURSE_INTEL_STAGES.map((s) => `${s.label} ${s.title} ${s.body}`).join(" ").toLowerCase(),
+    ].join(" ");
+    for (const key of ["sand", "tamp", "auger", "nozzle"]) {
+      expect(outside, `actuator vocabulary leaked: ${key}`).not.toContain(key);
+    }
+    expect(COURSE_INTEL_FUTURE_BRANCH_LABEL).toContain("FUTURE");
+    expect(COURSE_INTEL_FUTURE_BRANCH_LABEL).toContain("SAFETY-GATED");
+    const future = flat(COURSE_INTEL_FUTURE_FLOW);
+    expect(future).toContain("human-confirmed");
+    expect(future).toContain("stationary");
+  });
+});
+
+describe("illustrative briefing", () => {
+  it("keeps the supervisor in control and coverage gaps inconclusive", () => {
+    expect([...COURSE_INTEL_BRIEFING_ACTIONS]).toEqual([
+      "CONFIRM",
+      "DEFER",
+      "MONITOR",
+      "FALSE POSITIVE",
+    ]);
+    const gap = COURSE_INTEL_BRIEFING[COURSE_INTEL_BRIEFING.length - 1];
+    expect(gap.place.toLowerCase()).toContain("coverage gap");
+    expect(gap.evidence.toLowerCase()).toContain("no conclusion");
   });
 });
 
@@ -65,11 +129,15 @@ describe("claims discipline", () => {
     const corpus = [
       ...COURSE_INTEL_STAGES.flatMap((s) => [s.label, s.title, s.body, s.status]),
       ...COURSE_INTEL_FLOW.flatMap((n) => [n.name, n.note]),
+      ...COURSE_INTEL_PLAYER_FLOW.flatMap((n) => [n.name, n.note]),
       ...COURSE_INTEL_FUTURE_FLOW.flatMap((n) => [n.name, n.note]),
+      ...COURSE_INTEL_CONDITION_COVERAGE.flatMap((c) => [c.name, c.note]),
+      COURSE_INTEL_COVERAGE_CALLOUT,
+      ...COURSE_INTEL_FACILITY_VALUE,
+      ...COURSE_INTEL_PLAYER_VALUE,
+      ...COURSE_INTEL_BRIEFING.flatMap((r) => [r.place, r.finding, r.evidence, r.action]),
       // The qualification is asserted separately: its only "deployed" is the
       // negation "not …a deployed cart integration".
-      ...COURSE_INTEL_PLAYER_VALUE,
-      ...COURSE_INTEL_FACILITY_VALUE,
     ]
       .join(" ")
       .toLowerCase();
@@ -82,11 +150,13 @@ describe("claims discipline", () => {
       "every launch monitor",
       "every golf cart",
       "every ball",
+      "every divot",
       "perfectly",
       "eliminates",
       "autonomously drives",
       "customer",
       "guaranteed",
+      "no issue found",
     ]) {
       expect(corpus, `banned claim: ${banned}`).not.toContain(banned);
     }

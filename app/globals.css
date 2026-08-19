@@ -754,7 +754,7 @@ main { background: var(--night); }
 .ci-loop { margin: clamp(26px, 3vw, 40px) 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 6px; }
 .ci-loop li { padding: 7px 13px; border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(13, 17, 23, 0.85); color: var(--white-soft); font-size: 11px; font-weight: 780; letter-spacing: 0.08em; }
 .ci-loop li:not(:last-child)::after { content: "→"; margin-left: -2px; padding-left: 10px; color: var(--white-faint); font-weight: 400; }
-.ci-loop .ci-loop-future { border-color: var(--amber-line); color: var(--amber-soft); }
+.ci-tagline { margin: clamp(12px, 1.4vw, 18px) 0 0; color: var(--lime); font-size: clamp(13px, 1.1vw, 15px); font-weight: 780; letter-spacing: 0.06em; }
 .ci-duo { margin-top: clamp(34px, 4vw, 56px); display: grid; grid-template-columns: 1fr; grid-template-areas: "flow" "stages"; gap: clamp(26px, 3vw, 44px); align-items: start; }
 .ci-flow-cell { grid-area: flow; min-width: 0; }
 .ci-stages { grid-area: stages; display: grid; gap: clamp(14px, 1.8vw, 22px); min-width: 0; }
@@ -777,6 +777,28 @@ main { background: var(--night); }
 .ci-branch-head { margin: 0 0 14px; color: var(--amber-soft); font-size: 10px; font-weight: 800; letter-spacing: 0.14em; }
 .ci-chain--future li { border-color: var(--amber-line); background: rgba(23, 18, 10, 0.55); }
 .ci-chain--future li + li::before { color: var(--amber); }
+.ci-branch--player { border-color: var(--blue-line); }
+.ci-branch--player .ci-branch-head { color: var(--blue); }
+.ci-chain--player li { border-color: var(--blue-line); background: rgba(10, 16, 26, 0.6); }
+.ci-chain-split { padding: 0 !important; border: none !important; background: none !important; }
+.ci-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 430px) { .ci-pair { grid-template-columns: 1fr; } }
+.ci-pair-cell { padding: 10px 14px 11px; border: 1px solid var(--blue-line); border-radius: 12px; background: rgba(10, 16, 26, 0.75); }
+.ci-pair-cell strong { display: block; color: var(--blue); font-size: clamp(11.5px, 0.95vw, 13px); font-weight: 780; letter-spacing: 0.06em; text-transform: uppercase; }
+.ci-pair-cell span { display: block; margin-top: 3px; color: var(--white-faint); font-size: clamp(11.5px, 0.95vw, 12.5px); line-height: 1.5; }
+.ci-callout { margin: 10px 0 0; padding: 9px 14px; border: 1px dashed var(--blue-line); border-radius: 10px; color: var(--white-soft); font-size: clamp(11.5px, 0.95vw, 12.5px); line-height: 1.55; font-weight: 640; }
+.ci-brief { margin-top: clamp(34px, 4vw, 56px); padding: clamp(18px, 2.2vw, 28px); border: 1px solid var(--line-strong); border-radius: var(--radius-m); background: rgba(9, 13, 19, 0.72); }
+.ci-brief-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.ci-brief-title { color: var(--white); font-size: clamp(12px, 1vw, 13.5px); font-weight: 800; letter-spacing: 0.12em; }
+.ci-brief-rows { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.ci-brief-rows li { padding: 12px 14px; border: 1px solid var(--line-strong); border-radius: 12px; background: rgba(13, 17, 23, 0.9); display: grid; gap: 3px; }
+.ci-brief-rows strong { color: var(--white); font-size: clamp(11.5px, 0.95vw, 13px); font-weight: 780; letter-spacing: 0.08em; }
+.ci-brief-rows span { color: var(--white-faint); font-size: clamp(12px, 1vw, 13.5px); line-height: 1.5; }
+.ci-brief-rows .ci-brief-meta { color: var(--white-soft); font-size: clamp(11px, 0.9vw, 12.5px); }
+.ci-brief-rows li:last-child { border-style: dashed; }
+.ci-brief-actions { margin: 14px 0 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.ci-brief-actions span { padding: 5px 12px; border: 1px solid var(--line-strong); border-radius: 999px; color: var(--white-soft); font-size: 10.5px; font-weight: 800; letter-spacing: 0.08em; }
+.ci-brief-actions span:first-child { border-color: var(--lime-line); color: var(--lime); }
 .ci-caption { margin: clamp(14px, 1.6vw, 20px) 0 0; color: var(--white-faint); font-size: 11.5px; line-height: 1.55; font-style: normal; }
 .ci-value { margin-top: clamp(34px, 4vw, 56px); display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2.2vw, 30px); }
 .ci-value-col h3 { margin: 0; color: var(--white); font-size: clamp(14px, 1.2vw, 16px); font-weight: 720; letter-spacing: 0.02em; }

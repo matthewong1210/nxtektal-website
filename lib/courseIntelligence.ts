@@ -1,9 +1,17 @@
 /**
- * Course Intelligence & smart-cart retrofit chapter — approved copy as data
- * (mirrors the expansionStages/equipmentCompare pattern) so tests can hold
- * the section to the qualified narrative: statuses never inflate, the cart
- * stays human-driven, landing output stays probabilistic, and course-care
- * execution stays future and human-confirmed.
+ * Course Intelligence chapter — approved copy as data (mirrors the
+ * expansionStages/equipmentCompare pattern) so tests can hold the section
+ * to the qualified narrative.
+ *
+ * Narrative spine (grounds operations first): map the course into a
+ * versioned 3D Course World Model, let existing human-driven carts inspect
+ * it continuously as mobile sensing nodes, separate course CONDITION from
+ * inspection COVERAGE, cluster and deduplicate repeat observations into
+ * tracked issues, deliver an evidence-backed maintenance briefing, keep
+ * the grounds supervisor in control of every decision, and verify repairs
+ * on a later cart pass. Player-facing shot intelligence is an OPTIONAL
+ * module on the same mapped infrastructure; mechanical course care is a
+ * FUTURE, safety-gated execution branch.
  *
  * Narrative position: after the intelligence layer, before ROI and the
  * Expansion chapters. The driving-range closed loop remains the current
@@ -16,79 +24,147 @@ export type CourseIntelligenceStage = {
   label: string;
   title: string;
   body: string;
-  status: "PLATFORM DIRECTION" | "FUTURE MODULE";
+  status: "PLATFORM DIRECTION";
 };
 
 export const COURSE_INTEL_STAGES: CourseIntelligenceStage[] = [
   {
     number: 1,
-    label: "SCAN & COMMISSION",
-    title: "Build a shared 3D understanding of the course.",
-    body: "Professional site scanning captures terrain, elevation, fairways, greens, bunkers, water, cart paths, trees, and operating zones. The processed map becomes a structured Course World Model available to the facility's local NXTektal deployment.",
+    label: "MAP & COMMISSION",
+    title: "Establish a shared spatial baseline for the course.",
+    body: "Professional site scanning captures terrain, elevation, fairways, greens, bunkers, water, cart paths, and operating zones in one coordinate system. The processed map becomes a versioned Course World Model — the shared spatial baseline for the facility's local NXTektal deployment.",
     status: "PLATFORM DIRECTION",
   },
   {
     number: 2,
-    label: "RETROFIT EXISTING CARTS",
-    title: "Add intelligence without replacing the fleet.",
-    body: "Positioning, edge compute, a player display, and compatible launch-monitor data can turn an existing cart into a connected sensing node. Each observed shot can be projected into the course model as a likely landing region and used to guide the player toward the search area.",
+    label: "INSPECT CONTINUOUSLY",
+    title: "Turn the carts already on site into mobile inspection nodes.",
+    body: "Positioning, calibrated cameras, and edge processing can let existing carts capture divot and turf-anomaly candidates during normal operation — selected evidence with coordinates, time, and camera pose rather than full video uploads. Coverage is recorded only where a valid view was actually obtained.",
     status: "PLATFORM DIRECTION",
   },
   {
     number: 3,
-    label: "LOCALIZED COURSE CARE",
-    title: "Add mechanical execution after the sensing loop is proven.",
-    body: "A future removable module can inspect the strike area, dispense a measured amount of sand, press the repair, and verify the result. Initial operation would remain stationary, safety-gated, and human-confirmed.",
-    status: "FUTURE MODULE",
+    label: "PRIORITIZE & VERIFY",
+    title: "Turn repeated observations into evidence-backed grounds recommendations.",
+    body: "Repeat observations can be clustered and deduplicated into tracked condition issues, weighed against inspection coverage and evidence gaps, and delivered as a prioritized maintenance briefing. The grounds supervisor confirms each action, and a later cart pass can verify the repair.",
+    status: "PLATFORM DIRECTION",
   },
 ];
 
-/** The platform sequence strip. REPAIR is the future step. */
+/** The grounds-intelligence operating sequence. */
 export const COURSE_INTEL_LOOP = [
   "MAP",
   "LOCALIZE",
-  "OBSERVE",
-  "PREDICT",
-  "GUIDE",
-  "LEARN",
-  "REPAIR",
+  "INSPECT",
+  "DETECT",
+  "DEDUPLICATE",
+  "PRIORITIZE",
+  "CONFIRM",
+  "VERIFY",
 ] as const;
 
 export type FlowNode = { name: string; note: string };
 
-/** Main system flow — every node ships with its qualifying annotation. */
+/** Main system flow — grounds operations. No launch-monitor or actuator
+ * vocabulary belongs here: those live only in their branches below. */
 export const COURSE_INTEL_FLOW: FlowNode[] = [
   { name: "Professional course scan", note: "At deployment, by the NXTektal team" },
-  { name: "3D Course World Model", note: "Stored at the facility · queried as structured map data" },
-  { name: "Existing golf cart + retrofit kit", note: "Human-driven · a connected sensing node" },
-  { name: "Position + shot observation", note: "Compatible launch monitors · vendor-neutral adapter" },
-  { name: "Predicted landing region", note: "A probability region, not an exact point" },
-  { name: "Player guidance + facility intelligence", note: "Search area · distance and club context" },
+  { name: "Versioned 3D Course World Model", note: "Shared facility infrastructure · queried as structured map data" },
+  { name: "Existing cart + pose + calibrated camera", note: "Human-driven · a mobile inspection node" },
+  { name: "Edge-filtered condition observations", note: "Selected evidence with coordinates, time, and camera pose — not full video" },
+  { name: "Condition + coverage", note: "Two records, kept distinct" },
+  { name: "Issue clustering + deduplication", note: "Repeat observations become tracked issues" },
+  { name: "Evidence-backed maintenance briefing", note: "Prioritized for the grounds team" },
+  { name: "Grounds supervisor decision", note: "Human-reviewed: confirm, defer, monitor, or reject" },
+  { name: "Crew action", note: "Existing staff and equipment" },
+  { name: "Later cart pass verifies outcome", note: "Verification recorded against the issue" },
   { name: "NXTektal Operating Layer", note: "Shared state, decisions, and learning" },
 ];
 
-/** Future branch — amber, safety-gated, human-confirmed. */
-export const COURSE_INTEL_FUTURE_FLOW: FlowNode[] = [
-  { name: "Strike-area observation", note: "Cart stationary · parking state confirmed" },
-  { name: "Human-confirmed divot repair", note: "Measured sand · force-limited press" },
-  { name: "Verified course-care record", note: "Camera-verified result" },
+/** The condition/coverage distinction rendered inside the flow. */
+export const COURSE_INTEL_CONDITION_COVERAGE = [
+  { name: "Course condition", note: "What did the carts observe?" },
+  { name: "Inspection coverage", note: "Where did the carts obtain a valid view?" },
+] as const;
+
+export const COURSE_INTEL_COVERAGE_CALLOUT =
+  "No observation is not the same as no issue. NXTektal is designed to report where evidence is sufficient — and where inspection coverage remains incomplete.";
+
+/** Optional player branch — the only place launch-monitor vocabulary may appear. */
+export const COURSE_INTEL_PLAYER_BRANCH_LABEL = "OPTIONAL PLAYER MODULE";
+
+export const COURSE_INTEL_PLAYER_FLOW: FlowNode[] = [
+  { name: "Compatible launch-monitor data", note: "Vendor-neutral adapter · from the cart node" },
+  { name: "Predicted landing region", note: "A probability region, not an exact point" },
+  { name: "Ball-search + club guidance", note: "Course-aware distance and elevation" },
 ];
 
-export const COURSE_INTEL_PLAYER_VALUE = [
-  "Course context on every hole",
-  "A predicted landing region for each observed shot",
-  "Guidance toward the ball-search area",
-  "Distance, elevation, and club context",
-  "A personal shot history that improves over time",
+/** Future execution branch — the only place actuator vocabulary may appear. */
+export const COURSE_INTEL_FUTURE_BRANCH_LABEL =
+  "FUTURE COURSE-CARE MODULE · SAFETY-GATED";
+
+export const COURSE_INTEL_FUTURE_FLOW: FlowNode[] = [
+  { name: "Human-confirmed issue", note: "Cart stationary · parking state confirmed" },
+  { name: "Measured sand + force-limited tamp", note: "A future removable module" },
+  { name: "Camera-verified outcome", note: "Recorded against the course-care history" },
 ];
 
 export const COURSE_INTEL_FACILITY_VALUE = [
-  "A shared, calibrated 3D course model",
-  "Connected-cart sensing across the course",
-  "Shot and traffic observations for operations",
-  "Maintenance-location intelligence",
-  "New structured inputs to the operating layer",
+  "Versioned 3D Course World Model",
+  "Mobile cart-based inspection",
+  "Inspection coverage and evidence quality",
+  "Georeferenced condition observations",
+  "Repeat-issue clustering and deduplication",
+  "Prioritized grounds maintenance briefing",
+  "Supervisor review and decision history",
+  "Repair verification",
+  "Operational memory over time",
 ];
+
+export const COURSE_INTEL_PLAYER_VALUE = [
+  "Predicted landing region",
+  "Ball-search guidance",
+  "Course-aware distance and elevation",
+  "Club recommendation",
+  "Personal shot history",
+];
+
+/** Illustrative grounds-briefing concept rows (simulated content, matching
+ * the site's existing illustrative-dashboard precedent). */
+export type BriefingRow = {
+  place: string;
+  finding: string;
+  evidence: string;
+  action: string;
+};
+
+export const COURSE_INTEL_BRIEFING: BriefingRow[] = [
+  {
+    place: "HOLE 7 · FAIRWAY",
+    finding: "7 independent repair areas · repeated across 4 cart observations",
+    evidence: "Evidence quality: High",
+    action: "Suggested action: Inspect before opening",
+  },
+  {
+    place: "HOLE 12 · WHITE TEE",
+    finding: "Repeated turf-wear candidate · trend: expanding",
+    evidence: "Evidence quality: Medium",
+    action: "Suggested action: Review tee-marker rotation",
+  },
+  {
+    place: "COVERAGE GAP · HOLE 9 · LEFT ROUGH",
+    finding: "Insufficient valid inspection",
+    evidence: "No conclusion is drawn for this area",
+    action: "Suggested action: Route a validating pass",
+  },
+];
+
+export const COURSE_INTEL_BRIEFING_ACTIONS = [
+  "CONFIRM",
+  "DEFER",
+  "MONITOR",
+  "FALSE POSITIVE",
+] as const;
 
 export const COURSE_INTEL_QUALIFICATION =
   "Illustrative platform direction — not live facility data or a deployed cart integration.";

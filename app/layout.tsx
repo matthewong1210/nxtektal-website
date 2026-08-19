@@ -46,7 +46,14 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body>{children}</body>
+      <body>
+        {/* Without JavaScript the IntersectionObserver never lifts Reveal's
+            entrance state — show all content immediately instead. */}
+        <noscript>
+          <style>{`.reveal { opacity: 1; transform: none; }`}</style>
+        </noscript>
+        {children}
+      </body>
     </html>
   );
 }
