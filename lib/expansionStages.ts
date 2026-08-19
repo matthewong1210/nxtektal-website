@@ -39,6 +39,8 @@ export const EXPANSION_STAGES: ExpansionStage[] = [
     title: "Inspection and Grounds Care",
     status: "PLATFORM DIRECTION",
     capabilities: [
+      "3D course commissioning",
+      "Existing-cart sensing and shot intelligence",
       "Drone inspection and mapping",
       "Turf and soil monitoring",
       "Bunker maintenance",
