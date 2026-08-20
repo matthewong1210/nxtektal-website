@@ -53,24 +53,25 @@ export const heroMasterFrame: HeroMasterFrame = {
   desktop: {
     avif: "/visuals/phase2/hero/master-frame.avif",
     webp: "/visuals/phase2/hero/master-frame.webp",
-    width: 1920,
-    height: 1080,
+    width: 3840,
+    height: 2160,
   },
   mobile: {
     avif: "/visuals/phase2/hero/master-frame-mobile.avif",
     webp: "/visuals/phase2/hero/master-frame-mobile.webp",
-    width: 705,
-    height: 940,
+    width: 1620,
+    height: 2160,
   },
-  // Hero background film (Phase 2G v2): trimmed re-encode of the NXTektal
+  // Hero background film (Phase 2G v3): trimmed re-encode of the NXTektal
   // hero film supplied 2026-08-11 (concept visualization — dawn facility
   // aerial with operating-layer scan, bunker care, the collection robot
   // sweeping balls, universal handoff into the ball-handling station, turf
   // robot, coordination routes). Logo intro/outro and closing watermark are
   // cut (source 1.5s–14.8s) and the tail self-crossfades into the head for
-  // a seamless ~12.9s ambient loop. 1920×1080@30 downscaled from the 4K
-  // source, no audio track. Desktop-only enhancement: mobile,
-  // reduced-motion, and every failure path keep the master frame.
+  // a seamless ~12.9s ambient loop. Native 3840×2160@30 (crisp on retina
+  // displays), no audio track; VP9 WebM first, HEVC (hvc1) MP4 for Safari.
+  // Desktop-only enhancement: mobile, reduced-motion, and every failure
+  // path keep the master frame.
   loop: {
     webm: "/visuals/phase2/hero/hero-loop.webm",
     mp4: "/visuals/phase2/hero/hero-loop.mp4",

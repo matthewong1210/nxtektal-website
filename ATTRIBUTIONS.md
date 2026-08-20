@@ -11,8 +11,9 @@ The hero background film (`hero-loop.webm` / `hero-loop.mp4`), both hero
 master-frame stills, and the RETURN / HANDOFF workflow loops and posters
 are all derived from one AI-generated NXTektal hero concept film supplied
 by the founders 2026-08-11 (4K 120fps hand-off) — logo intro/outro and the
-closing watermark removed, audio track stripped, hero film downscaled to
-1920×1080, workflow segments retimed to half speed at 1280×720. This
+closing watermark removed, audio track stripped, hero film at the source's
+native 3840×2160, workflow segments retimed (half or quarter speed) at
+1280×720. This
 supersedes the 2026-08-10 film and the earlier tracked-collector render
 stills, which are deleted. Concept visualization, not live facility
 footage. Usage rights follow the generating tool's terms for user-generated
