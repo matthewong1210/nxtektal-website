@@ -8,6 +8,7 @@ import EquipmentCompare from "../components/manifesto/EquipmentCompare";
 import HandoffSequence from "../components/manifesto/HandoffSequence";
 import MediaFrame, { CAPTIONS } from "../components/media/MediaFrame";
 import IntelligenceSection from "../components/manifesto/IntelligenceSection";
+import CourseIntelligenceSection from "../components/manifesto/CourseIntelligenceSection";
 import WorkflowStory from "../components/manifesto/WorkflowStory";
 import SpotlightGroup from "../components/manifesto/SpotlightGroup";
 import Reveal from "./reveal";
@@ -313,6 +314,9 @@ export default function Home() {
 
       {/* 10 · Agent intelligence + 11 · Illustrative manager report */}
       <IntelligenceSection />
+
+      {/* Course intelligence & smart-cart retrofit — platform direction */}
+      <CourseIntelligenceSection />
 
       {/* 8 · ROI */}
       <QuickCalculator />
