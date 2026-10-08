@@ -3,7 +3,7 @@ import { ResponsiveStill } from "../media/ResponsiveMedia";
 import { handoffPanelStills } from "../../lib/visualAssets";
 
 /**
- * Three-panel Modular Ball Handoff concept sequence
+ * Three-panel ball handoff concept sequence
  * (PHASE_2B_VISUAL_BRIEF.md §2, §4.2).
  *
  * Sprint 2 ships the structure with schematic SVG placeholders drawn in
@@ -20,8 +20,8 @@ const panels = [
   {
     step: "01",
     name: "DOCK",
-    label: "Robot docks at the handoff point",
-    alt: "Robot docking at the modular handoff unit (concept)",
+    label: "Robot docks at the handoff unit",
+    alt: "Robot docking at the handoff unit (concept)",
     glyph: "dock",
   },
   {
@@ -93,7 +93,7 @@ function HandoffGlyph({ kind, alt }: { kind: (typeof panels)[number]["glyph"]; a
 export default function HandoffSequence() {
   return (
     <MediaFrame caption={CAPTIONS.engConcept} tone="light" bare className="handoff-frame">
-      <ol className="handoff-seq" aria-label="Modular ball handoff concept sequence: dock, transfer, verify and release">
+      <ol className="handoff-seq" aria-label="Ball handoff concept sequence: dock, transfer, verify and release">
         {panels.map((panel, index) => (
           <li key={panel.step} className="handoff-panel">
             <div className="handoff-stage">

@@ -163,7 +163,7 @@ export default function WorkflowStory() {
         <ol
           ref={listRef}
           className="wf-steps"
-          aria-label="Closed-loop workflow: monitor, prioritize, dispatch, collect, return, handoff, wash and dispense, verify"
+          aria-label="Range-ball workflow: monitor, prioritize, dispatch, collect, return, handoff, wash and dispense, verify"
         >
           {WORKFLOW_STEPS.map((step, index) => {
             const state = !enhanced

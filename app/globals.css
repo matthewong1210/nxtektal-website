@@ -211,20 +211,25 @@ main { background: var(--night); }
 .phero-contours path { fill: none; stroke: rgba(245, 247, 247, 0.1); stroke-width: 1.2; }
 .phero-scrim { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(4, 7, 13, 0.6), rgba(4, 7, 13, 0.18) 120px, transparent 180px), linear-gradient(90deg, rgba(4, 7, 13, 0.78), rgba(4, 7, 13, 0.42) 46%, rgba(4, 7, 13, 0.08) 72%), linear-gradient(to top, rgba(4, 7, 13, 0.55), transparent 30%); }
 .phero-inner { position: relative; z-index: 2; width: min(100%, var(--max)); margin: 0 auto; padding: 120px var(--pad) 48px; }
-.phero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(28px, 3.4vw, 46px); }
+.phero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: clamp(24px, 3vw, 40px) 0 0; padding: 0; list-style: none; }
 .phero-chip { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(9, 13, 19, 0.72); color: var(--white-soft); font-size: 12px; font-weight: 700; letter-spacing: 0.03em; animation: hero-fade 900ms ease both; animation-delay: 500ms; }
 .phero-chip--data { color: var(--blue); animation-delay: 620ms; }
+.phero-chip--note { color: var(--white-faint); border-style: dashed; animation-delay: 440ms; }
 .phero-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); }
 
 /* retired: absolute chapter positioning (sequence). Copy typography kept below. */
 .ez-copy { max-width: 660px; }
-.ez-copy h1 { margin: 30px 0 24px; color: var(--white); font-size: clamp(38px, 5.4vw, 78px); font-weight: 600; line-height: 1.02; letter-spacing: -0.048em; overflow-wrap: break-word; }
+/* Hero copy may run wider so the four-word-per-line H1 wraps to three lines and the
+   primary CTA stays above the fold at 1366×768 / 1440×800. */
+.ez-copy--hero { max-width: 760px; }
+.ez-copy--hero .ez-note { margin-top: 16px; }
+.ez-copy h1 { margin: 24px 0 20px; color: var(--white); font-size: clamp(38px, 5.4vw, 78px); font-weight: 600; line-height: 1.02; letter-spacing: -0.048em; overflow-wrap: break-word; }
 .ez-copy h2 { margin: 26px 0 0; color: var(--white); font-size: clamp(30px, 3.9vw, 56px); font-weight: 590; line-height: 1.06; letter-spacing: -0.04em; }
 .ez-body { max-width: 640px; margin: 0; color: var(--white-soft); font-size: clamp(16px, 1.35vw, 20px); line-height: 1.64; }
 .ez-note { max-width: 600px; margin: clamp(18px, 2vw, 28px) 0 0; color: var(--white-faint); font-size: clamp(13px, 1.1vw, 15px); line-height: 1.66; }
 
 .hero-em { color: var(--lime); font-weight: 640; }
-.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
 .hero-fade { animation: hero-fade var(--motion-reveal) var(--ease-expressive) both; }
 .hero-fade:nth-child(2) { animation-delay: 80ms; }
 .hero-fade:nth-child(3) { animation-delay: 160ms; }
@@ -376,7 +381,7 @@ main { background: var(--night); }
 .dash-card--summary li { position: relative; break-inside: avoid; padding: 7px 0 7px 18px; color: var(--white-soft); font-size: 13.5px; line-height: 1.55; }
 .dash-card--summary li::before { content: ""; position: absolute; left: 0; top: 14px; width: 5px; height: 5px; border-radius: 50%; background: var(--blue-line); }
 
-/* Modular handoff concept sequence (Sprint 2 — schematic placeholders) */
+/* Handoff unit concept sequence (Sprint 2 — schematic placeholders) */
 .handoff-frame { margin-top: clamp(36px, 4.4vw, 58px); }
 .handoff-seq { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 24px); }
 .handoff-panel { display: flex; flex-direction: column; gap: 14px; }
@@ -409,8 +414,11 @@ main { background: var(--night); }
 .hero-chip-dot--live { background: var(--lime); }
 .hero-frame-caption { position: absolute; left: 18px; bottom: 14px; z-index: 2; margin: 0; }
 
-/* Range Operations Simulator proof (start of #intelligence) */
-.sim-proof { margin-bottom: clamp(56px, 7vw, 96px); padding-bottom: clamp(44px, 5.5vw, 72px); border-bottom: 1px solid var(--line); }
+/* Range Operations Simulator proof (simulation block of #software-and-machines).
+   The top margin lives here, not on the Reveal wrapper, so no spacer is left when the
+   gated module renders nothing. The h3 keeps the chapter's h2 weight visually. */
+.sim-proof { margin: clamp(56px, 7vw, 96px) 0 clamp(56px, 7vw, 96px); padding-bottom: clamp(44px, 5.5vw, 72px); border-bottom: 1px solid var(--line); }
+.sim-proof > h3 { max-width: 1000px; margin: 30px 0 0; color: var(--white); font-size: clamp(40px, 5.2vw, 78px); font-weight: 590; line-height: 1.04; letter-spacing: -0.045em; }
 .sim-duo { margin-top: clamp(36px, 4.4vw, 58px); display: grid; grid-template-columns: minmax(0, 62fr) minmax(0, 38fr); gap: clamp(24px, 3vw, 44px); align-items: start; }
 .sim-frame .media-frame-stage { aspect-ratio: 1400 / 1000; }
 .sim-truth-tag { position: absolute; bottom: 12px; left: 12px; z-index: 2; padding: 5px 11px; color: var(--white-soft); border: 1px solid var(--line-strong); border-radius: 999px; background: rgba(9, 19, 15, 0.82); font-size: 10.5px; font-weight: 720; letter-spacing: 0.06em; }
@@ -425,7 +433,7 @@ main { background: var(--night); }
 /* Sprint 3 gated slots: evidence grid + expansion map */
 .evidence-grid { margin-top: clamp(24px, 3vw, 40px); display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.5vw, 20px); }
 .evidence-grid .media-frame-stage { border-color: var(--line-strong); }
-/* Operating Layer Terrain Map (Sprint 3) */
+/* Site Brain Terrain Map (Sprint 3) */
 .tm { margin-top: clamp(32px, 4vw, 52px); }
 .tm-stage-wrap { display: grid; grid-template-columns: 1fr; gap: clamp(20px, 2.4vw, 32px); align-items: start; }
 .tm--enhanced .tm-stage-wrap { grid-template-columns: minmax(0, 65fr) minmax(0, 35fr); }
@@ -470,7 +478,7 @@ main { background: var(--night); }
 .tm-svg[data-stage="2"] .tm-s3 { opacity: 0.14; }
 .tm-svg[data-stage="2"] .tm-s2, .tm-svg[data-stage="3"] .tm-s2, .tm-svg[data-stage="3"] .tm-s3 { opacity: 1; }
 
-/* operating layer core panel */
+/* site brain core panel */
 .tm-core { border: 1px solid var(--blue-line); border-radius: 14px; background: #f7faff; padding: clamp(14px, 1.6vw, 20px); }
 .tm-core-name { display: block; color: var(--ink); font-size: 13.5px; font-weight: 750; letter-spacing: 0.02em; }
 .tm-core-fns { margin: 10px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px 8px; }
@@ -528,13 +536,43 @@ main { background: var(--night); }
 .evidence-col strong { color: var(--white-soft); font-size: 13px; font-weight: 620; }
 .evidence-col span { flex: 0 0 auto; padding: 3px 9px; color: var(--lime); border: 1px solid var(--lime-line); border-radius: 999px; font-size: 9px; font-weight: 780; letter-spacing: 0.07em; white-space: nowrap; }
 
+/* How the system works: the operating loop + who does what */
+.loop-steps { margin: clamp(32px, 4vw, 52px) 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(12px, 1.5vw, 20px); }
+.loop-step { display: grid; grid-template-columns: 34px 1fr; gap: 10px; border: 1px solid var(--line-strong); border-radius: 16px; background: rgba(13, 17, 23, 0.5); padding: clamp(16px, 1.8vw, 22px); box-shadow: var(--highlight-inset); }
+.loop-step .wf-step-index { color: var(--lime); }
+.loop-step strong { display: block; color: var(--white); font-size: 13px; font-weight: 760; letter-spacing: 0.08em; }
+.loop-step p { margin: 8px 0 0; color: var(--white-faint); font-size: 13px; line-height: 1.55; }
+.participants { margin-top: clamp(40px, 5vw, 64px); }
+.participant-cards { margin-top: clamp(16px, 2vw, 24px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(14px, 1.8vw, 24px); }
+.participant-cards > div { display: flex; }
+.participant-steps { display: block; margin-top: 14px; color: var(--blue); font-size: 11px; font-weight: 750; letter-spacing: 0.1em; text-transform: uppercase; }
+.control-note { max-width: 760px; margin: clamp(28px, 3.4vw, 46px) 0 0; color: var(--white-soft); font-size: clamp(16px, 1.4vw, 20px); font-weight: 560; line-height: 1.5; letter-spacing: -0.015em; }
+
+/* Software and machines: the two development tracks */
+.dev-duo { margin-top: clamp(32px, 4vw, 52px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 24px); }
+.dev-card { padding: clamp(20px, 2.4vw, 30px); border: 1px solid var(--line-strong); border-radius: var(--radius-m); background: rgba(13, 17, 23, 0.6); box-shadow: var(--highlight-inset); }
+.dev-card--machines { border-color: var(--lime-line); background: rgba(154, 248, 18, 0.03); }
+.dev-card-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.dev-card-label { color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+.dev-card-status { padding: 3px 9px; color: var(--lime); border: 1px solid var(--lime-line); border-radius: 999px; font-size: 9px; font-weight: 780; letter-spacing: 0.07em; white-space: nowrap; }
+.dev-card h3 { margin: 14px 0 0; color: var(--white); font-size: clamp(18px, 1.6vw, 23px); font-weight: 650; letter-spacing: -0.02em; }
+.dev-card ul { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.dev-card li { position: relative; padding-left: 18px; color: var(--white-faint); font-size: clamp(13.5px, 1.1vw, 15px); line-height: 1.6; }
+.dev-card li::before { content: ""; position: absolute; left: 0; top: 10px; width: 6px; height: 6px; border-radius: 2px; background: var(--blue-line); }
+.dev-card--machines li::before { background: var(--lime-line); }
+.dev-card-note { margin: 16px 0 0; color: var(--white-faint); font-size: 12.5px; line-height: 1.55; letter-spacing: 0.02em; }
+.intel-status { margin: 0; color: var(--white-faint); font-size: 12.5px; line-height: 1.55; letter-spacing: 0.02em; }
+/* `.block p` (0,1,1) would otherwise lift these notes to body brightness. */
+.block:not(.section-light) .ez-note, .block .dev-card-note, .block .intel-status { color: var(--white-faint); }
+.status-note { max-width: 760px; margin: clamp(22px, 2.6vw, 34px) 0 0; color: var(--white-faint); font-size: clamp(12.5px, 1vw, 14px); line-height: 1.6; }
+
 /* Pilot program steps */
 .pilot-steps { margin-top: clamp(26px, 3.2vw, 42px); display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 28px); }
 .pilot-step { display: grid; grid-template-columns: 40px 1fr; gap: 12px; border: 1px solid var(--line-strong); border-radius: 16px; background: rgba(13, 17, 23, 0.5); padding: clamp(16px, 2vw, 24px); }
 .pilot-step h3 { margin: 0; color: var(--white); font-size: 15px; font-weight: 720; }
 .pilot-step p { margin: 8px 0 0; color: var(--white-faint); font-size: 13px; line-height: 1.55; }
 
-/* Operating-layer band + module tethers */
+/* Site-brain band + module tethers */
 .layer-band { margin-top: clamp(40px, 5vw, 64px); padding: clamp(18px, 2.2vw, 28px) clamp(20px, 2.6vw, 34px); border: 1px solid var(--blue-line); border-radius: 16px; background: rgba(91, 157, 255, 0.05); display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 22px; }
 .layer-band strong { color: var(--white); font-size: clamp(16px, 1.5vw, 21px); font-weight: 700; letter-spacing: -0.01em; }
 .layer-band span { color: var(--white-faint); font-size: clamp(12px, 1vw, 14px); letter-spacing: 0.04em; }
@@ -698,7 +736,7 @@ main { background: var(--night); }
 /* Pilot CTA */
 .pilot-block { background: radial-gradient(circle at 76% 24%, rgba(154, 248, 18, 0.05), transparent 32%), var(--night); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 
-/* Agent intelligence */
+/* Software and machines chapter */
 .intel-block { background: linear-gradient(180deg, var(--night), #0e1510 45%, var(--night)); }
 .intel-duo { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: clamp(24px, 3vw, 48px); align-items: start; }
 .intel-left { display: grid; gap: clamp(16px, 2vw, 24px); align-content: start; }
@@ -780,9 +818,15 @@ footer > div { justify-self: end; display: flex; flex-wrap: wrap; gap: 21px; col
 footer a:hover, footer a:focus-visible { color: var(--lime); }
 
 /* ---------- Anchors (clear the fixed header) ---------- */
-#why-driving-ranges, #first-workflow, #intelligence, #expansion, #roi, #company, #pilot, #contact { scroll-margin-top: 104px; }
+#problem, #how-it-works, #first-workflow, #software-and-machines, #expansion, #progress, #roi, #company, #pilot, #contact { scroll-margin-top: 104px; }
 
 /* ---------- Responsive ---------- */
+/* Five loop cards need ≥210px each to read well; between the desktop nav breakpoint
+   and 1280px fall back to three columns before the two-column rule below. */
+@media (max-width: 1280px) {
+  .loop-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
 @media (max-width: 1120px) {
   .header-shell { grid-template-columns: 1fr auto; }
   .site-header nav { display: none; }
@@ -796,6 +840,8 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .intel-feedback-rail { display: none; }
   .dash-grid { grid-template-columns: repeat(2, 1fr); }
   .dash-card--summary { grid-column: span 2; }
+  .loop-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dev-duo { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
@@ -819,7 +865,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
   .closing-actions .button { width: 100%; }
   .validation-strip { grid-template-columns: 1fr; gap: 22px; }
   .validation-strip dt { font-size: clamp(30px, 9vw, 40px); }
-  .why-cards, .system-cards, .compare-grid, .status-grid, .evidence-cols, .pilot-steps, .problem-points { grid-template-columns: 1fr; }
+  .why-cards, .system-cards, .compare-grid, .status-grid, .evidence-cols, .pilot-steps, .problem-points, .loop-steps, .participant-cards { grid-template-columns: 1fr; }
   .eqc-columns { grid-template-columns: 1fr; }
   .evidence-grid { grid-template-columns: 1fr; }
   .status-block { padding-left: var(--pad); padding-right: var(--pad); }

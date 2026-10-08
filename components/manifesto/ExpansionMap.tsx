@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import {
   DEFAULT_STAGE,
   EXPANSION_STAGES,
-  OPERATING_LAYER,
+  SITE_BRAIN_CORE,
   clampStage,
 } from "../../lib/expansionStages";
 import { expansionMap } from "../../lib/visualAssets";
 import { ResponsiveStill } from "../media/ResponsiveMedia";
 
 /**
- * Operating Layer Terrain Map (Phase 2D Sprint 3).
+ * Site Brain Terrain Map (Phase 2D Sprint 3; copy updated for the site-brain positioning).
  *
  * The authoritative Expansion renderer (single source of truth — the
  * registry's still remains an optional override poster; the inline SVG is
@@ -22,9 +22,9 @@ import { ResponsiveStill } from "../media/ResponsiveMedia";
  * is the no-JS, mobile, tablet, and reduced-enhancement presentation.
  *
  * Client enhancement (≥1121px): two-column composition — the same map with
- * stage-scoped emphasis (CSS transitions on data-stage), plus the Operating
- * Layer core panel and three semantic stage buttons (aria-pressed, default
- * Starting Point, never auto-cycled).
+ * stage-scoped emphasis (CSS transitions on data-stage), plus the Site
+ * Brain core panel and three semantic stage buttons (aria-pressed, default
+ * First Workflow, never auto-cycled).
  *
  * The map is an illustrative managed golf-facility plan — not a real
  * customer facility, not a globe, not geography.
@@ -130,7 +130,7 @@ function TerrainMap({ stage }: { stage: 1 | 2 | 3 }) {
         <path className="tm-link tm-link--slate tm-link--dash" d="M 250 400 C 420 420, 520 440, 592 452" />
         <path className="tm-link tm-link--slate tm-link--dash" d="M 608 462 C 700 470, 780 440, 852 408" />
         <path className="tm-link tm-link--slate tm-link--dash" d="M 770 248 C 760 320, 700 420, 640 500" />
-        {/* logistics + reporting into the operating layer anchor */}
+        {/* logistics + reporting into the site-brain anchor */}
         <g className="tm-marker" transform="translate(470,560)">
           <rect className="tm-node-sq tm-node-sq--slate" x="-9" y="-9" width="18" height="18" rx="4" />
           <text className="tm-node-label tm-node-label--slate" x="14" y="4">Equipment logistics</text>
@@ -138,10 +138,10 @@ function TerrainMap({ stage }: { stage: 1 | 2 | 3 }) {
         <path className="tm-link tm-link--slate" d="M 461 560 C 430 566, 416 570, 412 570" />
       </g>
 
-      {/* ---- operating-layer anchor: everything reports into the core ---- */}
+      {/* ---- site-brain anchor: everything reports into the core ---- */}
       <g className="tm-anchor">
         <rect className="tm-anchor-box" x="180" y="576" width="252" height="30" rx="7" />
-        <text className="tm-anchor-label" x="198" y="596">NXTEKTAL OPERATING LAYER</text>
+        <text className="tm-anchor-label" x="198" y="596">NXTEKTAL SITE BRAIN</text>
       </g>
     </svg>
   );
@@ -175,16 +175,16 @@ export default function ExpansionMap() {
         <div className="tm-map" data-stage={enhanced ? stage : 3}>
           {mapVisual}
           <p className="tm-map-caption">
-            Illustrative managed golf-facility plan — not a specific customer facility.
+            Illustrative managed golf-facility plan — not a specific customer facility. Only stage 01 is in development; stages 02 and 03 are direction.
           </p>
         </div>
 
         {enhanced && (
           <div className="tm-side">
-            <div className="tm-core" role="group" aria-label="NXTektal Operating Layer functions">
-              <strong className="tm-core-name">{OPERATING_LAYER.name}</strong>
+            <div className="tm-core" role="group" aria-label="NXTektal Site Brain functions">
+              <strong className="tm-core-name">{SITE_BRAIN_CORE.name}</strong>
               <ul className="tm-core-fns">
-                {OPERATING_LAYER.functions.map((fn) => (
+                {SITE_BRAIN_CORE.functions.map((fn) => (
                   <li key={fn}>{fn}</li>
                 ))}
               </ul>
@@ -217,10 +217,10 @@ export default function ExpansionMap() {
       {/* Complete stage narratives — the mobile/tablet/no-JS presentation and
           the always-available screen-reader description. */}
       <div className={enhanced ? "tm-cards tm-cards--sr" : "tm-cards"}>
-        <div className="tm-core tm-core--card" role="group" aria-label="NXTektal Operating Layer functions">
-          <strong className="tm-core-name">{OPERATING_LAYER.name}</strong>
+        <div className="tm-core tm-core--card" role="group" aria-label="NXTektal Site Brain functions">
+          <strong className="tm-core-name">{SITE_BRAIN_CORE.name}</strong>
           <ul className="tm-core-fns">
-            {OPERATING_LAYER.functions.map((fn) => (
+            {SITE_BRAIN_CORE.functions.map((fn) => (
               <li key={fn}>{fn}</li>
             ))}
           </ul>

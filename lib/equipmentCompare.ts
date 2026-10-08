@@ -44,9 +44,9 @@ export const NXTEKTAL_WORKFLOW: WorkflowState = {
   key: "nxtektal",
   label: "WITH NXTEKTAL",
   nodes: [
-    { label: "Monitor & Prioritize", kind: "nxt" },
-    { label: "Autonomous Collection", kind: "nxt" },
-    { label: "Modular Handoff", kind: "nxt" },
+    { label: "Site Brain: Sense & Plan", kind: "nxt" },
+    { label: "Collection Robot", kind: "nxt" },
+    { label: "Handoff Unit", kind: "nxt" },
     { label: "Existing Washer & Dispenser", kind: "existing" },
     { label: "Verify & Report", kind: "verify" },
   ],
@@ -55,6 +55,7 @@ export const NXTEKTAL_WORKFLOW: WorkflowState = {
     "Coordinated equipment state",
     "Reduced routine manual transfer",
     "End-to-end workflow status",
+    "Exceptions flagged to a person",
   ],
 };
 
@@ -66,11 +67,11 @@ export const WHAT_STAYS = [
 ];
 
 export const WHAT_NXTEKTAL_ADDS = [
-  "Demand-aware monitoring and dispatch",
-  "Autonomous collection",
-  "Modular handoff",
-  "Workflow status and verification",
-  "Operating recommendations",
+  "Site Brain: sensing, planning, and coordination",
+  "NXTektal collection robot",
+  "Handoff unit into the existing washer intake",
+  "Handoff and result verification",
+  "Exception flags and operating recommendations",
 ];
 
 /** Default comparison position: an even split. */

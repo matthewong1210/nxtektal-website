@@ -9,9 +9,12 @@ import HeroBackgroundVideo from "./HeroBackgroundVideo";
  * operating-layer scan) is the full-bleed poster stage; when the registry's
  * hero loop is active,
  * a gated client layer (HeroBackgroundVideo) fades the produced facility
- * film in over it, using a lighter encode on mobile. The copy renders over a directional
- * scrim, and a restrained operational overlay (status chips + low-opacity
- * facility contours) communicates the operating layer without a HUD.
+ * film in over it, using a lighter encode on mobile. The copy renders over a
+ * directional scrim, and a restrained operational overlay (loop chips +
+ * low-opacity facility contours) communicates the Sense → Plan → Coordinate →
+ * Execute → Verify loop without a HUD. The chip list is a labelled <ul> so the
+ * "illustrative, not live data" qualifier reaches assistive technology, and
+ * its first chip says the same thing visibly.
  *
  * No scroll track, no space imagery. The copy never depends on the media:
  * reduced-motion, no-JS, and load-failure paths keep the still,
@@ -23,7 +26,9 @@ export default function ProductHero({ copy }: { copy: ReactNode }) {
   const { desktop, mobile, alt } = heroMasterFrame;
 
   return (
-    <section className="phero" aria-label="NXTektal — the intelligence layer for autonomous golf facilities">
+    <section className="phero" aria-label="NXTektal — the site brain and robotic workforce for outdoor facilities">
+      {/* Not aria-hidden: the upstream mobile-video fix renders a reachable
+          "Play background video" fallback button inside this stage. */}
       <div className="phero-media">
         {desktop && (
           <picture aria-hidden="true">
@@ -55,12 +60,15 @@ export default function ProductHero({ copy }: { copy: ReactNode }) {
 
       <div className="phero-inner">
         <div className="ez-copy ez-copy--hero">{copy}</div>
-        {/* facility-intelligence overlay — illustrative, non-numeric, real DOM text */}
-        <div className="phero-chips" aria-label="Illustrative facility intelligence readout">
-          <span className="phero-chip phero-chip--data">State — monitoring</span>
-          <span className="phero-chip"><i className="phero-dot" aria-hidden="true" /> Decision — collection priority updated</span>
-          <span className="phero-chip">Execution — available</span>
-        </div>
+        {/* site-brain loop overlay — illustrative, non-numeric, real DOM text */}
+        <ul className="phero-chips" aria-label="Illustrative site brain readout — not live facility data">
+          <li className="phero-chip phero-chip--note">Illustrative readout · not live data</li>
+          <li className="phero-chip phero-chip--data">Sense · inventory and demand</li>
+          <li className="phero-chip">Plan · collection run scheduled</li>
+          <li className="phero-chip">Coordinate · task assigned to the robot</li>
+          <li className="phero-chip"><i className="phero-dot" aria-hidden="true" /> Execute · robot sweeping Zone B</li>
+          <li className="phero-chip">Verify · handoff confirmed</li>
+        </ul>
       </div>
     </section>
   );

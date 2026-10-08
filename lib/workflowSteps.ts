@@ -11,16 +11,16 @@ import { workflowStepLoops, workflowStepStills } from "./visualAssets";
 
 export type WorkflowStep = { name: string; body: string };
 
-/** The approved eight steps, in approved order. Copy is unchanged. */
+/** The approved eight steps, in approved order. */
 export const WORKFLOW_STEPS: WorkflowStep[] = [
-  { name: "MONITOR", body: "Ball availability and demand are tracked across the range." },
-  { name: "PRIORITIZE", body: "The Range Operations Agent decides when collection is worth running." },
-  { name: "DISPATCH", body: "A mission is issued to the collection system." },
-  { name: "COLLECT", body: "The robot sweeps priority zones and fills its hopper." },
-  { name: "RETURN", body: "It navigates back to the handoff point." },
-  { name: "HANDOFF", body: "Balls transfer into the modular handoff unit." },
-  { name: "WASH & DISPENSE", body: "The facility’s existing equipment processes and returns balls to players." },
-  { name: "VERIFY", body: "The workflow is confirmed complete and logged for review." },
+  { name: "MONITOR", body: "Ball availability and demand are tracked across the range from sensors and the dispenser." },
+  { name: "PRIORITIZE", body: "The Site Brain decides when a collection run is worth making, within the rules the manager has set." },
+  { name: "DISPATCH", body: "A collection task is issued to the NXTektal collection robot." },
+  { name: "COLLECT", body: "The robot sweeps priority zones with its front roller picker and fills its onboard hopper." },
+  { name: "RETURN", body: "It navigates back to the handoff point by the range building." },
+  { name: "HANDOFF", body: "The hopper load transfers through the handoff unit into the range’s existing washer intake." },
+  { name: "WASH & DISPENSE", body: "The facility’s existing washer and dispenser process the balls and return them to players." },
+  { name: "VERIFY", body: "The handoff and the run are confirmed complete and logged; anything unconfirmed is flagged to a person." },
 ];
 
 /**

@@ -44,9 +44,9 @@ describe("workflow states", () => {
       "Existing dispenser",
     ]);
     expect(NXTEKTAL_WORKFLOW.nodes.map((n) => n.label)).toEqual([
-      "Monitor & Prioritize",
-      "Autonomous Collection",
-      "Modular Handoff",
+      "Site Brain: Sense & Plan",
+      "Collection Robot",
+      "Handoff Unit",
       "Existing Washer & Dispenser",
       "Verify & Report",
     ]);
@@ -87,7 +87,7 @@ describe("truthfulness guard", () => {
       .concat(WHAT_STAYS, WHAT_NXTEKTAL_ADDS)
       .join(" ")
       .toLowerCase();
-    for (const banned of ["universal", "guaranteed", "every washer", "all equipment", "no modification", "deployed", "customer"]) {
+    for (const banned of ["universal", "guaranteed", "every washer", "all equipment", "no modification", "deployed", "customer", "modular"]) {
       expect(corpus).not.toContain(banned);
     }
   });

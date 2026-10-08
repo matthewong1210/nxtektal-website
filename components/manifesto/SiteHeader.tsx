@@ -45,11 +45,18 @@ export default function SiteHeader({
       .map((item) => document.getElementById(item.href.slice(1)))
       .filter((el): el is HTMLElement => el !== null);
     if (targets.length === 0) return;
+    // Track every section currently inside the band so the indicator clears
+    // when none is (hero, footer, blocks without a nav id) instead of
+    // sticking to the last section that scrolled past.
+    const visible = new Set<string>();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+          const href = `#${entry.target.id}`;
+          if (entry.isIntersecting) visible.add(href);
+          else visible.delete(href);
         }
+        setActive(items.map((item) => item.href).find((href) => visible.has(href)) ?? null);
       },
       // A narrow band in the upper-middle of the viewport: exactly one
       // section owns it at a time, so boundaries don't flicker.

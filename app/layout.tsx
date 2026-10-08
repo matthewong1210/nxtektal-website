@@ -10,14 +10,14 @@ const inter = Inter({
 });
 
 const siteUrl = "https://nxtektal.com";
-const title = "NXTektal Systems | Facility Intelligence for Autonomous Golf Facilities";
+const title = "NXTektal Systems | Site Brain and Robotic Workforce for Outdoor Facilities";
 const description =
-  "NXTektal builds the intelligence layer that enables physical outdoor facilities to understand their environment, make operational decisions, and coordinate autonomous systems — starting with golf facilities.";
+  "NXTektal is building the software and machines to coordinate and carry out outdoor work, starting with golf facilities. First focus: range-ball operations — collection, handoff, and replenishment as one coordinated workflow.";
 const ogImage = {
   url: OG_IMAGE_PATH,
   width: 1200,
   height: 630,
-  alt: "NXTektal Systems — the intelligence layer for autonomous golf facilities",
+  alt: "NXTektal Systems — the site brain and robotic workforce for outdoor facilities",
 };
 
 export const metadata: Metadata = {

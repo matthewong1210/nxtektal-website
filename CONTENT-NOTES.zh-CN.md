@@ -1,4 +1,47 @@
-# NXTektal Systems 网站交接说明（品牌视觉版）
+# NXTektal Systems 网站交接说明
+
+## 2026-10 叙事更新：Site Brain + 作业机器人
+
+本轮将官网定位从"面向自主高尔夫设施的智能层"改为：
+
+> NXTektal 正在开发用于户外设施作业的现场大脑（Site Brain）和机器人，首先从高尔夫设施切入。
+
+首页叙事顺序（自上而下）：
+
+1. 公司定位与客户价值：Hero + 客户调研数据条。
+2. 客户目标与现场问题：何时收球的判断、设备之间的人工交接、供球风险与异常处理，一条现场观察，以及为什么先从练习场切入。
+3. 系统如何工作：Sense → Plan → Coordinate → Execute → Verify；管理者、NXTektal 机器人、传感器与既有设备各自参与的环节；管理者掌握目标、规则和审批。
+4. 第一条工作流：练习场收球、返回、交接、清洗补给、结果确认；接入既有设备，兼容性按场地评估。
+5. 软件与机器共同发展：Site Brain 与面向具体任务的机器并行开发；仿真器、架构分层（与 nxtektal-systems 代码库的设计边界对应）、管理者看板概念。
+6. 运营经济性（ROI 计算器）。
+7. 路线：高尔夫设施内的后续作业与更长期的户外设施方向——仅练习场供球流程在开发中，其余为方向而非产品。
+8. 当前进展与试点入口：各条线的真实状态，然后是 Assess → Integrate → Validate。
+9. 创始团队与最终 CTA。
+
+用词规则：
+
+- 核心定位统一使用 "site brain and robotic workforce"；不再以 "intelligence layer / execution layer / operating layer" 描述公司。"Full-stack" 仅在技术解释中按需使用。
+- 软件统称 **Site Brain**；仿真工具为 **Range Operations Simulator**（真实存在的开发工具）；机器为 **collection robot**（收球机器人）与 **handoff unit**（交接单元），均为 NXTektal 自研；兼容的既有设备共同参与工作流。
+- 客户统称 **golf facilities**（球场与独立练习场）；描述具体流程时用 **driving ranges**。
+- 迭代机制写成"现场结果指导软件与机器设计的改进"，不写 "improve with every deployment"。
+- "Modular" 仅在有明确模块化硬件设计依据时使用；共享任务接口不等于硬件模块可互换。
+- 状态标签（`app/page.tsx` 的 `buildTracks`、`lib/expansionStages.ts` 的 `EXPANSION_STAGES`、`components/manifesto/IntelligenceSection.tsx` 的状态标签）必须对应各条线的真实进度；路线阶段和 CONCEPT 模块不得写成可交付产品。
+
+待核实事项（本轮按保守措辞处理，见提交说明）：
+
+- "Prototype in development"（收球机器人）依据仓库 `ATTRIBUTIONS.md` 中"真实原型照片"的记录；请确认当前原型状态与对外口径。
+- "Facility workflow mapping — IN PROGRESS"、"Pilot site assessments — OPEN" 为对原 "PILOT PREPARATION" 的保守改写；请确认。
+- 客户调研数字（30+ / 超过三分之二 / 6）沿用原站，未新增数字。
+- 看板示例中的数值（如 "−40 min"、"6 of the last 7 days"）为概念示意，已标注 CONCEPT / illustrative。
+- 页脚原标语 "AUTONOMY. INTELLIGENCE. IMPACT." 已替换为定位语 "SITE BRAIN + ROBOTIC WORKFORCE FOR OUTDOOR FACILITIES"；如该标语是必须保留的品牌标识，请告知后恢复。
+- 社交分享图 `public/og-image.jpg` 已用真实原型照片（`public/robot/robot-front.jpg`）加新标题重新生成，替换了原图中 "The operating system for autonomous outdoor work" 的旧定位文案；请确认版式，部署后需让社交平台重新抓取。
+- HANDOFF 步骤的概念渲染显示"站侧机械臂倾倒球篮"，与文案中"料斗经交接单元转入既有清洗机进料口"的描述机制不同；请确认该渲染是否仍代表当前设计方向。
+- Hero 概念影片的生成工具与商用授权条款在 `ATTRIBUTIONS.md` 中仍未记录（沿用前版的待办）。
+- 进展模块中 "Facility state and planning rules — WORKING · SIMULATION INPUTS"、"Sensor and equipment interfaces — CONTRACTS · NO LIVE ADAPTER" 依据 nxtektal-systems 仓库 `docs/MILESTONES.md` 与 `.agent/context/deployment.md`：状态契约、确定性建议、Site Runtime 等已合并但仅接入合成数据，无物理适配器。
+
+---
+
+## 早期交接说明（品牌视觉版，2026-08 之前；定位描述已被上文取代）
 
 ## 本版定位
 

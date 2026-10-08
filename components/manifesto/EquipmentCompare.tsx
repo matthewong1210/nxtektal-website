@@ -113,19 +113,19 @@ function NxtektalDiagram() {
       <EquipmentZone />
       {/* Coordination chain */}
       <rect className="eqc-node eqc-node--nxt" x={56} y={60} width={224} height={82} rx={10} />
-      <text className="eqc-node-label" x={76} y={96}>Monitor &amp; Prioritize</text>
-      <text className="eqc-node-tag eqc-node-tag--nxt" x={76} y={120}>NXTEKTAL</text>
+      <text className="eqc-node-label" x={76} y={96}>Sense &amp; Plan</text>
+      <text className="eqc-node-tag eqc-node-tag--nxt" x={76} y={120}>NXTEKTAL SITE BRAIN</text>
 
       <Arrow x1={168} y1={142} x2={168} y2={210} tone="blue" />
 
       <rect className="eqc-node eqc-node--nxt" x={56} y={214} width={224} height={82} rx={10} />
-      <text className="eqc-node-label" x={76} y={250}>Autonomous Collection</text>
-      <text className="eqc-node-tag eqc-node-tag--nxt" x={76} y={274}>NXTEKTAL</text>
+      <text className="eqc-node-label" x={76} y={250}>Collection Robot</text>
+      <text className="eqc-node-tag eqc-node-tag--nxt" x={76} y={274}>NXTEKTAL ROBOT</text>
 
       <Arrow x1={280} y1={255} x2={396} y2={255} tone="blue" />
 
       <rect className="eqc-node eqc-node--nxt" x={400} y={214} width={224} height={82} rx={10} />
-      <text className="eqc-node-label" x={420} y={250}>Modular Handoff</text>
+      <text className="eqc-node-label" x={420} y={250}>Handoff Unit</text>
       <text className="eqc-node-tag eqc-node-tag--nxt" x={420} y={274}>NXTEKTAL</text>
 
       {/* Handoff feeds the same washer the facility already owns */}

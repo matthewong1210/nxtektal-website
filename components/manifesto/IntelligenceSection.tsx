@@ -1,36 +1,78 @@
 import Reveal from "../../app/reveal";
 import SimulatorProof from "./SimulatorProof";
 
+/**
+ * Software and machines chapter (#software-and-machines).
+ *
+ * Order: chapter header (Site Brain and task-specific machines are developed
+ * together) → the two development tracks → the Range Operations Simulator
+ * proof → the Site Brain architecture stack beside the manager dashboard
+ * concept. Every layer in the stack maps to a boundary that exists in the
+ * NXTektal systems repository (facility state, advisory planning, append-only
+ * memory, projection-only twin, robot execution behind safety interfaces);
+ * nothing here claims a live site integration, an equipment command surface,
+ * or a task interface for the handoff unit (which is a concept).
+ */
+
+const tracks = [
+  {
+    key: "brain",
+    label: "SITE BRAIN · SOFTWARE",
+    status: "WORKING IN SIMULATION",
+    title: "Plans the work and verifies the result.",
+    items: [
+      "Built on one picture of the site, assembled from sensors and existing systems, with missing data kept visible instead of guessed.",
+      "Planning rules are fixed and reviewable. Proposed work is approved, changed, or rejected by a person before anything moves.",
+      "Coordinates staff, NXTektal robots, and compatible equipment, and confirms each handoff and result.",
+      "Keeps a permanent record of what it observed, what it proposed, what people decided, and what happened.",
+    ],
+    note: "Developed and compared in the Range Operations Simulator today; no live site integration yet.",
+  },
+  {
+    key: "machines",
+    label: "TASK-SPECIFIC MACHINES · HARDWARE",
+    status: "IN DEVELOPMENT",
+    title: "Built for the physical job.",
+    items: [
+      "Collection robot — prototype in development. Designed around the sweep, return, and dock cycle the Site Brain schedules; described in the first workflow above.",
+      "Handoff unit — engineering concept. The transfer from the robot into the existing washer intake, configured to each site’s equipment.",
+      "NXTektal robots are being designed to report status and receive tasks through one task interface, behind the same hard task timeouts, bounded retries, safe retract, and latched emergency stop.",
+      "Compatible existing equipment joins the same workflow without being replaced.",
+    ],
+    note: "Concept renders on this page show the current design direction, not a final product. Sharing a task interface does not make parts interchangeable between robots.",
+  },
+];
+
 const layers = [
   {
-    name: "Physical World",
-    subtitle: "Robots · Sensors · Equipment · People · Environment",
-    description: "The facility as it actually is — machines, terrain, weather, demand, and the people working in it.",
+    name: "Site and sensors",
+    subtitle: "The physical world",
+    description: "Robots, sensors, existing equipment, staff, weather, and player demand — the facility as it actually is.",
   },
   {
     name: "Facility State",
     subtitle: "What is happening?",
-    description: "A current understanding of inventory, equipment, demand, terrain, resources, and constraints.",
+    description: "One time-stamped picture of inventory, equipment, demand, and constraints, assembled from observations. Missing data stays marked missing instead of being guessed.",
   },
   {
-    name: "Operational Intelligence",
+    name: "Planning and advice",
     subtitle: "What should happen next?",
-    description: "Determines priorities, risks, recommended actions, and resource allocation — the facility manager approves.",
+    description: "Fixed, reviewable rules evaluate the state, propose work, and flag risks. The facility manager sets the goals and approves what needs approval.",
   },
   {
-    name: "Operational Memory",
-    subtitle: "What has been learned?",
-    description: "State, decision, human action, and outcome feed improved future decisions — each facility develops its own operational knowledge over time.",
+    name: "Operational memory",
+    subtitle: "What happened before?",
+    description: "A record that is only ever added to, never edited: state, decision, human action, and outcome, kept for review and improvement. It never drives the live loop on its own.",
   },
   {
-    name: "Spatial Digital Twin",
-    subtitle: "Where and how does everything interact?",
-    description: "A living representation of terrain, infrastructure, equipment, operational zones, workflows, constraints, and the relationships between systems — not only visualization, but the operational state of the physical environment.",
+    name: "Spatial model",
+    subtitle: "Where is everything?",
+    description: "The same state projected onto the site layout as a digital twin. It is a view of the facility, never the source of truth.",
   },
   {
-    name: "Autonomous Execution",
-    subtitle: "How actions happen",
-    description: "Robots, sensors, connected equipment, and human workflows carry out approved work and report back.",
+    name: "Execution",
+    subtitle: "How work gets done",
+    description: "Robots receive tasks behind safety interfaces: hard task timeouts, bounded retries, safe retract, and a latched emergency stop that halts all motion until the platform is reset outside the software. Existing washers and dispensers are observed, not commanded.",
   },
 ];
 
@@ -54,28 +96,51 @@ function ModuleTag({ tag }: { tag: (typeof TAG)[keyof typeof TAG] }) {
 
 export default function IntelligenceSection() {
   return (
-    <section className="block intel-block" id="intelligence">
+    <section className="block intel-block" id="software-and-machines">
       <div className="block-inner">
-        {/* 1 · Simulator proof — tests and compares operating policies
+        {/* 1 · Chapter header — software and machines developed together */}
+        <Reveal>
+          <div className="eyebrow">SOFTWARE AND MACHINES · IN DEVELOPMENT</div>
+          <h2>One Site Brain. Machines designed for the job.</h2>
+          <p className="section-body">
+            NXTektal develops the Site Brain and its task-specific robots together. The software is built to understand site state, plan work, coordinate execution, and verify results; the machines are designed around the jobs it schedules. Field results from pilots will guide changes to both the software and the machine designs.
+          </p>
+        </Reveal>
+
+        {/* 2 · The two development tracks */}
+        <div className="dev-duo">
+          {tracks.map((track, index) => (
+            <Reveal key={track.key} delay={index * 60}>
+              <article className={`dev-card dev-card--${track.key}`}>
+                <div className="dev-card-head">
+                  <span className="dev-card-label">{track.label}</span>
+                  <span className="dev-card-status">{track.status}</span>
+                </div>
+                <h3>{track.title}</h3>
+                <ul>
+                  {track.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <p className="dev-card-note">{track.note}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* 3 · Simulator proof — where the planning rules are developed today
             (renders only when agentSimulatorDemo.ready) */}
         <Reveal>
           <SimulatorProof />
         </Reveal>
 
-        {/* 2 · Operating layer + 3 · Manager dashboard */}
-        <Reveal>
-          <div className="eyebrow">THE INTELLIGENCE LAYER · IN DEVELOPMENT</div>
-          <h2>Robots are the execution layer. NXTektal is the intelligence layer.</h2>
-          <p className="section-body">
-            NXTektal is being designed to understand facility state, decide what should happen next, remember what worked, and coordinate autonomous execution. The facility manager remains in control of goals, policies, and approvals.
-          </p>
-        </Reveal>
-
+        {/* 4 · Site Brain architecture + manager dashboard concept */}
         <div className="intel-duo">
-          {/* Coordination hierarchy — compact, secondary to the product view */}
           <Reveal>
             <div className="intel-left">
-              <ol className="intel-stack" aria-label="NXTektal intelligence layer, from the physical world to autonomous execution">
+              <div className="eyebrow">SITE BRAIN ARCHITECTURE</div>
+              <p className="intel-status">Every layer exists as software today and is exercised in simulation. Nothing is connected to a physical site yet.</p>
+              <ol className="intel-stack" aria-label="Site Brain architecture, from the physical site to execution">
                 {layers.map((layer, index) => (
                   <li key={layer.name} className="intel-layer">
                     {index > 0 && <span className="intel-connector" aria-hidden="true" />}
@@ -93,7 +158,7 @@ export default function IntelligenceSection() {
                 </span>
               </ol>
               <p className="intel-feedback-note">
-                Operational Memory closes the loop: state, decision, human action, and outcome feed back into the next recommendation — so each facility gets operationally smarter over time.
+                Field feedback closes the loop: what the system observed, what it planned, what people did, and what happened next are recorded — and that record guides the next software update and the next machine revision.
               </p>
             </div>
           </Reveal>
@@ -103,7 +168,7 @@ export default function IntelligenceSection() {
             <div className="dash-shell">
               <div className="dash" role="group" aria-label="Illustrative manager dashboard concept">
                 <div className="dash-titlebar">
-                  <span className="dash-title"><i aria-hidden="true" /> NXTektal · Range Operations</span>
+                  <span className="dash-title"><i aria-hidden="true" /> NXTektal Site Brain · Range Operations</span>
                   <span className="dash-note">Illustrative product concept — not live facility data</span>
                 </div>
 
@@ -111,7 +176,7 @@ export default function IntelligenceSection() {
                   {/* Left rail — product-surface concept, non-functional */}
                   <div className="dash-rail" aria-hidden="true">
                     <span className="dash-rail-item dash-rail-item--active">Overview</span>
-                    <span className="dash-rail-item">Missions</span>
+                    <span className="dash-rail-item">Tasks</span>
                     <span className="dash-rail-item">Equipment</span>
                     <span className="dash-rail-item">Reports</span>
                   </div>
@@ -147,11 +212,11 @@ export default function IntelligenceSection() {
                       </div>
                       <div className="dash-card">
                         <div className="dash-card-top">
-                          <span className="dash-label">Alerts</span>
+                          <span className="dash-label">Exceptions</span>
                           <ModuleTag tag={TAG.dev} />
                         </div>
                         <strong className="dash-value"><em className="dash-dot dash-dot--warn" aria-hidden="true" /> Washer intake flagged 14:32</strong>
-                        <p>Interruption detected and routed for review with mission context attached.</p>
+                        <p>Interruption detected and routed to a person for review, with task context attached.</p>
                       </div>
                     </div>
 
@@ -168,11 +233,11 @@ export default function IntelligenceSection() {
                       </div>
                       <div className="dash-card">
                         <div className="dash-card-top">
-                          <span className="dash-label">Active mission</span>
+                          <span className="dash-label">Active task</span>
                           <ModuleTag tag={TAG.dev} />
                         </div>
                         <strong className="dash-value"><em className="dash-dot dash-dot--live" aria-hidden="true" /> Collection · Zone B</strong>
-                        <p>Returning to handoff point after priority sweep.</p>
+                        <p>Collection robot returning to the handoff point after a priority sweep.</p>
                       </div>
                       <div className="dash-card">
                         <div className="dash-card-top">
@@ -180,7 +245,7 @@ export default function IntelligenceSection() {
                           <ModuleTag tag={TAG.dev} />
                         </div>
                         <strong className="dash-value">1 active · charging window scheduled</strong>
-                        <p>Next mission window aligned with demand forecast.</p>
+                        <p>Next task window aligned with the demand forecast.</p>
                       </div>
                       <div className="dash-card">
                         <div className="dash-card-top">
@@ -206,7 +271,7 @@ export default function IntelligenceSection() {
                 </div>
               </div>
               <p className="dash-legend">
-                Modules marked CONCEPT illustrate the platform direction and are not current functionality.
+                The dashboard is a product concept and every value shown is illustrative. IN DEVELOPMENT marks a Site Brain capability that exists in simulation today; CONCEPT marks product direction.
               </p>
             </div>
           </Reveal>

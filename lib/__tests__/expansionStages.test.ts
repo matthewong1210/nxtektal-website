@@ -4,7 +4,7 @@ import {
   BEYOND_ENVIRONMENTS,
   DEFAULT_STAGE,
   EXPANSION_STAGES,
-  OPERATING_LAYER,
+  SITE_BRAIN_CORE,
   OPERATING_LOOP,
   clampStage,
 } from "../expansionStages";
@@ -13,13 +13,13 @@ describe("expansion stages", () => {
   it("has exactly three stages in approved order", () => {
     expect(EXPANSION_STAGES).toHaveLength(3);
     expect(EXPANSION_STAGES.map((s) => s.label)).toEqual([
-      "STARTING POINT",
-      "EXPANDING ACROSS GOLF",
-      "FACILITY-WIDE AUTONOMY",
+      "FIRST WORKFLOW",
+      "NEXT JOBS ACROSS GOLF",
+      "FACILITY-WIDE COORDINATION",
     ]);
   });
 
-  it("defaults to Starting Point and clamps invalid stages back to it", () => {
+  it("defaults to the first workflow and clamps invalid stages back to it", () => {
     expect(DEFAULT_STAGE).toBe(1);
     expect(clampStage(1)).toBe(1);
     expect(clampStage(2)).toBe(2);
@@ -32,17 +32,27 @@ describe("expansion stages", () => {
   it("assigns the approved status to each stage", () => {
     expect(EXPANSION_STAGES.map((s) => s.status)).toEqual([
       "IN DEVELOPMENT",
-      "PLATFORM DIRECTION",
-      "LONG-TERM DIRECTION",
+      "DIRECTION · NOT STARTED",
+      "LATER DIRECTION",
     ]);
   });
 
-  it("stage 1 is Range Ball Operations with the full closed loop", () => {
+  it("only the first stage is in development — later stages are direction, never product", () => {
+    expect(EXPANSION_STAGES.filter((s) => s.status === "IN DEVELOPMENT").map((s) => s.number)).toEqual([1]);
+  });
+
+  it("stage 1 is Range-Ball Operations with the full loop, as exact entries", () => {
     const s1 = EXPANSION_STAGES[0];
-    expect(s1.title).toBe("Range Ball Operations");
-    for (const cap of ["Collection", "Return", "Automated handoff", "Workflow verification"]) {
-      expect(s1.capabilities).toContain(cap);
-    }
+    expect(s1.title).toBe("Range-Ball Operations");
+    expect(s1.capabilities).toEqual([
+      "Ball availability monitoring",
+      "Demand-responsive dispatch",
+      "Collection by the NXTektal collection robot",
+      "Return",
+      "Automated handoff into the existing washer",
+      "Wash-and-dispense coordination",
+      "Workflow verification",
+    ]);
   });
 
   it("stage 2 covers drone, turf/soil, bunker, mowing, and inspection", () => {
@@ -54,18 +64,19 @@ describe("expansion stages", () => {
 
   it("stage 3 covers shared state, multi-robot coordination, logistics, and reporting", () => {
     const caps = EXPANSION_STAGES[2].capabilities.join(" ").toLowerCase();
-    for (const key of ["shared facility state", "multi-robot", "logistics", "reporting"]) {
+    for (const key of ["facility-wide shared state", "multi-robot", "logistics", "reporting"]) {
       expect(caps).toContain(key);
     }
   });
 
-  it("the Operating Layer core lists the five approved functions", () => {
-    expect(OPERATING_LAYER.functions).toEqual([
-      "Shared State",
-      "Prioritization",
-      "Dispatch",
+  it("the Site Brain core lists the five approved functions", () => {
+    expect(SITE_BRAIN_CORE.name).toBe("NXTektal Site Brain");
+    expect(SITE_BRAIN_CORE.functions).toEqual([
+      "Site State",
+      "Planning",
+      "Coordination",
       "Verification",
-      "Learning",
+      "Field Feedback",
     ]);
   });
 });
@@ -84,11 +95,10 @@ describe("beyond golf", () => {
   it("keeps the operating loop in approved order", () => {
     expect(OPERATING_LOOP).toEqual([
       "SENSE",
-      "PRIORITIZE",
-      "DISPATCH",
+      "PLAN",
+      "COORDINATE",
       "EXECUTE",
       "VERIFY",
-      "IMPROVE",
     ]);
   });
 });
@@ -96,10 +106,10 @@ describe("beyond golf", () => {
 describe("truthfulness guard", () => {
   it("introduces no globe, planet, satellite, or deployment claim", () => {
     const corpus = EXPANSION_STAGES.flatMap((s) => [s.label, s.title, s.status, ...s.capabilities])
-      .concat(BEYOND_ENVIRONMENTS, OPERATING_LOOP, OPERATING_LAYER.functions, OPERATING_LAYER.name)
+      .concat(BEYOND_ENVIRONMENTS, OPERATING_LOOP, SITE_BRAIN_CORE.functions, SITE_BRAIN_CORE.name)
       .join(" ")
       .toLowerCase();
-    for (const banned of ["globe", "planet", "satellite", "earth", "deployed", "customer", "validated", "worldwide", "global"]) {
+    for (const banned of ["globe", "planet", "satellite", "earth", "deployed", "customer", "validated", "worldwide", "global", "operating layer", "modular"]) {
       expect(corpus).not.toContain(banned);
     }
   });

@@ -40,7 +40,7 @@ export default function FounderSection() {
       <div className="block-inner">
         <Reveal>
           <div className="eyebrow">THE FOUNDERS</div>
-          <h2>Built across customer development and robotics engineering.</h2>
+          <h2>Built across customer development, robotics engineering, and manufacturing.</h2>
         </Reveal>
         <div className="founders-grid">
           {founders.map((founder, index) => (

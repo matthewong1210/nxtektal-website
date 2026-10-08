@@ -80,7 +80,7 @@ export const heroMasterFrame: HeroMasterFrame = {
     mobileMp4: "/visuals/phase2/hero/hero-loop-mobile.mp4",
     poster: "/visuals/phase2/hero/master-frame.webp",
   },
-  alt: "Aerial view of a golf facility at dawn with the NXTektal operating layer scanning the grounds",
+  alt: "Aerial view of a golf facility at dawn with the NXTektal Site Brain scanning the grounds",
 };
 
 /** Interim hero photograph — retained as the documented fallback if the
@@ -238,7 +238,7 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
       webp: "/visuals/phase2/workflow/06-handoff-poster.webp",
       width: 1280,
       height: 720,
-      alt: "A robotic arm at the NXTektal handoff station tipping a loaded basket of range balls into the ball-handling system's intake",
+      alt: "Concept render: a station-side arm at the NXTektal handoff unit tipping a basket of range balls into the existing washer intake",
     },
     webm: "/visuals/phase2/workflow/06-handoff-loop.webm",
     mp4: "/visuals/phase2/workflow/06-handoff-loop.mp4",
@@ -263,7 +263,7 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
 ];
 
 // -----------------------------------------------------------------------
-// 3 · Modular Handoff production visuals (.integration-block · HandoffSequence)
+// 3 · Handoff unit production visuals (.integration-block · HandoffSequence)
 // Contract: 4:3 per panel — inline SVG preferred; stills 1200×900 AVIF+WebP.
 // Paths: public/visuals/phase2/handoff/seq-01-dock.* seq-02-transfer.* seq-03-verify.*
 // When a panel's production visual is registered it replaces that panel's
@@ -364,7 +364,9 @@ export const agentSimulatorDemo: AgentSimulatorDemo = {
 // OG / social image
 // Stable public path: replacing the file at public/og-image.jpg (1200×630)
 // updates every share card — app/layout.tsx references the path, not the
-// file contents. After the hero master frame is approved, export its
-// 1200×630 crop over this file; no code change required.
+// file contents. The card uses real prototype photography
+// (public/robot/robot-front.jpg) with the approved H1 set over it, not the
+// AI-generated hero concept frame; re-export over this file whenever the
+// hero headline changes. No code change required.
 // -----------------------------------------------------------------------
 export const OG_IMAGE_PATH = "/og-image.jpg";

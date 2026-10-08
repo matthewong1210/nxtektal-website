@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "NXTektal Systems",
     short_name: "NXTektal",
     description:
-      "NXTektal builds the intelligence layer for autonomous golf facilities, starting with closed-loop ball operations at driving ranges.",
+      "NXTektal is building the site brain and robotic workforce for outdoor facilities, starting with range-ball operations at golf facilities.",
     start_url: "/",
     display: "standalone",
     background_color: "#0d1117",
