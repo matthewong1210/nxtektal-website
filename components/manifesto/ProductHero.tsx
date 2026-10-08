@@ -9,12 +9,12 @@ import HeroBackgroundVideo from "./HeroBackgroundVideo";
  * operating-layer scan) is the full-bleed poster stage; when the registry's
  * hero loop is active,
  * a gated client layer (HeroBackgroundVideo) fades the produced facility
- * film in over it on desktop. The approved copy renders over a directional
+ * film in over it, using a lighter encode on mobile. The copy renders over a directional
  * scrim, and a restrained operational overlay (status chips + low-opacity
  * facility contours) communicates the operating layer without a HUD.
  *
  * No scroll track, no space imagery. The copy never depends on the media:
- * mobile, reduced-motion, no-JS, and load-failure paths keep the still,
+ * reduced-motion, no-JS, and load-failure paths keep the still,
  * and if that fails too the night-tone stage keeps the section fully
  * readable. Chip fade-in reuses the existing hero-fade rhythm and is
  * disabled under prefers-reduced-motion by the global motion rules.
@@ -24,9 +24,9 @@ export default function ProductHero({ copy }: { copy: ReactNode }) {
 
   return (
     <section className="phero" aria-label="NXTektal — the intelligence layer for autonomous golf facilities">
-      <div className="phero-media" aria-hidden="true">
+      <div className="phero-media">
         {desktop && (
-          <picture>
+          <picture aria-hidden="true">
             {mobile && (
               <>
                 <source media="(max-width: 760px)" type="image/avif" srcSet={mobile.avif} />
@@ -46,7 +46,7 @@ export default function ProductHero({ copy }: { copy: ReactNode }) {
         )}
         <HeroBackgroundVideo />
         {/* low-opacity facility contours — permitted ambient treatment */}
-        <svg className="phero-contours" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice">
+        <svg className="phero-contours" aria-hidden="true" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice">
           <path d="M -40 620 C 300 560, 620 590, 900 540 C 1120 500, 1300 520, 1480 470" />
           <path d="M -40 700 C 340 650, 700 680, 1040 620 C 1220 590, 1360 600, 1480 570" />
         </svg>

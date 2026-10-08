@@ -29,9 +29,11 @@ export type HeroSource = {
 
 export type HeroLoop = {
   webm: string;
-  /** H.264 fallback for browsers without WebM (Safari). */
+  /** 4K HEVC fallback for desktop Safari. */
   mp4: string;
-  /** Poster still — also the mobile, reduced-motion, and load-failure frame. */
+  /** Lightweight 720p H.264 for mobile Safari and other narrow viewports. */
+  mobileMp4: string;
+  /** Poster still — also the reduced-motion and load-failure frame. */
   poster: string;
 };
 
@@ -70,11 +72,12 @@ export const heroMasterFrame: HeroMasterFrame = {
   // cut (source 1.5s–14.8s) and the tail self-crossfades into the head for
   // a seamless ~12.9s ambient loop. Native 3840×2160@30 (crisp on retina
   // displays), no audio track; VP9 WebM first, HEVC (hvc1) MP4 for Safari.
-  // Desktop-only enhancement: mobile, reduced-motion, and every failure
-  // path keep the master frame.
+  // Narrow viewports select a separate 720p H.264 encode of the same loop.
+  // Reduced-motion and failure paths keep the master frame.
   loop: {
     webm: "/visuals/phase2/hero/hero-loop.webm",
     mp4: "/visuals/phase2/hero/hero-loop.mp4",
+    mobileMp4: "/visuals/phase2/hero/hero-loop-mobile.mp4",
     poster: "/visuals/phase2/hero/master-frame.webp",
   },
   alt: "Aerial view of a golf facility at dawn with the NXTektal operating layer scanning the grounds",

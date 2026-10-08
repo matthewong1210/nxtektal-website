@@ -22,7 +22,7 @@ describe("hero background loop (Phase 2G)", () => {
     const loop = heroMasterFrame.loop;
     expect(loop).not.toBeNull();
     if (!loop) return;
-    for (const p of [loop.webm, loop.mp4, loop.poster]) {
+    for (const p of [loop.webm, loop.mp4, loop.mobileMp4, loop.poster]) {
       expect(existsSync(publicPath(p)), `missing public asset: ${p}`).toBe(true);
     }
   });
