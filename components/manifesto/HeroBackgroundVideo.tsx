@@ -1,38 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { heroMasterFrame } from "../../lib/visualAssets";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { heroMasterFrame, type HeroLoop } from "../../lib/visualAssets";
 
-/**
- * Hero background motion layer (Phase 2G).
- *
- * Mounts the registry's hero loop as a decorative full-bleed layer between
- * the master-frame poster and the facility contours. Renders nothing on the
- * server and nothing until a definite desktop + motion-allowed answer, so
- * mobile (≤760px), prefers-reduced-motion, no-JS, autoplay-blocked, and
- * load-failure visitors all keep today's still hero — and the video bytes
- * are never requested on paths that will not play them (no hidden duplicate
- * mobile/desktop elements).
- *
- * The element stays at opacity 0 until real playback starts (`playing`,
- * not `canplay`, so a blocked-autoplay first frame is never shown) and then
- * fades in over the poster: no black frame, no layout shift, no controls,
- * no pointer interception.
+type VideoSize = "mobile" | "desktop";
+
+/** Poster-first hero film. Width selects the encode, not playback eligibility.
+ * Reduced-motion and no-JS visitors keep the still without loading video.
  */
 export default function HeroBackgroundVideo() {
-  const loop = heroMasterFrame.loop;
-  const ref = useRef<HTMLVideoElement>(null);
-  // null = preferences unresolved; the video mounts only on a definite yes
-  // for both gates (same resolved-preference pattern as ResponsiveLoop).
-  const [eligible, setEligible] = useState<boolean | null>(null);
-  const [live, setLive] = useState(false);
+  const [size, setSize] = useState<VideoSize | null>(null);
 
   useEffect(() => {
-    // Negation of the site's mobile breakpoint, so the two are exactly
-    // complementary at fractional widths (zoom / non-integer DPR).
     const narrow = window.matchMedia("(max-width: 760px)");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setEligible(!narrow.matches && !reduced.matches);
+    const sync = () => setSize(reduced.matches ? null : narrow.matches ? "mobile" : "desktop");
     sync();
     narrow.addEventListener("change", sync);
     reduced.addEventListener("change", sync);
@@ -42,27 +24,34 @@ export default function HeroBackgroundVideo() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!eligible) {
-      setLive(false);
-      return;
-    }
+  const loop = heroMasterFrame.loop;
+  if (!loop || !size) return null;
+  // A new element resets source selection and the poster fade on rotation.
+  return <HeroFilm key={size} size={size} loop={loop} />;
+}
+
+function HeroFilm({ size, loop }: { size: VideoSize; loop: HeroLoop }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [live, setLive] = useState(false);
+  const [needsPlay, setNeedsPlay] = useState(false);
+
+  const tryPlay = useCallback(() => {
     const video = ref.current;
-    if (!video) return;
-    const tryPlay = () => {
-      if (video.paused) video.play().catch(() => {});
-    };
+    if (!video || !video.paused || document.hidden) return;
+    // Set the DOM property as well as the JSX flag before Safari's play call.
+    video.muted = true;
+    void video.play().catch(() => {
+      if (ref.current === video) setNeedsPlay(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    const video = ref.current;
     tryPlay();
-    // Stay armed for the whole eligible session — a paused video must never
-    // strand the hero on the poster until reload. Browsers pause background
-    // tabs / low-power sessions; `visibilitychange` resumes on return, and
-    // the gesture listeners cover strict autoplay policies that need a user
-    // activation (granted at pointerup/touchend, not -down/-start). These
-    // are cheap no-ops while playing; one-shot listeners proved
-    // insufficient because a later browser pause found them consumed.
     const onVisibility = () => {
       if (!document.hidden) tryPlay();
     };
+    // Keep retries armed after browser pauses, including iOS low-power mode.
     document.addEventListener("visibilitychange", onVisibility);
     const options = { passive: true } as const;
     window.addEventListener("pointerup", tryPlay, options);
@@ -73,35 +62,44 @@ export default function HeroBackgroundVideo() {
       window.removeEventListener("pointerup", tryPlay);
       window.removeEventListener("touchend", tryPlay);
       window.removeEventListener("keydown", tryPlay);
+      video?.pause();
     };
-  }, [eligible]);
-
-  if (!loop || !eligible) return null;
+  }, [tryPlay]);
 
   return (
-    <video
-      ref={ref}
-      className={`phero-video${live ? " is-live" : ""}`}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-      // No poster attribute on purpose: the element is transparent until
-      // `playing` fires, and the master-frame <picture> underneath is the
-      // real poster — an attribute here would only re-download the WebP.
-      aria-hidden="true"
-      tabIndex={-1}
-      onPlaying={() => setLive(true)}
-      // A mid-session pause (tab backgrounding, low-power mode, a stall the
-      // browser gives up on) must not leave a frozen mid-motion frame over
-      // the poster — fade back out; a later `playing` fades back in. The
-      // loop wrap-around never fires `pause`, so normal looping is unaffected.
-      onPause={() => setLive(false)}
-      onError={() => setLive(false)}
-    >
-      <source src={loop.webm} type="video/webm" />
-      <source src={loop.mp4} type="video/mp4" />
-    </video>
+    <>
+      <video
+        ref={ref}
+        className={`phero-video${live ? " is-live" : ""}`}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+        tabIndex={-1}
+        // The picture below remains visible until actual playback begins.
+        onPlaying={() => { setLive(true); setNeedsPlay(false); }}
+        onPause={() => {
+          setLive(false);
+          if (!document.hidden) setNeedsPlay(true);
+        }}
+        onError={() => setLive(false)}
+      >
+        {size === "mobile" ? (
+          <source src={loop.mobileMp4} type="video/mp4" />
+        ) : (
+          <>
+            <source src={loop.webm} type="video/webm" />
+            <source src={loop.mp4} type="video/mp4" />
+          </>
+        )}
+      </video>
+      {needsPlay && (
+        <button className="phero-play" type="button" onClick={tryPlay}>
+          Play background video
+        </button>
+      )}
+    </>
   );
 }

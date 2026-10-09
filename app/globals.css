@@ -204,6 +204,8 @@ main { background: var(--night); }
 .phero-media img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
 .phero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; opacity: 0; transition: opacity 900ms ease; pointer-events: none; }
 .phero-video.is-live { opacity: 1; }
+.phero-play { position: absolute; z-index: 3; right: var(--pad); bottom: 4px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: rgba(9, 13, 19, 0.88); color: var(--white); font: inherit; font-size: 12px; cursor: pointer; }
+.phero-play:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { .phero-video { display: none; } }
 .phero-contours { position: absolute; inset: 0; width: 100%; height: 100%; }
 .phero-contours path { fill: none; stroke: rgba(245, 247, 247, 0.1); stroke-width: 1.2; }

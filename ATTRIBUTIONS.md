@@ -21,6 +21,10 @@ content; the tool was not recorded at hand-off — record it here and confirm
 commercial terms before launch. The raw source recording stays outside the
 repository.
 
+The mobile hero film (`hero-loop-mobile.mp4`) is a 1280×720 H.264 re-encode
+of that same `hero-loop.mp4`, with the full frame, 12.9-second loop and
+30 fps preserved, no audio, and faststart metadata. No new imagery is added.
+
 ## Workflow physical-loop media (`public/visuals/phase2/workflow/`)
 
 The WASH & DISPENSE loop and poster are derived from concept footage of
