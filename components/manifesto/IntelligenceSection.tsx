@@ -1,45 +1,47 @@
 import Reveal from "../../app/reveal";
 import SimulatorProof from "./SimulatorProof";
+import { IMPROVEMENT_LOOP, IMPROVEMENT_NOTE } from "../../lib/howItWorks";
 
 /**
  * Software and machines chapter (#software-and-machines).
  *
- * Order: chapter header (Site Brain and task-specific machines are developed
- * together) → the two development tracks → the Range Operations Simulator
- * proof → the Site Brain architecture stack beside the manager dashboard
- * concept. Every layer in the stack maps to a boundary that exists in the
- * NXTektal systems repository (facility state, advisory planning, append-only
- * memory, projection-only twin, robot execution behind safety interfaces);
- * nothing here claims a live site integration, an equipment command surface,
- * or a task interface for the handoff unit (which is a concept).
+ * Order: chapter header (the Site Brain and the hardware the job needs are
+ * developed together; third-party equipment used where it fits) → the two
+ * development tracks → the product-improvement loop (a method, kept separate
+ * from the operating loop) → the Range Operations Simulator proof → the Site
+ * Brain architecture stack beside the manager dashboard concept. Every layer
+ * in the stack maps to a boundary that exists in the NXTektal systems
+ * repository (facility state, advisory planning, append-only memory,
+ * projection-only twin, robot execution behind safety interfaces); nothing
+ * here claims a live site integration, an equipment command surface, or a
+ * settled handoff mechanism.
  */
 
 const tracks = [
   {
     key: "brain",
     label: "SITE BRAIN · SOFTWARE",
-    status: "WORKING IN SIMULATION",
-    title: "Plans the work and verifies the result.",
+    status: "WORKING · SIMULATION ONLY",
+    title: "Decides the work and confirms the result.",
     items: [
-      "Built on one picture of the site, assembled from sensors and existing systems, with missing data kept visible instead of guessed.",
-      "Planning rules are fixed and reviewable. Proposed work is approved, changed, or rejected by a person before anything moves.",
-      "Coordinates staff, NXTektal robots, and compatible equipment, and confirms each handoff and result.",
-      "Keeps a permanent record of what it observed, what it proposed, what people decided, and what happened.",
+      "Today: the whole loop runs in the Range Operations Simulator against simulated sites. No facility is connected.",
+      "Rules, not learned behaviour: decisions follow fixed rules a person can read, and a person approves proposed work.",
+      "Missing data stays visible as missing. The software never fills a gap with a guess.",
     ],
-    note: "Developed and compared in the Range Operations Simulator today; no live site integration yet.",
+    note: "What a pilot would add: real sensors, real equipment interfaces, and real exceptions.",
   },
   {
     key: "machines",
-    label: "TASK-SPECIFIC MACHINES · HARDWARE",
+    label: "MACHINES AND INTERFACES · HARDWARE",
     status: "IN DEVELOPMENT",
-    title: "Built for the physical job.",
+    title: "Built or chosen for the physical job.",
     items: [
-      "Collection robot — prototype in development. Designed around the sweep, return, and dock cycle the Site Brain schedules; described in the first workflow above.",
-      "Handoff unit — engineering concept. The transfer from the robot into the existing washer intake, configured to each site’s equipment.",
-      "NXTektal robots are being designed to report status and receive tasks through one task interface, behind the same hard task timeouts, bounded retries, safe retract, and latched emergency stop.",
-      "Compatible existing equipment joins the same workflow without being replaced.",
+      "Collection robot — prototype in development, designed around the sweep, return, and handoff cycle the Site Brain schedules.",
+      "Handoff and transfer into the existing washer intake — the transfer mechanism is under development; no option has been selected yet.",
+      "Shared control architecture: every NXTektal robot is designed to take tasks through the same interface, so the Site Brain schedules each one the same way.",
+      "Mechanical modules are reused where a job allows it, such as the mobile base.",
     ],
-    note: "Concept renders on this page show the current design direction, not a final product. Sharing a task interface does not make parts interchangeable between robots.",
+    note: "Concept renders on this page show design direction, not a final product, and a shared architecture does not make parts interchangeable between robots.",
   },
 ];
 
@@ -52,27 +54,27 @@ const layers = [
   {
     name: "Facility State",
     subtitle: "What is happening?",
-    description: "One time-stamped picture of inventory, equipment, demand, and constraints, assembled from observations. Missing data stays marked missing instead of being guessed.",
+    description: "One time-stamped picture of the site, assembled from observations. Missing data stays marked missing.",
   },
   {
-    name: "Planning and advice",
+    name: "Decisions and advice",
     subtitle: "What should happen next?",
-    description: "Fixed, reviewable rules evaluate the state, propose work, and flag risks. The facility manager sets the goals and approves what needs approval.",
+    description: "Fixed, reviewable rules propose work and flag risks. The manager sets the goals and approves.",
   },
   {
     name: "Operational memory",
     subtitle: "What happened before?",
-    description: "A record that is only ever added to, never edited: state, decision, human action, and outcome, kept for review and improvement. It never drives the live loop on its own.",
+    description: "A record that is only ever added to, never edited. It never drives the live loop on its own.",
   },
   {
     name: "Spatial model",
     subtitle: "Where is everything?",
-    description: "The same state projected onto the site layout as a digital twin. It is a view of the facility, never the source of truth.",
+    description: "The same state projected onto the site layout. A view of the facility, never the source of truth.",
   },
   {
     name: "Execution",
     subtitle: "How work gets done",
-    description: "Robots receive tasks behind safety interfaces: hard task timeouts, bounded retries, safe retract, and a latched emergency stop that halts all motion until the platform is reset outside the software. Existing washers and dispensers are observed, not commanded.",
+    description: "Robots are designed to take tasks the same way and to stop safely if a task runs too long or fails; an emergency stop cannot be cleared by software. Today this runs with a simulated robot only. Existing washers and dispensers would be observed, not commanded; no equipment is connected yet.",
   },
 ];
 
@@ -98,12 +100,12 @@ export default function IntelligenceSection() {
   return (
     <section className="block intel-block" id="software-and-machines">
       <div className="block-inner">
-        {/* 1 · Chapter header — software and machines developed together */}
+        {/* 1 · Chapter header — software and the hardware the job needs, developed together */}
         <Reveal>
           <div className="eyebrow">SOFTWARE AND MACHINES · IN DEVELOPMENT</div>
-          <h2>One Site Brain. Machines designed for the job.</h2>
+          <h2>The Site Brain, and the machines and interfaces the job needs.</h2>
           <p className="section-body">
-            NXTektal develops the Site Brain and its task-specific robots together. The software is built to understand site state, plan work, coordinate execution, and verify results; the machines are designed around the jobs it schedules. Field results from pilots will guide changes to both the software and the machine designs.
+            Two tracks, developed together: the Site Brain, which runs in simulation today, and the machines and interfaces the first job needs, which are in development. Field results from pilots will feed the next revision of both.
           </p>
         </Reveal>
 
@@ -128,13 +130,37 @@ export default function IntelligenceSection() {
           ))}
         </div>
 
-        {/* 3 · Simulator proof — where the planning rules are developed today
+        {/* 3 · The product-improvement loop — deliberately separate from the operating loop */}
+        <div className="improve-block">
+          <Reveal>
+            <div className="eyebrow">HOW DEPLOYMENTS IMPROVE THE PRODUCT</div>
+            <h3 className="improve-title">A second loop, run by the team: record, analyze, improve, test, deliver again.</h3>
+          </Reveal>
+          <Reveal>
+            <ol className="loop-steps" aria-label="The product-improvement loop: record, analyze, improve, test, deliver">
+              {IMPROVEMENT_LOOP.map((step, index) => (
+                <li key={step.name} className="loop-step">
+                  <span className="wf-step-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                  <div>
+                    <strong>{step.name}</strong>
+                    <p>{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+          <Reveal>
+            <p className="control-note">{IMPROVEMENT_NOTE}</p>
+          </Reveal>
+        </div>
+
+        {/* 4 · Simulator proof — where the decision rules are developed today
             (renders only when agentSimulatorDemo.ready) */}
         <Reveal>
           <SimulatorProof />
         </Reveal>
 
-        {/* 4 · Site Brain architecture + manager dashboard concept */}
+        {/* 5 · Site Brain architecture + manager dashboard concept */}
         <div className="intel-duo">
           <Reveal>
             <div className="intel-left">
@@ -153,12 +179,9 @@ export default function IntelligenceSection() {
                     </div>
                   </li>
                 ))}
-                <span className="intel-feedback-rail" aria-hidden="true">
-                  <i>FEEDBACK</i>
-                </span>
               </ol>
               <p className="intel-feedback-note">
-                Field feedback closes the loop: what the system observed, what it planned, what people did, and what happened next are recorded — and that record guides the next software update and the next machine revision.
+                The record is the input to the improvement loop above. The team runs that loop; the software does not change itself.
               </p>
             </div>
           </Reveal>

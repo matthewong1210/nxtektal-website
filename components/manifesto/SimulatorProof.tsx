@@ -25,8 +25,6 @@ const processItems = [
   { name: "SIMULATE", body: "Model demand, robot availability, equipment delays, and failure conditions." },
   { name: "COMPARE", body: "Measure availability, throughput, stockouts, interventions, energy, and utilization." },
   { name: "MANAGER REVIEW", body: "Surface policy changes and operating recommendations for human review." },
-  { name: "OPERATE", body: "At a pilot site: coordinate approved tasks across staff, robots, and existing equipment." },
-  { name: "IMPROVE", body: "After a pilot: compare expected and observed outcomes to inform the next plan — and the next design change." },
 ];
 
 export default function SimulatorProof() {
@@ -75,7 +73,7 @@ export default function SimulatorProof() {
       <div className="eyebrow">SIMULATION · WHERE THE SITE BRAIN IS BUILT TODAY</div>
       <h3>Test the operation before it reaches the field.</h3>
       <p className="section-body">
-        The Range Operations Simulator is where the Site Brain&rsquo;s planning rules are developed and compared today. It replays demand changes, robot states, dispatch decisions, handoff activity, and equipment constraints before an operating policy reaches a pilot site.
+        The Range Operations Simulator is where the Site Brain&rsquo;s decision rules are developed and compared today. It replays demand changes, robot states, dispatch decisions, handoff activity, and equipment constraints before an operating policy reaches a pilot site. Passing in simulation shows the software logic holds; it does not show the physical job has been done.
       </p>
 
       <div className="sim-duo">
@@ -99,7 +97,7 @@ export default function SimulatorProof() {
           <p>
             Each run records service availability, throughput, stockouts, interventions, energy use, robot utilization, and estimated operating cost, allowing policies and failure responses to be compared under the same scenario.
           </p>
-          <ol className="sim-process" aria-label="Simulation-to-operations process: steps one to three run today in simulation; four and five belong to a pilot">
+          <ol className="sim-process" aria-label="What the simulator does today: simulate, compare, and prepare recommendations for manager review">
             {processItems.map((item, index) => (
               <li key={item.name}>
                 <span className="wf-step-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
@@ -111,7 +109,7 @@ export default function SimulatorProof() {
             ))}
           </ol>
           <p className="sim-qualification">
-            Simulation results are not field results. Physical values in the simulator are placeholders until they are measured at a site, and field performance is validated separately during a pilot.
+            Simulation results are not field results. Physical values in the simulator are placeholders until they are measured at a site. What a pilot adds is the operating loop above, run on a real site, and the record the improvement loop needs.
           </p>
         </div>
       </div>

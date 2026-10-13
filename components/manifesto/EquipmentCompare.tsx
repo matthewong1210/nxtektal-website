@@ -113,7 +113,7 @@ function NxtektalDiagram() {
       <EquipmentZone />
       {/* Coordination chain */}
       <rect className="eqc-node eqc-node--nxt" x={56} y={60} width={224} height={82} rx={10} />
-      <text className="eqc-node-label" x={76} y={96}>Sense &amp; Plan</text>
+      <text className="eqc-node-label" x={76} y={96}>Sense &amp; Decide</text>
       <text className="eqc-node-tag eqc-node-tag--nxt" x={76} y={120}>NXTEKTAL SITE BRAIN</text>
 
       <Arrow x1={168} y1={142} x2={168} y2={210} tone="blue" />
@@ -125,22 +125,28 @@ function NxtektalDiagram() {
       <Arrow x1={280} y1={255} x2={396} y2={255} tone="blue" />
 
       <rect className="eqc-node eqc-node--nxt" x={400} y={214} width={224} height={82} rx={10} />
-      <text className="eqc-node-label" x={420} y={250}>Handoff Unit</text>
-      <text className="eqc-node-tag eqc-node-tag--nxt" x={420} y={274}>NXTEKTAL</text>
+      <text className="eqc-node-label" x={420} y={250}>Handoff &amp; Transfer</text>
+      <text className="eqc-node-tag eqc-node-tag--nxt" x={420} y={274}>MECHANISM IN DEVELOPMENT</text>
 
       {/* Handoff feeds the same washer the facility already owns */}
       <Arrow x1={624} y1={255} x2={832} y2={182} tone="blue" />
-      {/* Coordinated washer → dispenser flow */}
-      <Arrow x1={WASHER.x + 150} y1={WASHER.y + 82} x2={DISPENSER.x + 150} y2={DISPENSER.y} tone="lime" />
 
-      {/* Verification closes the loop */}
-      <rect className="eqc-node eqc-node--verify" x={400} y={330} width={224} height={64} rx={10} />
-      <text className="eqc-node-label eqc-node-label--sm" x={420} y={357}>Verify &amp; Report</text>
-      <text className="eqc-node-tag eqc-node-tag--verify" x={420} y={378}>WORKFLOW STATUS</text>
-      <path className="eqc-path eqc-path--lime" d={`M ${ZONE.x + 40} ${ZONE.y + ZONE.h} C 740 400, 700 362, 628 362`} fill="none" />
-      <path className="eqc-path eqc-path--blue" d={`M 400 362 C 160 362, 168 200, 168 146`} fill="none" />
+      {/* Washer → dispenser stays the facility's own manual step, drawn exactly as in the
+          current state: washing and dispensing are outside current scope. */}
+      <rect className="eqc-node eqc-node--manual" x={560} y={330} width={220} height={64} rx={10} />
+      <text className="eqc-node-label eqc-node-label--sm" x={578} y={357}>Manual transfer</text>
+      <text className="eqc-node-tag eqc-node-tag--manual" x={578} y={378}>MANUAL · UNCHANGED</text>
+      <path className="eqc-path eqc-path--muted" d={`M ${WASHER.x} ${WASHER.y + 41} C 700 179, 690 330, 672 330`} fill="none" />
+      <path className="eqc-path eqc-path--muted" d={`M 672 394 C 690 420, 760 300, ${DISPENSER.x} ${DISPENSER.y + 41}`} fill="none" />
 
-      <text className="eqc-foot" x={56} y={438}>Demand-aware dispatch · coordinated equipment state · end-to-end workflow status</text>
+      {/* Transfer confirmation — recorded at the handoff, required before the next run — closes the loop back to the Site Brain */}
+      <rect className="eqc-node eqc-node--verify" x={56} y={330} width={224} height={64} rx={10} />
+      <text className="eqc-node-label eqc-node-label--sm" x={76} y={357}>Confirm &amp; Report</text>
+      <text className="eqc-node-tag eqc-node-tag--verify" x={76} y={378}>REQUIRED BEFORE NEXT RUN</text>
+      <Arrow x1={440} y1={296} x2={284} y2={362} tone="lime" />
+      <path className="eqc-path eqc-path--blue" d={`M 56 362 C 20 362, 20 101, 52 101`} fill="none" />
+
+      <text className="eqc-foot" x={56} y={438}>Demand-aware dispatch · coordinated equipment state · transfer confirmed before the next run · washing and dispensing unchanged</text>
     </svg>
   );
 }
@@ -207,7 +213,7 @@ export default function EquipmentCompare() {
           className="eqc-stage"
           style={{ "--eqc-pos": `${COMPARE_DEFAULT}%` } as React.CSSProperties}
         >
-          <span className="eqc-stage-tag eqc-stage-tag--nxt">WITH NXTEKTAL</span>
+          <span className="eqc-stage-tag eqc-stage-tag--nxt">WITH NXTEKTAL · IN DEVELOPMENT</span>
           <span className="eqc-stage-tag eqc-stage-tag--current">TYPICAL CURRENT WORKFLOW</span>
           <div className="eqc-layer eqc-layer--current" aria-hidden="true">
             <CurrentDiagram />

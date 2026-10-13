@@ -2,9 +2,12 @@ import { describe, expect, it } from "vitest";
 
 import {
   ACTIVATION_HYSTERESIS_PX,
+  MEDIA_TAGS,
   WORKFLOW_STEPS,
+  captionFor,
   isLoopStep,
   mediaKeyFor,
+  mediaTagFor,
   resolveActiveStep,
   sequentialMediaFor,
 } from "../workflowSteps";
@@ -21,6 +24,39 @@ describe("step order and content", () => {
       "WASH & DISPENSE",
       "VERIFY",
     ]);
+  });
+});
+
+describe("handoff wording (mechanism-neutral, confirmation required)", () => {
+  it("states the handoff as a design requirement and names no settled mechanism or container", () => {
+    const handoff = WORKFLOW_STEPS[5].body;
+    expect(handoff).toContain("return to a handoff point for transfer into the range’s existing washer intake");
+    expect(handoff).toContain("requires transfer confirmation before collection resumes");
+    expect(handoff.toLowerCase()).toContain("mechanism is under development");
+    const all = WORKFLOW_STEPS.map((s) => s.body).join(" ").toLowerCase();
+    for (const banned of ["hopper", "basket", "chute", "conveyor", "robotic arm", "handoff unit", "lift and tilt"]) {
+      expect(all).not.toContain(banned);
+    }
+  });
+
+  it("keeps washing and dispensing with the existing equipment, outside current scope", () => {
+    expect(WORKFLOW_STEPS[6].body.toLowerCase()).toContain("outside nxtektal’s current scope");
+  });
+});
+
+describe("media labels (simulation vs concept, visible in the frame)", () => {
+  it("labels every step and marks the handoff footage as a concept with the mechanism under development", () => {
+    expect(MEDIA_TAGS).toHaveLength(WORKFLOW_STEPS.length);
+    expect(mediaTagFor(5)).toContain("TRANSFER MECHANISM UNDER DEVELOPMENT");
+    for (const i of [0, 1, 2, 7]) expect(mediaTagFor(i)).toBe("SIMULATION");
+    for (const i of [3, 4, 5, 6]) expect(mediaTagFor(i)!.startsWith("CONCEPT")).toBe(true);
+  });
+
+  it("gives every step a caption: simulation qualification or a concept caption", () => {
+    for (let i = 0; i < WORKFLOW_STEPS.length; i += 1) {
+      expect(captionFor(i), `step ${i} caption`).toBeTruthy();
+    }
+    expect(captionFor(5)).toBe("Concept visualization. Transfer mechanism under development.");
   });
 });
 

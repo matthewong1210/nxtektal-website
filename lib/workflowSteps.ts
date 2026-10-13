@@ -1,27 +1,56 @@
 /**
- * First Closed-Loop Workflow — step content and the pure activation logic
- * behind the scroll-driven story (Phase 2D Sprint 2A).
+ * First job workflow — step content, media labels, and the pure activation
+ * logic behind the scroll-driven story (Phase 2D Sprint 2A; copy updated for
+ * the "robots and the operating system behind them" positioning).
  *
- * Kept free of React/DOM so the activation rules and media mapping are unit
- * testable: WorkflowStory measures the DOM and delegates every decision to
- * these functions.
+ * Kept free of React/DOM so the activation rules, media mapping, and media
+ * labels are unit testable: WorkflowStory measures the DOM and delegates
+ * every decision to these functions. The HANDOFF step is deliberately
+ * mechanism-neutral — the transfer mechanism is under development and no
+ * option (arm, basket, lift, chute, conveyor) is named as settled.
  */
 
 import { workflowStepLoops, workflowStepStills } from "./visualAssets";
 
 export type WorkflowStep = { name: string; body: string };
 
-/** The approved eight steps, in approved order. */
+/** The approved eight steps, in approved order. A designed workflow, in development. */
 export const WORKFLOW_STEPS: WorkflowStep[] = [
   { name: "MONITOR", body: "Ball availability and demand are tracked across the range from sensors and the dispenser." },
-  { name: "PRIORITIZE", body: "The Site Brain decides when a collection run is worth making, within the rules the manager has set." },
+  { name: "PRIORITIZE", body: "The Site Brain — NXTektal’s scheduling and coordination software — decides when a collection run is worth making, within the rules the manager has set." },
   { name: "DISPATCH", body: "A collection task is issued to the NXTektal collection robot." },
-  { name: "COLLECT", body: "The robot sweeps priority zones with its front roller picker and fills its onboard hopper." },
-  { name: "RETURN", body: "It navigates back to the handoff point by the range building." },
-  { name: "HANDOFF", body: "The hopper load transfers through the handoff unit into the range’s existing washer intake." },
-  { name: "WASH & DISPENSE", body: "The facility’s existing washer and dispenser process the balls and return them to players." },
-  { name: "VERIFY", body: "The handoff and the run are confirmed complete and logged; anything unconfirmed is flagged to a person." },
+  { name: "COLLECT", body: "The robot sweeps priority zones and carries the collected balls on board." },
+  { name: "RETURN", body: "It brings the collected load back to the handoff point by the range building." },
+  { name: "HANDOFF", body: "Collected balls return to a handoff point for transfer into the range’s existing washer intake. The workflow requires transfer confirmation before collection resumes. The transfer mechanism is under development." },
+  { name: "WASH & DISPENSE", body: "The range’s existing washer and dispenser take it from there. These steps stay with the existing equipment and are outside NXTektal’s current scope." },
+  { name: "VERIFY", body: "The run and the transfer are confirmed and logged. Anything unconfirmed is flagged to a person before the next run." },
 ];
+
+/**
+ * Visible media label per step, rendered inside the media frame so the
+ * reader can always tell simulation, concept render, and concept
+ * visualization apart — and sees that the handoff mechanism is undecided
+ * right next to the concept footage that shows one option.
+ */
+export const MEDIA_TAGS: string[] = [
+  "SIMULATION",
+  "SIMULATION",
+  "SIMULATION",
+  "CONCEPT RENDER",
+  "CONCEPT VISUALIZATION",
+  "CONCEPT · TRANSFER MECHANISM UNDER DEVELOPMENT",
+  "CONCEPT · EXISTING EQUIPMENT",
+  "SIMULATION",
+];
+
+export function mediaTagFor(index: number): string | undefined {
+  return MEDIA_TAGS[index];
+}
+
+/** Caption under the media: a still's own caption, else the step loop's poster caption. */
+export function captionFor(index: number): string | undefined {
+  return workflowStepStills[index]?.caption ?? workflowStepLoops[index]?.still.caption;
+}
 
 /**
  * Media identity for a step:

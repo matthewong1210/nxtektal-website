@@ -9,12 +9,6 @@ import type { ReactNode } from "react";
  * media — never baked into the images themselves.
  */
 
-export const CAPTIONS = {
-  engConcept: "Engineering concept visualization",
-  illustrative: "Illustrative product concept — not live facility data",
-  direction: "Platform direction",
-} as const;
-
 type MediaFrameProps = {
   /** Optional: approved product imagery renders without a public label;
    * concept/simulation media keeps its qualification caption. */
