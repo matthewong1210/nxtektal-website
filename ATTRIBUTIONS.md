@@ -43,6 +43,18 @@ Systems).
 Screen recordings and stills of the NXTektal Range Operations Simulator —
 original NXTektal software; all rights held by NXTektal Systems.
 
+## YAWIN CE82A product imagery (`public/products/ce82a/`)
+
+`ce82a-product-white.webp` (980×731, product on white) and
+`ce82a-golf-course.webp` (1920×1079, course display scene) are YAWIN (亚云)
+manufacturer product materials for the CE82A robotic ball collector,
+supplied to NXTektal by the founders for the product page. Rights remain
+with YAWIN; confirm the terms of use with the manufacturer before launch.
+The YAWIN marking on the images is kept. The course scene is manufacturer
+display material, not an NXTektal customer deployment, and the page says so
+in its caption. Specification figures on the page come from the
+manufacturer's product sheet (亚云自动捡球机CE82A.pdf).
+
 ## Removed assets
 
 The tracked-collector Master Product Visual (Dreamina render supplied

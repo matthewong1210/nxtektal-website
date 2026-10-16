@@ -22,17 +22,15 @@ import {
 } from "../lib/expansionStages";
 import { BUILD_OR_USE_NOTE, DESIGN_STATUS_NOTE, LOOP_STEPS, PARTICIPANTS } from "../lib/howItWorks";
 import { BUILD_TRACKS, SCOPE, STATUS_DATE, SYSTEM_COMPONENTS } from "../lib/firstJob";
-import { SITE_DESCRIPTION } from "../lib/positioning";
+import { SITE, SITE_DESCRIPTION } from "../lib/positioning";
+import SiteFooter from "../components/SiteFooter";
+import { CE82A_ROUTE } from "../lib/products/ce82a";
 import Reveal from "./reveal";
 
 // Below-the-fold interactive module: split out so it never weighs on first paint.
 const QuickCalculator = dynamic(() => import("../components/roi/QuickCalculator"));
 
-const site = {
-  brand: "NXTektal Systems",
-  email: "founders@nxtektal.com",
-  domain: "nxtektal.com",
-};
+const site = SITE;
 
 const pilotMail = `mailto:${site.email}?subject=Pilot%20Facility%20Interest%20%E2%80%94%20%5BFacility%20Name%5D`;
 const assessmentMail = `mailto:${site.email}?subject=Site%20Assessment%20Request`;
@@ -41,6 +39,7 @@ const partnerMail = `mailto:${site.email}?subject=Partnership%20Discussion`;
 const navItems = [
   { label: "The Work", href: "#work" },
   { label: "First Job", href: "#first-workflow" },
+  { label: "Products", href: CE82A_ROUTE },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Why Golf", href: "#why-golf" },
   { label: "Progress", href: "#progress" },
@@ -585,17 +584,7 @@ export default function Home() {
       </section>
 
       {/* 16 · Footer */}
-      <footer>
-        <a className="brand footer-brand" href="#top" aria-label="Back to top">
-          <BrandLockup />
-        </a>
-        <p>ROBOTS + THE OPERATING SYSTEM FOR OUTDOOR WORK · STARTING WITH GOLF</p>
-        <div>
-          <a href={`https://${site.domain}`}>{site.domain}</a>
-          <a href={`mailto:${site.email}`}>{site.email}</a>
-          <span>© 2026 {site.brand}</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

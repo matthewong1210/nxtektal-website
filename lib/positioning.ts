@@ -15,3 +15,10 @@ export const FIRST_JOB_SENTENCE =
 
 /** Full site description used for metadata, share text, and JSON-LD. */
 export const SITE_DESCRIPTION = `${POSITIONING_SENTENCE} ${FIRST_JOB_SENTENCE}`;
+
+/** Site identity used by the header, footer, contact links and JSON-LD. */
+export const SITE = {
+  brand: "NXTektal Systems",
+  email: "founders@nxtektal.com",
+  domain: "nxtektal.com",
+} as const;
