@@ -21,7 +21,7 @@ import {
 } from "../../../lib/products/ce82a";
 
 export const metadata: Metadata = {
-  title: `${CE82A.name} | ${CE82A.brand} hardware | NXTektal Systems`,
+  title: `${CE82A.name} | NXTektal Systems`,
   description: CE82A.summary,
   alternates: { canonical: CE82A_ROUTE },
 };
@@ -63,7 +63,7 @@ export default function Ce82aPage() {
       <section className="pd-section pd-hero" id="overview" aria-labelledby="pd-h1">
         <div className="pd-inner pd-hero-grid">
           <div className="pd-hero-copy">
-            <p className="eyebrow">Products · {CE82A.brand} {CE82A.model}</p>
+            <p className="eyebrow">Products · {CE82A.model} · Manufactured by {CE82A.brand}</p>
             <h1 id="pd-h1">{CE82A.name}</h1>
             <p className="pd-lede">{CE82A.summary}</p>
             <dl className="pd-stats" aria-label="Key figures">

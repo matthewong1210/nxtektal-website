@@ -12,11 +12,11 @@
  * automatic recharging, and "automatic unloading when full" is a
  * manufacturer description whose delivered form is confirmed per site.
  *
- * Relationship: the CE82A is YAWIN hardware. NXTektal has begun initial
- * integration work; the partnership form, NXTektal software coverage and
- * commercial terms are not confirmed. Nothing here may present the CE82A as
- * NXTektal-built, as an authorised dealership, as a signed co-development, or
- * as fully integrated.
+ * Relationship (owner's wording, 2026-10-16): the CE82A is developed jointly
+ * by NXTektal and YAWIN and manufactured by YAWIN. Software coverage and
+ * commercial terms for a given site are confirmed during the inquiry. Nothing
+ * here may present the machine as NXTektal-manufactured, as an authorised
+ * dealership, or as fully integrated with NXTektal software at every site.
  */
 
 export const CE82A_ROUTE = "/products/ce82a";
@@ -29,10 +29,10 @@ export const CE82A = {
   nativeName: "CE82A 自动捡球机",
   category: "Robotic ball collector for golf driving ranges",
   summary:
-    "A robotic ball collector made by YAWIN for golf driving ranges. It gathers range balls across the outfield under remote control or autonomous navigation, with a 2 m collection width and a 1,200-ball basket.",
-  /** How NXTektal is involved — stated once, near the top, in plain terms. */
+    "A robotic ball collector for golf driving ranges, developed jointly by NXTektal and YAWIN and manufactured by YAWIN. It gathers range balls across the outfield under remote control or autonomous navigation, with a 2 m collection width and a 1,200-ball basket.",
+  /** How NXTektal and YAWIN relate — stated once, near the top, in plain terms. */
   relationship:
-    "The CE82A is built by YAWIN (亚云). NXTektal has begun initial hardware integration work with it. How a partnership would be structured, how much of a range’s operation NXTektal software would cover, and commercial terms are not yet confirmed.",
+    "The CE82A is developed jointly by NXTektal and YAWIN (亚云) and manufactured by YAWIN. Which parts of a range’s operation NXTektal’s software runs, and the commercial terms, are confirmed for each site during the inquiry.",
 } as const;
 
 export type HeroStat = { value: string; unit?: string; label: string };
@@ -65,10 +65,10 @@ export const FEATURES: Feature[] = [
   },
 ];
 
-export const FEATURES_INTRO = "What the CE82A does, as described in YAWIN’s product literature.";
+export const FEATURES_INTRO = "What the CE82A does, as described in its product literature.";
 
 export const FEATURES_NOTE =
-  "These functions are the manufacturer’s description of the machine. Which of them NXTektal software would operate, and how automatic unloading would be set up at a given range, are part of the integration work and are confirmed per delivery configuration.";
+  "These functions are the manufacturer’s description of the machine. Which of them NXTektal’s operating software runs at a given range, and how automatic unloading is set up there, are confirmed per delivery configuration.";
 
 export type ProductImage = {
   key: "white" | "scene";
@@ -90,8 +90,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/ce82a/ce82a-product-white.webp",
     width: 980,
     height: 731,
-    alt: "YAWIN CE82A robotic ball collector on a white background: the complete machine with its body, wheels and front collection mechanism, YAWIN marking visible",
-    caption: "YAWIN CE82A, manufacturer product photograph on white. The whole machine is shown; nothing is cropped.",
+    alt: "CE82A robotic ball collector on a white background: the complete machine with its body, wheels and front collection mechanism, YAWIN marking visible",
+    caption: "CE82A, product photograph on white (manufacturer material). The whole machine is shown; nothing is cropped.",
     label: "Product on white",
     fit: "contain",
   },
@@ -100,7 +100,7 @@ export const IMAGES: ProductImage[] = [
     src: "/products/ce82a/ce82a-golf-course.webp",
     width: 1920,
     height: 1079,
-    alt: "YAWIN CE82A on a golf course lawn, manufacturer display photograph",
+    alt: "CE82A on a golf course lawn, manufacturer display photograph",
     caption: "Manufacturer display material showing the CE82A on a golf course. It illustrates the kind of setting the machine works in; it is not an NXTektal customer deployment.",
     label: "On the course",
     fit: "cover",
@@ -161,7 +161,7 @@ export const SPEC_GROUPS: SpecGroup[] = [
 ];
 
 export const SPEC_NOTE =
-  "Specifications are taken from YAWIN’s product literature. Actual performance depends on the site, the load, the operating method and the delivered configuration.";
+  "Specifications are taken from the CE82A product literature (YAWIN). Actual performance depends on the site, the load, the operating method and the delivered configuration.";
 
 /** Contact entry: the site's existing address, with a product-specific subject. */
 export const CONTACT = {

@@ -47,8 +47,9 @@ original NXTektal software; all rights held by NXTektal Systems.
 
 `ce82a-product-white.webp` (980×731, product on white) and
 `ce82a-golf-course.webp` (1920×1079, course display scene) are YAWIN (亚云)
-manufacturer product materials for the CE82A robotic ball collector,
-supplied to NXTektal by the founders for the product page. Rights remain
+manufacturer product materials for the CE82A robotic ball collector
+(developed jointly by NXTektal and YAWIN, manufactured by YAWIN), supplied
+to NXTektal by the founders for the product page. Rights remain
 with YAWIN; confirm the terms of use with the manufacturer before launch.
 The YAWIN marking on the images is kept. The course scene is manufacturer
 display material, not an NXTektal customer deployment, and the page says so

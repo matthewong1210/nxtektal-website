@@ -75,7 +75,7 @@ The homepage follows one reading order, top to bottom. Work and value first, arc
 
 ## Products
 
-- `/products/ce82a` is the first product detail page: the YAWIN CE82A robotic ball collector (manufacturer hardware; NXTektal has begun initial integration work, partnership form, software coverage and commercial terms are not confirmed — the page says so once, in the status note under the hero).
+- `/products/ce82a` is the first product detail page: the CE82A robotic ball collector, developed jointly by NXTektal and YAWIN and manufactured by YAWIN (the owner’s wording); software coverage and commercial terms are confirmed per site, and the page says so once, in the status note under the hero. Never present it as NXTektal-manufactured or as fully integrated everywhere.
 - All of its copy, figures and captions live in `lib/products/ce82a.ts`; `lib/__tests__/ce82a.test.ts` pins the data boundaries (8,000 m²/h is area per hour, 25% is a gradient, 8 km/h is a maximum travel speed, 4.5 h is a manufacturer rating, 48 V / 60 Ah is not expanded into a total, quick battery swap is not automatic recharging, no price / stock / lead time / savings / certification / customer figures). Add a later model by copying the module shape.
 - Images go in `public/products/ce82a/` (`ce82a-product-white.webp`, 980×731, and `ce82a-golf-course.webp`, 1920×1079, both manufacturer material — keep the YAWIN marking). Until a file is present the page renders a neutral "Manufacturer photograph to be added" panel in its place; the check runs at build time, so rebuild after adding images.
 - The page reuses `SiteHeader` (with `homeHref`, `ctaHref` and `currentHref` for secondary pages) and the shared `SiteFooter`; the homepage nav carries a "Products" entry that links straight to it.

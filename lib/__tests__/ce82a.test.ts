@@ -13,12 +13,13 @@ const corpus = [
 const lower = corpus.toLowerCase();
 
 describe("CE82A identity and relationship", () => {
-  it("keeps the YAWIN brand and states the NXTektal relationship as unconfirmed", () => {
+  it("keeps the YAWIN manufacturer identity and states the co-development as the owner worded it", () => {
     expect(CE82A.brand).toBe("YAWIN");
     expect(CE82A.model).toBe("CE82A");
-    expect(CE82A.relationship).toContain("built by YAWIN");
-    expect(CE82A.relationship).toContain("not yet confirmed");
-    for (const banned of ["nxtektal-built", "built by nxtektal", "authorised dealer", "authorized dealer", "exclusive", "co-developed", "joint development partner", "fully integrated", "signed"]) {
+    expect(CE82A.relationship).toContain("developed jointly by NXTektal and YAWIN");
+    expect(CE82A.relationship).toContain("manufactured by YAWIN");
+    expect(CE82A.relationship).toContain("confirmed for each site");
+    for (const banned of ["manufactured by nxtektal", "built by nxtektal", "authorised dealer", "authorized dealer", "exclusive", "fully integrated", "signed", "contracted"]) {
       expect(lower).not.toContain(banned);
     }
   });
@@ -68,7 +69,7 @@ describe("CE82A specification boundaries", () => {
     for (const banned of ["price", "pricing", "in stock", "lead time", "delivery time", "payback", "roi", "saves", "savings", "labor saving", "labour saving", "zero missed", "certified", "certification", "customers", "deployed at", "order now", "buy now"]) {
       expect(lower).not.toContain(banned);
     }
-    expect(SPEC_NOTE).toContain("YAWIN’s product literature");
+    expect(SPEC_NOTE).toContain("product literature (YAWIN)");
   });
 });
 
