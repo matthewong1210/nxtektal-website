@@ -1,19 +1,32 @@
 "use client";
 
-import { useCallback, useRef, useState, type KeyboardEvent } from "react";
-import type { ProductImage } from "../../lib/products/ce82a";
-import { IMAGE_PENDING_TEXT } from "../../lib/products/ce82a";
+import { useCallback, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { IMAGE_PENDING_TEXT, type ProductImage } from "../../lib/products/types";
 
 export type GalleryImage = ProductImage & {
-  /** False until the manufacturer's file is present in public/products/ce82a/. */
+  /** False until the manufacturer's file is present in public/products/<model>/. */
   available: boolean;
 };
 
-/** A photograph, or the neutral pending panel when the file is not there yet. */
+/**
+ * Contain-fit product shots are never shown wider than their source: a
+ * low-resolution file (the ME74A front and raised-angle views are 617 and
+ * 690 px wide) sits centred at its natural size instead of being blown up.
+ */
+function naturalCap(image: ProductImage): CSSProperties | undefined {
+  return image.fit === "contain" ? ({ "--pd-natural": `${image.width}px` } as CSSProperties) : undefined;
+}
+
+/**
+ * A photograph, or the neutral pending panel when the file is not there yet.
+ * Both sit inside a `.pd-stage`, which sets the box (the hero stage takes the
+ * supplied file's aspect ratio from the data; gallery and card stages are
+ * 16:10), so the panel simply fills the stage.
+ */
 export function ProductPicture({ image, sizes, priority = false }: { image: GalleryImage; sizes: string; priority?: boolean }) {
   if (!image.available) {
     return (
-      <div className="pd-pending" role="img" aria-label={`${image.label}: ${IMAGE_PENDING_TEXT.toLowerCase()}`} style={{ aspectRatio: `${image.width} / ${image.height}` }}>
+      <div className="pd-pending" role="img" aria-label={`${image.label}: ${IMAGE_PENDING_TEXT.toLowerCase()}`}>
         <span>{IMAGE_PENDING_TEXT}</span>
       </div>
     );
@@ -29,6 +42,7 @@ export function ProductPicture({ image, sizes, priority = false }: { image: Gall
       fetchPriority={priority ? "high" : undefined}
       decoding="async"
       className={`pd-img pd-img--${image.fit}`}
+      style={naturalCap(image)}
     />
   );
 }
@@ -60,7 +74,7 @@ export default function ProductGallery({ images }: { images: GalleryImage[] }) {
   return (
     <div className="pd-gallery">
       <figure className="pd-gallery-main">
-        <button type="button" className="pd-gallery-open" onClick={open} aria-label={`Open “${current.label}” at full size`} disabled={!current.available}>
+        <button type="button" className="pd-gallery-open pd-stage" onClick={open} aria-label={`Open “${current.label}” at full size`} disabled={!current.available}>
           <ProductPicture image={current} sizes="(max-width: 760px) 100vw, 760px" />
         </button>
         <figcaption>{current.caption}</figcaption>
@@ -83,9 +97,9 @@ export default function ProductGallery({ images }: { images: GalleryImage[] }) {
 
       <dialog ref={dialogRef} className="pd-lightbox" aria-label={`${current.label} — full size`} onKeyDown={onDialogKey} onClick={(e) => { if (e.target === e.currentTarget) close(); }}>
         <div className="pd-lightbox-inner">
-          <div className="pd-lightbox-stage">
+          <div className="pd-lightbox-stage pd-stage">
             {current.available ? (
-              <img src={current.src} width={current.width} height={current.height} alt={current.alt} className={`pd-img pd-img--${current.fit}`} />
+              <img src={current.src} width={current.width} height={current.height} alt={current.alt} className={`pd-img pd-img--${current.fit}`} style={naturalCap(current)} />
             ) : (
               <div className="pd-pending" role="img" aria-label={IMAGE_PENDING_TEXT}><span>{IMAGE_PENDING_TEXT}</span></div>
             )}

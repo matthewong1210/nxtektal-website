@@ -24,7 +24,7 @@ import { BUILD_OR_USE_NOTE, DESIGN_STATUS_NOTE, LOOP_STEPS, PARTICIPANTS } from 
 import { BUILD_TRACKS, SCOPE, STATUS_DATE, SYSTEM_COMPONENTS } from "../lib/firstJob";
 import { SITE, SITE_DESCRIPTION } from "../lib/positioning";
 import SiteFooter from "../components/SiteFooter";
-import { CE82A_ROUTE } from "../lib/products/ce82a";
+import { PRODUCTS_ROUTE } from "../lib/products";
 import Reveal from "./reveal";
 
 // Below-the-fold interactive module: split out so it never weighs on first paint.
@@ -39,7 +39,7 @@ const partnerMail = `mailto:${site.email}?subject=Partnership%20Discussion`;
 const navItems = [
   { label: "The Work", href: "#work" },
   { label: "First Job", href: "#first-workflow" },
-  { label: "Products", href: CE82A_ROUTE },
+  { label: "Products", href: PRODUCTS_ROUTE },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Why Golf", href: "#why-golf" },
   { label: "Progress", href: "#progress" },

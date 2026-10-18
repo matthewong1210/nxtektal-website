@@ -9,7 +9,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: "https://nxtektal.com/products",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: "https://nxtektal.com/products/ce82a",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: "https://nxtektal.com/products/me74a",
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,

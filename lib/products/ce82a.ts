@@ -3,7 +3,7 @@
  *
  * One module holds everything the /products/ce82a page shows, so the copy,
  * the specification table and the media captions can be checked by tests
- * and so later models can follow the same shape. All figures come from the
+ * and so later models can follow the same shape (see ./types.ts and ./me74a.ts). All figures come from the
  * manufacturer's product literature (亚云自动捡球机CE82A.pdf); the notes next
  * to each figure keep the data boundaries the owner set: area efficiency is
  * not balls per hour, 25% is a gradient not degrees, 8 km/h is a maximum
@@ -18,6 +18,20 @@
  * here may present the machine as NXTektal-manufactured, as an authorised
  * dealership, or as fully integrated with NXTektal software at every site.
  */
+
+import {
+  IMAGE_PENDING_TEXT,
+  PRODUCT_SECTIONS,
+  type Feature,
+  type HeroStat,
+  type ProductData,
+  type ProductImage,
+  type SpecGroup,
+  type SpecRow,
+} from "./types";
+
+export type { Feature, HeroStat, ProductImage, SpecGroup, SpecRow };
+export { IMAGE_PENDING_TEXT };
 
 export const CE82A_ROUTE = "/products/ce82a";
 
@@ -35,15 +49,11 @@ export const CE82A = {
     "The CE82A is developed jointly by NXTektal and YAWIN (亚云) and manufactured by YAWIN. Which parts of a range’s operation NXTektal’s software runs, and the commercial terms, are confirmed for each site during the inquiry.",
 } as const;
 
-export type HeroStat = { value: string; unit?: string; label: string };
-
 /** The two figures the first screen leads with. */
 export const HERO_STATS: HeroStat[] = [
   { value: "2", unit: "m", label: "Collection width" },
   { value: "1,200", label: "Ball basket capacity" },
 ];
-
-export type Feature = { title: string; body: string };
 
 /** Four themes, as described in the manufacturer's literature. */
 export const FEATURES: Feature[] = [
@@ -70,20 +80,6 @@ export const FEATURES_INTRO = "What the CE82A does, as described in its product 
 export const FEATURES_NOTE =
   "These functions are the manufacturer’s description of the machine. Which of them NXTektal’s operating software runs at a given range, and how automatic unloading is set up there, are confirmed per delivery configuration.";
 
-export type ProductImage = {
-  key: "white" | "scene";
-  /** Public path; the file is supplied by the manufacturer and copied into public/products/ce82a/. */
-  src: string;
-  width: number;
-  height: number;
-  alt: string;
-  caption: string;
-  /** Short label for the thumbnail button. */
-  label: string;
-  /** "contain" keeps the whole machine visible (white-background product shot); "cover" is for scene photography. */
-  fit: "contain" | "cover";
-};
-
 export const IMAGES: ProductImage[] = [
   {
     key: "white",
@@ -106,12 +102,6 @@ export const IMAGES: ProductImage[] = [
     fit: "cover",
   },
 ];
-
-/** Shown in place of a photograph when the file has not been supplied yet. */
-export const IMAGE_PENDING_TEXT = "Manufacturer photograph to be added";
-
-export type SpecRow = { name: string; value: string; note?: string };
-export type SpecGroup = { title: string; rows: SpecRow[] };
 
 /** Grouped specification table. Values are the manufacturer's; notes keep the data boundaries. */
 export const SPEC_GROUPS: SpecGroup[] = [
@@ -176,11 +166,25 @@ export const CONTACT = {
   secondaryHref: "/#pilot",
 } as const;
 
-/** Section anchors, in page order. */
-export const SECTIONS = [
-  { id: "overview", label: "Overview" },
-  { id: "features", label: "Features" },
-  { id: "gallery", label: "Images" },
-  { id: "specs", label: "Specifications" },
-  { id: "contact", label: "Contact" },
-] as const;
+/** Section anchors, in page order (shared by every product page). */
+export const SECTIONS = PRODUCT_SECTIONS;
+
+export const GALLERY_HEADING = "The machine on white, and in the setting it works in.";
+
+/** Everything the /products/ce82a page shows, in the shared product shape. */
+export const CE82A_PRODUCT: ProductData = {
+  route: CE82A_ROUTE,
+  ...CE82A,
+  job: "Driving-range ball collection",
+  heroStats: HERO_STATS,
+  images: IMAGES,
+  heroImageKey: "white",
+  featuresIntro: FEATURES_INTRO,
+  features: FEATURES,
+  featuresNote: FEATURES_NOTE,
+  galleryHeading: GALLERY_HEADING,
+  specGroups: SPEC_GROUPS,
+  specNote: SPEC_NOTE,
+  contact: CONTACT,
+  sections: SECTIONS,
+};

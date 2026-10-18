@@ -56,6 +56,23 @@ display material, not an NXTektal customer deployment, and the page says so
 in its caption. Specification figures on the page come from the
 manufacturer's product sheet (亚云自动捡球机CE82A.pdf).
 
+## YAWIN ME74A product imagery (`public/products/me74a/`)
+
+`me74a-product-studio.webp` (1322×747, studio product shot),
+`me74a-front.webp` (617×436, front view), `me74a-top-angle.webp` (690×488,
+raised-angle view) and `me74a-golf-course.webp` (1920×1440, course display
+scene) are YAWIN (亚云) manufacturer product materials for the ME74A robotic
+fairway mower, supplied to NXTektal by the founders for the product page.
+Rights remain with YAWIN; confirm the terms of use with the manufacturer
+before launch. The markings that appear on the machine and in the literature
+(YAWIN and Rural Dog) are kept as supplied; they are not altered, not
+replaced by NXTektal branding, and no brand relationship between them is
+inferred. The course scene is manufacturer display material, not an NXTektal
+customer deployment, and the page says so in its caption. The front and
+raised-angle sources are low resolution and are shown at their natural size.
+Specification figures on the page come from the manufacturer's product sheet
+(ME74A.pdf) and the owner's spec table of 2026-10-18.
+
 ## Removed assets
 
 The tracked-collector Master Product Visual (Dreamina render supplied

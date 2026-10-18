@@ -1,4 +1,4 @@
-import type { SpecGroup } from "../../lib/products/ce82a";
+import type { SpecGroup } from "../../lib/products/types";
 
 /**
  * Grouped specification tables. One <table> per group keeps the group title

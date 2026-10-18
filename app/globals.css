@@ -1099,7 +1099,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 @media (max-width: 380px) { .brand-lockup { height: 18px; } }
 @media (max-width: 340px) { .header-cta { display: none; } }
 
-/* ---------- Product detail page (/products/ce82a) ---------- */
+/* ---------- Products: list (/products) and detail pages (/products/<model>) ---------- */
 .pd-main { min-height: 100vh; padding-top: 118px; background: var(--paper); color: var(--ink); }
 .pd-inner { width: min(100%, var(--max)); margin: 0 auto; }
 .pd-section { padding: clamp(44px, 6vw, 84px) var(--pad); scroll-margin-top: 112px; }
@@ -1133,9 +1133,18 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .pd-img { display: block; width: 100%; height: auto; }
 .pd-img--contain { object-fit: contain; background: #ffffff; }
 .pd-img--cover { object-fit: cover; }
-.pd-figure--hero .pd-img { aspect-ratio: 980 / 731; }
+/* A stage centres its image. Its aspect ratio comes from the data (inline style), so the hero follows the
+   supplied file's proportions; a contain-fit image is never shown wider than its source (--pd-natural),
+   so a low-resolution file sits at its natural size instead of being blown up. */
+.pd-stage { display: grid; place-items: center; width: 100%; overflow: hidden; }
+.pd-stage .pd-img--contain { width: min(100%, var(--pd-natural, 100%)); height: auto; max-height: 100%; }
+.pd-stage .pd-img--cover { width: 100%; height: 100%; }
+.pd-stage .pd-pending { width: 100%; height: 100%; min-height: 0; }
+.pd-lightbox-stage .pd-pending { min-height: 200px; }
 .pd-pending { display: grid; place-items: center; width: 100%; min-height: 200px; border: 1px dashed rgba(22, 32, 43, 0.3); border-radius: 14px; background: repeating-linear-gradient(135deg, #f7f7f5 0 12px, #efefec 12px 24px); color: var(--ink-faint); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; padding: 20px; }
-.pd-figure-stage .pd-pending { border: none; border-radius: 0; }
+.pd-figure-stage .pd-pending, .pd-gallery-open .pd-pending, .pd-card .pd-pending { border: none; border-radius: 0; }
+.pd-crumbs a { color: inherit; text-decoration: underline; text-decoration-color: rgba(31, 95, 214, 0.45); text-underline-offset: 3px; }
+.pd-crumbs a:hover, .pd-crumbs a:focus-visible { color: var(--blue-deep); text-decoration-color: currentColor; }
 
 /* in-page nav */
 .pd-subnav { padding: 0 var(--pad); border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); background: #ffffff; }
@@ -1152,11 +1161,11 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 /* gallery */
 .pd-gallery { margin-top: 28px; }
 .pd-gallery-main { margin: 0; }
-.pd-gallery-open { display: block; width: 100%; padding: 0; border: 1px solid var(--paper-line); border-radius: 18px; background: #ffffff; cursor: zoom-in; overflow: hidden; }
+.pd-gallery-open { width: 100%; aspect-ratio: 16 / 10; padding: 0; border: 1px solid var(--paper-line); border-radius: 18px; background: #ffffff; cursor: zoom-in; }
 .pd-gallery-open:disabled { cursor: default; }
-.pd-gallery-open .pd-img { aspect-ratio: 16 / 10; }
 .pd-thumbs { display: flex; flex-wrap: wrap; gap: 12px; margin: 16px 0 0; padding: 0; list-style: none; }
-.pd-thumb { display: grid; gap: 6px; width: 150px; padding: 6px; border: 2px solid transparent; border-radius: 12px; background: #ffffff; color: var(--ink-soft); font: inherit; font-size: 12px; font-weight: 700; text-align: left; cursor: pointer; }
+.pd-thumbs li { flex: 0 0 150px; min-width: 0; }
+.pd-thumb { display: grid; gap: 6px; width: 100%; padding: 6px; border: 2px solid transparent; border-radius: 12px; background: #ffffff; color: var(--ink-soft); font: inherit; font-size: 12px; font-weight: 700; text-align: left; cursor: pointer; }
 .pd-thumb .pd-img, .pd-pending--thumb { aspect-ratio: 16 / 10; border-radius: 8px; min-height: 0; }
 .pd-pending--thumb { display: block; }
 .pd-thumb[aria-pressed="true"] { border-color: var(--blue-deep); color: var(--ink); }
@@ -1168,6 +1177,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .pd-lightbox-inner { padding: 16px; }
 .pd-lightbox-stage { background: #ffffff; border-radius: 12px; overflow: hidden; }
 .pd-lightbox-stage .pd-img { max-height: 70vh; object-fit: contain; background: #ffffff; }
+.pd-lightbox-stage .pd-img--cover { height: auto; }
 .pd-lightbox-caption { margin: 12px 0 0; color: var(--white-faint); font-size: 13.5px; line-height: 1.5; }
 .pd-lightbox-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
 .pd-lightbox .button-secondary { color: var(--white); border-color: var(--line-strong); background: rgba(13, 17, 23, 0.4); }
@@ -1183,6 +1193,24 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .pd-value { display: block; font-weight: 650; font-variant-numeric: tabular-nums; }
 .pd-spec-note { display: block; margin-top: 3px; color: var(--ink-faint); font-size: 13px; line-height: 1.45; }
 
+/* product cards: the /products list and the "also in Products" block */
+.pd-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); margin-top: 36px; }
+.pd-card { display: grid; grid-template-rows: auto 1fr; margin: 0; border: 1px solid var(--paper-line); border-radius: 18px; background: #ffffff; overflow: hidden; }
+.pd-card-figure { display: block; border-bottom: 1px solid var(--paper-line); background: #ffffff; }
+.pd-card-body { display: grid; align-content: start; gap: 8px; padding: 20px 22px 22px; }
+.pd-card h3 { margin: 0; color: var(--ink); font-size: clamp(20px, 2vw, 26px); font-weight: 650; line-height: 1.15; letter-spacing: -0.02em; text-wrap: balance; }
+.pd-card h3 a { color: inherit; }
+.pd-card h3 a:hover, .pd-card h3 a:focus-visible { color: var(--blue-deep); }
+.pd-card-job { margin: 0; color: var(--ink-soft); font-size: 12.5px; font-weight: 750; letter-spacing: 0.06em; text-transform: uppercase; }
+.pd-card-summary { margin: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.6; }
+.pd-card .pd-textlink { margin-top: 6px; }
+.pd-cards--related { grid-template-columns: minmax(0, 1fr); max-width: 980px; }
+.pd-cards--related .pd-card { grid-template-rows: none; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; }
+.pd-cards--related .pd-card-figure { border-bottom: none; border-right: 1px solid var(--paper-line); }
+.pd-cards--related .pd-card-body { padding: 24px 28px; }
+.pd-related { border-top: 1px solid var(--paper-line); }
+.pd-list h1 { max-width: 16ch; }
+
 /* contact */
 .pd-contact { background: #e9ebe9; }
 .pd-contact-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
@@ -1194,15 +1222,16 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .pd-main footer { margin-top: 0; }
 
 @media (max-width: 900px) {
-  .pd-hero-grid, .pd-features, .pd-specs, .pd-contact-grid { grid-template-columns: 1fr; }
+  .pd-hero-grid, .pd-features, .pd-specs, .pd-contact-grid, .pd-cards, .pd-cards--related .pd-card { grid-template-columns: 1fr; }
   .pd-hero-grid .pd-figure--hero { order: -1; }
+  .pd-cards--related .pd-card-figure { border-right: none; border-bottom: 1px solid var(--paper-line); }
 }
 @media (max-width: 760px) {
   .pd-main { padding-top: 96px; }
   .pd-section { scroll-margin-top: 92px; }
   .pd-stats { gap: 14px 28px; }
   .pd-actions .button { flex: 1 1 100%; }
-  .pd-thumb { width: calc(50% - 6px); }
+  .pd-thumbs li { flex-basis: calc(50% - 6px); }
   .pd-table th { width: 42%; }
   .pd-table th, .pd-table td { padding: 10px 12px; font-size: 14.5px; }
   .pd-lightbox { width: 100vw; max-height: 100vh; border-radius: 0; }
