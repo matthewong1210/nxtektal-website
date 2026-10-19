@@ -130,7 +130,7 @@ export const SPEC_GROUPS: SpecGroup[] = [
       { name: "Drive", value: "Dual-motor drive" },
       { name: "Steering", value: "Differential steering" },
       { name: "Braking", value: "Electromagnetic brake" },
-      { name: "Rated braking distance", value: "≤ 0.5 m", note: "Test conditions not provided." },
+      { name: "Rated braking distance", value: "0.5 m", note: "Manufacturer figure; test conditions not provided." },
     ],
   },
   {

@@ -45,7 +45,7 @@ describe("CE82A specification boundaries", () => {
     expect(row("Run time, dual battery").value).toBe("Up to 4.5 h");
     expect(row("Maximum travel speed").value).toBe("8 km/h");
     expect(row("Maximum gradient").value).toBe("25%");
-    expect(row("Rated braking distance").value).toBe("≤ 0.5 m");
+    expect(row("Rated braking distance").value).toBe("0.5 m"); // the sheet's "≤" belongs to the 4.5 h run time, not the braking figure
     expect(row("Length × width × height").value).toBe("315 × 210 × 73 cm");
     expect(row("Weight").value).toBe("248 kg");
     expect(rows).toHaveLength(18);
@@ -59,7 +59,7 @@ describe("CE82A specification boundaries", () => {
     expect(row("Run time, dual battery").note).toContain("Manufacturer rating");
     expect(lower).not.toMatch(/\b\d+(\.\d+)?\s?k?wh\b/); // no derived energy total
     expect(row("Battery rating").note).toContain("not specified");
-    expect(row("Rated braking distance").note).toContain("Test conditions not provided");
+    expect(row("Rated braking distance").note).toContain("test conditions not provided");
     for (const banned of ["automatic charging", "auto-charging", "self-charging", "automatic battery swap", "charging dock", "docking station", "unattended", "fully autonomous operation"]) {
       expect(lower).not.toContain(banned);
     }
