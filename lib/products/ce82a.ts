@@ -86,8 +86,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/ce82a/ce82a-product-white.webp",
     width: 980,
     height: 731,
-    alt: "CE82A robotic ball collector on a white background: the complete machine with its body, wheels and front collection mechanism, YAWIN marking visible",
-    caption: "CE82A, product photograph on white (manufacturer material). The whole machine is shown; nothing is cropped.",
+    alt: "CE82A robotic ball collector on a white background: the complete machine with its body, wheels and collection unit, YAWIN marking visible",
+    caption: "CE82A, manufacturer product image on white. The whole machine is shown; nothing is cropped.",
     label: "Product on white",
     fit: "contain",
   },
@@ -96,8 +96,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/ce82a/ce82a-golf-course.webp",
     width: 1920,
     height: 1079,
-    alt: "CE82A on a golf course lawn, manufacturer display photograph",
-    caption: "Manufacturer display material showing the CE82A on a golf course. It illustrates the kind of setting the machine works in; it is not an NXTektal customer deployment.",
+    alt: "CE82A on golf turf, manufacturer display image",
+    caption: "Manufacturer display material showing the CE82A on golf turf. It is manufacturer imagery, not an NXTektal customer deployment.",
     label: "On the course",
     fit: "cover",
   },
@@ -169,7 +169,7 @@ export const CONTACT = {
 /** Section anchors, in page order (shared by every product page). */
 export const SECTIONS = PRODUCT_SECTIONS;
 
-export const GALLERY_HEADING = "The machine on white, and in the setting it works in.";
+export const GALLERY_HEADING = "The machine on white, and in the manufacturer’s course scene.";
 
 /** Everything the /products/ce82a page shows, in the shared product shape. */
 export const CE82A_PRODUCT: ProductData = {

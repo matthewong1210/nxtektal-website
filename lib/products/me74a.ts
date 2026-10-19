@@ -106,8 +106,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/me74a/me74a-product-studio.webp",
     width: 1322,
     height: 747,
-    alt: "ME74A robotic fairway mower, studio product photograph: the complete machine with its wheels and the three front reel cutting units",
-    caption: "ME74A, manufacturer studio photograph. The whole machine is shown, including the wheels and the front cutting units; nothing is cropped.",
+    alt: "ME74A robotic fairway mower, manufacturer studio image: the complete machine with its wheels and the front reel cutting units",
+    caption: "ME74A, manufacturer studio image. The whole machine is shown, including the wheels and the front cutting units; nothing is cropped.",
     label: "Studio view",
     fit: "contain",
   },
@@ -116,8 +116,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/me74a/me74a-front.webp",
     width: 617,
     height: 436,
-    alt: "ME74A robotic fairway mower seen from the front, manufacturer photograph",
-    caption: "Front view, manufacturer material. The source is low resolution and is shown at its natural size.",
+    alt: "ME74A robotic fairway mower seen from the front, manufacturer image",
+    caption: "Front view, manufacturer material. The source is low resolution and is never shown larger than its natural size.",
     label: "Front view",
     fit: "contain",
   },
@@ -126,8 +126,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/me74a/me74a-top-angle.webp",
     width: 690,
     height: 488,
-    alt: "ME74A robotic fairway mower seen from a raised front angle, manufacturer photograph",
-    caption: "Raised-angle view, manufacturer material. The source is low resolution and is shown at its natural size.",
+    alt: "ME74A robotic fairway mower seen from a raised front angle, manufacturer image",
+    caption: "Raised-angle view, manufacturer material. The source is low resolution and is never shown larger than its natural size.",
     label: "Raised angle",
     fit: "contain",
   },
@@ -136,7 +136,7 @@ export const IMAGES: ProductImage[] = [
     src: "/products/me74a/me74a-golf-course.webp",
     width: 1920,
     height: 1440,
-    alt: "ME74A on a golf course fairway, manufacturer display photograph",
+    alt: "ME74A on a golf course fairway, manufacturer display image",
     caption: "Manufacturer display material showing the ME74A on a golf course. It illustrates the kind of setting the machine works in; it is not an NXTektal customer deployment.",
     label: "On the course",
     fit: "cover",
@@ -146,7 +146,7 @@ export const IMAGES: ProductImage[] = [
 export const GALLERY_HEADING = "Four manufacturer views: studio, front, raised angle, and on the course.";
 
 export const GALLERY_NOTE =
-  "Manufacturer display material; the markings on the machine (YAWIN, Rural Dog) are kept as supplied. The front and raised-angle sources are low resolution and are shown at their natural size.";
+  "Manufacturer display material; the Rural Dog marking on the machine is kept as supplied. The front and raised-angle sources are low resolution and are never shown larger than their natural size.";
 
 /** Grouped specification table. Values are the manufacturer's; notes keep the data boundaries. */
 export const SPEC_GROUPS: SpecGroup[] = [
@@ -228,8 +228,8 @@ export const CONTACT: ProductContact = {
   body:
     "Tell us about your course — fairway area, slopes, and how mowing is done today. We reply by email on whether the ME74A could fit your site, on the scope of software integration, and on supply arrangements.",
   cta: "Ask about product and site fit",
-  secondaryLabel: "Pilot program on the homepage",
-  secondaryHref: "/#pilot",
+  secondaryLabel: "About NXTektal on the homepage",
+  secondaryHref: "/#company",
 };
 
 /** Everything the /products/me74a page shows, in the shared product shape. */

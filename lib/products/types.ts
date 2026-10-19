@@ -26,7 +26,7 @@ export type ProductImage = {
   caption: string;
   /** Short label for the thumbnail button. */
   label: string;
-  /** "contain" keeps the whole machine visible (product shot); "cover" is for scene photography. */
+  /** "contain" keeps the whole machine visible (product shot); "cover" is for scene imagery. */
   fit: "contain" | "cover";
 };
 
@@ -76,8 +76,8 @@ export type ProductData = {
   sections: readonly ProductSection[];
 };
 
-/** Shown in place of a photograph when the file has not been supplied yet. */
-export const IMAGE_PENDING_TEXT = "Manufacturer photograph to be added";
+/** Shown in place of an image when the file has not been supplied yet. */
+export const IMAGE_PENDING_TEXT = "Manufacturer image to be added";
 
 /** Section anchors shared by every product page, in page order. */
 export const PRODUCT_SECTIONS = [

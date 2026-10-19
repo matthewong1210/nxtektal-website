@@ -34,16 +34,17 @@ export function withAvailability(product: ProductData): GalleryImage[] {
 }
 
 /** A small card for another product: used by the related block and the products list. */
-export function ProductCard({ product, image }: { product: ProductData; image: GalleryImage }) {
+export function ProductCard({ product, image, heading: Heading = "h3" }: { product: ProductData; image: GalleryImage; heading?: "h2" | "h3" }) {
   return (
     <article className="pd-card">
-      <a className="pd-card-figure" href={product.route} aria-label={`${product.name}: open the product page`} tabIndex={-1}>
+      {/* The figure link duplicates the title link, so it is hidden from the tab order and the accessibility tree. */}
+      <a className="pd-card-figure" href={product.route} tabIndex={-1} aria-hidden="true">
         <div className="pd-stage" style={{ aspectRatio: "16 / 10" }}>
-          <ProductPicture image={image} sizes="(max-width: 760px) 100vw, 40vw" />
+          <ProductPicture image={image} />
         </div>
       </a>
       <div className="pd-card-body">
-        <h3><a href={product.route}>{product.name}</a></h3>
+        <Heading><a href={product.route}>{product.name}</a></Heading>
         <p className="pd-card-job">{product.model} · {product.job}</p>
         <p className="pd-card-summary">{product.summary}</p>
         <a className="pd-textlink" href={product.route}>See the {product.model} →</a>
@@ -54,7 +55,7 @@ export function ProductCard({ product, image }: { product: ProductData; image: G
 
 /**
  * One template for every product detail page: A overview (copy beside the
- * full product photograph), B features as the manufacturer describes them,
+ * full product image), B features as the manufacturer describes them,
  * C gallery, D grouped specifications, E the other products and the contact
  * entry. All copy comes from the product's data module.
  */
@@ -68,7 +69,7 @@ export default function ProductPage({ product }: { product: ProductData }) {
     <main className="pd-main" id="top">
       <SiteHeader items={productNavItems} brand={<BrandLockup />} ctaIcon={<Arrow />} homeHref="/" ctaHref="/#pilot" currentHref={PRODUCTS_ROUTE} />
 
-      {/* A · Overview: copy and the full product photograph side by side */}
+      {/* A · Overview: copy and the full product image side by side */}
       <section className="pd-section pd-hero" id="overview" aria-labelledby="pd-h1">
         <div className="pd-inner pd-hero-grid">
           <div className="pd-hero-copy">
@@ -94,7 +95,7 @@ export default function ProductPage({ product }: { product: ProductData }) {
           </div>
           <figure className="pd-figure pd-figure--hero">
             <div className="pd-figure-stage pd-stage" style={{ aspectRatio: `${hero.width} / ${hero.height}` }}>
-              <ProductPicture image={hero} sizes="(max-width: 760px) 100vw, 56vw" priority />
+              <ProductPicture image={hero} priority />
             </div>
             <figcaption>{hero.caption}</figcaption>
           </figure>
@@ -142,7 +143,7 @@ export default function ProductPage({ product }: { product: ProductData }) {
       <section className="pd-section" id="specs" aria-labelledby="pd-h2-specs">
         <div className="pd-inner">
           <p className="eyebrow">Specifications</p>
-          <h2 id="pd-h2-specs">Full technical specifications.</h2>
+          <h2 id="pd-h2-specs">Technical specifications.</h2>
           <p className="pd-note pd-note--lead">{product.specNote}</p>
           <SpecTable groups={product.specGroups} />
         </div>

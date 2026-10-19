@@ -4,12 +4,9 @@ import SiteFooter from "../../components/SiteFooter";
 import SiteHeader from "../../components/manifesto/SiteHeader";
 import { Arrow, ProductCard, productNavItems, withAvailability } from "../../components/products/ProductPage";
 import { PRODUCTS, PRODUCTS_PAGE, PRODUCTS_ROUTE } from "../../lib/products";
+import { pageMetadata } from "../../lib/products/metadata";
 
-export const metadata: Metadata = {
-  title: `${PRODUCTS_PAGE.title} | NXTektal Systems`,
-  description: PRODUCTS_PAGE.intro,
-  alternates: { canonical: PRODUCTS_ROUTE },
-};
+export const metadata: Metadata = pageMetadata({ title: PRODUCTS_PAGE.title, description: PRODUCTS_PAGE.intro, route: PRODUCTS_ROUTE });
 
 /** The products list: one card per model, by job, each linking to its detail page. */
 export default function ProductsPage() {
@@ -26,7 +23,7 @@ export default function ProductsPage() {
             {PRODUCTS.map((product) => {
               const images = withAvailability(product);
               const hero = images.find((i) => i.key === product.heroImageKey) ?? images[0];
-              return <ProductCard product={product} image={hero} key={product.route} />;
+              return <ProductCard product={product} image={hero} heading="h2" key={product.route} />;
             })}
           </div>
           <p className="pd-note">{PRODUCTS_PAGE.note}</p>

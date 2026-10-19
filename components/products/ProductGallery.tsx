@@ -18,17 +18,18 @@ function naturalCap(image: ProductImage): CSSProperties | undefined {
 }
 
 /**
- * A photograph, or the neutral pending panel when the file is not there yet.
+ * An image, or the neutral pending panel when the file is not there yet.
  * Both sit inside a `.pd-stage`, which sets the box (the hero stage takes the
  * supplied file's aspect ratio from the data; gallery and card stages are
  * 16:10), so the panel simply fills the stage.
  */
-export function ProductPicture({ image, sizes, priority = false }: { image: GalleryImage; sizes: string; priority?: boolean }) {
+export function ProductPicture({ image, priority = false }: { image: GalleryImage; priority?: boolean }) {
   if (!image.available) {
+    // A <span>, so the panel is valid inside the gallery's <button> as well as in a <figure>.
     return (
-      <div className="pd-pending" role="img" aria-label={`${image.label}: ${IMAGE_PENDING_TEXT.toLowerCase()}`}>
+      <span className="pd-pending" role="img" aria-label={`${image.label}: ${IMAGE_PENDING_TEXT.toLowerCase()}`}>
         <span>{IMAGE_PENDING_TEXT}</span>
-      </div>
+      </span>
     );
   }
   return (
@@ -37,7 +38,6 @@ export function ProductPicture({ image, sizes, priority = false }: { image: Gall
       width={image.width}
       height={image.height}
       alt={image.alt}
-      sizes={sizes}
       loading={priority ? "eager" : "lazy"}
       fetchPriority={priority ? "high" : undefined}
       decoding="async"
@@ -74,8 +74,8 @@ export default function ProductGallery({ images }: { images: GalleryImage[] }) {
   return (
     <div className="pd-gallery">
       <figure className="pd-gallery-main">
-        <button type="button" className="pd-gallery-open pd-stage" onClick={open} aria-label={`Open “${current.label}” at full size`} disabled={!current.available}>
-          <ProductPicture image={current} sizes="(max-width: 760px) 100vw, 760px" />
+        <button type="button" className="pd-gallery-open pd-stage" onClick={open} aria-label={`${current.alt} — open at full size`} disabled={!current.available}>
+          <ProductPicture image={current} />
         </button>
         <figcaption>{current.caption}</figcaption>
       </figure>
@@ -101,7 +101,7 @@ export default function ProductGallery({ images }: { images: GalleryImage[] }) {
             {current.available ? (
               <img src={current.src} width={current.width} height={current.height} alt={current.alt} className={`pd-img pd-img--${current.fit}`} style={naturalCap(current)} />
             ) : (
-              <div className="pd-pending" role="img" aria-label={IMAGE_PENDING_TEXT}><span>{IMAGE_PENDING_TEXT}</span></div>
+              <span className="pd-pending" role="img" aria-label={IMAGE_PENDING_TEXT}><span>{IMAGE_PENDING_TEXT}</span></span>
             )}
           </div>
           <p className="pd-lightbox-caption">{current.caption}</p>
