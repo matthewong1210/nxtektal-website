@@ -97,7 +97,7 @@ export default function ProductGallery({ images }: { images: GalleryImage[] }) {
 
       <dialog ref={dialogRef} className="pd-lightbox" aria-label={`${current.label} — full size`} onKeyDown={onDialogKey} onClick={(e) => { if (e.target === e.currentTarget) close(); }}>
         <div className="pd-lightbox-inner">
-          <div className="pd-lightbox-stage pd-stage">
+          <div className="pd-lightbox-stage">
             {current.available ? (
               <img src={current.src} width={current.width} height={current.height} alt={current.alt} className={`pd-img pd-img--${current.fit}`} style={naturalCap(current)} />
             ) : (

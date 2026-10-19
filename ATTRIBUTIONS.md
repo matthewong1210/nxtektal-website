@@ -49,8 +49,13 @@ original NXTektal software; all rights held by NXTektal Systems.
 `ce82a-golf-course.webp` (1920×1079, course display scene) are YAWIN (亚云)
 manufacturer product materials for the CE82A robotic ball collector
 (developed jointly by NXTektal and YAWIN, manufactured by YAWIN), supplied
-to NXTektal by the founders for the product page. Rights remain
-with YAWIN; confirm the terms of use with the manufacturer before launch.
+to NXTektal by the founders for the product page. The files in this
+repository were extracted on 2026-10-19 from the manufacturer's product
+sheet (亚云自动捡球机CE82A.pdf, page 1: the 980×731 product image as embedded,
+and the 2848×1600 course scene scaled to 1920×1079), converted from the
+PDF's CMYK JPEGs to sRGB WebP; replace them with the founders' own exports
+if those differ. Rights remain with YAWIN; confirm the terms of use with
+the manufacturer before launch.
 The YAWIN marking on the images is kept. The course scene is manufacturer
 display material, not an NXTektal customer deployment, and the page says so
 in its caption. Specification figures on the page come from the
@@ -63,8 +68,13 @@ manufacturer's product sheet (亚云自动捡球机CE82A.pdf).
 raised-angle view) and `me74a-golf-course.webp` (1920×1440, course display
 scene) are YAWIN (亚云) manufacturer product materials for the ME74A robotic
 fairway mower, supplied to NXTektal by the founders for the product page.
-Rights remain with YAWIN; confirm the terms of use with the manufacturer
-before launch. The markings that appear on the machine and in the literature
+The files in this repository were extracted on 2026-10-19 from the
+manufacturer's product sheet (ME74A.pdf: the 1322×747 studio image, the
+617×436 front and 690×488 raised-angle images as embedded on pages 1 and 3,
+and the 2480×1860 cover scene scaled to 1920×1440), converted from the
+PDF's CMYK/RGB JPEGs to sRGB WebP; replace them with the founders' own
+exports if those differ. Rights remain with YAWIN; confirm the terms of use
+with the manufacturer before launch. The markings that appear on the machine and in the literature
 (YAWIN and Rural Dog) are kept as supplied; they are not altered, not
 replaced by NXTektal branding, and no brand relationship between them is
 inferred. The course scene is manufacturer display material, not an NXTektal

@@ -1136,11 +1136,11 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 /* A stage centres its image. Its aspect ratio comes from the data (inline style), so the hero follows the
    supplied file's proportions; a contain-fit image is never shown wider than its source (--pd-natural),
    so a low-resolution file sits at its natural size instead of being blown up. */
-.pd-stage { display: grid; place-items: center; width: 100%; overflow: hidden; }
-.pd-stage .pd-img--contain { width: min(100%, var(--pd-natural, 100%)); height: auto; max-height: 100%; }
+.pd-stage { position: relative; width: 100%; overflow: hidden; }
+.pd-stage .pd-img, .pd-stage .pd-pending { position: absolute; inset: 0; margin: auto; }
+.pd-stage .pd-img--contain { width: auto; height: auto; max-width: min(100%, var(--pd-natural, 100%)); max-height: 100%; }
 .pd-stage .pd-img--cover { width: 100%; height: 100%; }
 .pd-stage .pd-pending { width: 100%; height: 100%; min-height: 0; }
-.pd-lightbox-stage .pd-pending { min-height: 200px; }
 .pd-pending { display: grid; place-items: center; width: 100%; min-height: 200px; border: 1px dashed rgba(22, 32, 43, 0.3); border-radius: 14px; background: repeating-linear-gradient(135deg, #f7f7f5 0 12px, #efefec 12px 24px); color: var(--ink-faint); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; padding: 20px; }
 .pd-figure-stage .pd-pending, .pd-gallery-open .pd-pending, .pd-card .pd-pending { border: none; border-radius: 0; }
 .pd-crumbs a { color: inherit; text-decoration: underline; text-decoration-color: rgba(31, 95, 214, 0.45); text-underline-offset: 3px; }
@@ -1175,9 +1175,9 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .pd-lightbox { width: min(96vw, 1200px); max-width: none; max-height: 94vh; padding: 0; border: none; border-radius: 18px; background: #0d1117; color: var(--white); }
 .pd-lightbox::backdrop { background: rgba(4, 7, 13, 0.82); }
 .pd-lightbox-inner { padding: 16px; }
-.pd-lightbox-stage { background: #ffffff; border-radius: 12px; overflow: hidden; }
-.pd-lightbox-stage .pd-img { max-height: 70vh; object-fit: contain; background: #ffffff; }
-.pd-lightbox-stage .pd-img--cover { height: auto; }
+.pd-lightbox-stage { display: grid; place-items: center; background: #ffffff; border-radius: 12px; overflow: hidden; }
+.pd-lightbox-stage .pd-img { width: auto; height: auto; max-width: min(100%, var(--pd-natural, 100%)); max-height: 70vh; object-fit: contain; background: #ffffff; }
+.pd-lightbox-stage .pd-pending { min-height: 200px; }
 .pd-lightbox-caption { margin: 12px 0 0; color: var(--white-faint); font-size: 13.5px; line-height: 1.5; }
 .pd-lightbox-controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
 .pd-lightbox .button-secondary { color: var(--white); border-color: var(--line-strong); background: rgba(13, 17, 23, 0.4); }
