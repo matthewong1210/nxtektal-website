@@ -30,10 +30,10 @@ describe("product registry", () => {
     expect(relatedProducts(ME74A_PRODUCT).map((p) => p.model)).toEqual(["CE82A"]);
   });
 
-  it("describes the list without claiming ME74A integration, deployment or orders", () => {
+  it("describes the list neutrally: no claimed or denied ME74A integration, deployment or orders", () => {
     const text = `${PRODUCTS_PAGE.intro} ${PRODUCTS_PAGE.note}`.toLowerCase();
-    expect(text).toContain("not yet integrated with nxtektal’s software");
     expect(text).toContain("plans to extend");
-    for (const banned of ["fully integrated", "deployed", "orders", "dealer", "agreement", "price", "in stock"]) expect(text).not.toContain(banned);
+    expect(text).toContain("software integration scope, site fit and supply arrangements are confirmed with nxtektal");
+    for (const banned of ["fully integrated", "not yet integrated", "not integrated", "deployed", "no deployment", "orders", "dealer", "agreement", "price", "in stock"]) expect(text).not.toContain(banned);
   });
 });

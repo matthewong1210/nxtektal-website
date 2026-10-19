@@ -27,16 +27,19 @@
  *   here; IP65 is reported as marked, not expanded into weather or
  *   certification claims; the literature's marketing percentages are left out.
  *
- * Relationship (owner's wording, 2026-10-18): the ME74A is YAWIN's
+ * Relationship (owner's wording, 2026-10-18/19): the ME74A is YAWIN's
  * pure-electric fairway mower — a fairway mower, not a greens mower, and not
  * claimed to suit every turf setting. NXTektal plans to extend from the CE82A
- * to mowing, but there is no evidence that the ME74A has been integrated with
- * NXTektal software, so nothing here may say integration is complete, that
- * the machine is deployed at a customer site, or that orders are being
- * taken. Nothing may say NXTektal developed the hardware, is an authorised
- * dealer, or has signed a joint-development agreement. Manufacturer markings
- * (YAWIN and Rural Dog) stay on the images as supplied; no brand relationship
- * between them is inferred.
+ * to mowing. The commercial status is stated neutrally: nothing here may
+ * claim that integration is complete, that the machine is deployed at a
+ * customer site, or that orders are being taken — and nothing may assert the
+ * opposite either ("not integrated", "no deployment", "no orders"), because
+ * neither has been confirmed. Software integration scope, site fit and
+ * supply arrangements are confirmed with NXTektal. Nothing may say NXTektal
+ * developed the hardware, is an authorised dealer, or has signed a
+ * joint-development agreement. Manufacturer markings (YAWIN and Rural Dog)
+ * stay on the images as supplied; no brand relationship between them is
+ * inferred.
  */
 
 import {
@@ -62,7 +65,7 @@ export const ME74A = {
     "A pure-electric robotic mower for golf-course fairway maintenance, made by YAWIN. It cuts with three reel cutting units and combines positioning, environment perception and automatic operation, with a 1.88 m cutting width and a 10–60 mm cutting height range.",
   /** How NXTektal relates to the machine — stated once, near the top, in plain terms. */
   relationship:
-    "The ME74A is a YAWIN (亚云) product: a pure-electric fairway mower, not a greens mower. NXTektal plans to extend from the CE82A’s ball collection to fairway mowing. The ME74A is not yet integrated with NXTektal’s software, NXTektal has no customer deployment of it and takes no orders for it; whether it fits a given course is confirmed during the inquiry.",
+    "The ME74A is a YAWIN (亚云) product: a pure-electric fairway mower, not a greens mower. NXTektal plans to extend from the CE82A’s ball collection to fairway mowing. For the scope of software integration, site fit and supply arrangements, contact NXTektal to confirm.",
 } as const;
 
 /** The three figures the first screen leads with. */
@@ -95,7 +98,7 @@ export const FEATURES: Feature[] = [
 export const FEATURES_INTRO = "What the ME74A does, as described in its product literature.";
 
 export const FEATURES_NOTE =
-  "These functions are the manufacturer’s description of the machine’s hardware capability, not NXTektal software. The ME74A is not integrated with NXTektal’s operating software today.";
+  "These functions are the manufacturer’s description of the machine’s hardware capability, not a description of NXTektal software. The scope of software integration for a given course is confirmed with NXTektal.";
 
 export const IMAGES: ProductImage[] = [
   {
@@ -223,7 +226,7 @@ export const CONTACT: ProductContact = {
   mailto: "mailto:founders@nxtektal.com?subject=ME74A%20%E2%80%94%20product%20and%20site%20fit",
   heading: "Ask about the product and site fit",
   body:
-    "Tell us about your course — fairway area, slopes, and how mowing is done today. We reply by email on whether the ME74A could fit your site, and on where NXTektal’s software stands for mowing.",
+    "Tell us about your course — fairway area, slopes, and how mowing is done today. We reply by email on whether the ME74A could fit your site, on the scope of software integration, and on supply arrangements.",
   cta: "Ask about product and site fit",
   secondaryLabel: "Pilot program on the homepage",
   secondaryHref: "/#pilot",

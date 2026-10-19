@@ -27,11 +27,15 @@ describe("ME74A identity and relationship", () => {
     for (const banned of ["all turf", "any turf", "every turf", "all-terrain", "all terrain"]) expect(lower).not.toContain(banned);
   });
 
-  it("claims no completed integration, customer deployment, orders, hardware authorship, dealership or agreement", () => {
-    expect(ME74A.relationship).toContain("not yet integrated with NXTektal’s software");
-    expect(ME74A.relationship).toContain("no customer deployment");
-    expect(ME74A.relationship).toContain("takes no orders");
-    expect(FEATURES_NOTE).toContain("not NXTektal software");
+  it("states the commercial status neutrally: no claimed integration, deployment or orders, and no unconfirmed denial of them either", () => {
+    expect(ME74A.relationship).toContain("contact NXTektal to confirm");
+    expect(ME74A.relationship).toContain("software integration, site fit and supply arrangements");
+    expect(FEATURES_NOTE).toContain("not a description of NXTektal software");
+    expect(FEATURES_NOTE).toContain("confirmed with NXTektal");
+    // unconfirmed negative assertions are out, as are unconfirmed positive ones
+    for (const banned of ["not yet integrated", "not integrated", "no customer deployment", "no deployment", "takes no orders", "no orders", "not deployed", "not for sale", "not available"]) {
+      expect(lower).not.toContain(banned);
+    }
     for (const banned of [
       "fully integrated", "integration is complete", "integrated with nxtektal’s software today", "runs on nxtektal", "deployed at", "in service at", "in operation at",
       "orders open", "order now", "available to order", "accepting orders", "pre-order",
@@ -40,8 +44,9 @@ describe("ME74A identity and relationship", () => {
     ]) {
       expect(lower).not.toContain(banned);
     }
-    // "integrated" appears only in negated form
-    expect(lower.split("not yet integrated").join("").split("not integrated").join("")).not.toContain("integrated");
+    // "integrated"/"integration" appear only as the thing to confirm, never as a completed state
+    expect(lower).not.toMatch(/\bintegrated\b/);
+    expect(lower).toContain("scope of software integration");
   });
 
   it("presents the features as the manufacturer's hardware description, with reel (not rotary) cutting units", () => {
