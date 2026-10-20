@@ -43,16 +43,14 @@ describe("product registry", () => {
 
   it("keeps the two products separate: the ME74A does not replace the CE82A", () => {
     expect(CE82A_PRODUCT.name).toBe("CE82A Robotic Ball Collector");
-    expect(CE82A_PRODUCT.relationship).toContain("developed jointly by NXTektal and YAWIN");
-    expect(ME74A_PRODUCT.relationship).not.toContain("developed jointly");
+    expect(ME74A_PRODUCT.name).toBe("ME74A Robotic Fairway Mower");
     expect(relatedProducts(CE82A_PRODUCT).map((p) => p.model)).toEqual(["ME74A"]);
     expect(relatedProducts(ME74A_PRODUCT).map((p) => p.model)).toEqual(["CE82A"]);
   });
 
-  it("describes the list neutrally: no claimed or denied ME74A integration, deployment or orders", () => {
-    const text = `${PRODUCTS_PAGE.intro} ${PRODUCTS_PAGE.note}`.toLowerCase();
-    expect(text).toContain("plans to extend");
+  it("describes the list by job only: no maker, relationship, or claimed/denied integration, deployment or orders", () => {
+    const text = `${PRODUCTS_PAGE.heading} ${PRODUCTS_PAGE.intro} ${PRODUCTS_PAGE.note}`.toLowerCase();
     expect(text).toContain("software integration scope, site fit and supply arrangements are confirmed with nxtektal");
-    for (const banned of ["fully integrated", "not yet integrated", "not integrated", "deployed", "no deployment", "orders", "dealer", "agreement", "price", "in stock"]) expect(text).not.toContain(banned);
+    for (const banned of ["yawin", "manufactur", "made by", "jointly", "plans to extend", "fully integrated", "not yet integrated", "not integrated", "deployed", "no deployment", "orders", "dealer", "agreement", "price", "in stock"]) expect(text).not.toContain(banned);
   });
 });

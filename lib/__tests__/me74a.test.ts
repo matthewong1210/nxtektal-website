@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { CONTACT, FEATURES, FEATURES_NOTE, GALLERY_HEADING, GALLERY_NOTE, HERO_STATS, IMAGES, ME74A, ME74A_PRODUCT, ME74A_ROUTE, SPEC_GROUPS, SPEC_NOTE } from "../products/me74a";
+import { CONTACT, FEATURES, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, GALLERY_NOTE, HERO_STATS, IMAGES, ME74A, ME74A_PRODUCT, ME74A_ROUTE, SPEC_GROUPS, SPEC_NOTE } from "../products/me74a";
 
 const rows = SPEC_GROUPS.flatMap((g) => g.rows);
 const row = (name: string) => rows.find((r) => r.name === name)!;
 const corpus = [
-  ME74A.name, ME74A.nativeName, ME74A.brandNative, ME74A.category, ME74A.summary, ME74A.relationship, FEATURES_NOTE, GALLERY_HEADING, GALLERY_NOTE, SPEC_NOTE,
+  ME74A.name, ME74A.category, ME74A.summary, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, GALLERY_NOTE, SPEC_NOTE,
   CONTACT.body, CONTACT.heading, CONTACT.cta, CONTACT.secondaryLabel, ME74A_PRODUCT.job,
   ...HERO_STATS.map((s) => s.label),
   ...FEATURES.flatMap((f) => [f.title, f.body]),
@@ -22,24 +22,24 @@ const ban = (terms: string[]) => {
   }
 };
 
-describe("ME74A identity and relationship", () => {
-  it("is YAWIN's fairway mower, not a greens mower, with NXTektal's plan stated as a plan", () => {
-    expect(ME74A.brand).toBe("YAWIN");
+describe("ME74A identity", () => {
+  it("is presented by functions and figures only: a fairway mower, not a greens mower, with no maker or relationship copy", () => {
+    expect(ME74A.brand).toBe("YAWIN"); // kept for records (ATTRIBUTIONS); never rendered
     expect(ME74A.model).toBe("ME74A");
     expect(ME74A.name).toBe("ME74A Robotic Fairway Mower");
     expect(ME74A.nativeName).toBe("ME74A 智能球道割草机器人");
     expect(ME74A_ROUTE).toBe("/products/me74a");
-    expect(ME74A.relationship).toContain("a YAWIN (亚云) product");
-    expect(ME74A.relationship).toContain("not a greens mower");
-    expect(ME74A.relationship).toContain("plans to extend");
+    expect("relationship" in ME74A).toBe(false);
+    expect(ME74A.summary).toContain("a fairway mower, not a greens mower");
+    ban(["yawin", "亚云", "rural dog", "manufactured by", "manufacturer", "made by", "plans to extend", "developed jointly", "co-developed", "jointly developed"]);
     expect(lower.split("not a greens mower").join("")).not.toContain("greens mower");
     ban(["all turf", "any turf", "every turf", "all-terrain", "all terrain"]);
   });
 
   it("states the commercial status neutrally: no claimed integration, deployment or orders, and no unconfirmed denial of them either", () => {
-    expect(ME74A.relationship).toContain("contact NXTektal to confirm");
-    expect(ME74A.relationship).toContain("software integration, site fit and supply arrangements");
-    expect(FEATURES_NOTE).toContain("not a description of NXTektal software");
+    expect(CONTACT.body).toContain("scope of software integration");
+    expect(CONTACT.body).toContain("supply arrangements");
+    expect(FEATURES_NOTE).toContain("as described in the product literature");
     expect(FEATURES_NOTE).toContain("confirmed with NXTektal");
     // unconfirmed negative assertions are out, as are unconfirmed positive ones
     ban(["not yet integrated", "not integrated", "no customer deployment", "no deployment", "takes no orders", "no orders", "not deployed", "not for sale", "not available"]);
@@ -54,15 +54,15 @@ describe("ME74A identity and relationship", () => {
     expect(lower).toContain("scope of software integration");
   });
 
-  it("presents the features as the manufacturer's hardware description, with reel (not rotary) cutting units", () => {
+  it("presents the features as functions from the product literature, with reel (not rotary) cutting units", () => {
     expect(FEATURES).toHaveLength(4);
     expect(FEATURES.map((f) => f.title)).toEqual(["Cutting system", "Positioning and perception", "Automatic operation and cross-area travel", "Battery and recharging"]);
-    expect(FEATURES_NOTE.toLowerCase()).toContain("manufacturer’s description");
+    expect(FEATURES_INTRO).toBe("What the ME74A does.");
     expect(FEATURES[0].body).toContain("Three reel cutting units");
     expect(FEATURES[0].body).toContain("brushless DC motor");
-    expect(FEATURES[2].body).toContain("The manufacturer describes");
+    expect(FEATURES[2].body).toContain("as described in the product literature");
     expect(FEATURES[2].body).toContain("Routes and site fit are confirmed per course");
-    expect(FEATURES[3].body).toContain("The manufacturer describes automatic return to the charging station");
+    expect(FEATURES[3].body).toContain("Automatic return to the charging station as described in the product literature");
     expect(lower).not.toContain("rotary");
     ban(["centimetre accuracy", "centimeter accuracy", "cm accuracy", "collision-free", "collision free", "never collides", "cannot collide"]);
   });
@@ -104,16 +104,16 @@ describe("ME74A specification boundaries", () => {
   });
 
   it("keeps travel and mowing figures apart, and the ratings as the manufacturer's", () => {
-    expect(row("Maximum travel gradient").note).toBe("Manufacturer rating for travel only.");
-    expect(row("Maximum mowing gradient").note).toBe("Manufacturer rating for mowing.");
+    expect(row("Maximum travel gradient").note).toBe("Rated for travel only, not for mowing.");
+    expect(row("Maximum mowing gradient").note).toBe("Rated for mowing.");
     expect(lower).not.toMatch(/mow\w*\s+(on|at|up to)\s+(a\s+)?60\s?%/);
     expect(lower).not.toMatch(/60\s?%\s+(mowing|cutting)/);
     expect(row("Maximum travel speed").note).toContain("not a sustained mowing speed");
     expect(lower).not.toMatch(/mow\w*\s+(at|speed of)\s+9\s?km/);
-    expect(row("Rated mowing rate").note).toContain("Manufacturer rating, not measured or guaranteed by NXTektal");
-    expect(row("Rated area per charge").note).toContain("Manufacturer rating");
-    expect(row("Rated run time on a full charge").note).toContain("Manufacturer rating");
-    expect(SPEC_NOTE).toContain("manufacturer’s product literature (YAWIN)");
+    expect(row("Rated mowing rate").note).toContain("Rated figure, not measured or guaranteed by NXTektal");
+    expect(row("Rated area per charge").note).toContain("Rated figure");
+    expect(row("Rated run time on a full charge").note).toContain("Rated figure");
+    expect(SPEC_NOTE).toContain("from the ME74A product literature");
     expect(SPEC_NOTE).toContain("turf conditions, slope, route, weather and the delivered configuration");
   });
 
@@ -133,7 +133,7 @@ describe("ME74A specification boundaries", () => {
   });
 
   it("does not expand IP65 or decide the warranty provider, and omits marketing figures", () => {
-    expect(row("Ingress protection").note).toBe("As marked by the manufacturer.");
+    expect(row("Ingress protection").note).toBe("As marked in the product literature.");
     ban(["waterproof", "water-proof", "submersion", "submersible", "all-weather", "all weather", "weatherproof", "rainproof", "certified", "certification", "ip67", "ip68"]);
     expect(row("Warranty period").note).toContain("delivery contract");
     ban(["nxtektal warranty", "yawin warranty", "warranted by", "nxtektal guarantees", "we guarantee", "covered by nxtektal"]);
@@ -163,8 +163,7 @@ describe("ME74A media and contact", () => {
     expect(IMAGES[1].caption).toContain("natural size");
     expect(IMAGES[2].caption).toContain("natural size");
     expect(IMAGES[3].caption).toContain("not an NXTektal customer deployment");
-    expect(GALLERY_NOTE).toContain("Rural Dog marking on the machine is kept as supplied");
-    expect(GALLERY_NOTE).not.toContain("YAWIN"); // the machine carries the Rural Dog marking; YAWIN is the literature's brand, and no relationship is inferred
+    expect(GALLERY_NOTE).toContain("markings on the machine as supplied");
     expect(IMAGES[0].alt).not.toContain("three front"); // two units are mounted at the front, the third sits behind them
     expect(lower).not.toContain("photograph"); // the six files are manufacturer renders/display art
   });
@@ -172,7 +171,7 @@ describe("ME74A media and contact", () => {
   it("never passes the manufacturer's images off as NXTektal's own, or shows internals", () => {
     for (const image of IMAGES) {
       const text = `${image.alt} ${image.caption}`.toLowerCase();
-      expect(text).toContain("manufacturer");
+      expect(text).not.toContain("nxtektal customer deployment at");
       expect(text).not.toContain("nxtektal customer deployment at");
       for (const banned of ["exploded", "cutaway", "internal", "inside the", "sensor position", "charging station"]) expect(text).not.toContain(banned);
     }

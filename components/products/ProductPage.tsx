@@ -25,7 +25,7 @@ export const Arrow = () => (
   </svg>
 );
 
-/** The manufacturer's files are copied into public/products/<model>/; until then the page shows a neutral pending panel. */
+/** Image files live in public/products/<model>/; until a file is present the page shows a neutral pending panel. */
 export function withAvailability(product: ProductData): GalleryImage[] {
   return product.images.map((image) => ({
     ...image,
@@ -69,11 +69,11 @@ export default function ProductPage({ product }: { product: ProductData }) {
     <main className="pd-main" id="top">
       <SiteHeader items={productNavItems} brand={<BrandLockup />} ctaIcon={<Arrow />} homeHref="/" ctaHref="/#pilot" currentHref={PRODUCTS_ROUTE} />
 
-      {/* A · Overview: copy and the full product image side by side */}
+      {/* A · Overview: copy and the full product image side by side (functions and figures only — no maker or relationship copy) */}
       <section className="pd-section pd-hero" id="overview" aria-labelledby="pd-h1">
         <div className="pd-inner pd-hero-grid">
           <div className="pd-hero-copy">
-            <p className="eyebrow pd-crumbs"><a href={PRODUCTS_ROUTE}>Products</a> · {product.model} · Manufactured by {product.brand}</p>
+            <p className="eyebrow pd-crumbs"><a href={PRODUCTS_ROUTE}>Products</a> · {product.model} · {product.job}</p>
             <h1 id="pd-h1">{product.name}</h1>
             <p className="pd-lede">{product.summary}</p>
             <dl className="pd-stats" aria-label="Key figures">
@@ -91,7 +91,6 @@ export default function ProductPage({ product }: { product: ProductData }) {
               <a className="button button-primary" href="#specs">See full specifications <Arrow /></a>
               <a className="button button-secondary" href={contact.mailto}>{contact.cta}</a>
             </div>
-            <p className="pd-status">{product.relationship}</p>
           </div>
           <figure className="pd-figure pd-figure--hero">
             <div className="pd-figure-stage pd-stage" style={{ aspectRatio: `${hero.width} / ${hero.height}` }}>
@@ -112,10 +111,10 @@ export default function ProductPage({ product }: { product: ProductData }) {
         </div>
       </nav>
 
-      {/* B · Features, as the manufacturer describes them */}
+      {/* B · Features */}
       <section className="pd-section" id="features" aria-labelledby="pd-h2-features">
         <div className="pd-inner">
-          <p className="eyebrow">Features · manufacturer description</p>
+          <p className="eyebrow">Features</p>
           <h2 id="pd-h2-features">{product.featuresIntro}</h2>
           <dl className="pd-features">
             {product.features.map((feature) => (
@@ -129,7 +128,7 @@ export default function ProductPage({ product }: { product: ProductData }) {
         </div>
       </section>
 
-      {/* C · Images: the manufacturer's views */}
+      {/* C · Images */}
       <section className="pd-section pd-section--tint" id="gallery" aria-labelledby="pd-h2-gallery">
         <div className="pd-inner">
           <p className="eyebrow">Images</p>

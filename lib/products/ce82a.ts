@@ -43,10 +43,7 @@ export const CE82A = {
   nativeName: "CE82A 自动捡球机",
   category: "Robotic ball collector for golf driving ranges",
   summary:
-    "A robotic ball collector for golf driving ranges, developed jointly by NXTektal and YAWIN and manufactured by YAWIN. It gathers range balls across the outfield under remote control or autonomous navigation, with a 2 m collection width and a 1,200-ball basket.",
-  /** How NXTektal and YAWIN relate — stated once, near the top, in plain terms. */
-  relationship:
-    "The CE82A is developed jointly by NXTektal and YAWIN (亚云) and manufactured by YAWIN. Which parts of a range’s operation NXTektal’s software runs, and the commercial terms, are confirmed for each site during the inquiry.",
+    "A robotic ball collector for golf driving ranges. It gathers range balls across the outfield under remote control or autonomous navigation, with a 2 m collection width and a 1,200-ball basket.",
 } as const;
 
 /** The two figures the first screen leads with. */
@@ -55,7 +52,7 @@ export const HERO_STATS: HeroStat[] = [
   { value: "1,200", label: "Ball basket capacity" },
 ];
 
-/** Four themes, as described in the manufacturer's literature. */
+/** Four themes, as described in the product literature. */
 export const FEATURES: Feature[] = [
   {
     title: "Control and navigation",
@@ -63,7 +60,7 @@ export const FEATURES: Feature[] = [
   },
   {
     title: "Perception and obstacle avoidance",
-    body: "3D lidar, a full-colour camera and a 3D camera. The manufacturer describes obstacle detection and avoidance.",
+    body: "3D lidar, a full-colour camera and a 3D camera, for obstacle detection and avoidance as described in the product literature.",
   },
   {
     title: "Work management",
@@ -71,14 +68,14 @@ export const FEATURES: Feature[] = [
   },
   {
     title: "Full basket and recharging",
-    body: "Vision-based full-basket detection; the manufacturer describes automatic delivery and unloading when the basket is full. Recharging by direct charging or quick battery swap.",
+    body: "Vision-based full-basket detection, with automatic delivery and unloading when the basket is full as described in the product literature. Recharging by direct charging or quick battery swap.",
   },
 ];
 
-export const FEATURES_INTRO = "What the CE82A does, as described in its product literature.";
+export const FEATURES_INTRO = "What the CE82A does.";
 
 export const FEATURES_NOTE =
-  "These functions are the manufacturer’s description of the machine. Which of them NXTektal’s operating software runs at a given range, and how automatic unloading is set up there, are confirmed per delivery configuration.";
+  "Functions are as described in the product literature. Which of them NXTektal’s software runs at a given range, and how automatic unloading is set up there, are confirmed per delivery configuration.";
 
 export const IMAGES: ProductImage[] = [
   {
@@ -86,8 +83,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/ce82a/ce82a-product-white.webp",
     width: 980,
     height: 731,
-    alt: "CE82A robotic ball collector on a white background: the complete machine with its body, wheels and collection unit, YAWIN marking visible",
-    caption: "CE82A, manufacturer product image on white. The whole machine is shown; nothing is cropped.",
+    alt: "CE82A robotic ball collector on a white background: the complete machine with its body, wheels and collection unit",
+    caption: "CE82A, product image on white. The whole machine is shown; nothing is cropped.",
     label: "Product on white",
     fit: "contain",
   },
@@ -96,14 +93,14 @@ export const IMAGES: ProductImage[] = [
     src: "/products/ce82a/ce82a-golf-course.webp",
     width: 1920,
     height: 1079,
-    alt: "CE82A on golf turf, manufacturer display image",
-    caption: "Manufacturer display material showing the CE82A on golf turf. It is manufacturer imagery, not an NXTektal customer deployment.",
+    alt: "CE82A on golf turf, display image from the product literature",
+    caption: "Display image from the product literature showing the CE82A on golf turf; not an NXTektal customer deployment.",
     label: "On the course",
     fit: "cover",
   },
 ];
 
-/** Grouped specification table. Values are the manufacturer's; notes keep the data boundaries. */
+/** Grouped specification table. Values are from the product literature; notes keep the data boundaries. */
 export const SPEC_GROUPS: SpecGroup[] = [
   {
     title: "Collection",
@@ -117,8 +114,8 @@ export const SPEC_GROUPS: SpecGroup[] = [
     title: "Battery and recharging",
     rows: [
       { name: "Battery type", value: "Lithium iron phosphate (LiFePO₄)" },
-      { name: "Battery rating", value: "48 V / 60 Ah", note: "As stated by the manufacturer; whether this is one battery or the combined pack is not specified." },
-      { name: "Run time, dual battery", value: "Up to 4.5 h", note: "Manufacturer rating, not a measured guarantee." },
+      { name: "Battery rating", value: "48 V / 60 Ah", note: "Whether this is one battery or the combined pack is not specified." },
+      { name: "Run time, dual battery", value: "Up to 4.5 h", note: "Rated figure, not a measured guarantee." },
       { name: "Recharging", value: "Direct charging; quick battery swap" },
     ],
   },
@@ -130,7 +127,7 @@ export const SPEC_GROUPS: SpecGroup[] = [
       { name: "Drive", value: "Dual-motor drive" },
       { name: "Steering", value: "Differential steering" },
       { name: "Braking", value: "Electromagnetic brake" },
-      { name: "Rated braking distance", value: "0.5 m", note: "Manufacturer figure; test conditions not provided." },
+      { name: "Rated braking distance", value: "0.5 m", note: "Test conditions not provided." },
     ],
   },
   {
@@ -151,7 +148,7 @@ export const SPEC_GROUPS: SpecGroup[] = [
 ];
 
 export const SPEC_NOTE =
-  "Specifications are taken from the CE82A product literature (YAWIN). Actual performance depends on the site, the load, the operating method and the delivered configuration.";
+  "Specifications are taken from the CE82A product literature. Actual performance depends on the site, the load, the operating method and the delivered configuration.";
 
 /** Contact entry: the site's existing address, with a product-specific subject. */
 export const CONTACT = {
@@ -169,7 +166,7 @@ export const CONTACT = {
 /** Section anchors, in page order (shared by every product page). */
 export const SECTIONS = PRODUCT_SECTIONS;
 
-export const GALLERY_HEADING = "The machine on white, and in the manufacturer’s course scene.";
+export const GALLERY_HEADING = "The machine on white, and on the course.";
 
 /** Everything the /products/ce82a page shows, in the shared product shape. */
 export const CE82A_PRODUCT: ProductData = {

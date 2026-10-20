@@ -4,7 +4,7 @@ import { useCallback, useRef, useState, type CSSProperties, type KeyboardEvent }
 import { IMAGE_PENDING_TEXT, type ProductImage } from "../../lib/products/types";
 
 export type GalleryImage = ProductImage & {
-  /** False until the manufacturer's file is present in public/products/<model>/. */
+  /** False until the file is present in public/products/<model>/. */
   available: boolean;
 };
 

@@ -24,8 +24,8 @@ export const PRODUCTS_PAGE = {
   eyebrow: "Products",
   heading: "Two machines, two jobs.",
   intro:
-    "The CE82A collects range balls on driving ranges; the ME74A mows fairways. Both are manufactured by YAWIN. The CE82A is developed jointly with NXTektal; the ME74A is the fairway mower NXTektal plans to extend to.",
-  note: "Each page lists the manufacturer’s figures with their boundaries. Software integration scope, site fit and supply arrangements are confirmed with NXTektal for each site.",
+    "The CE82A collects range balls on driving ranges; the ME74A mows fairways. Each page describes what the machine does and lists its specifications.",
+  note: "Figures are from each product’s literature. Software integration scope, site fit and supply arrangements are confirmed with NXTektal for each site.",
   relatedEyebrow: "Also in Products",
   allLabel: "All products",
 } as const;

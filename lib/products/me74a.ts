@@ -62,10 +62,7 @@ export const ME74A = {
   nativeName: "ME74A 智能球道割草机器人",
   category: "Robotic fairway mower for golf courses",
   summary:
-    "A pure-electric robotic mower for golf-course fairway maintenance, made by YAWIN. It cuts with three reel cutting units and combines positioning, environment perception and automatic operation, with a 1.88 m cutting width and a 10–60 mm cutting height range.",
-  /** How NXTektal relates to the machine — stated once, near the top, in plain terms. */
-  relationship:
-    "The ME74A is a YAWIN (亚云) product: a pure-electric fairway mower, not a greens mower. NXTektal plans to extend from the CE82A’s ball collection to fairway mowing. For the scope of software integration, site fit and supply arrangements, contact NXTektal to confirm.",
+    "A pure-electric robotic mower for golf-course fairway maintenance — a fairway mower, not a greens mower. It cuts with three reel cutting units and combines positioning, environment perception and automatic operation, with a 1.88 m cutting width and a 10–60 mm cutting height range.",
 } as const;
 
 /** The three figures the first screen leads with. */
@@ -75,7 +72,7 @@ export const HERO_STATS: HeroStat[] = [
   { value: "3", label: "Reel cutting units" },
 ];
 
-/** Four themes, as described in the manufacturer's literature. */
+/** Four themes, as described in the product literature. */
 export const FEATURES: Feature[] = [
   {
     title: "Cutting system",
@@ -87,18 +84,18 @@ export const FEATURES: Feature[] = [
   },
   {
     title: "Automatic operation and cross-area travel",
-    body: "The manufacturer describes automatic travel between the maintenance yard and the fairways, movement across areas, obstacle avoidance, and automatic return when it rains or a fault occurs. Routes and site fit are confirmed per course.",
+    body: "Automatic travel between the maintenance yard and the fairways, movement across areas, obstacle avoidance, and automatic return when it rains or a fault occurs, as described in the product literature. Routes and site fit are confirmed per course.",
   },
   {
     title: "Battery and recharging",
-    body: "48 V / 450 Ah lithium iron phosphate battery. The manufacturer describes automatic return to the charging station and lists wired plug-in and wireless contactless charging options.",
+    body: "48 V / 450 Ah lithium iron phosphate battery. Automatic return to the charging station as described in the product literature; wired plug-in and wireless contactless charging options are listed.",
   },
 ];
 
-export const FEATURES_INTRO = "What the ME74A does, as described in its product literature.";
+export const FEATURES_INTRO = "What the ME74A does.";
 
 export const FEATURES_NOTE =
-  "These functions are the manufacturer’s description of the machine’s hardware capability, not a description of NXTektal software. The scope of software integration for a given course is confirmed with NXTektal.";
+  "Functions are as described in the product literature. The scope of software integration for a given course is confirmed with NXTektal.";
 
 export const IMAGES: ProductImage[] = [
   {
@@ -106,8 +103,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/me74a/me74a-product-studio.webp",
     width: 1322,
     height: 747,
-    alt: "ME74A robotic fairway mower, manufacturer studio image: the complete machine with its wheels and the front reel cutting units",
-    caption: "ME74A, manufacturer studio image. The whole machine is shown, including the wheels and the front cutting units; nothing is cropped.",
+    alt: "ME74A robotic fairway mower, studio image: the complete machine with its wheels and the front reel cutting units",
+    caption: "ME74A, studio image. The whole machine is shown, including the wheels and the front cutting units; nothing is cropped.",
     label: "Studio view",
     fit: "contain",
   },
@@ -116,8 +113,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/me74a/me74a-front.webp",
     width: 617,
     height: 436,
-    alt: "ME74A robotic fairway mower seen from the front, manufacturer image",
-    caption: "Front view, manufacturer material. The source is low resolution and is never shown larger than its natural size.",
+    alt: "ME74A robotic fairway mower seen from the front",
+    caption: "Front view. The source is low resolution and is never shown larger than its natural size.",
     label: "Front view",
     fit: "contain",
   },
@@ -126,8 +123,8 @@ export const IMAGES: ProductImage[] = [
     src: "/products/me74a/me74a-top-angle.webp",
     width: 690,
     height: 488,
-    alt: "ME74A robotic fairway mower seen from a raised front angle, manufacturer image",
-    caption: "Raised-angle view, manufacturer material. The source is low resolution and is never shown larger than its natural size.",
+    alt: "ME74A robotic fairway mower seen from a raised front angle",
+    caption: "Raised-angle view. The source is low resolution and is never shown larger than its natural size.",
     label: "Raised angle",
     fit: "contain",
   },
@@ -136,19 +133,19 @@ export const IMAGES: ProductImage[] = [
     src: "/products/me74a/me74a-golf-course.webp",
     width: 1920,
     height: 1440,
-    alt: "ME74A on a golf course fairway, manufacturer display image",
-    caption: "Manufacturer display material showing the ME74A on a golf course. It illustrates the kind of setting the machine works in; it is not an NXTektal customer deployment.",
+    alt: "ME74A on a golf course fairway, display image from the product literature",
+    caption: "Display image from the product literature showing the ME74A on a golf course; not an NXTektal customer deployment.",
     label: "On the course",
     fit: "cover",
   },
 ];
 
-export const GALLERY_HEADING = "Four manufacturer views: studio, front, raised angle, and on the course.";
+export const GALLERY_HEADING = "Four views: studio, front, raised angle, and on the course.";
 
 export const GALLERY_NOTE =
-  "Manufacturer display material; the Rural Dog marking on the machine is kept as supplied. The front and raised-angle sources are low resolution and are never shown larger than their natural size.";
+  "Images are from the product literature, with the markings on the machine as supplied. The front and raised-angle sources are low resolution and are never shown larger than their natural size.";
 
-/** Grouped specification table. Values are the manufacturer's; notes keep the data boundaries. */
+/** Grouped specification table. Values are from the product literature; notes keep the data boundaries. */
 export const SPEC_GROUPS: SpecGroup[] = [
   {
     title: "Cutting system",
@@ -163,9 +160,9 @@ export const SPEC_GROUPS: SpecGroup[] = [
   {
     title: "Work rate",
     rows: [
-      { name: "Rated mowing rate", value: "8,000 m²/h", note: "Manufacturer rating, not measured or guaranteed by NXTektal." },
-      { name: "Rated area per charge", value: "60,000 m²", note: "Manufacturer rating." },
-      { name: "Rated run time on a full charge", value: "8–9 h", note: "Manufacturer rating." },
+      { name: "Rated mowing rate", value: "8,000 m²/h", note: "Rated figure, not measured or guaranteed by NXTektal." },
+      { name: "Rated area per charge", value: "60,000 m²", note: "Rated figure." },
+      { name: "Rated run time on a full charge", value: "8–9 h", note: "Rated figure." },
     ],
   },
   {
@@ -173,7 +170,7 @@ export const SPEC_GROUPS: SpecGroup[] = [
     rows: [
       { name: "Battery type", value: "Lithium iron phosphate (LiFePO₄)" },
       { name: "Battery rating", value: "48 V / 450 Ah" },
-      { name: "Rated charging time", value: "4.5 h", note: "Manufacturer figure; the charging configuration is to be confirmed." },
+      { name: "Rated charging time", value: "4.5 h", note: "The charging configuration is to be confirmed." },
       { name: "Charging", value: "Wired plug-in and wireless contactless options are listed in the literature", note: "Configuration to be confirmed; neither option is assumed to be included." },
     ],
   },
@@ -196,8 +193,8 @@ export const SPEC_GROUPS: SpecGroup[] = [
   {
     title: "Gradient",
     rows: [
-      { name: "Maximum travel gradient", value: "60% (about 31°)", note: "Manufacturer rating for travel only." },
-      { name: "Maximum mowing gradient", value: "44% (about 24°)", note: "Manufacturer rating for mowing." },
+      { name: "Maximum travel gradient", value: "60% (about 31°)", note: "Rated for travel only, not for mowing." },
+      { name: "Maximum mowing gradient", value: "44% (about 24°)", note: "Rated for mowing." },
     ],
   },
   {
@@ -210,14 +207,14 @@ export const SPEC_GROUPS: SpecGroup[] = [
   {
     title: "Protection and warranty",
     rows: [
-      { name: "Ingress protection", value: "IP65", note: "As marked by the manufacturer." },
-      { name: "Warranty period", value: "2 years, per the manufacturer’s literature", note: "Scope and conditions are set by the delivery contract." },
+      { name: "Ingress protection", value: "IP65", note: "As marked in the product literature." },
+      { name: "Warranty period", value: "2 years", note: "Per the product literature; scope and conditions are set by the delivery contract." },
     ],
   },
 ];
 
 export const SPEC_NOTE =
-  "Specifications are from the manufacturer’s product literature (YAWIN). Actual performance depends on turf conditions, slope, route, weather and the delivered configuration.";
+  "Specifications are from the ME74A product literature. Actual performance depends on turf conditions, slope, route, weather and the delivered configuration.";
 
 /** Contact entry: the site's existing address, with a product-specific subject. */
 export const CONTACT: ProductContact = {

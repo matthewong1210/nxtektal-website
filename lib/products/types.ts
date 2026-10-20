@@ -17,7 +17,7 @@ export type Feature = { title: string; body: string };
 export type ProductImage = {
   /** Stable key, unique within one product (used for thumbnails and the hero pick). */
   key: string;
-  /** Public path; the file is supplied by the manufacturer and copied into public/products/<model>/. */
+  /** Public path under public/products/<model>/. */
   src: string;
   /** Natural pixel size of the supplied file. Contain-fit images are never shown wider than this. */
   width: number;
@@ -49,6 +49,7 @@ export type ProductSection = { id: string; label: string };
 export type ProductData = {
   /** Page route, e.g. "/products/ce82a". */
   route: string;
+  /** Maker, for records (ATTRIBUTIONS, tests). Not rendered: the pages present functions and specifications only. */
   brand: string;
   brandNative: string;
   model: string;
@@ -58,8 +59,6 @@ export type ProductData = {
   /** The job in a few words, for the products list and the related-product block. */
   job: string;
   summary: string;
-  /** How NXTektal relates to the machine — stated once, near the top, in plain terms. */
-  relationship: string;
   heroStats: HeroStat[];
   images: ProductImage[];
   /** Which image the first screen shows (a key from `images`). */
@@ -77,7 +76,7 @@ export type ProductData = {
 };
 
 /** Shown in place of an image when the file has not been supplied yet. */
-export const IMAGE_PENDING_TEXT = "Manufacturer image to be added";
+export const IMAGE_PENDING_TEXT = "Product image to be added";
 
 /** Section anchors shared by every product page, in page order. */
 export const PRODUCT_SECTIONS = [
