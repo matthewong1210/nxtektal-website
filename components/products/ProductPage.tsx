@@ -55,7 +55,7 @@ export function ProductCard({ product, image, heading: Heading = "h3" }: { produ
 
 /**
  * One template for every product detail page: A overview (copy beside the
- * full product image), B features as the manufacturer describes them,
+ * full product image), B features as described in the product literature,
  * C gallery, D grouped specifications, E the other products and the contact
  * entry. All copy comes from the product's data module.
  */

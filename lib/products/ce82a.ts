@@ -12,11 +12,13 @@
  * automatic recharging, and "automatic unloading when full" is a
  * manufacturer description whose delivered form is confirmed per site.
  *
- * Relationship (owner's wording, 2026-10-16): the CE82A is developed jointly
- * by NXTektal and YAWIN and manufactured by YAWIN. Software coverage and
- * commercial terms for a given site are confirmed during the inquiry. Nothing
- * here may present the machine as NXTektal-manufactured, as an authorised
- * dealership, or as fully integrated with NXTektal software at every site.
+ * Presentation (owner's direction, 2026-10-20): the page presents functions
+ * and specifications only — no maker attribution, no co-development or
+ * relationship copy, no commercial status. `brand`/`brandNative` are kept for
+ * records (ATTRIBUTIONS) and never rendered. Nothing may present the machine
+ * as NXTektal-manufactured, as an authorised dealership, or as fully
+ * integrated with NXTektal software; software coverage and commercial terms
+ * are a matter for the inquiry (contact block).
  */
 
 import {
@@ -68,14 +70,14 @@ export const FEATURES: Feature[] = [
   },
   {
     title: "Full basket and recharging",
-    body: "Vision-based full-basket detection, with automatic delivery and unloading when the basket is full as described in the product literature. Recharging by direct charging or quick battery swap.",
+    body: "Vision-based full-basket detection, with automatic delivery and unloading when the basket is full, as described in the product literature. Recharging by direct charging or quick battery swap.",
   },
 ];
 
 export const FEATURES_INTRO = "What the CE82A does.";
 
 export const FEATURES_NOTE =
-  "Functions are as described in the product literature. Which of them NXTektal’s software runs at a given range, and how automatic unloading is set up there, are confirmed per delivery configuration.";
+  "Functions are as described in the product literature. How automatic unloading is set up at a given range is confirmed per delivery configuration.";
 
 export const IMAGES: ProductImage[] = [
   {

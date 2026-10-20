@@ -27,19 +27,17 @@
  *   here; IP65 is reported as marked, not expanded into weather or
  *   certification claims; the literature's marketing percentages are left out.
  *
- * Relationship (owner's wording, 2026-10-18/19): the ME74A is YAWIN's
- * pure-electric fairway mower — a fairway mower, not a greens mower, and not
- * claimed to suit every turf setting. NXTektal plans to extend from the CE82A
- * to mowing. The commercial status is stated neutrally: nothing here may
- * claim that integration is complete, that the machine is deployed at a
- * customer site, or that orders are being taken — and nothing may assert the
- * opposite either ("not integrated", "no deployment", "no orders"), because
- * neither has been confirmed. Software integration scope, site fit and
- * supply arrangements are confirmed with NXTektal. Nothing may say NXTektal
- * developed the hardware, is an authorised dealer, or has signed a
- * joint-development agreement. Manufacturer markings (YAWIN and Rural Dog)
- * stay on the images as supplied; no brand relationship between them is
- * inferred.
+ * Presentation (owner's direction, 2026-10-20): the page presents functions
+ * and specifications only. No maker attribution, no brand names (YAWIN,
+ * Rural Dog), no co-development or relationship copy, no "plans to extend"
+ * narrative, no commercial status in the hero. `brand`/`brandNative` are kept
+ * for records (ATTRIBUTIONS) and never rendered. The machine is a fairway
+ * mower, not a greens mower, and is not claimed to suit every turf setting.
+ * Nothing may claim that integration with NXTektal software is complete, that
+ * the machine is deployed at a customer site, or that orders are being taken —
+ * and nothing may assert the opposite either, because neither has been
+ * confirmed; the neutral inquiry line lives in the contact block only. The
+ * markings on the images stay as supplied and are not described in copy.
  */
 
 import {
@@ -95,7 +93,7 @@ export const FEATURES: Feature[] = [
 export const FEATURES_INTRO = "What the ME74A does.";
 
 export const FEATURES_NOTE =
-  "Functions are as described in the product literature. The scope of software integration for a given course is confirmed with NXTektal.";
+  "Functions are as described in the product literature.";
 
 export const IMAGES: ProductImage[] = [
   {
@@ -143,7 +141,7 @@ export const IMAGES: ProductImage[] = [
 export const GALLERY_HEADING = "Four views: studio, front, raised angle, and on the course.";
 
 export const GALLERY_NOTE =
-  "Images are from the product literature, with the markings on the machine as supplied. The front and raised-angle sources are low resolution and are never shown larger than their natural size.";
+  "Images are from the product literature. The front and raised-angle sources are low resolution and are never shown larger than their natural size.";
 
 /** Grouped specification table. Values are from the product literature; notes keep the data boundaries. */
 export const SPEC_GROUPS: SpecGroup[] = [

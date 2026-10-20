@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { CE82A, CONTACT, FEATURES, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, HERO_STATS, IMAGES, SPEC_GROUPS, SPEC_NOTE } from "../products/ce82a";
+import { CE82A, CE82A_PRODUCT, CONTACT, FEATURES, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, HERO_STATS, IMAGES, SPEC_GROUPS, SPEC_NOTE } from "../products/ce82a";
 
 const rows = SPEC_GROUPS.flatMap((g) => g.rows);
 const row = (name: string) => rows.find((r) => r.name === name)!;
 const corpus = [
-  CE82A.name, CE82A.category, CE82A.summary, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, SPEC_NOTE,
+  CE82A.name, CE82A.category, CE82A.summary, CE82A_PRODUCT.job, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, SPEC_NOTE,
   CONTACT.body, CONTACT.heading, CONTACT.cta, CONTACT.secondaryLabel,
   ...HERO_STATS.map((s) => s.label),
   ...FEATURES.flatMap((f) => [f.title, f.body]),
@@ -27,17 +27,17 @@ describe("CE82A identity", () => {
     expect(CE82A.brand).toBe("YAWIN"); // kept for records (ATTRIBUTIONS); never rendered
     expect(CE82A.model).toBe("CE82A");
     expect("relationship" in CE82A).toBe(false);
-    ban(["yawin", "亚云", "manufactured by", "manufacturer", "made by", "developed jointly", "co-developed", "jointly developed", "built by nxtektal", "authorised dealer", "authorized dealer", "dealer", "exclusive", "fully integrated", "signed", "contracted", "agreement", "partnership"]);
+    ban(["yawin", "亚云", "rural dog", "manufactured by", "manufacturer", "made by", "as supplied", "developed jointly", "co-developed", "co-development", "jointly developed", "plans to extend", "built by nxtektal", "authorised dealer", "authorized dealer", "dealer", "exclusive", "fully integrated", "signed", "contracted", "agreement", "partnership"]);
     expect(lower).toContain("product literature"); // the source is named without a brand
   });
 
   it("presents the features as functions described in the product literature", () => {
     expect(FEATURES).toHaveLength(4);
     expect(FEATURES_INTRO).toBe("What the CE82A does.");
-    expect(FEATURES_NOTE).toContain("as described in the product literature");
-    expect(FEATURES_NOTE).toContain("confirmed per delivery configuration");
+    expect(FEATURES_NOTE).toBe("Functions are as described in the product literature. How automatic unloading is set up at a given range is confirmed per delivery configuration.");
+    expect(FEATURES_NOTE).not.toContain("NXTektal’s software"); // software coverage is a matter for the inquiry, not a feature note
     expect(FEATURES[1].body).toContain("as described in the product literature");
-    expect(FEATURES[3].body).toContain("automatic delivery and unloading when the basket is full as described in the product literature");
+    expect(FEATURES[3].body).toContain("automatic delivery and unloading when the basket is full, as described in the product literature");
   });
 });
 

@@ -31,7 +31,7 @@ describe("ME74A identity", () => {
     expect(ME74A_ROUTE).toBe("/products/me74a");
     expect("relationship" in ME74A).toBe(false);
     expect(ME74A.summary).toContain("a fairway mower, not a greens mower");
-    ban(["yawin", "亚云", "rural dog", "manufactured by", "manufacturer", "made by", "plans to extend", "developed jointly", "co-developed", "jointly developed"]);
+    ban(["yawin", "亚云", "rural dog", "manufactured by", "manufacturer", "made by", "plans to extend", "developed jointly", "co-developed", "co-development", "jointly developed", "as supplied"]);
     expect(lower.split("not a greens mower").join("")).not.toContain("greens mower");
     ban(["all turf", "any turf", "every turf", "all-terrain", "all terrain"]);
   });
@@ -39,8 +39,7 @@ describe("ME74A identity", () => {
   it("states the commercial status neutrally: no claimed integration, deployment or orders, and no unconfirmed denial of them either", () => {
     expect(CONTACT.body).toContain("scope of software integration");
     expect(CONTACT.body).toContain("supply arrangements");
-    expect(FEATURES_NOTE).toContain("as described in the product literature");
-    expect(FEATURES_NOTE).toContain("confirmed with NXTektal");
+    expect(FEATURES_NOTE).toBe("Functions are as described in the product literature."); // the inquiry line lives in the contact block only
     // unconfirmed negative assertions are out, as are unconfirmed positive ones
     ban(["not yet integrated", "not integrated", "no customer deployment", "no deployment", "takes no orders", "no orders", "not deployed", "not for sale", "not available"]);
     ban([
@@ -163,7 +162,7 @@ describe("ME74A media and contact", () => {
     expect(IMAGES[1].caption).toContain("natural size");
     expect(IMAGES[2].caption).toContain("natural size");
     expect(IMAGES[3].caption).toContain("not an NXTektal customer deployment");
-    expect(GALLERY_NOTE).toContain("markings on the machine as supplied");
+    expect(GALLERY_NOTE).toBe("Images are from the product literature. The front and raised-angle sources are low resolution and are never shown larger than their natural size.");
     expect(IMAGES[0].alt).not.toContain("three front"); // two units are mounted at the front, the third sits behind them
     expect(lower).not.toContain("photograph"); // the six files are manufacturer renders/display art
   });
@@ -171,7 +170,7 @@ describe("ME74A media and contact", () => {
   it("never passes the manufacturer's images off as NXTektal's own, or shows internals", () => {
     for (const image of IMAGES) {
       const text = `${image.alt} ${image.caption}`.toLowerCase();
-      expect(text).not.toContain("nxtektal customer deployment at");
+      for (const banned of ["manufacturer", "yawin", "rural dog", "made by", "as supplied"]) expect(text).not.toContain(banned);
       expect(text).not.toContain("nxtektal customer deployment at");
       for (const banned of ["exploded", "cutaway", "internal", "inside the", "sensor position", "charging station"]) expect(text).not.toContain(banned);
     }
