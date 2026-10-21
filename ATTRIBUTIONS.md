@@ -46,36 +46,31 @@ original NXTektal software; all rights held by NXTektal Systems.
 ## CE82A product imagery (`public/products/ce82a/`)
 
 `ce82a-raised-angle.webp` (1537×1023), `ce82a-front.webp` (1538×1023),
-`ce82a-side-left.webp` (1536×1024) and `ce82a-side-right.webp` (1536×1024)
-are studio renders of the CE82A supplied by the founders on 2026-10-21 for
-the product page; the founders hold the record of their origin and rights.
+`ce82a-side-left.webp` (1536×1024), `ce82a-side-right.webp` (1536×1024) and
+`ce82a-driving-range.webp` (1538×1022, a driving-range scene) are renders of
+the CE82A supplied by the founders on 2026-10-21 for the product page; the
+founders hold the record of their origin and rights. The range scene is a
+display image, not an NXTektal customer deployment, and the page says so in
+its caption.
 They replaced the YAWIN (亚云) manufacturer images used until then (the
 980×731 product-on-white image and the 1920×1079 course scene extracted from
 亚云自动捡球机CE82A.pdf on 2026-10-19); that attribution is preserved in git
 history. Specification figures on the page still come from the
 manufacturer's product sheet (亚云自动捡球机CE82A.pdf).
 
-## YAWIN ME74A product imagery (`public/products/me74a/`)
+## ME74A product imagery (`public/products/me74a/`)
 
-`me74a-product-studio.webp` (1322×747, studio product shot),
-`me74a-front.webp` (617×436, front view), `me74a-top-angle.webp` (690×488,
-raised-angle view) and `me74a-golf-course.webp` (1920×1440, course display
-scene) are YAWIN (亚云) manufacturer product materials for the ME74A robotic
-fairway mower, supplied to NXTektal by the founders for the product page.
-The files in this repository were extracted on 2026-10-19 from the
-manufacturer's product sheet (ME74A.pdf: the 1322×747 studio image, the
-617×436 front and 690×488 raised-angle images as embedded on pages 1 and 3,
-and the 2480×1860 cover scene scaled to 1920×1440), converted from the
-PDF's CMYK/RGB JPEGs to sRGB WebP; replace them with the founders' own
-exports if those differ. Rights remain with YAWIN; confirm the terms of use
-with the manufacturer before launch. The markings that appear on the machine and in the literature
-(YAWIN and Rural Dog) are kept as supplied; they are not altered, not
-replaced by NXTektal branding, and no brand relationship between them is
-inferred. The course scene is manufacturer display material, not an NXTektal
-customer deployment, and the page says so in its caption. The front and
-raised-angle sources are low resolution and are shown at their natural size.
-Specification figures on the page come from the manufacturer's product sheet
-(ME74A.pdf) and the owner's spec table of 2026-10-18.
+`me74a-raised-angle.webp` (1536×1024), `me74a-front.webp` (1537×1023),
+`me74a-side.webp` (1537×1023) and `me74a-golf-course.webp` (1537×1023) are
+renders of the ME74A supplied by the founders on 2026-10-21 for the product
+page (three studio views and one course scene); the founders hold the record
+of their origin and rights. They replaced the YAWIN (亚云) manufacturer images
+used until then (the 1322×747 studio, 617×436 front, 690×488 raised-angle and
+1920×1440 cover-scene images extracted from ME74A.pdf on 2026-10-19); that
+attribution is preserved in git history. The course scene is a display image,
+not an NXTektal customer deployment, and the page says so in its caption.
+Specification figures on the page still come from the manufacturer's product
+sheet (ME74A.pdf) and the owner's spec table of 2026-10-18.
 
 ## Removed assets
 

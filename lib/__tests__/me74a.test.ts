@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { CONTACT, FEATURES, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, GALLERY_NOTE, HERO_STATS, IMAGES, ME74A, ME74A_PRODUCT, ME74A_ROUTE, SPEC_GROUPS, SPEC_NOTE } from "../products/me74a";
+import { CONTACT, FEATURES, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, HERO_STATS, IMAGES, ME74A, ME74A_PRODUCT, ME74A_ROUTE, SPEC_GROUPS, SPEC_NOTE } from "../products/me74a";
 
 const rows = SPEC_GROUPS.flatMap((g) => g.rows);
 const row = (name: string) => rows.find((r) => r.name === name)!;
 const corpus = [
-  ME74A.name, ME74A.category, ME74A.summary, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, GALLERY_NOTE, SPEC_NOTE,
+  ME74A.name, ME74A.category, ME74A.summary, FEATURES_INTRO, FEATURES_NOTE, GALLERY_HEADING, SPEC_NOTE,
   CONTACT.body, CONTACT.heading, CONTACT.cta, CONTACT.secondaryLabel, ME74A_PRODUCT.job,
   ...HERO_STATS.map((s) => s.label),
   ...FEATURES.flatMap((f) => [f.title, f.body]),
@@ -146,28 +146,27 @@ describe("ME74A specification boundaries", () => {
 });
 
 describe("ME74A media and contact", () => {
-  it("lists the four manufacturer images at their natural sizes, under the ME74A folder", () => {
-    expect(IMAGES.map((i) => i.key)).toEqual(["studio", "front", "top", "course"]);
+  it("lists the four studio/course views at their file sizes, with the raised angle as the hero", () => {
+    expect(IMAGES.map((i) => i.key)).toEqual(["raised", "front", "side", "course"]);
     expect(IMAGES.map((i) => i.src)).toEqual([
-      "/products/me74a/me74a-product-studio.webp",
+      "/products/me74a/me74a-raised-angle.webp",
       "/products/me74a/me74a-front.webp",
-      "/products/me74a/me74a-top-angle.webp",
+      "/products/me74a/me74a-side.webp",
       "/products/me74a/me74a-golf-course.webp",
     ]);
-    expect(IMAGES.map((i) => [i.width, i.height])).toEqual([[1322, 747], [617, 436], [690, 488], [1920, 1440]]);
-    expect(IMAGES.map((i) => i.fit)).toEqual(["contain", "contain", "contain", "cover"]);
-    expect(ME74A_PRODUCT.heroImageKey).toBe("studio");
+    expect(IMAGES.map((i) => [i.width, i.height])).toEqual([[1536, 1024], [1537, 1023], [1537, 1023], [1537, 1023]]);
+    expect(IMAGES.every((i) => i.fit === "contain")).toBe(true);
+    expect(ME74A_PRODUCT.heroImageKey).toBe("raised");
+    expect(ME74A_PRODUCT.galleryAspect).toBe("3 / 2");
+    expect(ME74A_PRODUCT.galleryNote).toBeUndefined();
     expect(IMAGES[0].caption).toContain("nothing is cropped");
     expect(IMAGES[0].alt).toContain("wheels");
-    expect(IMAGES[1].caption).toContain("natural size");
-    expect(IMAGES[2].caption).toContain("natural size");
+    expect(IMAGES[0].alt).toContain("three reel cutting units"); // the raised angle shows all three units
     expect(IMAGES[3].caption).toContain("not an NXTektal customer deployment");
-    expect(GALLERY_NOTE).toBe("Images are from the product literature. The front and raised-angle sources are low resolution and are never shown larger than their natural size.");
-    expect(IMAGES[0].alt).not.toContain("three front"); // two units are mounted at the front, the third sits behind them
-    expect(lower).not.toContain("photograph"); // the six files are manufacturer renders/display art
+    expect(lower).not.toContain("photograph"); // the files are renders
   });
 
-  it("never passes the manufacturer's images off as NXTektal's own, or shows internals", () => {
+  it("never passes the images off as NXTektal's own, or shows internals", () => {
     for (const image of IMAGES) {
       const text = `${image.alt} ${image.caption}`.toLowerCase();
       for (const banned of ["manufacturer", "yawin", "rural dog", "made by", "as supplied"]) expect(text).not.toContain(banned);

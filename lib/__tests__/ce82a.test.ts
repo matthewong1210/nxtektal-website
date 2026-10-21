@@ -80,22 +80,25 @@ describe("CE82A specification boundaries", () => {
 });
 
 describe("CE82A media and contact", () => {
-  it("lists the four studio views at their file sizes, with the raised angle as the hero and no deployment claim", () => {
-    expect(IMAGES.map((i) => i.key)).toEqual(["raised", "front", "side-left", "side-right"]);
+  it("lists the four studio views and the range scene at their file sizes, with the raised angle as the hero and no deployment claim", () => {
+    expect(IMAGES.map((i) => i.key)).toEqual(["raised", "front", "side-left", "side-right", "range"]);
     expect(IMAGES.map((i) => i.src)).toEqual([
       "/products/ce82a/ce82a-raised-angle.webp",
       "/products/ce82a/ce82a-front.webp",
       "/products/ce82a/ce82a-side-left.webp",
       "/products/ce82a/ce82a-side-right.webp",
+      "/products/ce82a/ce82a-driving-range.webp",
     ]);
-    expect(IMAGES.map((i) => [i.width, i.height])).toEqual([[1537, 1023], [1538, 1023], [1536, 1024], [1536, 1024]]);
+    expect(IMAGES.map((i) => [i.width, i.height])).toEqual([[1537, 1023], [1538, 1023], [1536, 1024], [1536, 1024], [1538, 1022]]);
+    expect(IMAGES[4].caption).toContain("not an NXTektal customer deployment");
     expect(IMAGES.every((i) => i.fit === "contain")).toBe(true);
     expect(CE82A_PRODUCT.heroImageKey).toBe("raised");
     expect(CE82A_PRODUCT.galleryAspect).toBe("3 / 2");
     expect(IMAGES[0].caption).toContain("nothing is cropped");
     expect(IMAGES[0].alt).toContain("wheels");
     for (const image of IMAGES) {
-      const text = `${image.alt} ${image.caption}`.toLowerCase();
+      // the only permitted deployment/customer wording is the required disclaimer itself
+      const text = `${image.alt} ${image.caption}`.toLowerCase().replace("not an nxtektal customer deployment", "");
       for (const banned of ["deploy", "customer", "photograph", "manufacturer", "yawin", "exploded", "cutaway", "internal", "charging station"]) expect(text).not.toContain(banned);
     }
     // the files are renders, so nothing may call them photographs

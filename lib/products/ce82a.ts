@@ -120,6 +120,16 @@ export const IMAGES: ProductImage[] = [
     label: "Side view, right",
     fit: "contain",
   },
+  {
+    key: "range",
+    src: "/products/ce82a/ce82a-driving-range.webp",
+    width: 1538,
+    height: 1022,
+    alt: "CE82A robotic ball collector on a driving-range outfield with range balls on the grass, display image",
+    caption: "On the range: display image of the CE82A on a driving-range outfield; not an NXTektal customer deployment.",
+    label: "On the range",
+    fit: "contain",
+  },
 ];
 
 /** Grouped specification table. Values are from the product literature; notes keep the data boundaries. */
@@ -188,7 +198,7 @@ export const CONTACT = {
 /** Section anchors, in page order (shared by every product page). */
 export const SECTIONS = PRODUCT_SECTIONS;
 
-export const GALLERY_HEADING = "Four studio views: raised angle, front, and both sides.";
+export const GALLERY_HEADING = "Five views: raised angle, front, both sides, and on the range.";
 
 /** Everything the /products/ce82a page shows, in the shared product shape. */
 export const CE82A_PRODUCT: ProductData = {

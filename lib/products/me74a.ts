@@ -97,51 +97,48 @@ export const FEATURES_NOTE =
 
 export const IMAGES: ProductImage[] = [
   {
-    key: "studio",
-    src: "/products/me74a/me74a-product-studio.webp",
-    width: 1322,
-    height: 747,
-    alt: "ME74A robotic fairway mower, studio image: the complete machine with its wheels and the front reel cutting units",
-    caption: "ME74A, studio image. The whole machine is shown, including the wheels and the front cutting units; nothing is cropped.",
-    label: "Studio view",
+    key: "raised",
+    src: "/products/me74a/me74a-raised-angle.webp",
+    width: 1536,
+    height: 1024,
+    alt: "ME74A robotic fairway mower from a raised front angle: the complete machine with its wheels and the three reel cutting units",
+    caption: "ME74A, studio image from a raised front angle. The whole machine is shown, including the wheels and the reel cutting units; nothing is cropped.",
+    label: "Raised angle",
     fit: "contain",
   },
   {
     key: "front",
     src: "/products/me74a/me74a-front.webp",
-    width: 617,
-    height: 436,
-    alt: "ME74A robotic fairway mower seen from the front",
-    caption: "Front view. The source is low resolution and is never shown larger than its natural size.",
+    width: 1537,
+    height: 1023,
+    alt: "ME74A robotic fairway mower seen from the front, with the reel cutting units across the full width",
+    caption: "Front view: the reel cutting units across the full width, with the lidar and camera housing on top of the body.",
     label: "Front view",
     fit: "contain",
   },
   {
-    key: "top",
-    src: "/products/me74a/me74a-top-angle.webp",
-    width: 690,
-    height: 488,
-    alt: "ME74A robotic fairway mower seen from a raised front angle",
-    caption: "Raised-angle view. The source is low resolution and is never shown larger than its natural size.",
-    label: "Raised angle",
+    key: "side",
+    src: "/products/me74a/me74a-side.webp",
+    width: 1537,
+    height: 1023,
+    alt: "ME74A robotic fairway mower seen from the side: a front reel cutting unit, the drive wheel and the rear caster wheel",
+    caption: "Side view: a front reel cutting unit ahead of the drive wheel, with the rear caster wheel behind.",
+    label: "Side view",
     fit: "contain",
   },
   {
     key: "course",
     src: "/products/me74a/me74a-golf-course.webp",
-    width: 1920,
-    height: 1440,
-    alt: "ME74A on a golf course fairway, display image from the product literature",
-    caption: "Display image from the product literature showing the ME74A on a golf course; not an NXTektal customer deployment.",
+    width: 1537,
+    height: 1023,
+    alt: "ME74A robotic fairway mower on a golf course fairway, display image",
+    caption: "On the course: display image of the ME74A on a fairway; not an NXTektal customer deployment.",
     label: "On the course",
-    fit: "cover",
+    fit: "contain",
   },
 ];
 
-export const GALLERY_HEADING = "Four views: studio, front, raised angle, and on the course.";
-
-export const GALLERY_NOTE =
-  "Images are from the product literature. The front and raised-angle sources are low resolution and are never shown larger than their natural size.";
+export const GALLERY_HEADING = "Four views: raised angle, front, side, and on the course.";
 
 /** Grouped specification table. Values are from the product literature; notes keep the data boundaries. */
 export const SPEC_GROUPS: SpecGroup[] = [
@@ -234,12 +231,12 @@ export const ME74A_PRODUCT: ProductData = {
   job: "Fairway mowing",
   heroStats: HERO_STATS,
   images: IMAGES,
-  heroImageKey: "studio",
+  heroImageKey: "raised",
+  galleryAspect: "3 / 2",
   featuresIntro: FEATURES_INTRO,
   features: FEATURES,
   featuresNote: FEATURES_NOTE,
   galleryHeading: GALLERY_HEADING,
-  galleryNote: GALLERY_NOTE,
   specGroups: SPEC_GROUPS,
   specNote: SPEC_NOTE,
   contact: CONTACT,
