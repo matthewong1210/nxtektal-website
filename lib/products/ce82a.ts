@@ -81,24 +81,44 @@ export const FEATURES_NOTE =
 
 export const IMAGES: ProductImage[] = [
   {
-    key: "white",
-    src: "/products/ce82a/ce82a-product-white.webp",
-    width: 980,
-    height: 731,
-    alt: "CE82A robotic ball collector on a white background: the complete machine with its body, wheels and collection unit",
-    caption: "CE82A, product image on white. The whole machine is shown; nothing is cropped.",
-    label: "Product on white",
+    key: "raised",
+    src: "/products/ce82a/ce82a-raised-angle.webp",
+    width: 1537,
+    height: 1023,
+    alt: "CE82A robotic ball collector from a raised front angle: the complete machine with its body, wheels and the towed collection unit with rollers and baskets",
+    caption: "CE82A, studio image from a raised front angle. The whole machine is shown, including the wheels and the towed collection unit; nothing is cropped.",
+    label: "Raised angle",
     fit: "contain",
   },
   {
-    key: "scene",
-    src: "/products/ce82a/ce82a-golf-course.webp",
-    width: 1920,
-    height: 1079,
-    alt: "CE82A on golf turf, display image from the product literature",
-    caption: "Display image from the product literature showing the CE82A on golf turf; not an NXTektal customer deployment.",
-    label: "On the course",
-    fit: "cover",
+    key: "front",
+    src: "/products/ce82a/ce82a-front.webp",
+    width: 1538,
+    height: 1023,
+    alt: "CE82A robotic ball collector seen from the front, with the collection rollers and baskets across the full width",
+    caption: "Front view: the collection rollers and baskets across the full width, with the caster wheel of the collection unit in the centre.",
+    label: "Front view",
+    fit: "contain",
+  },
+  {
+    key: "side-left",
+    src: "/products/ce82a/ce82a-side-left.webp",
+    width: 1536,
+    height: 1024,
+    alt: "CE82A robotic ball collector seen from the left side: the collection unit on its tow arm ahead of the body",
+    caption: "Side view from the left: the collection unit on its tow arm ahead of the body.",
+    label: "Side view, left",
+    fit: "contain",
+  },
+  {
+    key: "side-right",
+    src: "/products/ce82a/ce82a-side-right.webp",
+    width: 1536,
+    height: 1024,
+    alt: "CE82A robotic ball collector seen from the right side",
+    caption: "Side view from the right.",
+    label: "Side view, right",
+    fit: "contain",
   },
 ];
 
@@ -168,7 +188,7 @@ export const CONTACT = {
 /** Section anchors, in page order (shared by every product page). */
 export const SECTIONS = PRODUCT_SECTIONS;
 
-export const GALLERY_HEADING = "The machine on white, and on the course.";
+export const GALLERY_HEADING = "Four studio views: raised angle, front, and both sides.";
 
 /** Everything the /products/ce82a page shows, in the shared product shape. */
 export const CE82A_PRODUCT: ProductData = {
@@ -177,7 +197,8 @@ export const CE82A_PRODUCT: ProductData = {
   job: "Driving-range ball collection",
   heroStats: HERO_STATS,
   images: IMAGES,
-  heroImageKey: "white",
+  heroImageKey: "raised",
+  galleryAspect: "3 / 2",
   featuresIntro: FEATURES_INTRO,
   features: FEATURES,
   featuresNote: FEATURES_NOTE,

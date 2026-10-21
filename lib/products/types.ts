@@ -67,8 +67,10 @@ export type ProductData = {
   features: Feature[];
   featuresNote: string;
   galleryHeading: string;
-  /** Optional note under the gallery, e.g. about low-resolution sources or markings. */
+  /** Optional note under the gallery, e.g. about low-resolution sources. */
   galleryNote?: string;
+  /** Aspect ratio of the gallery stage and thumbnails (CSS value); defaults to "16 / 10". Set it to the images' own ratio when they all share one, so nothing is letterboxed. */
+  galleryAspect?: string;
   specGroups: SpecGroup[];
   specNote: string;
   contact: ProductContact;

@@ -54,7 +54,7 @@ export function ProductPicture({ image, priority = false }: { image: GalleryImag
  * switch, Enter on the main image to open, arrows to move, Escape to close.
  * Focus returns to the opener when the dialog closes (native behaviour).
  */
-export default function ProductGallery({ images }: { images: GalleryImage[] }) {
+export default function ProductGallery({ images, aspect = "16 / 10" }: { images: GalleryImage[]; aspect?: string }) {
   const [index, setIndex] = useState(0);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const current = images[index];
@@ -74,7 +74,7 @@ export default function ProductGallery({ images }: { images: GalleryImage[] }) {
   return (
     <div className="pd-gallery">
       <figure className="pd-gallery-main">
-        <button type="button" className="pd-gallery-open pd-stage" onClick={open} aria-label={`${current.alt} — open at full size`} disabled={!current.available}>
+        <button type="button" className="pd-gallery-open pd-stage" style={{ aspectRatio: aspect }} onClick={open} aria-label={`${current.alt} — open at full size`} disabled={!current.available}>
           <ProductPicture image={current} />
         </button>
         <figcaption>{current.caption}</figcaption>
@@ -85,9 +85,9 @@ export default function ProductGallery({ images }: { images: GalleryImage[] }) {
           <li key={image.key}>
             <button type="button" className="pd-thumb" aria-pressed={i === index} onClick={() => setIndex(i)}>
               {image.available ? (
-                <img src={image.src} width={image.width} height={image.height} alt="" loading="lazy" decoding="async" className={`pd-img pd-img--${image.fit}`} />
+                <img src={image.src} width={image.width} height={image.height} alt="" loading="lazy" decoding="async" className={`pd-img pd-img--${image.fit}`} style={{ aspectRatio: aspect }} />
               ) : (
-                <span className="pd-pending pd-pending--thumb" aria-hidden="true" />
+                <span className="pd-pending pd-pending--thumb" aria-hidden="true" style={{ aspectRatio: aspect }} />
               )}
               <span>{image.label}</span>
             </button>

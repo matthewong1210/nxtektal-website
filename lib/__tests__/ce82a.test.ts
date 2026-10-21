@@ -80,17 +80,27 @@ describe("CE82A specification boundaries", () => {
 });
 
 describe("CE82A media and contact", () => {
-  it("labels the scene image as manufacturer material, not a customer deployment", () => {
-    const scene = IMAGES.find((i) => i.key === "scene")!;
-    expect(scene.caption).toContain("not an NXTektal customer deployment");
-    expect(scene.caption).toContain("from the product literature");
-    // the six files are manufacturer renders/display art, so nothing may call them photographs
+  it("lists the four studio views at their file sizes, with the raised angle as the hero and no deployment claim", () => {
+    expect(IMAGES.map((i) => i.key)).toEqual(["raised", "front", "side-left", "side-right"]);
+    expect(IMAGES.map((i) => i.src)).toEqual([
+      "/products/ce82a/ce82a-raised-angle.webp",
+      "/products/ce82a/ce82a-front.webp",
+      "/products/ce82a/ce82a-side-left.webp",
+      "/products/ce82a/ce82a-side-right.webp",
+    ]);
+    expect(IMAGES.map((i) => [i.width, i.height])).toEqual([[1537, 1023], [1538, 1023], [1536, 1024], [1536, 1024]]);
+    expect(IMAGES.every((i) => i.fit === "contain")).toBe(true);
+    expect(CE82A_PRODUCT.heroImageKey).toBe("raised");
+    expect(CE82A_PRODUCT.galleryAspect).toBe("3 / 2");
+    expect(IMAGES[0].caption).toContain("nothing is cropped");
+    expect(IMAGES[0].alt).toContain("wheels");
+    for (const image of IMAGES) {
+      const text = `${image.alt} ${image.caption}`.toLowerCase();
+      for (const banned of ["deploy", "customer", "photograph", "manufacturer", "yawin", "exploded", "cutaway", "internal", "charging station"]) expect(text).not.toContain(banned);
+    }
+    // the files are renders, so nothing may call them photographs
     expect(lower).not.toContain("photograph");
     ban(["exploded", "cutaway", "internal", "sensor position", "charging station", "customer photo"]);
-    const white = IMAGES.find((i) => i.key === "white")!;
-    expect(white.fit).toBe("contain");
-    expect([white.width, white.height]).toEqual([980, 731]);
-    expect([scene.width, scene.height]).toEqual([1920, 1079]);
   });
 
   it("uses the site's existing contact address", () => {

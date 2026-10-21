@@ -43,22 +43,16 @@ Systems).
 Screen recordings and stills of the NXTektal Range Operations Simulator —
 original NXTektal software; all rights held by NXTektal Systems.
 
-## YAWIN CE82A product imagery (`public/products/ce82a/`)
+## CE82A product imagery (`public/products/ce82a/`)
 
-`ce82a-product-white.webp` (980×731, product on white) and
-`ce82a-golf-course.webp` (1920×1079, course display scene) are YAWIN (亚云)
-manufacturer product materials for the CE82A robotic ball collector
-(developed jointly by NXTektal and YAWIN, manufactured by YAWIN), supplied
-to NXTektal by the founders for the product page. The files in this
-repository were extracted on 2026-10-19 from the manufacturer's product
-sheet (亚云自动捡球机CE82A.pdf, page 1: the 980×731 product image as embedded,
-and the 2848×1600 course scene scaled to 1920×1079), converted from the
-PDF's CMYK JPEGs to sRGB WebP; replace them with the founders' own exports
-if those differ. Rights remain with YAWIN; confirm the terms of use with
-the manufacturer before launch.
-The YAWIN marking on the images is kept. The course scene is manufacturer
-display material, not an NXTektal customer deployment, and the page says so
-in its caption. Specification figures on the page come from the
+`ce82a-raised-angle.webp` (1537×1023), `ce82a-front.webp` (1538×1023),
+`ce82a-side-left.webp` (1536×1024) and `ce82a-side-right.webp` (1536×1024)
+are studio renders of the CE82A supplied by the founders on 2026-10-21 for
+the product page; the founders hold the record of their origin and rights.
+They replaced the YAWIN (亚云) manufacturer images used until then (the
+980×731 product-on-white image and the 1920×1079 course scene extracted from
+亚云自动捡球机CE82A.pdf on 2026-10-19); that attribution is preserved in git
+history. Specification figures on the page still come from the
 manufacturer's product sheet (亚云自动捡球机CE82A.pdf).
 
 ## YAWIN ME74A product imagery (`public/products/me74a/`)

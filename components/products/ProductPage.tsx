@@ -133,7 +133,7 @@ export default function ProductPage({ product }: { product: ProductData }) {
         <div className="pd-inner">
           <p className="eyebrow">Images</p>
           <h2 id="pd-h2-gallery">{product.galleryHeading}</h2>
-          <ProductGallery images={images} />
+          <ProductGallery images={images} aspect={product.galleryAspect} />
           {product.galleryNote && <p className="pd-note">{product.galleryNote}</p>}
         </div>
       </section>
