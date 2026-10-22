@@ -5,19 +5,12 @@ import SiteFooter from "../SiteFooter";
 import SiteHeader from "../manifesto/SiteHeader";
 import ProductGallery, { ProductPicture, type GalleryImage } from "./ProductGallery";
 import SpecTable from "./SpecTable";
+import { CONTACT_LABEL, NAV_ITEMS } from "../../lib/homepage";
 import { PRODUCTS_PAGE, PRODUCTS_ROUTE, relatedProducts } from "../../lib/products";
 import type { ProductData } from "../../lib/products/types";
 
-/* The homepage sections, reached from product pages with absolute anchors, plus the products list. */
-export const productNavItems = [
-  { label: "The Work", href: "/#work" },
-  { label: "First Job", href: "/#first-workflow" },
-  { label: "Products", href: PRODUCTS_ROUTE },
-  { label: "How It Works", href: "/#how-it-works" },
-  { label: "Why Golf", href: "/#why-golf" },
-  { label: "Progress", href: "/#progress" },
-  { label: "Company", href: "/#company" },
-];
+/* The same navigation as the homepage; its section anchors become absolute from a product page. */
+export const productNavItems = NAV_ITEMS.map((item) => (item.href.startsWith("#") ? { ...item, href: `/${item.href}` } : item));
 
 export const Arrow = () => (
   <svg aria-hidden="true" viewBox="0 0 20 20" className="icon-arrow">
@@ -67,7 +60,7 @@ export default function ProductPage({ product }: { product: ProductData }) {
 
   return (
     <main className="pd-main" id="top">
-      <SiteHeader items={productNavItems} brand={<BrandLockup />} ctaIcon={<Arrow />} homeHref="/" ctaHref="/#pilot" currentHref={PRODUCTS_ROUTE} />
+      <SiteHeader items={productNavItems} brand={<BrandLockup />} ctaIcon={<Arrow />} homeHref="/" ctaHref="#contact" ctaLabel={CONTACT_LABEL} currentHref={PRODUCTS_ROUTE} />
 
       {/* A · Overview: copy and the full product image side by side (functions and figures only — no maker or relationship copy) */}
       <section className="pd-section pd-hero" id="overview" aria-labelledby="pd-h1">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SHARE_IMAGE_ALT } from "../positioning";
 import { OG_IMAGE_PATH } from "../visualAssets";
 import type { ProductData } from "./types";
 
@@ -15,7 +16,7 @@ const OG_IMAGE = {
   url: OG_IMAGE_PATH,
   width: 1200,
   height: 630,
-  alt: "NXTektal Systems — robots and the operating system behind them for outdoor work, starting with golf",
+  alt: SHARE_IMAGE_ALT,
 };
 
 export function pageMetadata({ title, description, route }: { title: string; description: string; route: string }): Metadata {

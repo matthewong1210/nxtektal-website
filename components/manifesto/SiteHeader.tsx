@@ -15,7 +15,8 @@ export default function SiteHeader({
   brand,
   ctaIcon,
   homeHref = "#top",
-  ctaHref = "#pilot",
+  ctaHref = "#contact",
+  ctaLabel = "Contact",
   currentHref,
 }: {
   items: FluidMenuItem[];
@@ -23,8 +24,10 @@ export default function SiteHeader({
   ctaIcon: ReactNode;
   /** Brand link target: "#top" on the homepage, "/" on secondary pages. */
   homeHref?: string;
-  /** Header CTA target: "#pilot" on the homepage, "/#pilot" on secondary pages. */
+  /** Header CTA target: the page's own contact entry ("#contact"), or the homepage's ("/#contact") on a page without one. */
   ctaHref?: string;
+  /** Header CTA label — one contact entry, so "Contact" everywhere. */
+  ctaLabel?: string;
   /** On a secondary page, the nav item that is the current page (aria-current="page"). */
   currentHref?: string;
 }) {
@@ -95,7 +98,7 @@ export default function SiteHeader({
         </nav>
         <div className="header-end">
           <a className="header-cta" href={ctaHref}>
-            Become a Pilot {ctaIcon}
+            {ctaLabel} {ctaIcon}
           </a>
           <FluidMenu items={items} />
         </div>

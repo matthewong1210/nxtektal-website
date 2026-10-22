@@ -220,8 +220,8 @@ export const CONTACT: ProductContact = {
   body:
     "Tell us about your course — fairway area, slopes, and how mowing is done today. We reply by email on whether the ME74A could fit your site, on the scope of software integration, and on supply arrangements.",
   cta: "Ask about product and site fit",
-  secondaryLabel: "About NXTektal on the homepage",
-  secondaryHref: "/#company",
+  secondaryLabel: "The robots on the homepage",
+  secondaryHref: "/#robots",
 };
 
 /** Everything the /products/me74a page shows, in the shared product shape. */

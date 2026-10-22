@@ -191,8 +191,8 @@ export const CONTACT = {
   body:
     "Tell us about your range — outfield size and terrain, how balls are collected and washed today, and what you would want a machine to take over. We reply by email on whether the CE82A, and NXTektal’s software, could fit your site.",
   cta: "Ask about product and site fit",
-  secondaryLabel: "Pilot program on the homepage",
-  secondaryHref: "/#pilot",
+  secondaryLabel: "The first job on the homepage",
+  secondaryHref: "/#golf",
 } as const;
 
 /** Section anchors, in page order (shared by every product page). */

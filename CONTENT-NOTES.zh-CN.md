@@ -1,6 +1,32 @@
 # NXTektal Systems 网站交接说明
 
-## 2026-10-13 叙事更新：机器人 + 背后的运营系统，先讲工作再讲架构
+## 2026-10-22 首页极简改版：承诺 → 高尔夫 → Insite → 机器人 → 联系
+
+参考 runtime.si 与 synphony.co 的极简结构，首页改为五个随内容定高的区块（不再是一屏一个论点的长页）。全部首页文案集中在 `lib/homepage.ts`，由 `lib/__tests__/homepage.test.ts` 锁定用词。
+
+1. 首屏：只有两句话 —— "Automate your outdoor operations." / "Insite understands your site. Robots execute the work."；保留 logo、四项导航（Golf / Insite / Robots / Products）和一个 Contact 按钮。
+2. 高尔夫："Starting with golf facilities."，一句话说明从练习场收球开始并交接到既有洗球设备；原首页视频改为本区块的主视觉（`components/manifesto/FacilityFilm.tsx`），画面下保留一行概念标签（概念动画、非部署系统实拍；所示交接机构仍在开发中）。手机端沿用 PR #37 的视频处理（轻量编码、静音内联自动播放、封面优先、"Play background video" 回退、减少动态时不加载视频）。
+3. Insite：Site Brain 的正式新名字（全站改名，测试禁止 "Site Brain" 再出现）。围绕一张系统画面（仿真器海报，画面内标注 "Simulation results — not live facility data."）给出三个客户能理解的价值：看清现场正在发生什么 / 知道哪些工作需要优先处理 / 掌握执行进度、异常和完成结果。不讲技术架构；一行状态说明：目前运行在 Range Operations Simulator 中，尚未接入客户场地。
+4. 机器人："Robots do the work Insite hands over."；两张紧凑卡片（名称、型号与任务、简短开发状态、产品页链接），状态沿用此前已批准的口径：CE82A "First job · In development. Not yet running at a customer facility."，ME74A "Next job · Next to validate. Not started."；卡片下方只有 All products 链接，中性询价句仍只出现在产品页联系区块与产品列表说明中（2026-10-20 规则不变）。
+5. 联系：一个标题、一句话、mailto 按钮和邮箱文本。
+
+同步改动：
+
+- 定位句改为 "NXTektal is building Insite, the software that understands an outdoor site, and the robots that execute the work, starting with golf facilities."（metadata / manifest / JSON-LD 共用；`<title>` 改为 "Automate Your Outdoor Operations"）；页脚标语改为 "INSITE + ROBOTS FOR OUTDOOR OPERATIONS · STARTING WITH GOLF"。
+- 产品页导航与首页一致，页头按钮统一为 Contact（指向本页的联系区块；产品列表页没有联系区块，指向首页的）；产品页底部的次级链接改为指向首页的 #golf / #robots。
+- 下线的首页区块（客户调研数据条、反复作业列表、八步工作流、既有设备接入、运行闭环、软件与机器、为什么先做高尔夫、如何扩展、快速 ROI 计算器、进展看板、试点步骤、创始人）及其组件、数据模块、测试与样式已删除，可在 2026-10-22 之前的 git 历史中找回；`/roi-calculator` 页面仍在线但首页不再链接。未再引用的素材（workflow / handoff 概念片段、原型实拍、创始人照片）仍保留在 `public/` 下。
+- 社交分享图 `public/og-image.jpg` 已按新标题重新生成（真实原型照片 + "Automate your outdoor operations."），部署后需让社交平台重新抓取。
+
+待创始人确认：
+
+1. "Insite" 作为正式软件名：建议上线前做一次商标 / 域名检索（Insite 是常见产品名）。
+2. 两台机器人卡片的开发状态口径（沿用此前批准的 "in development / next to validate"），以及 Insite "尚未接入客户场地" 的状态句。
+3. 首页不再出现创始人、客户调研数据与 ROI 入口；如需保留其中任一项，建议作为独立页面而不是加回首页。
+4. 视频概念标签的措辞（"Concept visualization, not footage of a deployed system. The transfer mechanism shown is under development."）。
+
+---
+
+## 2026-10-13 叙事更新：机器人 + 背后的运营系统，先讲工作再讲架构（定位句、软件名称与首页结构已被上文 2026-10-22 取代）
 
 本轮定位基准句：
 

@@ -5,16 +5,28 @@
  * wording so an older positioning sentence cannot drift back into one surface.
  */
 
-/** The positioning sentence. Work and value first; "Site Brain" is introduced later on the page. */
+/** The positioning sentence: the promise and the two parts that deliver it. "Insite" is the software's name (formerly "Site Brain"). */
 export const POSITIONING_SENTENCE =
-  "NXTektal is building robots and the operating system behind them to carry out outdoor work, starting with golf facilities.";
+  "NXTektal is building Insite, the software that understands an outdoor site, and the robots that execute the work, starting with golf facilities.";
 
 /** The first job, stated as scope — handoff into existing equipment, nothing more. */
 export const FIRST_JOB_SENTENCE =
   "First job: range-ball collection with handoff into the range’s existing washer.";
 
+/** The homepage <title> and the share-card alt text, kept beside the sentence so they move together. */
+export const SITE_TITLE = "NXTektal Systems | Automate Your Outdoor Operations";
+export const SHARE_IMAGE_ALT =
+  "NXTektal Systems — Insite understands your site; robots execute the work. Starting with golf facilities.";
+
 /** Full site description used for metadata, share text, and JSON-LD. */
 export const SITE_DESCRIPTION = `${POSITIONING_SENTENCE} ${FIRST_JOB_SENTENCE}`;
+
+/** The founders, for the Organization structured data (the homepage no longer carries a founders section). */
+export const FOUNDERS = [
+  { name: "Matthew Huang", role: "Co-Founder & Chief Executive Officer" },
+  { name: "Steven Guo", role: "Co-Founder & Chief Technology Officer" },
+  { name: "Jason Chen", role: "Co-Founder & Chief Operating Officer" },
+] as const;
 
 /** Site identity used by the header, footer, contact links and JSON-LD. */
 export const SITE = {
