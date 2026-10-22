@@ -13,6 +13,11 @@ export const POSITIONING_SENTENCE =
 export const FIRST_JOB_SENTENCE =
   "First job: range-ball collection with handoff into the range’s existing washer.";
 
+/** The homepage <title> and the share-card alt text, kept beside the sentence so they move together. */
+export const SITE_TITLE = "NXTektal Systems | Automate Your Outdoor Operations";
+export const SHARE_IMAGE_ALT =
+  "NXTektal Systems — Insite understands your site; robots execute the work. Starting with golf facilities.";
+
 /** Full site description used for metadata, share text, and JSON-LD. */
 export const SITE_DESCRIPTION = `${POSITIONING_SENTENCE} ${FIRST_JOB_SENTENCE}`;
 

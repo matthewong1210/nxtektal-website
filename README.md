@@ -6,7 +6,7 @@ A responsive website for **NXTektal Systems**, which is building Insite, the sof
 - Domain: `https://nxtektal.com`
 - Contact currently used in the site: `founders@nxtektal.com`
 
-> Before launch, create and test the `founders@nxtektal.com` mailbox or replace it in `lib/positioning.ts`.
+> Before launch, create and test the `founders@nxtektal.com` mailbox or replace it in `lib/positioning.ts`, in the `CONTACT` blocks of `lib/products/*.ts` (and their tests), and in `components/roi/FullCalculator.tsx`.
 
 ## Visual system
 
@@ -51,8 +51,8 @@ The homepage (redesigned 2026-10-22 after the minimal, YC-style references the f
 
 1. The promise — "Automate your outdoor operations." / "Insite understands your site. Robots execute the work." Text only, with whitespace; the header keeps the logo, four nav items (Golf, Insite, Robots, Products) and one Contact button.
 2. Golf — "Starting with golf facilities.", one sentence on the first job (range-ball collection, handoff into the range's existing washer), and the facility film as the main visual with its concept label under the frame.
-3. Insite — the software's name (formerly "Site Brain"). One system screen (the Range Operations Simulator poster, tagged as simulation) and three things it gives the people running the site: see what is happening; know which work needs attention first; follow progress, exceptions, and results. Understanding first, then judgement, coordination and follow-through; no architecture. One status line: runs in the simulator, not yet connected to a customer site.
-4. Robots — "Robots do the work Insite hands over." Two compact cards from the product registry (name, model and job, a short development status, a link to the product page) and the neutral inquiry line.
+3. Insite — the software's name (formerly "Site Brain"). One system screen (the Range Operations Simulator poster, tagged in the frame as simulation; `agentSimulatorDemo.ready` gates it, as `hasMasterFrame()` gates the film) and three things it gives the people running the site: see what is happening; know which work needs attention first; follow progress, exceptions, and results. Understanding first, then judgement, coordination and follow-through; no architecture. One status line: runs in the simulator, not yet connected to a customer site.
+4. Robots — "Robots do the work Insite hands over." Two compact cards from the product registry (name, job, a short development status, a link to the product page), then a link to the products list. The neutral inquiry line stays on the product pages.
 5. Contact — one heading, one sentence, the mailto button and the address as text. Then the footer.
 
 Block heights follow their content; nothing is a full-screen slide. The sections that left the homepage on 2026-10-22 (customer-discovery strip, the recurring-work list, the workflow story, equipment integration, the operating loop, software-and-machines, why golf, how it scales, the quick ROI calculator, progress tracks, pilot steps, founders) remain in git history before that date; `/roi-calculator` stays live but is no longer linked from the homepage.

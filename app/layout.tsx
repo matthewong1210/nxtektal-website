@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { SITE_DESCRIPTION } from "../lib/positioning";
+import { SHARE_IMAGE_ALT, SITE_DESCRIPTION, SITE_TITLE } from "../lib/positioning";
 import { OG_IMAGE_PATH } from "../lib/visualAssets";
 import "./globals.css";
 
@@ -11,13 +11,13 @@ const inter = Inter({
 });
 
 const siteUrl = "https://nxtektal.com";
-const title = "NXTektal Systems | Automate Your Outdoor Operations";
+const title = SITE_TITLE;
 const description = SITE_DESCRIPTION;
 const ogImage = {
   url: OG_IMAGE_PATH,
   width: 1200,
   height: 630,
-  alt: "NXTektal Systems — Insite understands your site; robots execute the work. Starting with golf facilities.",
+  alt: SHARE_IMAGE_ALT,
 };
 
 export const metadata: Metadata = {

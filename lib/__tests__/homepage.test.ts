@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { CONTACT, CONTACT_LABEL, GOLF, HERO, INSITE, NAV_ITEMS, ROBOTS, SOFTWARE_NAME, robotCards } from "../homepage";
+import { CONTACT, CONTACT_LABEL, FOOTER_TAGLINE, GOLF, HERO, INSITE, NAV_ITEMS, ROBOTS, SOFTWARE_NAME, robotCards } from "../homepage";
 import { FIRST_JOB_SENTENCE, POSITIONING_SENTENCE, SITE } from "../positioning";
 import { PRODUCTS, PRODUCTS_ROUTE } from "../products";
 import { agentSimulatorDemo, heroMasterFrame } from "../visualAssets";
@@ -15,14 +15,13 @@ const corpus = [
   INSITE.eyebrow,
   INSITE.heading,
   INSITE.body,
-  INSITE.screenCaption,
   INSITE.status,
   ...INSITE.values.flatMap((v) => [v.title, v.body]),
   ROBOTS.eyebrow,
   ROBOTS.heading,
   ROBOTS.body,
-  ROBOTS.note,
   ROBOTS.allLabel,
+  FOOTER_TAGLINE,
   ...ROBOTS.cards.flatMap((c) => [c.stage, c.status]),
   CONTACT.heading,
   CONTACT.body,
@@ -85,7 +84,7 @@ describe("homepage copy", () => {
     expect(cards[1].product.model).toBe("ME74A");
     expect(cards[1].status).toContain("Next to validate");
     expect(cards[1].status).toContain("Not started");
-    expect(ROBOTS.note).toBe("Software integration scope, site fit and supply arrangements are confirmed with NXTektal for each site.");
+    expect("note" in ROBOTS).toBe(false); // the neutral inquiry line stays on the product pages, not under the cards
   });
 
   it("navigation is Golf, Insite, Robots, Products, and the one button is Contact", () => {
@@ -96,6 +95,10 @@ describe("homepage copy", () => {
       ["Products", PRODUCTS_ROUTE],
     ]);
     expect(CONTACT_LABEL).toBe("Contact");
+  });
+
+  it("the footer line names Insite and the robots, and golf as the start", () => {
+    expect(FOOTER_TAGLINE).toBe("INSITE + ROBOTS FOR OUTDOOR OPERATIONS · STARTING WITH GOLF");
   });
 
   it("the contact entry writes to the site mailbox", () => {

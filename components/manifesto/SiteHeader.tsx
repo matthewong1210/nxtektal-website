@@ -24,7 +24,7 @@ export default function SiteHeader({
   ctaIcon: ReactNode;
   /** Brand link target: "#top" on the homepage, "/" on secondary pages. */
   homeHref?: string;
-  /** Header CTA target: the page's own contact entry ("#contact") on every page. */
+  /** Header CTA target: the page's own contact entry ("#contact"), or the homepage's ("/#contact") on a page without one. */
   ctaHref?: string;
   /** Header CTA label — one contact entry, so "Contact" everywhere. */
   ctaLabel?: string;

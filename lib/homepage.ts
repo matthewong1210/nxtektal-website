@@ -49,7 +49,7 @@ export const INSITE = {
   eyebrow: SOFTWARE_NAME,
   heading: "Insite understands your site.",
   body:
-    "Insite is the software behind the robots. It keeps track of what is happening across the grounds, helps the people running the site decide what to do next, and follows the work through to the result.",
+    "Insite is NXTektal’s software. It keeps track of what is happening across the grounds, helps the people running the site decide what to do next, and follows the work through to the result.",
   values: [
     {
       title: "See what is happening on the site.",
@@ -64,19 +64,17 @@ export const INSITE = {
       body: "Runs in progress, exceptions such as a late run or an unconfirmed transfer, and completed work are recorded as they happen.",
     },
   ],
-  /** Under the system screen (the in-frame tag is `agentSimulatorDemo.truthLabel`). */
-  screenCaption: "Insite in the Range Operations Simulator, NXTektal’s development environment.",
   status: "Insite runs in the Range Operations Simulator today. It is not yet connected to a customer site.",
 } as const;
 
-/** Block 4 — the robots. Name, job, and a short development status per machine; details on the product pages. */
+/** Block 4 — the robots. Name, job, and a short development status per machine; details on the product pages.
+ * The neutral inquiry line stays on the product pages (contact block and list note), not here. */
 export type RobotCardCopy = { route: string; stage: string; status: string };
 
 export const ROBOTS = {
   eyebrow: "Robots",
   heading: "Robots do the work Insite hands over.",
   body: "Each robot takes one job on the site. Insite works out what needs doing; the robot carries it out.",
-  note: "Software integration scope, site fit and supply arrangements are confirmed with NXTektal for each site.",
   allLabel: "All products",
   cards: [
     { route: "/products/ce82a", stage: "First job", status: "In development. Not yet running at a customer facility." },
@@ -92,6 +90,9 @@ export function robotCards(): (RobotCardCopy & { product: ProductData })[] {
     return { ...card, product };
   });
 }
+
+/** The footer line, kept with the rest of the homepage copy so the tests cover it. */
+export const FOOTER_TAGLINE = "INSITE + ROBOTS FOR OUTDOOR OPERATIONS · STARTING WITH GOLF";
 
 /** Block 5 — one contact entry. */
 const CONTACT_SUBJECT = "Site inquiry — [Facility name]";

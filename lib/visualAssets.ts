@@ -49,6 +49,9 @@ export const heroMasterFrame: HeroMasterFrame = {
   // The desktop still IS the loop's first frame — the fade from poster to
   // video is invisible. Mobile is a 3:4 recomposition of the same aerial
   // centred on the Insite scan beam; the framed film uses it below 760px.
+  // It was cut from the master frame at x = 960 (43.2% of the horizontal
+  // slack); app/globals.css aligns the mobile loop with the same
+  // object-position below 760px — re-export both or neither.
   ready: true,
   desktop: {
     avif: "/visuals/phase2/hero/master-frame.avif",
@@ -78,7 +81,7 @@ export const heroMasterFrame: HeroMasterFrame = {
     mobileMp4: "/visuals/phase2/hero/hero-loop-mobile.mp4",
     poster: "/visuals/phase2/hero/master-frame.webp",
   },
-  alt: "Concept visualization: aerial view of a golf facility at dawn with NXTektal’s Insite scanning the grounds. The film also shows one transfer-mechanism option that is under development, and machines that are later direction.",
+  alt: "Concept visualization: aerial view of a golf facility at dawn with NXTektal’s Insite scanning the grounds. The film also shows one transfer-mechanism option that is under development, and machines planned for later.",
 };
 
 /** Interim photograph — retained as the documented fallback if the film
@@ -109,14 +112,6 @@ export type StillSource = {
   caption?: string;
 };
 
-/** An ambient loop: WebM preferred, MP4 fallback, poster is mandatory. */
-export type LoopSource = {
-  webm: string;
-  mp4: string;
-  poster: string;
-  alt: string;
-};
-
 // -----------------------------------------------------------------------
 // 2 · Insite system screen (#insite) — the Range Operations Simulator
 // ~13.6s chrome-cropped loop (1400×1000, 30fps, muted) + desktop poster
@@ -132,7 +127,6 @@ export type AgentSimulatorDemo = {
   posterDesktop: { avif: string; webp: string; width: number; height: number };
   posterMobile: { avif: string; webp: string; width: number; height: number };
   alt: string;
-  caption: string;
   truthLabel: string;
 };
 
@@ -155,7 +149,6 @@ export const agentSimulatorDemo: AgentSimulatorDemo = {
     height: 1350,
   },
   alt: "Insite in the NXTektal Range Operations Simulator: robot states, a dispatch decision, facility metrics, and operating results for a simulated demand-spike scenario.",
-  caption: "Range Operations Simulator — working development environment. Demand-spike scenario shown.",
   truthLabel: "Simulation results — not live facility data.",
 };
 

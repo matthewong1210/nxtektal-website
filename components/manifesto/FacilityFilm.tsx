@@ -1,5 +1,5 @@
 import { GOLF } from "../../lib/homepage";
-import { heroMasterFrame } from "../../lib/visualAssets";
+import { hasMasterFrame, heroMasterFrame } from "../../lib/visualAssets";
 import HeroBackgroundVideo from "./HeroBackgroundVideo";
 
 /**
@@ -12,9 +12,11 @@ import HeroBackgroundVideo from "./HeroBackgroundVideo";
  * poster first, a reachable "Play background video" fallback, and no video
  * under reduced motion. The label under the frame says what the film is,
  * because it is a concept visualization that also shows a transfer
- * mechanism under development and machines that are later direction.
+ * mechanism under development and machines planned for later.
  */
 export default function FacilityFilm() {
+  // The registry gates the film: without both stills the golf block keeps its copy and no frame.
+  if (!hasMasterFrame()) return null;
   const { desktop, mobile, alt } = heroMasterFrame;
 
   return (

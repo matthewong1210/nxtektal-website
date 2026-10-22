@@ -1,6 +1,6 @@
 # Phase 2 Visual Asset Plan — NXTektal Homepage
 
-> **Superseded wording (2026-10-13):** this document is historical planning. Where it names a "handoff unit", "hopper", "basket", "chute", "conveyor", or "modular" transfer hardware, that wording is retired; the live rule is README.md → Terminology (mechanism-neutral handoff: "Collected balls return to a handoff point for transfer into the range's existing washer intake. The workflow requires transfer confirmation before collection resumes."). Planned alt text here must not be copied into `lib/visualAssets.ts`; use the current strings in `components/manifesto/HandoffSequence.tsx` and `lib/visualAssets.ts`.
+> **Superseded wording (2026-10-13):** this document is historical planning. Where it names a "handoff unit", "hopper", "basket", "chute", "conveyor", or "modular" transfer hardware, that wording is retired; the live rule is README.md → Terminology (mechanism-neutral handoff: "Collected balls return to a handoff point for transfer into the range's existing washer intake. The workflow requires transfer confirmation before collection resumes."). Planned alt text here must not be copied into `lib/visualAssets.ts`; use the current strings in `lib/homepage.ts` (`GOLF.filmLabel`) and `lib/visualAssets.ts`.
 
 Status date: 2026-08-01 · Branch: `feature/phase2a-visual-asset-prep`
 

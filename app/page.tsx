@@ -24,7 +24,8 @@ export default function Home() {
     const images = withAvailability(card.product);
     return { ...card, image: images.find((i) => i.key === card.product.heroImageKey) ?? images[0] };
   });
-  const { posterDesktop, posterMobile, alt: screenAlt, truthLabel } = agentSimulatorDemo;
+  // The registry gates the screen: with ready=false the Insite block keeps its three values and no frame.
+  const screen = agentSimulatorDemo.ready ? agentSimulatorDemo : null;
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -82,13 +83,14 @@ export default function Home() {
           </Reveal>
           <Reveal>
             <div className="insite-grid">
-              <figure className="screen">
-                <div className="screen-stage">
-                  <span className="screen-tag">{truthLabel}</span>
-                  <ResponsiveStill source={{ ...posterDesktop, alt: screenAlt, mobile: posterMobile }} />
-                </div>
-                <figcaption className="screen-caption">{INSITE.screenCaption}</figcaption>
-              </figure>
+              {screen && (
+                <figure className="screen">
+                  <div className="screen-stage">
+                    <span className="screen-tag">{screen.truthLabel}</span>
+                    <ResponsiveStill source={{ ...screen.posterDesktop, alt: screen.alt, mobile: screen.posterMobile }} />
+                  </div>
+                </figure>
+              )}
               <ul className="values" aria-label="What Insite gives the people running the site">
                 {INSITE.values.map((value) => (
                   <li key={value.title}>
@@ -134,7 +136,7 @@ export default function Home() {
                   <div className="robot-body">
                     <p className="robot-stage">{stage}</p>
                     <h3><a href={product.route}>{product.name}</a></h3>
-                    <p className="robot-job">{product.model} · {product.job}</p>
+                    <p className="robot-job">{product.job}</p>
                     <p className="robot-status">{status}</p>
                     <a className="text-link" href={product.route}>See the {product.model} <Arrow /></a>
                   </div>
@@ -144,7 +146,7 @@ export default function Home() {
           </div>
           <Reveal>
             <p className="chapter-note">
-              {ROBOTS.note} <a href={PRODUCTS_ROUTE}>{ROBOTS.allLabel} <Arrow /></a>
+              <a href={PRODUCTS_ROUTE}>{ROBOTS.allLabel} <Arrow /></a>
             </p>
           </Reveal>
         </div>
