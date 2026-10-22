@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 
+import { POSITIONING_SENTENCE } from "../lib/positioning";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "NXTektal Systems",
     short_name: "NXTektal",
-    description:
-      "NXTektal builds the intelligence layer for autonomous golf facilities, starting with closed-loop ball operations at driving ranges.",
+    description: POSITIONING_SENTENCE,
     start_url: "/",
     display: "standalone",
     background_color: "#0d1117",

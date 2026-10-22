@@ -14,10 +14,19 @@ export default function SiteHeader({
   items,
   brand,
   ctaIcon,
+  homeHref = "#top",
+  ctaHref = "#pilot",
+  currentHref,
 }: {
   items: FluidMenuItem[];
   brand: ReactNode;
   ctaIcon: ReactNode;
+  /** Brand link target: "#top" on the homepage, "/" on secondary pages. */
+  homeHref?: string;
+  /** Header CTA target: "#pilot" on the homepage, "/#pilot" on secondary pages. */
+  ctaHref?: string;
+  /** On a secondary page, the nav item that is the current page (aria-current="page"). */
+  currentHref?: string;
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState<string | null>(null);
@@ -42,14 +51,22 @@ export default function SiteHeader({
 
   useEffect(() => {
     const targets = items
+      .filter((item) => item.href.startsWith("#"))
       .map((item) => document.getElementById(item.href.slice(1)))
       .filter((el): el is HTMLElement => el !== null);
     if (targets.length === 0) return;
+    // Track every section currently inside the band so the indicator clears
+    // when none is (hero, footer, blocks without a nav id) instead of
+    // sticking to the last section that scrolled past.
+    const visible = new Set<string>();
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
+          const href = `#${entry.target.id}`;
+          if (entry.isIntersecting) visible.add(href);
+          else visible.delete(href);
         }
+        setActive(items.map((item) => item.href).find((href) => visible.has(href)) ?? null);
       },
       // A narrow band in the upper-middle of the viewport: exactly one
       // section owns it at a time, so boundaries don't flicker.
@@ -62,7 +79,7 @@ export default function SiteHeader({
   return (
     <header className={scrolled ? "site-header site-header--scrolled" : "site-header"}>
       <div className="header-shell">
-        <a className="brand" href="#top" aria-label="NXTektal Systems home">
+        <a className="brand" href={homeHref} aria-label="NXTektal Systems home">
           {brand}
         </a>
         <nav aria-label="Primary navigation">
@@ -70,14 +87,14 @@ export default function SiteHeader({
             <a
               key={item.href}
               href={item.href}
-              aria-current={active === item.href ? "true" : undefined}
+              aria-current={active === item.href ? "true" : currentHref === item.href ? "page" : undefined}
             >
               {item.label}
             </a>
           ))}
         </nav>
         <div className="header-end">
-          <a className="header-cta" href="#pilot">
+          <a className="header-cta" href={ctaHref}>
             Become a Pilot {ctaIcon}
           </a>
           <FluidMenu items={items} />

@@ -1,5 +1,7 @@
 # Phase 2B · Sprint 1 — Visual Production Brief
 
+> **Superseded wording (2026-10-13):** this document is historical planning. Where it names a "handoff unit", "hopper", "basket", "chute", "conveyor", or "modular" transfer hardware, that wording is retired; the live rule is README.md → Terminology (mechanism-neutral handoff: "Collected balls return to a handoff point for transfer into the range's existing washer intake. The workflow requires transfer confirmation before collection resumes."). Planned alt text here must not be copied into `lib/visualAssets.ts`; use the current strings in `components/manifesto/HandoffSequence.tsx` and `lib/visualAssets.ts`.
+
 Status date: 2026-08-01 · Branch: `feature/phase2b-sprint1-brief`
 Depends on: Phase 2A infrastructure (`components/media/MediaFrame.tsx`,
 `public/visuals/phase2/*`, `PHASE_2_VISUAL_ASSET_PLAN.md`)

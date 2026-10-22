@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SITE_DESCRIPTION } from "../lib/positioning";
 import { OG_IMAGE_PATH } from "../lib/visualAssets";
 import "./globals.css";
 
@@ -10,14 +11,13 @@ const inter = Inter({
 });
 
 const siteUrl = "https://nxtektal.com";
-const title = "NXTektal Systems | Facility Intelligence for Autonomous Golf Facilities";
-const description =
-  "NXTektal builds the intelligence layer that enables physical outdoor facilities to understand their environment, make operational decisions, and coordinate autonomous systems — starting with golf facilities.";
+const title = "NXTektal Systems | Robots and the Operating System for Outdoor Work";
+const description = SITE_DESCRIPTION;
 const ogImage = {
   url: OG_IMAGE_PATH,
   width: 1200,
   height: 630,
-  alt: "NXTektal Systems — the intelligence layer for autonomous golf facilities",
+  alt: "NXTektal Systems — robots and the operating system behind them for outdoor work, starting with golf",
 };
 
 export const metadata: Metadata = {

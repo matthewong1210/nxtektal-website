@@ -6,8 +6,10 @@ import { ResponsiveLoop, ResponsiveStill } from "../media/ResponsiveMedia";
 import { workflowStepLoops, workflowStepStills } from "../../lib/visualAssets";
 import {
   WORKFLOW_STEPS,
+  captionFor,
   isLoopStep,
   mediaKeyFor,
+  mediaTagFor,
   resolveActiveStep,
   sequentialMediaFor,
 } from "../../lib/workflowSteps";
@@ -17,7 +19,7 @@ import RobotVideo from "./RobotVideo";
 const ACTIVATION_FRACTION = 0.42;
 
 /**
- * First Closed-Loop Workflow (Phase 2D Sprint 2A).
+ * First-job workflow story (Phase 2D Sprint 2A).
  *
  * Server-rendered default: a sequential story — every step's number, label,
  * description, and (distinct) media in DOM order. That is the no-JS, the
@@ -135,9 +137,9 @@ export default function WorkflowStory() {
     return <ResponsiveStill source={workflowStepStills[index]!} />;
   };
 
-  // Simulator stills carry their qualification; approved physical product
-  // media renders as normal product imagery with no public label.
-  const captionFor = (index: number) => workflowStepStills[index]?.caption;
+  // Every step carries a caption (simulation qualification or concept
+  // caption) and a visible in-frame label, so simulation, concept render, and
+  // the undecided handoff mechanism are never mistaken for deployed footage.
 
   // Warm the immediately adjacent stills (same markup the stage will
   // render, hidden) so a crossfade lands on a cached asset — without ever
@@ -163,7 +165,7 @@ export default function WorkflowStory() {
         <ol
           ref={listRef}
           className="wf-steps"
-          aria-label="Closed-loop workflow: monitor, prioritize, dispatch, collect, return, handoff, wash and dispense, verify"
+          aria-label="Range-ball workflow: monitor, prioritize, dispatch, collect, return, handoff, wash and dispense, verify"
         >
           {WORKFLOW_STEPS.map((step, index) => {
             const state = !enhanced
@@ -199,6 +201,7 @@ export default function WorkflowStory() {
                       ) : (
                         <RobotVideo />
                       )}
+                      {mediaTagFor(index) && <span className="wf-truth-tag">{mediaTagFor(index)}</span>}
                     </MediaFrame>
                   </div>
                 )}
@@ -228,6 +231,7 @@ export default function WorkflowStory() {
                   </div>
                 );
               })}
+              {mediaTagFor(active) && <span className="wf-truth-tag">{mediaTagFor(active)}</span>}
             </MediaFrame>
           </div>
         </div>

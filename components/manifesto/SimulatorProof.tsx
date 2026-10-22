@@ -6,9 +6,10 @@ import { ResponsiveLoop, ResponsiveStill } from "../media/ResponsiveMedia";
 import { agentSimulatorDemo } from "../../lib/visualAssets";
 
 /**
- * Range Operations Simulator proof module — first block of the existing
- * #intelligence chapter (Phase 2C Sprint 1). Presents the working simulator
- * as software-development evidence; never as live facility data.
+ * Range Operations Simulator proof module — the simulation block of the
+ * #intelligence (software and machines) chapter (Phase 2C Sprint 1).
+ * Presents the working simulator as software-development evidence; never as
+ * live facility data.
  *
  * Media policy:
  * - One ResponsiveStill poster renders everywhere first (desktop crop +
@@ -24,8 +25,6 @@ const processItems = [
   { name: "SIMULATE", body: "Model demand, robot availability, equipment delays, and failure conditions." },
   { name: "COMPARE", body: "Measure availability, throughput, stockouts, interventions, energy, and utilization." },
   { name: "MANAGER REVIEW", body: "Surface policy changes and operating recommendations for human review." },
-  { name: "OPERATE", body: "Coordinate approved tasks across robots, equipment, and workflow agents." },
-  { name: "IMPROVE", body: "Compare expected and observed outcomes to inform the next recommendation." },
 ];
 
 export default function SimulatorProof() {
@@ -71,10 +70,10 @@ export default function SimulatorProof() {
 
   return (
     <div className="sim-proof" ref={rootRef}>
-      <div className="eyebrow">SIMULATION &amp; OPERATING INTELLIGENCE</div>
-      <h2>Test the operation before it reaches the field.</h2>
+      <div className="eyebrow">SIMULATION · WHERE THE SITE BRAIN IS BUILT TODAY</div>
+      <h3>Test the operation before it reaches the field.</h3>
       <p className="section-body">
-        NXTektal&rsquo;s Range Operations Simulator replays demand changes, robot states, dispatch decisions, handoff activity, and equipment constraints before an operating policy reaches a pilot site.
+        The Range Operations Simulator is where the Site Brain&rsquo;s decision rules are developed and compared today. It replays demand changes, robot states, dispatch decisions, handoff activity, and equipment constraints before an operating policy reaches a pilot site. Passing in simulation shows the software logic holds; it does not show the physical job has been done.
       </p>
 
       <div className="sim-duo">
@@ -98,7 +97,7 @@ export default function SimulatorProof() {
           <p>
             Each run records service availability, throughput, stockouts, interventions, energy use, robot utilization, and estimated operating cost, allowing policies and failure responses to be compared under the same scenario.
           </p>
-          <ol className="sim-process" aria-label="Simulation-to-operations process">
+          <ol className="sim-process" aria-label="What the simulator does today: simulate, compare, and prepare recommendations for manager review">
             {processItems.map((item, index) => (
               <li key={item.name}>
                 <span className="wf-step-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
@@ -110,7 +109,7 @@ export default function SimulatorProof() {
             ))}
           </ol>
           <p className="sim-qualification">
-            Simulation informs operating decisions. Field performance is validated separately during pilot deployment.
+            Simulation results are not field results. Physical values in the simulator are placeholders until they are measured at a site. What a pilot adds is the operating loop above, run on a real site, and the record the improvement loop needs.
           </p>
         </div>
       </div>

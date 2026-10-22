@@ -1,29 +1,36 @@
 import type { ReactNode } from "react";
+import { HERO_CAPTION } from "../../lib/firstJob";
 import { heroMasterFrame } from "../../lib/visualAssets";
 import HeroBackgroundVideo from "./HeroBackgroundVideo";
 
 /**
- * Product-led Hero (Phase 2E Sprint 1 · motion layer Phase 2G).
+ * Product-led Hero (Phase 2E Sprint 1 · motion layer Phase 2G · mobile film
+ * PR #37).
  *
- * The hero film's opening frame (dawn facility aerial with the
- * operating-layer scan) is the full-bleed poster stage; when the registry's
- * hero loop is active,
- * a gated client layer (HeroBackgroundVideo) fades the produced facility
- * film in over it, using a lighter encode on mobile. The copy renders over a directional
- * scrim, and a restrained operational overlay (status chips + low-opacity
- * facility contours) communicates the operating layer without a HUD.
+ * The hero film's opening frame (dawn facility aerial with the Site Brain
+ * scan) is the full-bleed poster stage; when the registry's hero loop is
+ * active, a gated client layer (HeroBackgroundVideo) fades the produced
+ * facility film in over it, using a lighter encode on mobile. The copy
+ * renders over a directional scrim, and a restrained overlay (loop chips +
+ * low-opacity facility contours) walks through one job in the operating
+ * loop without a HUD. The chip list is a labelled <ul> so the "illustrative,
+ * not live data" qualifier reaches assistive technology; its first chip and
+ * the caption under it say the same thing visibly, because the film is a
+ * concept visualization that also shows later-stage machines.
  *
  * No scroll track, no space imagery. The copy never depends on the media:
- * reduced-motion, no-JS, and load-failure paths keep the still,
- * and if that fails too the night-tone stage keeps the section fully
- * readable. Chip fade-in reuses the existing hero-fade rhythm and is
- * disabled under prefers-reduced-motion by the global motion rules.
+ * reduced-motion, no-JS, and load-failure paths keep the still, and if that
+ * fails too the night-tone stage keeps the section fully readable. Chip
+ * fade-in reuses the existing hero-fade rhythm and is disabled under
+ * prefers-reduced-motion by the global motion rules.
  */
 export default function ProductHero({ copy }: { copy: ReactNode }) {
   const { desktop, mobile, alt } = heroMasterFrame;
 
   return (
-    <section className="phero" aria-label="NXTektal — the intelligence layer for autonomous golf facilities">
+    <section className="phero" aria-label="NXTektal — robots and the operating system behind them for outdoor work">
+      {/* Not aria-hidden: the mobile-video fix renders a reachable
+          "Play background video" fallback button inside this stage. */}
       <div className="phero-media">
         {desktop && (
           <picture aria-hidden="true">
@@ -55,12 +62,16 @@ export default function ProductHero({ copy }: { copy: ReactNode }) {
 
       <div className="phero-inner">
         <div className="ez-copy ez-copy--hero">{copy}</div>
-        {/* facility-intelligence overlay — illustrative, non-numeric, real DOM text */}
-        <div className="phero-chips" aria-label="Illustrative facility intelligence readout">
-          <span className="phero-chip phero-chip--data">State — monitoring</span>
-          <span className="phero-chip"><i className="phero-dot" aria-hidden="true" /> Decision — collection priority updated</span>
-          <span className="phero-chip">Execution — available</span>
-        </div>
+        {/* one job through the operating loop — illustrative, non-numeric, real DOM text */}
+        <ul className="phero-chips" aria-label="Illustrative walk through one collection job — not live facility data">
+          <li className="phero-chip phero-chip--note">Illustrative · not live data</li>
+          <li className="phero-chip phero-chip--data">Work needed · outfield filling up</li>
+          <li className="phero-chip">Scheduled · collection run</li>
+          <li className="phero-chip"><i className="phero-dot" aria-hidden="true" /> In progress · robot sweeping</li>
+          <li className="phero-chip">Confirmed · transfer logged</li>
+          <li className="phero-chip">Exception · flagged to staff</li>
+        </ul>
+        <p className="phero-caption">{HERO_CAPTION}</p>
       </div>
     </section>
   );

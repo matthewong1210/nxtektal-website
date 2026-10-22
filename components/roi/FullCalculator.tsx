@@ -461,8 +461,8 @@ export default function FullCalculator() {
       <section className="roi-section roi-cta">
         <h2>Confirm the real numbers on your range</h2>
         <p>A site assessment replaces every assumption above with measured values from your facility.</p>
-        <a className="button button-primary" href="mailto:founders@nxtektal.com?subject=Site%20assessment">
-          Book a site assessment
+        <a className="button button-primary" href="mailto:founders@nxtektal.com?subject=Site%20Assessment%20Request">
+          Request a Site Assessment
         </a>
         <Link className="text-link" href="/">Back to nxtektal.com</Link>
       </section>

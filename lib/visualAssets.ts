@@ -66,9 +66,9 @@ export const heroMasterFrame: HeroMasterFrame = {
   },
   // Hero background film (Phase 2G v3): trimmed re-encode of the NXTektal
   // hero film supplied 2026-08-11 (concept visualization — dawn facility
-  // aerial with operating-layer scan, bunker care, the collection robot
-  // sweeping balls, universal handoff into the ball-handling station, turf
-  // robot, coordination routes). Logo intro/outro and closing watermark are
+  // aerial with Site Brain scan, bunker care, the collection robot sweeping
+  // balls, a robot-mounted-arm handoff concept — one transfer option, the
+  // mechanism is under development — turf robot, coordination routes). Logo intro/outro and closing watermark are
   // cut (source 1.5s–14.8s) and the tail self-crossfades into the head for
   // a seamless ~12.9s ambient loop. Native 3840×2160@30 (crisp on retina
   // displays), no audio track; VP9 WebM first, HEVC (hvc1) MP4 for Safari.
@@ -80,7 +80,7 @@ export const heroMasterFrame: HeroMasterFrame = {
     mobileMp4: "/visuals/phase2/hero/hero-loop-mobile.mp4",
     poster: "/visuals/phase2/hero/master-frame.webp",
   },
-  alt: "Aerial view of a golf facility at dawn with the NXTektal operating layer scanning the grounds",
+  alt: "Concept visualization: aerial view of a golf facility at dawn with the NXTektal Site Brain scanning the grounds. The film also shows one transfer-mechanism option that is under development, and machines that are later direction.",
 };
 
 /** Interim hero photograph — retained as the documented fallback if the
@@ -121,7 +121,7 @@ export type LoopSource = {
 };
 
 // -----------------------------------------------------------------------
-// 2 · Closed-Loop Workflow (#first-workflow · WorkflowStory MediaFrame)
+// 2 · First-job workflow (#first-workflow · WorkflowStory MediaFrame)
 // Contract: 1600×900 (16:9) per step, AVIF+WebP.
 // Paths: public/visuals/phase2/workflow/step-01-monitor.{avif,webp} … step-08-verify.{avif,webp}
 // When present, the workflow visual shows the active step's still; steps
@@ -189,7 +189,11 @@ export type WorkflowStepLoop = {
 // COLLECT from the 2026-08-11 Dreamina render, RETURN/HANDOFF from the
 // 2026-08-11 hero film, WASH & DISPENSE from the 2026-08-04/06 render
 // batch — so the four physical stages stay visually distinct. All are
-// concept visualizations, not live facility footage.
+// concept visualizations, not live facility footage, and each still now
+// carries the caption rendered under it. The HANDOFF footage shows a
+// robot-mounted arm lifting the collected load: one option, not the chosen
+// mechanism — the caption and the in-frame label say so
+// (lib/workflowSteps.ts MEDIA_TAGS).
 export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
   null, // 01 MONITOR — simulator still
   null, // 02 PRIORITIZE — simulator still
@@ -206,7 +210,8 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
       webp: "/visuals/phase2/workflow/04-collect-poster.webp",
       width: 1280,
       height: 720,
-      alt: "NXTektal collection robot sweeping scattered range balls into its front roller picker on a driving range at dawn",
+      alt: "Concept render of the NXTektal collection robot sweeping scattered range balls into its front roller picker on a driving range at dawn",
+      caption: "Concept render of the current collection-robot design — not a deployed machine.",
     },
     webm: "/visuals/phase2/workflow/04-collect-loop.webm",
     mp4: "/visuals/phase2/workflow/04-collect-loop.mp4",
@@ -223,22 +228,25 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
       webp: "/visuals/phase2/workflow/05-return-poster.webp",
       width: 1280,
       height: 720,
-      alt: "Aerial view of the golf facility with glowing coordination routes and waypoint markers tracing robot paths across the grounds",
+      alt: "Concept visualization: aerial view of the golf facility with coordination routes and waypoint markers tracing robot paths across the grounds",
+      caption: "Concept visualization — not live facility footage.",
     },
     webm: "/visuals/phase2/workflow/05-return-loop.webm",
     mp4: "/visuals/phase2/workflow/05-return-loop.mp4",
   },
   {
-    // 06 HANDOFF — universal handoff: the station-side arm tips the loaded
-    // ball basket into the ball-handling system's intake (half-speed retime
-    // of the 2026-08-11 hero film's 120fps handoff segment, 720p30, 0.4s
+    // 06 HANDOFF — concept footage of one transfer option: a robot-mounted
+    // arm lifts the collected load toward the existing washer intake. The
+    // mechanism is under development and not chosen (half-speed retime of
+    // the 2026-08-11 hero film's 120fps handoff segment, 720p30, 0.4s
     // self-crossfade → seamless ~3.6s loop).
     still: {
       avif: "/visuals/phase2/workflow/06-handoff-poster.avif",
       webp: "/visuals/phase2/workflow/06-handoff-poster.webp",
       width: 1280,
       height: 720,
-      alt: "A robotic arm at the NXTektal handoff station tipping a loaded basket of range balls into the ball-handling system's intake",
+      alt: "Concept visualization of the handoff: a robot-mounted arm lifting the collected load toward the existing washer intake. One option shown; the transfer mechanism is under development and has not been chosen.",
+      caption: "Concept visualization. Transfer mechanism under development.",
     },
     webm: "/visuals/phase2/workflow/06-handoff-loop.webm",
     mp4: "/visuals/phase2/workflow/06-handoff-loop.mp4",
@@ -254,7 +262,8 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
       webp: "/visuals/phase2/workflow/07-wash-dispense-poster.webp",
       width: 1280,
       height: 720,
-      alt: "Golf balls churning in the washer trough while an elevator conveyor carries cleaned balls up toward the dispenser",
+      alt: "Concept visualization of the existing washer: golf balls churning in the trough while an elevator carries cleaned balls up toward the dispenser",
+      caption: "Concept visualization of the existing washer and dispenser — outside NXTektal’s current scope.",
     },
     webm: "/visuals/phase2/workflow/07-wash-dispense-loop.webm",
     mp4: "/visuals/phase2/workflow/07-wash-dispense-loop.mp4",
@@ -263,7 +272,7 @@ export const workflowStepLoops: (WorkflowStepLoop | null)[] = [
 ];
 
 // -----------------------------------------------------------------------
-// 3 · Modular Handoff production visuals (.integration-block · HandoffSequence)
+// 3 · Handoff workflow production visuals (.integration-block · HandoffSequence)
 // Contract: 4:3 per panel — inline SVG preferred; stills 1200×900 AVIF+WebP.
 // Paths: public/visuals/phase2/handoff/seq-01-dock.* seq-02-transfer.* seq-03-verify.*
 // When a panel's production visual is registered it replaces that panel's
@@ -364,7 +373,9 @@ export const agentSimulatorDemo: AgentSimulatorDemo = {
 // OG / social image
 // Stable public path: replacing the file at public/og-image.jpg (1200×630)
 // updates every share card — app/layout.tsx references the path, not the
-// file contents. After the hero master frame is approved, export its
-// 1200×630 crop over this file; no code change required.
+// file contents. The card uses real prototype photography
+// (public/robot/robot-front.jpg) with the approved H1 set over it, not the
+// AI-generated hero concept frame; re-export over this file whenever the
+// hero headline changes. No code change required.
 // -----------------------------------------------------------------------
 export const OG_IMAGE_PATH = "/og-image.jpg";
