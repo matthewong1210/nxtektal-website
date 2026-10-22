@@ -10,7 +10,7 @@ import type { LoopSource, StillSource } from "../../lib/visualAssets";
  * This is the swap layer that makes future replacements registry-only:
  * a slot upgrades still → loop by passing a different prop — the component
  * tree around it never changes. Reduced-motion and load-failure states are
- * covered by the poster (video) and by MediaFrame's reserved stage (still).
+ * covered by the poster (video) and by the caller's aspect-reserved stage (still).
  */
 
 export function ResponsiveStill({ source }: { source: StillSource }) {

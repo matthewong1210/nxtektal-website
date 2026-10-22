@@ -25,6 +25,11 @@ The mobile hero film (`hero-loop-mobile.mp4`) is a 1280×720 H.264 re-encode
 of that same `hero-loop.mp4`, with the full frame, 12.9-second loop and
 30 fps preserved, no audio, and faststart metadata. No new imagery is added.
 
+Since 2026-10-22 the film is framed as the main visual of the homepage's
+golf block (`components/manifesto/FacilityFilm.tsx`) rather than the hero
+background; the same stills and encodes are used, with the concept label
+under the frame.
+
 ## Workflow physical-loop media (`public/visuals/phase2/workflow/`)
 
 The WASH & DISPENSE loop and poster are derived from concept footage of
@@ -36,7 +41,9 @@ front roller picker) supplied 2026-08-11, same terms. The RETURN and
 HANDOFF loops and posters are derived from the 2026-08-11 hero film (see
 above). Simulator-derived stills are screenshots of the NXTektal Range
 Operations Simulator (original software, all rights held by NXTektal
-Systems).
+Systems). These workflow files, and the prototype footage in
+`public/robot/`, are retained in the repository but not referenced by the
+site since the 2026-10-22 homepage redesign.
 
 ## Simulator media (`public/visuals/phase2/simulator/`)
 

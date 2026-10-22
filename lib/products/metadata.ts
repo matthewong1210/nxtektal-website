@@ -15,7 +15,7 @@ const OG_IMAGE = {
   url: OG_IMAGE_PATH,
   width: 1200,
   height: 630,
-  alt: "NXTektal Systems — robots and the operating system behind them for outdoor work, starting with golf",
+  alt: "NXTektal Systems — Insite understands your site; robots execute the work. Starting with golf facilities.",
 };
 
 export function pageMetadata({ title, description, route }: { title: string; description: string; route: string }): Metadata {

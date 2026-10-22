@@ -3,6 +3,7 @@ import BrandLockup from "../../components/BrandLockup";
 import SiteFooter from "../../components/SiteFooter";
 import SiteHeader from "../../components/manifesto/SiteHeader";
 import { Arrow, ProductCard, productNavItems, withAvailability } from "../../components/products/ProductPage";
+import { CONTACT_LABEL } from "../../lib/homepage";
 import { PRODUCTS, PRODUCTS_PAGE, PRODUCTS_ROUTE } from "../../lib/products";
 import { pageMetadata } from "../../lib/products/metadata";
 
@@ -12,7 +13,7 @@ export const metadata: Metadata = pageMetadata({ title: PRODUCTS_PAGE.title, des
 export default function ProductsPage() {
   return (
     <main className="pd-main" id="top">
-      <SiteHeader items={productNavItems} brand={<BrandLockup />} ctaIcon={<Arrow />} homeHref="/" ctaHref="/#pilot" currentHref={PRODUCTS_ROUTE} />
+      <SiteHeader items={productNavItems} brand={<BrandLockup />} ctaIcon={<Arrow />} homeHref="/" ctaHref="/#contact" ctaLabel={CONTACT_LABEL} currentHref={PRODUCTS_ROUTE} />
 
       <section className="pd-section pd-hero pd-list" aria-labelledby="pd-h1">
         <div className="pd-inner">

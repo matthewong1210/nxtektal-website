@@ -179,6 +179,6 @@ describe("ME74A media and contact", () => {
   it("uses the site's existing contact address with an ME74A subject", () => {
     expect(CONTACT.email).toBe("founders@nxtektal.com");
     expect(CONTACT.mailto).toBe("mailto:founders@nxtektal.com?subject=ME74A%20%E2%80%94%20product%20and%20site%20fit");
-    expect(CONTACT.secondaryHref).toBe("/#company"); // not the range-ball pilot section, which does not cover the mower
+    expect(CONTACT.secondaryHref).toBe("/#robots"); // the robots block, not the golf block, which is about range-ball collection
   });
 });

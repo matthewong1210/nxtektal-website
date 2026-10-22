@@ -3,8 +3,8 @@
 import { act, type ReactNode } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import FacilityFilm from "../FacilityFilm";
 import HeroBackgroundVideo from "../HeroBackgroundVideo";
-import ProductHero from "../ProductHero";
 
 let container: HTMLDivElement;
 let root: Root;
@@ -158,9 +158,9 @@ describe("HeroBackgroundVideo", () => {
     expect(vi.mocked(restored.play).mock.contexts).toContain(restored);
   });
 
-  it("exposes an accessible retry button within ProductHero after autoplay is blocked", async () => {
+  it("exposes an accessible retry button within the framed film after autoplay is blocked", async () => {
     vi.mocked(HTMLMediaElement.prototype.play).mockRejectedValue(new DOMException("Autoplay blocked", "NotAllowedError"));
-    await render(<ProductHero copy={<h1>Facility intelligence</h1>} />);
+    await render(<FacilityFilm />);
 
     const button = getPlayButton();
     expect(button.disabled).toBe(false);

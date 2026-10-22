@@ -11,7 +11,7 @@ export default function SiteFooter({ homeHref = "#top" }: { homeHref?: string })
       <a className="brand footer-brand" href={homeHref} aria-label={homeHref === "#top" ? "Back to top" : "NXTektal Systems home"}>
         <BrandLockup />
       </a>
-      <p>ROBOTS + THE OPERATING SYSTEM FOR OUTDOOR WORK · STARTING WITH GOLF</p>
+      <p>INSITE + ROBOTS FOR OUTDOOR OPERATIONS · STARTING WITH GOLF</p>
       <div>
         <a href={`https://${SITE.domain}`}>{SITE.domain}</a>
         <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
