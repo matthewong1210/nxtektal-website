@@ -86,7 +86,6 @@ export default function Home() {
               {screen && (
                 <figure className="screen">
                   <div className="screen-stage">
-                    <span className="screen-tag">{screen.truthLabel}</span>
                     <ResponsiveStill source={{ ...screen.posterDesktop, alt: screen.alt, mobile: screen.posterMobile }} />
                   </div>
                 </figure>

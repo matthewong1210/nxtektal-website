@@ -127,7 +127,6 @@ export type AgentSimulatorDemo = {
   posterDesktop: { avif: string; webp: string; width: number; height: number };
   posterMobile: { avif: string; webp: string; width: number; height: number };
   alt: string;
-  truthLabel: string;
 };
 
 export const agentSimulatorDemo: AgentSimulatorDemo = {
@@ -148,8 +147,8 @@ export const agentSimulatorDemo: AgentSimulatorDemo = {
     width: 1080,
     height: 1350,
   },
-  alt: "Insite in the NXTektal Range Operations Simulator: robot states, a dispatch decision, facility metrics, and operating results for a simulated demand-spike scenario.",
-  truthLabel: "Simulation results — not live facility data.",
+  // No in-frame label: the founders explain the image elsewhere (their direction, 2026-11-02); the alt still names the simulator.
+  alt: "Insite’s operating view in the NXTektal Range Operations Simulator: robot states, a dispatch decision, facility metrics, and results for a simulated demand-spike scenario.",
 };
 
 // -----------------------------------------------------------------------

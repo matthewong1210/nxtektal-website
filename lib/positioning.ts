@@ -7,7 +7,18 @@
 
 /** The positioning sentence: the promise and the two parts that deliver it. "Insite" is the software's name (formerly "Site Brain"). */
 export const POSITIONING_SENTENCE =
-  "NXTektal is building Insite, the software that understands an outdoor site, and the robots that execute the work, starting with golf facilities.";
+  "NXTektal makes Insite, the software that understands an outdoor site, and the robots that execute the work, starting with golf facilities.";
+
+/**
+ * Field status, as stated by the founders on 2026-11-02 (the same facts as
+ * in the YC application). The site states these and nothing more: no site
+ * names, counts beyond "five", results, or integration claims.
+ */
+export const FIELD_STATUS = {
+  insite: "Insite is in use at five golf facilities.",
+  firstGeneration: "The first-generation remote-controlled collection robot is used by course staff.",
+  secondGeneration: "The second-generation robot is in field testing at a golf course in Shanghai.",
+} as const;
 
 /** The first job, stated as scope — handoff into existing equipment, nothing more. */
 export const FIRST_JOB_SENTENCE =
@@ -19,7 +30,7 @@ export const SHARE_IMAGE_ALT =
   "NXTektal Systems — Insite understands your site; robots execute the work. Starting with golf facilities.";
 
 /** Full site description used for metadata, share text, and JSON-LD. */
-export const SITE_DESCRIPTION = `${POSITIONING_SENTENCE} ${FIRST_JOB_SENTENCE}`;
+export const SITE_DESCRIPTION = `${POSITIONING_SENTENCE} ${FIELD_STATUS.insite} ${FIRST_JOB_SENTENCE}`;
 
 /** The founders, for the Organization structured data (the homepage no longer carries a founders section). */
 export const FOUNDERS = [

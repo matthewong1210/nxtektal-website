@@ -4,12 +4,12 @@ import manifest from "../../app/manifest";
 import { FIRST_JOB_SENTENCE, POSITIONING_SENTENCE, SHARE_IMAGE_ALT, SITE_DESCRIPTION, SITE_TITLE } from "../positioning";
 
 describe("positioning", () => {
-  it("states the approved positioning sentence: Insite understands the site, robots execute the work", () => {
+  it("states the approved positioning sentence: Insite understands the site, robots execute the work; the description carries the field status", () => {
     expect(POSITIONING_SENTENCE).toBe(
-      "NXTektal is building Insite, the software that understands an outdoor site, and the robots that execute the work, starting with golf facilities.",
+      "NXTektal makes Insite, the software that understands an outdoor site, and the robots that execute the work, starting with golf facilities.",
     );
     expect(SITE_DESCRIPTION).toBe(
-      "NXTektal is building Insite, the software that understands an outdoor site, and the robots that execute the work, starting with golf facilities. First job: range-ball collection with handoff into the range’s existing washer.",
+      "NXTektal makes Insite, the software that understands an outdoor site, and the robots that execute the work, starting with golf facilities. Insite is in use at five golf facilities. First job: range-ball collection with handoff into the range’s existing washer.",
     );
     expect(FIRST_JOB_SENTENCE.toLowerCase()).toContain("existing washer");
   });
