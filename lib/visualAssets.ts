@@ -148,8 +148,8 @@ export const agentSimulatorDemo: AgentSimulatorDemo = {
     width: 1080,
     height: 1350,
   },
-  alt: "Insite in the NXTektal Range Operations Simulator: robot states, a dispatch decision, facility metrics, and operating results for a simulated demand-spike scenario.",
-  truthLabel: "Simulation results — not live facility data.",
+  alt: "Insite’s operating view in the NXTektal Range Operations Simulator: robot states, a dispatch decision, facility metrics, and results for a simulated demand-spike scenario.",
+  truthLabel: "Range Operations Simulator — development view",
 };
 
 // -----------------------------------------------------------------------

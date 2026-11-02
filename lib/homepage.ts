@@ -6,11 +6,14 @@
  *
  * "Insite" is the name of the software (formerly "Site Brain"). Insite is
  * advisory: it understands the site and helps the people running it decide;
- * the robots carry out the work. Nothing here claims a connected site, a
- * deployed machine, or a completed integration.
+ * the robots carry out the work. Field status comes from FIELD_STATUS in
+ * lib/positioning.ts (founders, 2026-11-02): Insite in use at five golf
+ * facilities, the first-generation collection robot used by course staff,
+ * the second generation in field testing in Shanghai. The page states those
+ * facts and nothing more.
  */
 
-import { SITE } from "./positioning";
+import { FIELD_STATUS, SITE } from "./positioning";
 import { PRODUCTS, PRODUCTS_ROUTE } from "./products";
 import type { ProductData } from "./products/types";
 
@@ -39,9 +42,9 @@ export const GOLF = {
   heading: "Starting with golf facilities.",
   body:
     "We start with range-ball collection at driving ranges: a robot gathers the balls across the outfield and brings them back for transfer into the range’s existing washer.",
-  /** The short label under the film: a concept visualization that also shows a transfer mechanism under development. */
+  /** The short label under the film: a concept visualization, not site footage, that also shows a transfer mechanism under development. */
   filmLabel:
-    "Concept visualization, not footage of a deployed system. The transfer mechanism shown is under development.",
+    "Concept visualization, not site footage. The transfer mechanism shown is under development.",
 } as const;
 
 /** Block 3 — Insite: understanding first, then judgement, coordination, and follow-through. No architecture. */
@@ -64,11 +67,12 @@ export const INSITE = {
       body: "Runs in progress, exceptions such as a late run or an unconfirmed transfer, and completed work are recorded as they happen.",
     },
   ],
-  status: "Insite runs in the Range Operations Simulator today. It is not yet connected to a customer site.",
+  status: FIELD_STATUS.insite,
 } as const;
 
-/** Block 4 — the robots. Name, job, and a short development status per machine; details on the product pages.
- * The neutral inquiry line stays on the product pages (contact block and list note), not here. */
+/** Block 4 — the robots. Name, job, and a short field status per machine; details on the product pages.
+ * The first-job card covers both generations of the collection robot (FIELD_STATUS); the mower keeps its
+ * earlier status until the founders update it. The neutral inquiry line stays on the product pages. */
 export type RobotCardCopy = { route: string; stage: string; status: string };
 
 export const ROBOTS = {
@@ -77,7 +81,7 @@ export const ROBOTS = {
   body: "Each robot takes one job on the site. Insite works out what needs doing; the robot carries it out.",
   allLabel: "All products",
   cards: [
-    { route: "/products/ce82a", stage: "First job", status: "In development. Not yet running at a customer facility." },
+    { route: "/products/ce82a", stage: "First job", status: "First generation, remote-controlled, in use by course staff. Second generation in field testing at a golf course in Shanghai." },
     { route: "/products/me74a", stage: "Next job", status: "Next to validate. Not started." },
   ] as RobotCardCopy[],
 };
