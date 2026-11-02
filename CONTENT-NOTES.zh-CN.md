@@ -6,7 +6,7 @@
 
 - Insite 已在五个球场使用 → `FIELD_STATUS.insite`："Insite is in use at five golf facilities."（首页 Insite 状态句、站点描述 metadata 共用）。
 - 第一代遥控捡球机器人已被球场员工使用；第二代机器人正在上海球场现场测试 → 首页机器人区块 CE82A 卡片状态："First generation, remote-controlled, in use by course staff. Second generation in field testing at a golf course in Shanghai."
-- 定位句由 "is building" 改为 "makes"；视频标签改为 "Concept visualization, not site footage. The transfer mechanism shown is under development."；仿真器画面的标注改为 "Range Operations Simulator — development view"（该图仍是仿真器画面，标注必须说明；换成现场 Insite 截图后即可去掉）。
+- 定位句由 "is building" 改为 "makes"；视频标签改为 "Concept visualization, not site footage. The transfer mechanism shown is under development."；仿真器画面的画面内标注按创始人意见去掉（创始人会在别处说明该图）；alt 文本仍注明是 Range Operations Simulator 画面。
 - 社交分享图副标题改为 "In use at five golf facilities. First job: range-ball collection at driving ranges."
 - README 用词规则同步；`lib/__tests__/homepage.test.ts` 与 `positioning.test.ts` 锁定上述句子，并禁止 "not yet" / "in development." 回到首页。
 
@@ -15,7 +15,7 @@
 1. 卡片把 CE82A 当作"第一代遥控捡球机器人"，并把第二代写在同一张卡片上；若第二代是另一型号或应单独展示，请提供名称、任务和一张图。
 2. ME74A 割草机器人状态仍为 "Next to validate. Not started."，YC 申请未提及；如有变化请告知。
 3. 视频标签中的"交接机构仍在开发中"沿用此前口径；若第二代机器人已解决交接，请告知以更新标签与影片 alt 文本。
-4. Insite 区块仍用仿真器画面；请提供一张现场 Insite 截图（桌面 1400×1000 左右，手机 1080×1350 可选），替换后不再需要仿真器标注。
+4. Insite 区块仍用仿真器画面（已无画面内标注）；如有现场 Insite 截图（桌面 1400×1000 左右，手机 1080×1350 可选），可直接替换。
 5. 产品页（CE82A / ME74A）未加现场状态，仍只讲功能与参数；如需在产品页也写，请说明。
 
 ---

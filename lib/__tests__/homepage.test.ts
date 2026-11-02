@@ -31,7 +31,6 @@ const corpus = [
   CONTACT_LABEL,
   heroMasterFrame.alt,
   agentSimulatorDemo.alt,
-  agentSimulatorDemo.truthLabel,
   POSITIONING_SENTENCE,
   FIRST_JOB_SENTENCE,
 ]
@@ -70,7 +69,7 @@ describe("homepage copy", () => {
     ]);
     expect(INSITE.status).toBe(FIELD_STATUS.insite);
     expect(FIELD_STATUS.insite).toBe("Insite is in use at five golf facilities.");
-    expect(agentSimulatorDemo.truthLabel).toBe("Range Operations Simulator — development view");
+    expect("truthLabel" in agentSimulatorDemo).toBe(false); // no in-frame label on the screen (founders, 2026-11-02); the alt names the simulator
     expect(agentSimulatorDemo.alt).toContain(SOFTWARE_NAME);
   });
 

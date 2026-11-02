@@ -418,10 +418,9 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .screen-stage { position: relative; aspect-ratio: 1400 / 770; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-l); background: #0a0f14; }
 .screen-stage picture { display: block; width: 100%; height: 100%; }
 /* The simulator posters (1400×1000 and 1080×1350) open with the tool's own title strip and run parameters; the stage
-   is anchored to the bottom so the screen shows the operating view (site map, decision, figures) and the tag says
-   what it is. Re-check the two crops if the posters are replaced (agentSimulatorDemo in lib/visualAssets.ts). */
+   is anchored to the bottom so the screen shows the operating view (site map, decision, figures). Re-check the two
+   crops if the posters are replaced (agentSimulatorDemo in lib/visualAssets.ts). */
 .screen-stage img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
-.screen-tag { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 5px 11px; border: 1px solid var(--line-strong); border-radius: var(--radius-pill); background: rgba(9, 13, 19, 0.82); color: var(--white-soft); font-size: 10.5px; font-weight: 720; letter-spacing: 0.06em; }
 .values { display: grid; grid-template-columns: 1fr; gap: clamp(18px, 2vw, 26px); margin: 0; padding: 0; list-style: none; }
 .values li { min-width: 0; padding-top: 16px; border-top: 1px solid var(--line-strong); }
 .values h3 { margin: 0; color: var(--white); font-size: clamp(17px, 1.5vw, 21px); font-weight: 650; line-height: 1.25; letter-spacing: -0.02em; text-wrap: balance; }
