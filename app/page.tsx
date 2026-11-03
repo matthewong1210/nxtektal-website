@@ -2,6 +2,7 @@ import BrandLockup from "../components/BrandLockup";
 import SiteFooter from "../components/SiteFooter";
 import FacilityFilm from "../components/manifesto/FacilityFilm";
 import SiteHeader from "../components/manifesto/SiteHeader";
+import SiteWireframe from "../components/manifesto/SiteWireframe";
 import { ResponsiveStill } from "../components/media/ResponsiveMedia";
 import { Arrow, withAvailability } from "../components/products/ProductPage";
 import { CONTACT, CONTACT_LABEL, GOLF, HERO, INSITE, NAV_ITEMS, ROBOTS, robotCards } from "../lib/homepage";
@@ -51,15 +52,31 @@ export default function Home() {
 
       <SiteHeader items={NAV_ITEMS} brand={<BrandLockup />} ctaIcon={<Arrow />} ctaHref="#contact" ctaLabel={CONTACT_LABEL} />
 
-      {/* 1 · The promise — two lines and whitespace */}
+      {/* 1 · The promise — two lines, the field status, two actions, and the interactive site wireframe beside them */}
       <section className="promise" aria-labelledby="promise-h1">
         <div className="promise-inner">
-          <h1 id="promise-h1" className="hero-fade">{HERO.title}</h1>
-          <p className="promise-sub hero-fade">{HERO.subtitle}</p>
+          <div className="promise-copy">
+            <h1 id="promise-h1" className="hero-fade">{HERO.title}</h1>
+            <p className="promise-sub hero-fade">{HERO.subtitle}</p>
+            <ul className="promise-proof hero-fade" aria-label="Field status">
+              {HERO.proof.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <div className="promise-actions hero-fade">
+              <a className="button button-primary" href={HERO.primary.href}>{HERO.primary.label} <Arrow /></a>
+              <a className="button button-secondary" href={HERO.secondary.href}>{HERO.secondary.label}</a>
+            </div>
+          </div>
+          <div className="promise-media hero-fade">
+            <div className="wire">
+              <SiteWireframe />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 2 · Golf — the first application; the film is the main visual */}
+      {/* 2 · Golf — the first application; the film is its main visual */}
       <section className="chapter chapter--golf" id="golf" aria-labelledby="golf-h2">
         <div className="chapter-inner">
           <Reveal>

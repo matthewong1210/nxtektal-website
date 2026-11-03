@@ -30,10 +30,18 @@ export const NAV_ITEMS = [
 /** The one header button, on every page. */
 export const CONTACT_LABEL = "Contact";
 
-/** Block 1 — the promise. Two lines, nothing else. */
+/** Block 1 — the promise: two lines, the field status in one short strip, two actions, and the interactive site wireframe beside them. */
 export const HERO = {
   title: "Automate your outdoor operations.",
   subtitle: "Insite understands your site. Robots execute the work.",
+  /** One short form of each FIELD_STATUS sentence; the full sentences stay in the Insite and robots blocks. */
+  proof: [
+    "Insite in use at five golf facilities",
+    "First-generation robot used by course staff",
+    "Second generation in field testing in Shanghai",
+  ],
+  primary: { label: "Contact NXTektal", href: "#contact" },
+  secondary: { label: "See how it works", href: "#golf" },
 } as const;
 
 /** Block 2 — the first application. The film does the explaining; one sentence states the first job. */
