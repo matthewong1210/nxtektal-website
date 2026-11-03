@@ -2,6 +2,7 @@ import BrandLockup from "../components/BrandLockup";
 import SiteFooter from "../components/SiteFooter";
 import FacilityFilm from "../components/manifesto/FacilityFilm";
 import SiteHeader from "../components/manifesto/SiteHeader";
+import SiteWireframe from "../components/manifesto/SiteWireframe";
 import { ResponsiveStill } from "../components/media/ResponsiveMedia";
 import { Arrow, withAvailability } from "../components/products/ProductPage";
 import { CONTACT, CONTACT_LABEL, GOLF, HERO, INSITE, NAV_ITEMS, ROBOTS, robotCards } from "../lib/homepage";
@@ -51,7 +52,7 @@ export default function Home() {
 
       <SiteHeader items={NAV_ITEMS} brand={<BrandLockup />} ctaIcon={<Arrow />} ctaHref="#contact" ctaLabel={CONTACT_LABEL} />
 
-      {/* 1 · The promise — two lines, the field status, two actions, and the film beside them */}
+      {/* 1 · The promise — two lines, the field status, two actions, and the interactive site wireframe beside them */}
       <section className="promise" aria-labelledby="promise-h1">
         <div className="promise-inner">
           <div className="promise-copy">
@@ -68,18 +69,23 @@ export default function Home() {
             </div>
           </div>
           <div className="promise-media hero-fade">
-            <FacilityFilm />
+            <div className="wire">
+              <SiteWireframe />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 2 · Golf — the first application in one sentence; the film above is the scene */}
+      {/* 2 · Golf — the first application; the film is its main visual */}
       <section className="chapter chapter--golf" id="golf" aria-labelledby="golf-h2">
         <div className="chapter-inner">
           <Reveal>
             <p className="eyebrow">{GOLF.eyebrow}</p>
             <h2 id="golf-h2">{GOLF.heading}</h2>
             <p className="chapter-lede">{GOLF.body}</p>
+          </Reveal>
+          <Reveal>
+            <FacilityFilm />
           </Reveal>
         </div>
       </section>

@@ -30,7 +30,7 @@ export const NAV_ITEMS = [
 /** The one header button, on every page. */
 export const CONTACT_LABEL = "Contact";
 
-/** Block 1 — the promise: two lines, the field status in one short strip, two actions, and the film beside them. */
+/** Block 1 — the promise: two lines, the field status in one short strip, two actions, and the interactive site wireframe beside them. */
 export const HERO = {
   title: "Automate your outdoor operations.",
   subtitle: "Insite understands your site. Robots execute the work.",
@@ -44,7 +44,7 @@ export const HERO = {
   secondary: { label: "See how it works", href: "#golf" },
 } as const;
 
-/** Block 2 — the first application, in one sentence under the film (which sits in the first screen since 2026-11-03). */
+/** Block 2 — the first application. The film does the explaining; one sentence states the first job. */
 export const GOLF = {
   eyebrow: "First application",
   heading: "Starting with golf facilities.",

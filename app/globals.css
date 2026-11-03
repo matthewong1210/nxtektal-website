@@ -400,6 +400,9 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .promise-proof li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--lime); }
 .promise-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: clamp(26px, 2.8vw, 36px); }
 .promise-media { min-width: 0; }
+/* the interactive site wireframe (components/manifesto/SiteWireframe.tsx): a canvas that fills a 5:4 stage; a faint glow keeps the column from reading as empty before the script runs */
+.wire { position: relative; aspect-ratio: 5 / 4; width: 100%; background: radial-gradient(ellipse at 50% 62%, rgba(154, 248, 18, 0.07), transparent 62%); }
+.wire-canvas { display: block; width: 100%; height: 100%; }
 
 .chapter { padding: clamp(64px, 8vw, 120px) var(--pad); }
 .chapter + .chapter { border-top: 1px solid var(--line); }
@@ -411,8 +414,8 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .chapter-note a:hover, .chapter-note a:focus-visible { color: var(--lime); }
 .chapter-note a .icon-arrow { width: 15px; height: 15px; }
 
-/* the facility film: the first screen's visual, beside the promise */
-.film { margin: 0; }
+/* the facility film: the golf block's main visual */
+.film { margin: clamp(36px, 4.5vw, 60px) 0 0; }
 .film-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-l); background: #0a0f14; }
 .film-stage picture { display: block; width: 100%; height: 100%; }
 .film-stage img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
@@ -457,6 +460,7 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 @media (max-width: 1120px) {
   .promise-inner { grid-template-columns: 1fr; gap: clamp(28px, 5vw, 48px); }
   .promise h1 { max-width: 14ch; }
+  .wire { max-width: 640px; aspect-ratio: 4 / 3; }
   .insite-grid { grid-template-columns: 1fr; }
   .screen { max-width: 760px; }
   .values { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); }

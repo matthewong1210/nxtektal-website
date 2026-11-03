@@ -2,7 +2,7 @@
 
 ## 2026-11-03 首屏补实：状态条、两个按钮、影片上移
 
-创始人反馈首屏"有点空"（参照 runtime.si，本环境无法访问该站，按描述处理）。首屏改为两栏：左侧两句承诺 + 三行现场状态短句（`HERO.proof`，是 `FIELD_STATUS` 的缩写）+ 两个按钮（Contact NXTektal → #contact；See how it works → #golf）；右侧为影片（`FacilityFilm`，概念标签仍在画面下）。高尔夫区块保留标题与一句话，影片不再重复。1120px 以下两栏上下堆叠，手机端影片仍为 3:4 通栏。
+创始人反馈首屏"有点空"，并给出 runtime.si 首屏截图（深底大标题 + 右侧会转动、随鼠标响应的线框球体；本环境无法访问该站）。首屏改为两栏：左侧两句承诺 + 三行现场状态短句（`HERO.proof`，是 `FIELD_STATUS` 的缩写）+ 两个按钮（Contact NXTektal → #contact；See how it works → #golf）；右侧为交互式场地线框（`components/manifesto/SiteWireframe.tsx`，纯 canvas 自绘：练习场地形网格、从发球线展开的收球分区环、Insite 扫描扫过时点亮的节点、三个沿各自路径移动的机器人；自行缓慢漂移，鼠标在首屏内移动时随之倾斜，离开视口或切换标签页时暂停，减少动态效果时只画一帧静态图；纯装饰，不含任何数字或场地信息，alt 标注为 decorative）。影片回到高尔夫区块作为主视觉。1120px 以下两栏上下堆叠，线框改为 4:3。
 
 ---
 
