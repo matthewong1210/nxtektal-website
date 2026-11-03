@@ -390,10 +390,16 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 @media (max-width: 340px) { .header-cta { display: none; } }
 
 /* ---------- Homepage (2026-10-22 minimal layout): promise · golf · Insite · robots · contact ---------- */
-.promise { padding: clamp(176px, 28vh, 320px) var(--pad) clamp(88px, 13vh, 170px); }
-.promise-inner { width: min(100%, var(--max)); margin: 0 auto; }
-.promise h1 { max-width: 13ch; margin: 0; color: var(--white); font-size: clamp(44px, 7.6vw, 116px); font-weight: 600; line-height: 0.98; letter-spacing: -0.05em; text-wrap: balance; }
-.promise-sub { max-width: 30ch; margin: clamp(26px, 3vw, 42px) 0 0; color: var(--white-soft); font-size: clamp(19px, 2.1vw, 29px); font-weight: 500; line-height: 1.38; letter-spacing: -0.022em; text-wrap: balance; }
+.promise { padding: clamp(136px, 17vh, 200px) var(--pad) clamp(56px, 7vw, 96px); }
+.promise-inner { width: min(100%, var(--max)); margin: 0 auto; display: grid; grid-template-columns: minmax(0, 11fr) minmax(0, 13fr); gap: clamp(32px, 4vw, 64px); align-items: center; }
+.promise-copy { min-width: 0; }
+.promise h1 { max-width: 12ch; margin: 0; color: var(--white); font-size: clamp(40px, 5.2vw, 76px); font-weight: 600; line-height: 1; letter-spacing: -0.045em; text-wrap: balance; }
+.promise-sub { max-width: 30ch; margin: clamp(20px, 2.2vw, 30px) 0 0; color: var(--white-soft); font-size: clamp(18px, 1.6vw, 23px); font-weight: 500; line-height: 1.4; letter-spacing: -0.02em; text-wrap: balance; }
+.promise-proof { display: grid; gap: 8px; margin: clamp(24px, 2.6vw, 36px) 0 0; padding: 0; list-style: none; }
+.promise-proof li { position: relative; padding-left: 18px; color: var(--white-faint); font-size: clamp(13.5px, 1.05vw, 15px); line-height: 1.5; }
+.promise-proof li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 7px; height: 7px; border-radius: 50%; background: var(--lime); }
+.promise-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: clamp(26px, 2.8vw, 36px); }
+.promise-media { min-width: 0; }
 
 .chapter { padding: clamp(64px, 8vw, 120px) var(--pad); }
 .chapter + .chapter { border-top: 1px solid var(--line); }
@@ -405,8 +411,8 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .chapter-note a:hover, .chapter-note a:focus-visible { color: var(--lime); }
 .chapter-note a .icon-arrow { width: 15px; height: 15px; }
 
-/* the facility film: the golf block's main visual */
-.film { margin: clamp(36px, 4.5vw, 60px) 0 0; }
+/* the facility film: the first screen's visual, beside the promise */
+.film { margin: 0; }
 .film-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-l); background: #0a0f14; }
 .film-stage picture { display: block; width: 100%; height: 100%; }
 .film-stage img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 62% 50%; }
@@ -449,6 +455,8 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 .contact-email a:hover, .contact-email a:focus-visible { color: var(--lime); }
 
 @media (max-width: 1120px) {
+  .promise-inner { grid-template-columns: 1fr; gap: clamp(28px, 5vw, 48px); }
+  .promise h1 { max-width: 14ch; }
   .insite-grid { grid-template-columns: 1fr; }
   .screen { max-width: 760px; }
   .values { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 36px); }
@@ -456,9 +464,11 @@ footer a:hover, footer a:focus-visible { color: var(--lime); }
 
 @media (max-width: 760px) {
   .values { grid-template-columns: 1fr; }
-  .promise { padding: 150px var(--pad) 80px; }
+  .promise { padding: 120px var(--pad) 56px; }
   .promise h1 { font-size: clamp(38px, 11vw, 48px); line-height: 1.02; }
   .promise-sub { font-size: 18px; }
+  .promise-actions { align-items: stretch; flex-direction: column; }
+  .promise-actions .button { width: 100%; }
   .chapter h2 { font-size: clamp(28px, 8vw, 36px); }
   /* The film goes edge to edge and switches to the 3:4 still and crop so it stays the main visual on a phone. */
   .film-stage { margin: 0 calc(-1 * var(--pad)); aspect-ratio: 3 / 4; border-left: none; border-right: none; border-radius: 0; }

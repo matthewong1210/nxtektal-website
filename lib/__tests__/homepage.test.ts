@@ -8,6 +8,9 @@ import { agentSimulatorDemo, heroMasterFrame } from "../visualAssets";
 const corpus = [
   HERO.title,
   HERO.subtitle,
+  ...HERO.proof,
+  HERO.primary.label,
+  HERO.secondary.label,
   GOLF.eyebrow,
   GOLF.heading,
   GOLF.body,
@@ -47,6 +50,19 @@ describe("homepage copy", () => {
   it("opens with the promise in two lines: Insite understands, robots execute", () => {
     expect(HERO.title).toBe("Automate your outdoor operations.");
     expect(HERO.subtitle).toBe("Insite understands your site. Robots execute the work.");
+  });
+
+  it("the first screen's status strip is a short form of the three field facts, and its actions point at contact and the golf block", () => {
+    expect(HERO.proof).toEqual([
+      "Insite in use at five golf facilities",
+      "First-generation robot used by course staff",
+      "Second generation in field testing in Shanghai",
+    ]);
+    expect(FIELD_STATUS.insite).toContain("five golf facilities");
+    expect(FIELD_STATUS.firstGeneration).toContain("course staff");
+    expect(FIELD_STATUS.secondGeneration).toContain("Shanghai");
+    expect(HERO.primary.href).toBe("#contact");
+    expect(HERO.secondary.href).toBe("#golf");
   });
 
   it("the golf block states the first job with handoff into the existing washer and labels the film as concept", () => {
